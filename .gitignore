@@ -1,2 +1,5 @@
 build/*
 .idea/*
+CMakeFiles/*
+CMakeCache.txt
+
