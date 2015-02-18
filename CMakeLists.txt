@@ -30,7 +30,7 @@ if(INCLUDE_DISTRIB)
 endif(INCLUDE_DISTRIB)
 
 
-# a
+
 include_directories(
 	external/glfw-3.0.3/include/GLFW/
 	external/glm-0.9.4.0/
