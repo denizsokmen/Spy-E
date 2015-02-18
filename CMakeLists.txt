@@ -62,8 +62,10 @@ add_executable(game
 target_link_libraries(game
 	${ALL_LIBS}
 )
+
+
 # Xcode and Visual working directories
-set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Agile/")
+set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Agile/" COMPILE_FLAGS "-std=c++11")
 create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Agile/")
 
 
