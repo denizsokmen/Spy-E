@@ -45,9 +45,9 @@ int main( void )
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
+    glfwWindowHint(GLFW_SAMPLES, 4);   
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    window = glfwCreateWindow( 1024, 768, "Agile", NULL, NULL);
+    window = glfwCreateWindow( 800, 600, "Agile", glfwGetPrimaryMonitor(), NULL);
     if( window == NULL ) {
         fprintf( stderr, "Failed to open GLFW window.");
         glfwTerminate();
