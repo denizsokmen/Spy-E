@@ -7,7 +7,7 @@
 //
 
 #include "Scene.h"
-
+#include <iostream>
 
 Scene::Scene() {
     this->objects = new std::vector<Renderable *>;
@@ -17,6 +17,8 @@ void Scene::add(Renderable *object){
     this->objects->push_back(object);
     object->identifier = 1;
 
+    count++;
+    std::cout<< "Number of objects: " << count << std::endl;
 }
 
 

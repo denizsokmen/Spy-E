@@ -18,7 +18,7 @@ class Scene {
     
 private:
     std::vector<Renderable *> *objects;
-    int count = 1;
+    int count = 0;
     
     
 public:

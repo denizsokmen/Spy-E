@@ -24,8 +24,9 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-// Include Shader
+// Include Shader, Controls
 #include "shader.hpp"
+#include "controls.hpp"
 
 // Include Cube, Scene
 #include "Scene.h"
@@ -45,9 +46,12 @@ int main( void )
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_SAMPLES, 4);   
+    glfwWindowHint(GLFW_SAMPLES, 16);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    window = glfwCreateWindow( 800, 600, "Agile", glfwGetPrimaryMonitor(), NULL);
+    
+
+    
+    window = glfwCreateWindow( 1024, 768, "Photic Zone", NULL, NULL);
     if( window == NULL ) {
         fprintf( stderr, "Failed to open GLFW window.");
         glfwTerminate();
@@ -63,6 +67,7 @@ int main( void )
     }
     
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     
     // Enable depth test
@@ -103,9 +108,9 @@ int main( void )
 
    
     for (int i=0; i<20; i++) {
-        for (int j=0; j<4; j++) {
-            for (int k=0; k<10; k++) {
-                Cube *cube = new Cube(Point {-30.0f+i*3, -10.0f+j*3, 0.0f+k*3}, 10.0f);
+        for (int j=0; j<20; j++) {
+            for (int k=0; k<20; k++) {
+                Cube *cube = new Cube(Point {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
                 scene->add(cube);
             }
 
@@ -181,6 +186,16 @@ int main( void )
         
         // Use our shader
         glUseProgram(programID);
+        
+        
+        
+        // Compute the MVP matrix from keyboard and mouse input
+        computeMatricesFromInputs();
+        glm::mat4 ProjectionMatrix = getProjectionMatrix();
+        glm::mat4 ViewMatrix = getViewMatrix();
+        glm::mat4 ModelMatrix = glm::mat4(1.0);
+        glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+        
         
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform
