@@ -55,13 +55,16 @@ add_definitions(
 # Tutorial 1
 add_executable(game 
 	Agile/main.cpp
+	Agile/Cube.cpp
+	Agile/shader.cpp
+	Agile/Scene.cpp
 )
 target_link_libraries(game
 	${ALL_LIBS}
 )
 # Xcode and Visual working directories
-set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/game/")
-create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/game/")
+set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Agile/")
+create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Agile/")
 
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
