@@ -258,6 +258,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"./external/glfw-3.0.3/include/GLFW/",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -265,6 +266,7 @@
 					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -275,6 +277,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					"./external/glfw-3.0.3/include/GLFW/",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -282,6 +285,7 @@
 					/usr/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
