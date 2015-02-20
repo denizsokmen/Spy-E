@@ -46,7 +46,7 @@ int main( void )
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_SAMPLES, 16);
+    glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
 
@@ -110,6 +110,7 @@ int main( void )
     for (int i=0; i<20; i++) {
         for (int j=0; j<20; j++) {
             for (int k=0; k<20; k++) {
+
                 Cube *cube = new Cube(Point {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
                 scene->add(cube);
             }
