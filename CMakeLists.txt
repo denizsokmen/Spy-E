@@ -59,6 +59,7 @@ add_executable(game
 	Agile/shader.cpp
 	Agile/Scene.cpp
 	Agile/controls.cpp
+	Agile/Camera.cpp
 )
 target_link_libraries(game
 	${ALL_LIBS}
