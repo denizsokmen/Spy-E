@@ -12,8 +12,8 @@
 
 #pragma mark Constructor
 
-Cube::Cube (Point point, float length) {
-    this->setPoint(point);
+Cube::Cube (Position position, float length) {
+    this->setPosition(position);
     this->setLength(length);
     
 }
@@ -92,9 +92,9 @@ void Cube::load(){
     };
     
     for (int v = 0; v < 12*3 ; v++){
-        g_vertex_buffer_data[3*v+0] = g_vertex_buffer_data[3*v+0] + this->point.x;
-        g_vertex_buffer_data[3*v+1] = g_vertex_buffer_data[3*v+1] + this->point.y;
-        g_vertex_buffer_data[3*v+2] = g_vertex_buffer_data[3*v+2] + this->point.z;
+        g_vertex_buffer_data[3*v+0] = g_vertex_buffer_data[3*v+0] + this->position.x;
+        g_vertex_buffer_data[3*v+1] = g_vertex_buffer_data[3*v+1] + this->position.y;
+        g_vertex_buffer_data[3*v+2] = g_vertex_buffer_data[3*v+2] + this->position.z;
     }
     
     glGenBuffers(1, &vertexbuffer);
@@ -113,16 +113,16 @@ void Cube::unload() {
 
 #pragma mark Getters Setters
 
-Point Cube::getPoint(){
-    return this->point;
+Position Cube::getPosition() {
+    return this->position;
 }
 
 float Cube::getLength(){
     return this->length;
 }
 
-void Cube::setPoint(Point point){
-    this->point = point;
+void Cube::setPosition(Position point){
+    this->position = point;
 }
 
 void Cube::setLength(float length){

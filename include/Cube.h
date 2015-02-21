@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 #include "Renderable.h"
-#include "Point.h"
+#include "Position.h"
 
 // Include GLEW
 
@@ -21,23 +21,23 @@
 class Cube: public Renderable {
 
 private:
-    Point point;
+    Position position;
     float length;
     
 
 
-    
+
 public:
-    Cube (Point point, float length);
+    Cube (Position position, float length);
     
     void render ();
     void load   ();
     void unload();
     
-    Point getPoint();
+    Position getPosition();
     float getLength();
     
-    void setPoint(Point point);
+    void setPosition(Position position);
     void setLength(float length);
     
     

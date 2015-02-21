@@ -11,6 +11,7 @@
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -24,13 +25,15 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-// Include Shader, Controls
+// Include Shader, Controls, ObjLoader
 #include "shader.hpp"
 #include "controls.hpp"
+#include "objloader.hpp"
 
 // Include Cube, Scene
 #include "Scene.h"
 #include "Cube.h"
+
 
 int main( void )
 {
@@ -51,7 +54,7 @@ int main( void )
     
 
     
-    window = glfwCreateWindow( 1024, 768, "Photic Zone", NULL, NULL);
+    window = glfwCreateWindow( 1024, 768, "Spy-E", NULL, NULL);
     if( window == NULL ) {
         fprintf( stderr, "Failed to open GLFW window.");
         glfwTerminate();
@@ -107,11 +110,11 @@ int main( void )
     
 
    
-    for (int i=0; i<20; i++) {
-        for (int j=0; j<20; j++) {
-            for (int k=0; k<20; k++) {
+    for (int i=0; i<1; i++) {
+        for (int j=0; j<1; j++) {
+            for (int k=0; k<1; k++) {
 
-                Cube *cube = new Cube(Point {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
+                Cube *cube = new Cube(Position {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
                 scene->add(cube);
             }
 
@@ -177,7 +180,15 @@ int main( void )
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
     //Load here
-    
+    std::vector< glm::vec3 > vertices;
+    std::vector< glm::vec2 > uvs;
+    std::vector< glm::vec3 > normals; // Won't be used at the moment.
+    bool res = loadOBJ("../models/camera.obj", vertices, uvs, normals);
+    GLuint vertexbuffer;
+    glGenBuffers(1, &vertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+
     scene->load();
     
     do{
@@ -201,9 +212,17 @@ int main( void )
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-        
 
-        
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+        glVertexAttribPointer(
+                0,                  // attribute
+                3,                  // size
+                GL_FLOAT,           // type
+                GL_FALSE,           // normalized?
+                0,                  // stride
+                (void*)0            // array buffer offset
+        );
 
         
         // 2nd attribute buffer : colors
@@ -221,9 +240,12 @@ int main( void )
 
         //TODO: Render here
         // Draw the triangle !
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
+
 
         scene->render();
-        
+
+
         
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

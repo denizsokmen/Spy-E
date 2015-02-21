@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 CS476. All rights reserved.
 //
 
-#ifndef __Agile__Point__
-#define __Agile__Point__
+#ifndef __Agile__Position__
+#define __Agile__Position__
 
 #include <stdio.h>
 
 
-struct Point {
+struct Position {
     float x;
     float y;
     float z;
 };
 
-#endif /* defined(__Agile__Point__) */
+#endif /* defined(__Agile__Position__) */

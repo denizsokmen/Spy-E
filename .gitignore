@@ -3,3 +3,5 @@ build/*
 CMakeFiles/*
 CMakeCache.txt
 
+
+game/game
