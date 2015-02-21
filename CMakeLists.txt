@@ -1,6 +1,6 @@
 # CMake entry point
 cmake_minimum_required (VERSION 2.6)
-project (Agile)
+project (SpyE)
 
 find_package(OpenGL REQUIRED)
 
@@ -35,6 +35,7 @@ include_directories(
 	external/glfw-3.0.3/include/GLFW/
 	external/glm-0.9.4.0/
 	external/glew-1.9.0/include/
+	include/
 	.
 )
 
@@ -54,12 +55,19 @@ add_definitions(
 
 # Tutorial 1
 add_executable(game 
-	Agile/main.cpp
-	Agile/Cube.cpp
-	Agile/shader.cpp
-	Agile/Scene.cpp
-	Agile/controls.cpp
-	Agile/Camera.cpp
+	src/main.cpp
+	src/Cube.cpp
+	src/shader.cpp
+	src/Scene.cpp
+	src/controls.cpp
+	src/Camera.cpp
+	include/Camera.hpp
+	include/controls.hpp
+	include/Cube.h
+	include/Point.h
+	include/Renderable.h
+	include/Scene.h
+	include/shader.hpp
 )
 target_link_libraries(game
 	${ALL_LIBS}
@@ -67,8 +75,8 @@ target_link_libraries(game
 
 
 # Xcode and Visual working directories
-set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Agile/" COMPILE_FLAGS "-std=c++11")
-create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Agile/")
+set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")
+create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
@@ -77,8 +85,8 @@ SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
 add_custom_command(
-   TARGET tutorial01_first_window POST_BUILD
-   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial01_first_window${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/game/"
+   TARGET game POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/game${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/game/"
 )
 
 
