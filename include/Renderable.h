@@ -11,21 +11,30 @@
 
 #include <stdio.h>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+
 
 class Renderable {
 
-public:
-    unsigned int identifier;
+private:
+
+
     
 protected:
+    glm::vec3 position;
     GLuint vertexbuffer;
 
 
 public:
+    unsigned int identifier;
+
     virtual ~Renderable() {}
     virtual void render() {}
     virtual void load() {}
     virtual void unload() {}
+
+    glm::vec3 getPosition();
+    void setPosition(glm::vec3  position);
 };
 
 

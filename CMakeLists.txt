@@ -65,7 +65,6 @@ add_executable(game
 	include/Camera.hpp
 	include/controls.hpp
 	include/Cube.h
-	include/Position.h
 	include/Renderable.h
 	include/Scene.h
 	include/shader.hpp

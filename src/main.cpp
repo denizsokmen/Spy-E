@@ -114,7 +114,7 @@ int main( void )
         for (int j=0; j<1; j++) {
             for (int k=0; k<1; k++) {
 
-                Cube *cube = new Cube(Position {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
+                Cube *cube = new Cube(glm::vec3 {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
                 scene->add(cube);
             }
 
