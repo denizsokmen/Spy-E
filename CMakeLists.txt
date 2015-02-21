@@ -70,6 +70,7 @@ add_executable(game
 	include/Scene.h
 	include/shader.hpp
 	include/objloader.hpp
+	include/Mesh.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
