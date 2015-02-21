@@ -61,13 +61,15 @@ add_executable(game
 	src/Scene.cpp
 	src/controls.cpp
 	src/Camera.cpp
+	src/objloader.cpp
 	include/Camera.hpp
 	include/controls.hpp
 	include/Cube.h
-	include/Point.h
+	include/Position.h
 	include/Renderable.h
 	include/Scene.h
 	include/shader.hpp
+	include/objloader.hpp
 )
 target_link_libraries(game
 	${ALL_LIBS}
