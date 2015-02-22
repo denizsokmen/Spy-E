@@ -62,6 +62,7 @@ add_executable(game
 	src/controls.cpp
 	src/Camera.cpp
 	src/objloader.cpp
+	src/Renderable.cpp
 	include/Camera.hpp
 	include/controls.hpp
 	include/Cube.h
