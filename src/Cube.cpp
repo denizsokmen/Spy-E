@@ -27,7 +27,7 @@ void Cube::render(){
 
     
     // 1rst attribute buffer : vertices
-    glEnableVertexAttribArray(this->identifier);
+    glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glVertexAttribPointer(
                           0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
@@ -41,11 +41,11 @@ void Cube::render(){
     glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
     
 
-    glDisableVertexAttribArray(this->identifier);
+    glDisableVertexAttribArray(0);
     
 
 
-    
+
 
 }
 void Cube::load(){
@@ -91,11 +91,11 @@ void Cube::load(){
         1.0f,-1.0f, 1.0f
     };
     
-    for (int v = 0; v < 12*3 ; v++){
-        g_vertex_buffer_data[3*v+0] = g_vertex_buffer_data[3*v+0] + this->position[0];
-        g_vertex_buffer_data[3*v+1] = g_vertex_buffer_data[3*v+1] + this->position[1];
-        g_vertex_buffer_data[3*v+2] = g_vertex_buffer_data[3*v+2] + this->position[2];
-    }
+//    for (int v = 0; v < 12*3 ; v++){
+//        g_vertex_buffer_data[3*v+0] = g_vertex_buffer_data[3*v+0] + this->position[0];
+//        g_vertex_buffer_data[3*v+1] = g_vertex_buffer_data[3*v+1] + this->position[1];
+//        g_vertex_buffer_data[3*v+2] = g_vertex_buffer_data[3*v+2] + this->position[2];
+//    }
     
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

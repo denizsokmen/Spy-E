@@ -71,7 +71,7 @@ int main( void )
     
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glClearColor(0.f, 0.f, 0.4f, 0.0f);
     
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
@@ -109,21 +109,21 @@ int main( void )
     Scene *scene = new Scene();
     
 
-   
-    for (int i=0; i<1; i++) {
-        for (int j=0; j<1; j++) {
-            for (int k=0; k<1; k++) {
+//
+//    for (int i=0; i<1; i++) {
+//        for (int j=0; j<1; j++) {
+//            for (int k=0; k<1; k++) {
+//
+//
+//            }
+//
+//        }
+//
+//    }
 
-                Cube *cube = new Cube(glm::vec3 {-30.0f+i*2, -10.0f+j*2, 0.0f+k*2}, 10.0f);
-                scene->add(cube);
-            }
 
-        }
-
-    }
-    
-   
-
+    Cube *cube = new Cube(glm::vec3 {0, 0, 0}, 10.0f);
+    scene->add(cube);
     
     
     
@@ -134,44 +134,10 @@ int main( void )
     
     
     // One color for each vertex. They were generated randomly.
-    static const GLfloat g_color_buffer_data[] = {
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.583f,  0.771f,  0.014f,
-        0.359f,  0.583f,  0.152f,
-        0.483f,  0.596f,  0.789f,
-        0.559f,  0.861f,  0.639f,
-        0.195f,  0.548f,  0.859f,
-        0.014f,  0.184f,  0.576f,
-        0.771f,  0.328f,  0.970f,
-        0.406f,  0.615f,  0.116f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.982f,  0.099f,  0.879f,
-        0.014f,  0.184f,  0.576f,
-    };
+    static GLfloat g_color_buffer_data[8192];
+
+    for (int i=0; i<8192; i++)
+        g_color_buffer_data[i] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX) ;
     
 
     GLuint colorbuffer;
@@ -243,7 +209,7 @@ int main( void )
         glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
 
 
-        scene->render();
+      //  scene->render();
 
 
         

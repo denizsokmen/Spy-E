@@ -23,11 +23,11 @@ glm::mat4 getProjectionMatrix(){
 
 
 // Initial position : on +Z
-glm::vec3 position = glm::vec3( 0, 0, 5 ); 
+glm::vec3 position = glm::vec3( 4.63674, 4.83092, 0.00686024 );
 // Initial horizontal angle : toward -Z
-float horizontalAngle = 3.14f;
+float horizontalAngle = -3.00f;
 // Initial vertical angle : none
-float verticalAngle = 0.0f;
+float verticalAngle = 5.76f;
 // Initial Field of View
 float initialFoV = 90.0f;
 
@@ -58,8 +58,8 @@ void computeMatricesFromInputs(){
 	horizontalAngle += mouseSpeed * float(1024/2 - xpos );
 	verticalAngle   += mouseSpeed * float( 768/2 - ypos );
     
-    //std::cout << "xpos: " << xpos << " ypos: " << ypos << std::endl;
-    
+    std::cout << "Camera x: " << position[0] << " y: " << position[1] << " z: " << position[2] << std::endl;
+	std::cout << "Angle horizontal: " << horizontalAngle << " vertical: " << verticalAngle  << std::endl;
 	// Direction : Spherical coordinates to Cartesian coordinates conversion
 	glm::vec3 direction(
 		cos(verticalAngle) * sin(horizontalAngle), 
