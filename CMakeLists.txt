@@ -63,6 +63,7 @@ add_executable(game
 	src/objloader.cpp
 	src/Renderable.cpp
 	src/VertexBuffer.cpp
+	src/Label.cpp
 	include/Camera.hpp
 	include/controls.hpp
 	include/Cube.h
@@ -72,6 +73,7 @@ add_executable(game
 	include/objloader.hpp
 	include/Mesh.h
 	include/VertexBuffer.h
+	include/Label.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
