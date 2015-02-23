@@ -149,7 +149,7 @@ int main( void )
     std::vector< glm::vec3 > vertices;
     std::vector< glm::vec2 > uvs;
     std::vector< glm::vec3 > normals; // Won't be used at the moment.
-    bool res = loadOBJ("../models/camera.obj", vertices, uvs, normals);
+    bool res = loadOBJ("../models/camera/camera-top.obj", vertices, uvs, normals);
     GLuint vertexbuffer;
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
