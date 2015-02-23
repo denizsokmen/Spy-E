@@ -16,8 +16,8 @@
 #include <glm/glm.hpp>
 
 #include "Renderable.h"
-#include "VertexBuffer.h"
 
+class VertexBuffer;
 
 class Label: public Renderable {
 
