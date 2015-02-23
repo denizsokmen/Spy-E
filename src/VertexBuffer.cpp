@@ -69,7 +69,7 @@ void VertexBuffer::upload() {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboUV]);
         glBufferData(GL_ARRAY_BUFFER, vertex[vboUV].size() * sizeof(glm::vec2), &vertex[vboUV][0], GL_STATIC_DRAW);
     }
-    
+
 
     if (vertex[vboTangent].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboTangent]);
@@ -78,4 +78,12 @@ void VertexBuffer::upload() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+
+    if (indices.size() > 0) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboind);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    }
 }
+

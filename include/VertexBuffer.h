@@ -16,6 +16,7 @@ enum VBO {
 
 class VertexBuffer {
     GLuint vbo[MAX_VBO];
+    GLuint vboind;
     std::vector<float> vertex[MAX_VBO];
     std::vector<unsigned int> indices;
 
@@ -37,3 +38,4 @@ public:
 };
 
 #endif
+
