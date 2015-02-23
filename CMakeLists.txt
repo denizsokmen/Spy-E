@@ -53,7 +53,6 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-# Tutorial 1
 add_executable(game 
 	src/main.cpp
 	src/Cube.cpp
@@ -63,6 +62,7 @@ add_executable(game
 	src/Camera.cpp
 	src/objloader.cpp
 	src/Renderable.cpp
+	src/VertexBuffer.cpp
 	include/Camera.hpp
 	include/controls.hpp
 	include/Cube.h
@@ -71,6 +71,7 @@ add_executable(game
 	include/shader.hpp
 	include/objloader.hpp
 	include/Mesh.h
+	include/VertexBuffer.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
