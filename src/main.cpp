@@ -156,7 +156,7 @@ int main( void )
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
     scene->load();
-    
+    float scale = 0.1f;
     do{
         
         // Clear the screen
@@ -172,12 +172,15 @@ int main( void )
         glm::mat4 ProjectionMatrix = getProjectionMatrix();
         glm::mat4 ViewMatrix = getViewMatrix();
         glm::mat4 ModelMatrix = glm::mat4(1.0);
-        glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
-        
+        scale += 0.1f;
+        ModelMatrix = glm::scale(ModelMatrix, glm::vec3(scale,scale, scale));
+        ModelMatrix = glm::rotate(ModelMatrix, scale, glm::vec3(1.0f,0.0f,0.0f));
+        glm::mat4 MV = ProjectionMatrix * (ViewMatrix * ModelMatrix);
+        fprintf(stdout, "%f - %f %f %f %f \n", scale, ModelMatrix[0][0], ModelMatrix[0][1], ModelMatrix[0][2], ModelMatrix[0][3]);
         
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(programID, "MVP"), 1, GL_FALSE, &MV[0][0]);
 
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
