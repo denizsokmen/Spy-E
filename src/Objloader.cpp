@@ -3,9 +3,8 @@
 #include <string>
 #include <cstring>
 
-#include <glm/glm.hpp>
 
-#include "objloader.hpp"
+#include "Objloader.h"
 
 // Very, VERY simple OBJ loader.
 // Here is a short list of features a real function would provide :

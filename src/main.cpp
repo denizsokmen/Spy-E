@@ -26,9 +26,9 @@ GLFWwindow* window;
 using namespace glm;
 
 // Include Shader, Controls, ObjLoader
-#include "shader.hpp"
-#include "controls.hpp"
-#include "objloader.hpp"
+#include "Shader.h"
+#include "Controls.h"
+#include "Objloader.h"
 
 // Include Cube, Scene
 #include "Scene.h"
@@ -150,6 +150,7 @@ int main( void )
     std::vector< glm::vec2 > uvs;
     std::vector< glm::vec3 > normals; // Won't be used at the moment.
     bool res = loadOBJ("../models/camera/camera-top.obj", vertices, uvs, normals);
+
     GLuint vertexbuffer;
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
