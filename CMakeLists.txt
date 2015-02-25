@@ -58,15 +58,15 @@ add_executable(game
 	src/Cube.cpp
 	src/Shader.cpp
 	src/Scene.cpp
-	src/Controls.cpp
 	src/Camera.cpp
 	src/Objloader.cpp
 	src/Renderable.cpp
 	src/VertexBuffer.cpp
 	src/Label.cpp
 	src/SubMesh.cpp
+	src/Input.cpp
+	src/Game.cpp
 	include/Camera.h
-	include/Controls.h
 	include/Cube.h
 	include/Renderable.h
 	include/Scene.h
@@ -76,6 +76,8 @@ add_executable(game
 	include/VertexBuffer.h
 	include/Label.h
 	include/SubMesh.h
+	include/Input.h
+	include/Game.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
