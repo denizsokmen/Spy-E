@@ -1,6 +1,6 @@
 ## Spy-E  
   
-Spy-E is a 3D stealth game project, which is based on **OpenAL 1.1**, **OpenGL 3.3™** and **C++**. 
+Spy-E is a 3D stealth game project, which is based on **OpenAL 1.0**, **OpenGL 3.3™** and **C++**. 
 
 ### Description
 
