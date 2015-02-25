@@ -1,6 +1,6 @@
 ## Spy-E  
   
-Spy-E is a 3D stealth game project, which is based on **OpenGL 3.3™** and **C++**. 
+Spy-E is a 3D stealth game project, which is based on **OpenAL 1.1**, **OpenGL 3.3™** and **C++**. 
 
 ### Description
 
@@ -8,7 +8,7 @@ The player is expected to use **stealth techniques** to avoid enemies, surveilla
 
 ### External Libraries
 
-All of the open source external libraries are in externals folder and [GLEW](http://glew.sourceforge.net), [GLFW3](http://www.glfw.org), [GLM](http://glm.g-truc.net/0.9.6/index.html) are used for wrapping newer OpenGL versions, getting rid of platform dependent window creation and efficient math library for vector and matrix arithmetic. We are also using [CMake](http://www.cmake.org) for cross-platform makefiles to compile C++ code. 
+All of the open source external libraries are in externals folder and [GLEW](http://glew.sourceforge.net), [GLFW3](http://www.glfw.org), [GLM](http://glm.g-truc.net/0.9.6/index.html), OpenAL are used for wrapping newer OpenGL versions, getting rid of platform dependent window creation and efficient math library for vector and matrix arithmetic. We are also using [CMake](http://www.cmake.org) for cross-platform makefiles to compile C++ code. 
 
 
 ### Platforms Supported
