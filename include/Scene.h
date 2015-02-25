@@ -3,10 +3,13 @@
 
 class World;
 class Camera;
+class Renderer;
 
 class Scene {
 	Camera* camera;
 	World* world;
+	Renderer* renderer;
+
 
 public:
 	Scene();

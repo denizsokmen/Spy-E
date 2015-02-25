@@ -67,7 +67,7 @@ add_executable(game
 	src/Renderer.cpp
 	src/Entity.cpp
 	src/World.cpp
-	
+	src/Scene.cpp
 
 	include/Camera.h
 	include/Renderable.h

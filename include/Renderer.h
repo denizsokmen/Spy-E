@@ -7,14 +7,19 @@
 
 class ShaderProgram;
 
+class Scene;
+
 class Renderer {
     ShaderProgram* generalShader;
 
+    private:
+
+        void loadGeneralShader();
 
     public:
-    Renderer();
-    ~Renderer();
-    void render();
+        Renderer();
+        ~Renderer();
+        void render();
 
 
 };

@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
+#include <Scene.h>
+#include <Renderer.h>
 #include "Game.h"
 
 
-bool Game::init(int width, int height, char const *title, bool fullscreen) {
+bool Game::init(int width, int height, char const *title, bool fullScreen) {
     if( !glfwInit() ) {
         fprintf( stderr, "Failed to initialize GLFW\n" );
         return false;
@@ -16,7 +18,7 @@ bool Game::init(int width, int height, char const *title, bool fullscreen) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    window = glfwCreateWindow( width, height, title, fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+    window = glfwCreateWindow( width, height, title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
     if( window == NULL ) {
         fprintf( stderr, "Failed to open GLFW window.");
         glfwTerminate();
@@ -35,7 +37,9 @@ bool Game::init(int width, int height, char const *title, bool fullscreen) {
 
 void Game::update() {
 	do {
-
+        if (this->scene) {
+            this->scene->render();
+        }
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -44,4 +48,13 @@ void Game::update() {
 
 void Game::end() {
     glfwTerminate();
+}
+
+void Game::setScene(Scene *scene) {
+    this->scene = scene;
+}
+
+void Game::removeScene() {
+    this->scene = NULL;
+    delete this->scene;
 }
