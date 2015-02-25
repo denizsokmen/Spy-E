@@ -55,31 +55,29 @@ add_definitions(
 
 add_executable(game 
 	src/main.cpp
-	src/shader.cpp
-	src/controls.cpp
+	src/Cube.cpp
+	src/Shader.cpp
+	src/Scene.cpp
 	src/Camera.cpp
-	src/objloader.cpp
+	src/Objloader.cpp
 	src/Renderable.cpp
 	src/VertexBuffer.cpp
 	src/Label.cpp
-	src/Entity.cpp
-	src/World.cpp
-	src/Renderer.cpp
-
-	include/Camera.hpp
-	include/controls.hpp
+	src/SubMesh.cpp
+	src/Input.cpp
+	src/Game.cpp
+	include/Camera.h
+	include/Cube.h
 	include/Renderable.h
-	include/shader.hpp
-	include/objloader.hpp
+	include/Scene.h
+	include/Shader.h
+	include/Objloader.h
 	include/Mesh.h
 	include/VertexBuffer.h
 	include/Label.h
-	include/Entity.h
-	include/World.h
-	include/Renderer.h
-
-
-
+	include/SubMesh.h
+	include/Input.h
+	include/Game.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
