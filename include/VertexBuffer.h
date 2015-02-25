@@ -34,6 +34,10 @@ public:
 
     void upload();
 
+    void bind();
+    void draw();
+    void unbind();
+
 
 };
 

@@ -5,14 +5,16 @@
 #ifndef __SpyE_Renderer__
 #define __SpyE_Renderer__
 
-
+class ShaderProgram;
 
 class Renderer {
-
+    ShaderProgram* program;
 
 
     public:
-        void render();
+    Renderer();
+    ~Renderer();
+    void render();
 
 
 };

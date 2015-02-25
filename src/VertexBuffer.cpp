@@ -87,3 +87,14 @@ void VertexBuffer::upload() {
     }
 }
 
+void VertexBuffer::bind() {
+
+}
+
+void VertexBuffer::draw() {
+
+}
+
+void VertexBuffer::unbind() {
+
+}
