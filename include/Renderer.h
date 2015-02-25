@@ -8,7 +8,7 @@
 class ShaderProgram;
 
 class Renderer {
-    ShaderProgram* program;
+    ShaderProgram* generalShader;
 
 
     public:

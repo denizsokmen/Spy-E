@@ -34,7 +34,12 @@ bool Game::init(int width, int height, char const *title, bool fullscreen) {
 }
 
 void Game::update() {
+	do {
 
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 }
 
 void Game::end() {

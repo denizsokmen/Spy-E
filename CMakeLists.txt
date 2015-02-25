@@ -67,6 +67,7 @@ add_executable(game
 	src/Renderer.cpp
 	src/Entity.cpp
 	src/World.cpp
+	
 
 	include/Camera.h
 	include/Renderable.h
@@ -81,6 +82,7 @@ add_executable(game
 	include/Renderer.h
 	include/World.h
 	include/Entity.h
+	include/Scene.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

@@ -1,7 +1,7 @@
 #ifndef GAME_H_INC
 #define GAME_H_INC
 
-class GLFWwindow;
+struct GLFWwindow;
 
 class Game {
 
