@@ -55,9 +55,7 @@ add_definitions(
 
 add_executable(game 
 	src/main.cpp
-	src/Cube.cpp
 	src/Shader.cpp
-	src/Scene.cpp
 	src/Camera.cpp
 	src/Objloader.cpp
 	src/Renderable.cpp
@@ -66,10 +64,12 @@ add_executable(game
 	src/SubMesh.cpp
 	src/Input.cpp
 	src/Game.cpp
+	src/Renderer.cpp
+	src/Entity.cpp
+	src/World.cpp
+
 	include/Camera.h
-	include/Cube.h
 	include/Renderable.h
-	include/Scene.h
 	include/Shader.h
 	include/Objloader.h
 	include/Mesh.h
@@ -78,6 +78,9 @@ add_executable(game
 	include/SubMesh.h
 	include/Input.h
 	include/Game.h
+	include/Renderer.h
+	include/World.h
+	include/Entity.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

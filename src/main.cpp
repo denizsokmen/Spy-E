@@ -13,7 +13,7 @@ Game* game;
 int main( void )
 {
     game = new Game();
-    if (game->init(800, 600, "Spy-E", true)) {
+    if (game->init(800, 600, "Spy-E", false)) {
         game->update();
     }
     game->end();
