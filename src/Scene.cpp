@@ -6,7 +6,7 @@
 #include <iostream>
 
 void Scene::render() {
-
+    this->renderer->render();
 }
 
 void Scene::update() {
