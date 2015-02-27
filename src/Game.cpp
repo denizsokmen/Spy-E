@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
-#include <Scene.h>
-#include <Renderer.h>
+#include "Scene.h"
+#include "Renderer.h"
 #include "Input.h"
 #include "Game.h"
 
@@ -35,12 +35,11 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
-<<<<<<< HEAD
+
 
     input = new Input(window);
-=======
-    input = new Input();
->>>>>>> 52f8547fb8ec7521d2b517945377de86eff39f22
+
+
     scene = new Scene();
 
     return true;
