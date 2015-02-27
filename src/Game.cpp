@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
-#include <Scene.h>
-#include <Renderer.h>
+#include "Scene.h"
+#include "Renderer.h"
 #include "Input.h"
 #include "Game.h"
 
@@ -36,7 +36,11 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
-    input = new Input();
+
+
+    input = new Input(window);
+
+
     scene = new Scene();
 
     return true;
