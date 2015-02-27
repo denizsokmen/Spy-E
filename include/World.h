@@ -2,9 +2,22 @@
 #ifndef __SpyE_World__
 #define __SpyE_World__
 #include <vector>
-#include "Entity.h"
+
+class Entity;
+
+
 class World {
-	std::vector<Entity> entities;
+
+	private:
+		std::vector<Entity *> entities;
+
+
+	public:
+		int getEntityCount();
+
+		Entity* getEntity(int identifier);
+		void addEntity(Entity *entity);
+		void addEntities(std::vector<Entity *> *entities);
 
 };
 
