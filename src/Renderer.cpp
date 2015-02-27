@@ -9,7 +9,7 @@ Renderer::Renderer() {
 
 void Renderer::loadGeneralShader() {
     generalShader = new ShaderProgram;
-    generalShader->load("vertex.glsl", "fragment.glsl");
+    generalShader->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
 }
 
 void Renderer::render() {
