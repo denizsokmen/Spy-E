@@ -5,6 +5,10 @@
 
 Renderer::Renderer() {
     this->loadGeneralShader();
+
+
+
+
 }
 
 void Renderer::loadGeneralShader() {
