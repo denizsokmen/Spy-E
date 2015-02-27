@@ -34,10 +34,6 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    this->scene = new Scene();
-
-
-
 
     input = new Input();
     scene = new Scene();
