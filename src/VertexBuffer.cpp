@@ -47,6 +47,7 @@ void VertexBuffer::addIndex(unsigned int index) {
 void VertexBuffer::upload() {
     glGenBuffers(5, vbo);
 
+    fprintf(stderr, "%d - %d", vertex[vboPosition].size(), vertex[vboNormal].size());
     if (vertex[vboPosition].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboPosition]);
         glBufferData(GL_ARRAY_BUFFER, vertex[vboPosition].size() * sizeof(glm::vec4), &vertex[vboPosition][0], GL_STATIC_DRAW);
@@ -88,13 +89,24 @@ void VertexBuffer::upload() {
 }
 
 void VertexBuffer::bind() {
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[vboPosition]);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[vboNormal]);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
+
 
 }
 
 void VertexBuffer::draw() {
-
+    glDrawArrays(GL_TRIANGLES, 0, vertex[vboPosition].size() / 4);
 }
 
 void VertexBuffer::unbind() {
-
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 }
