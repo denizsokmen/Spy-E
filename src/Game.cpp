@@ -4,6 +4,7 @@
 #include <glfw3.h>
 #include <Scene.h>
 #include <Renderer.h>
+#include "Input.h"
 #include "Game.h"
 
 
@@ -32,15 +33,25 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     }
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+
+
+    input = new Input();
+    scene = new Scene();
+
     return true;
 }
 
 void Game::update() {
 	do {
-        if (this->scene) {
-            this->scene->render();
-        }
 
+        input->update();
+        input->update();
+
+
+
+
+        scene->render();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
