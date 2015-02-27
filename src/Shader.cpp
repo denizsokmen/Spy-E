@@ -30,7 +30,7 @@ bool ShaderProgram::load(const char *vertexFilePath, const char *fragmentFilePat
 			VertexShaderCode += "\n" + Line;
 		VertexShaderStream.close();
 	}else{
-		printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertexFilePath);
+		printf("Impossible to open %s. Are you in the right directory ? \n", vertexFilePath);
 		getchar();
 		return 0;
 	}

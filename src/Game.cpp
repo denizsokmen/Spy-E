@@ -35,8 +35,12 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
+<<<<<<< HEAD
 
     input = new Input(window);
+=======
+    input = new Input();
+>>>>>>> 52f8547fb8ec7521d2b517945377de86eff39f22
     scene = new Scene();
 
     return true;
@@ -44,9 +48,12 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 
 void Game::update() {
 	do {
+        if (this->scene) {
+            this->scene->render();
+        }
 
         input->update();
-        input->update();
+        scene->update();
 
 
 
