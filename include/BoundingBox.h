@@ -1,4 +1,8 @@
+#ifndef BOUNDINGBOX_H_INC
+#define BOUNDINGBOX_H_INC
+
 #include <glm/glm.hpp>
+#include <vector>
 
 class BoundingBox{
 
@@ -14,3 +18,4 @@ private:
     void createFromVertices();
 
 };
+#endif
