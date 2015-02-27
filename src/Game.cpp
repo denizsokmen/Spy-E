@@ -36,7 +36,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 
 
 
-    input = new Input();
+    input = new Input(window);
     scene = new Scene();
 
     return true;
