@@ -6,8 +6,6 @@
 class World {
 	std::vector<Entity> entities;
 
-
-
 };
 
 

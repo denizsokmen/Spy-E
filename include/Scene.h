@@ -14,6 +14,7 @@ class Scene {
 public:
 	Scene();
 	void render();
+	void update();
 };
 
 #endif

@@ -4,11 +4,13 @@
 struct GLFWwindow;
 
 class Scene;
+class Input;
 
 class Game {
 
 private:
-    Scene *scene;
+    Input* input;
+    Scene* scene;
 
 
 public:
