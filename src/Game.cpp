@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
+#include <Timer.h>
 #include "Scene.h"
 #include "Renderer.h"
 #include "Input.h"
@@ -34,14 +35,14 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     }
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSwapInterval(0);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
 
 
     input = new Input(window);
-
-
+    timer = new Timer(400);
     scene = new Scene();
 
     return true;
@@ -49,26 +50,27 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 
 void Game::update() {
     double lastTime = glfwGetTime();
+    int cnt = 0;
 	do {
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
 
-        printf("%f\n", 1.0f/deltaTime);
+        //printf("%f\n", glfwGetTime());
 
-
-        if (this->scene) {
-            this->scene->render();
+        while (timer->tick()) {
+            input->update();
+            scene->update();
+            cnt++;
         }
-
-        input->update();
-        scene->update();
-
+        timer->endLoop();
         scene->render();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-
-        lastTime = currentTime;
+        if (deltaTime > 1.0) {
+            lastTime = currentTime;
+            printf("%d tick \n", cnt);
+        }
 
     } while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 }

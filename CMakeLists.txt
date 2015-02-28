@@ -69,6 +69,10 @@ add_executable(game
 	src/World.cpp
 	src/Scene.cpp
 	src/BoundingBox.cpp
+	src/Physics.cpp
+	src/PhysicsWorld.cpp
+	src/Body.cpp
+	src/Timer.cpp
 
 	include/Camera.h
 	include/Renderable.h
@@ -85,6 +89,10 @@ add_executable(game
 	include/Entity.h
 	include/Scene.h
 	include/BoundingBox.h
+	include/Body.h
+	include/Physics.h
+	include/PhysicsWorld.h
+	include/Timer.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

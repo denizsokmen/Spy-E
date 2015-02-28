@@ -5,6 +5,7 @@ struct GLFWwindow;
 
 class Scene;
 class Input;
+class Timer;
 
 class Game {
 
@@ -23,7 +24,7 @@ public:
     void end();
 
     GLFWwindow *window;
-
+    Timer *timer;
 };
 
 
