@@ -1,11 +1,13 @@
 #ifndef SCENE_H_INC
 #define SCENE_H_INC
 
+#include "System.h"
+
 class World;
 class Camera;
 class Renderer;
 
-class Scene {
+class Scene : public System {
 	Camera* camera;
 	World* world;
 	Renderer* renderer;
@@ -13,8 +15,9 @@ class Scene {
 
 public:
 	Scene();
+	~Scene();
 	void render();
-	void update();
+	void update(float dt);
 };
 
 #endif

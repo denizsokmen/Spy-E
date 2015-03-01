@@ -9,7 +9,7 @@ void Scene::render() {
     renderer->render(camera);
 }
 
-void Scene::update() {
+Scene::~Scene() {
 
 }
 
@@ -18,4 +18,8 @@ Scene::Scene() {
     camera = new Camera();
     camera->perspective(20.0f, 4.0f/3.0f, 0.1f, 100.0f);
     std::cout << "Scene initilization" << std::endl;
+}
+
+void Scene::update(float dt) {
+
 }

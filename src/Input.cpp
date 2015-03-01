@@ -7,7 +7,7 @@ Input::Input(GLFWwindow *window) {
 	this -> keyState = NULL;
 }
 
-void Input::update() {
+void Input::update(float dt) {
 
 }
 

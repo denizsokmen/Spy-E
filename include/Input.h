@@ -3,9 +3,9 @@
 
 #include <glfw3.h>
 #include <iostream>
+#include "System.h"
 
-
-class Input {
+class Input : public System {
 
 public:
 	bool *keyState;
@@ -13,7 +13,7 @@ public:
 
     Input(GLFWwindow *window);
     ~Input();
-    void update();
+    void update(float dt);
 	GLFWkeyfun glfwSetKeyCallback(GLFWwindow *window, GLFWkeyfun cbfun);
 };
 

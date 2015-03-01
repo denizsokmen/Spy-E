@@ -58,8 +58,14 @@ void Game::update() {
         //printf("%f\n", glfwGetTime());
 
         while (timer->tick()) {
-            input->update();
-            scene->update();
+
+            /* TODO: all those input, scene etc.
+                will be a core system in SystemController
+                and systemController->update(timer->getTickSize());
+                will update them.
+             */
+            input->update(timer->getTickSize());
+            scene->update(timer->getTickSize());
             cnt++;
         }
         timer->endLoop();

@@ -15,6 +15,8 @@ public:
 
     double clock;
     double stepClock;
+
+    float getTickSize();
 };
 
 

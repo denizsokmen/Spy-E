@@ -34,3 +34,6 @@ void Timer::endLoop() {
     updateCount = 0;
 }
 
+float Timer::getTickSize() {
+    return stepClock;
+}

@@ -4,11 +4,10 @@
 class System {
 
 public:
-    System();
-    ~System();
+    System() {}
 
-    void update(float dt);
-    void draw();
+    virtual void update(float dt) {}
+    virtual void draw() {}
 };
 
 #endif
