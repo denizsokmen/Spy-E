@@ -93,6 +93,8 @@ add_executable(game
 	include/Physics.h
 	include/PhysicsWorld.h
 	include/Timer.h
+	include/System.h
+	include/SystemController.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
