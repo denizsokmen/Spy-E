@@ -73,6 +73,8 @@ VertexBuffer* ObjLoader::loadOBJ(const char * path) {
 
     }
 
+    fclose(file);
+
     // For each vertex of each triangle
 
     VertexBuffer* vertexBuffer = new VertexBuffer();
@@ -95,6 +97,7 @@ VertexBuffer* ObjLoader::loadOBJ(const char * path) {
 
     }
     vertexBuffer->upload();
+
     return vertexBuffer;
 }
 

@@ -17,13 +17,13 @@
 class VertexBuffer;
 
 class Renderable {
+public:
+    void setTransformation(glm::mat4 &transformation) {
+        this->transformation = transformation;
+    }
 
-private:
-
-
-    
 protected:
-    //glm::vec3 position;
+//glm::vec3 position;
     glm::mat4 transformation;
     VertexBuffer *vertexBuffer;
     GLuint vertexbuffer;
@@ -40,7 +40,7 @@ public:
     virtual VertexBuffer* getVertexBuffer() { return vertexBuffer; }
 
 
-    glm::mat4 getTransformation();
+    glm::mat4& getTransformation();
     void setPosition(glm::vec3  position);
 };
 

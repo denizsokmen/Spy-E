@@ -15,13 +15,13 @@ Renderer::Renderer() {
 void Renderer::loadGeneralShader() {
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
-    generalBuffer = objLoader->loadOBJ("./models/camera/camera-bottom.obj");
+    //generalBuffer = objLoader->loadOBJ("./models/camera/camera-bottom.obj");
 
     glGenVertexArrays(1, &vaoid);
     glBindVertexArray(vaoid);
 }
 
-void Renderer::render(Camera* camera) {
+void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
     static float pos = 5.0f;
 
     pos -= 0.01f;

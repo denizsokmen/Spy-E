@@ -16,9 +16,11 @@ class World {
 		int getEntityCount();
 
 		Entity* getEntity(int identifier);
+		std::vector<Entity*> getEntities();
 		void addEntity(Entity *entity);
 		void addEntities(std::vector<Entity *> *entities);
 
+	Entity *createEntity();
 };
 
 

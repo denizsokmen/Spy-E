@@ -40,10 +40,12 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
+    scene = new Scene();
+    input = new Input(window);
 
     controller = new SystemController();
-    controller->addCoreSystem(new Input(window));
-    controller->addCoreSystem(new Scene());
+    controller->addCoreSystem(input);
+    controller->addCoreSystem(scene);
 
     timer = new Timer(TICK_PER_SECOND);
 

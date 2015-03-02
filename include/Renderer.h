@@ -20,7 +20,6 @@ class Renderer {
     ObjLoader* objLoader;
     VertexBuffer* generalBuffer;
 
-    std::vector<Renderable*> renderList;
 
     GLuint vaoid;
 
@@ -31,7 +30,7 @@ class Renderer {
     public:
         Renderer();
         ~Renderer();
-        void render(Camera* camera);
+        void render(Camera* camera, std::vector<Renderable*> renderList);
 
 
 };

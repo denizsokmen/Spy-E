@@ -75,6 +75,8 @@ add_executable(game
 	src/Body.cpp
 	src/Timer.cpp
 	src/SystemController.cpp
+	src/TestGameSystem.cpp
+	src/Mesh.cpp
 
 	include/Camera.h
 	include/Renderable.h
@@ -97,6 +99,7 @@ add_executable(game
 	include/Timer.h
 	include/System.h
 	include/SystemController.h
+	include/TestGameSystem.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
