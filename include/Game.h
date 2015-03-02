@@ -6,19 +6,16 @@ struct GLFWwindow;
 class Scene;
 class Input;
 class Timer;
+class SystemController;
 
 class Game {
 
 private:
-    Input* input;
-    Scene* scene;
+    SystemController* controller;
     float deltaTime;
 
 public:
     bool init(int width, int height, char const *title, bool fullScreen);
-
-    void setScene(Scene *scene);
-    void removeScene();
     
     void update();
     void end();

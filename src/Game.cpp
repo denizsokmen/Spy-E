@@ -2,12 +2,13 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
-#include <Timer.h>
+#include "Timer.h"
 #include "Scene.h"
 #include "Renderer.h"
 #include "Input.h"
 #include "Game.h"
-
+#include "SystemController.h"
+#define TICK_PER_SECOND 400
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
     if( !glfwInit() ) {
@@ -40,42 +41,38 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glDepthFunc(GL_LESS);
 
 
+    controller = new SystemController();
+    controller->addCoreSystem(new Input(window));
+    controller->addCoreSystem(new Scene());
 
-    input = new Input(window);
-    timer = new Timer(400);
-    scene = new Scene();
+    timer = new Timer(TICK_PER_SECOND);
 
     return true;
 }
 
 void Game::update() {
     double lastTime = glfwGetTime();
-    int cnt = 0;
+    int tickCount = 0;
 	do {
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
 
-        //printf("%f\n", glfwGetTime());
 
         while (timer->tick()) {
-
-            /* TODO: all those input, scene etc.
-                will be a core system in SystemController
-                and systemController->update(timer->getTickSize());
-                will update them.
-             */
-            input->update(timer->getTickSize());
-            scene->update(timer->getTickSize());
-            cnt++;
+            controller->update(timer->getTickSize());
+            tickCount++;
         }
+
+
         timer->endLoop();
-        scene->render();
+        controller->draw();
+        
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
         if (deltaTime > 1.0) {
             lastTime = currentTime;
-            printf("%d tick \n", cnt);
+            printf("%d tick \n", tickCount);
         }
 
     } while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
@@ -85,11 +82,3 @@ void Game::end() {
     glfwTerminate();
 }
 
-void Game::setScene(Scene *scene) {
-    this->scene = scene;
-}
-
-void Game::removeScene() {
-    this->scene = NULL;
-    delete this->scene;
-}
