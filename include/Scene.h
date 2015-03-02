@@ -16,7 +16,7 @@ class Scene : public System {
 public:
 	Scene();
 	~Scene();
-	void render();
+	void draw();
 	void update(float dt);
 };
 

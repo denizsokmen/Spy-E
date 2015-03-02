@@ -8,7 +8,7 @@
 #include "Input.h"
 #include "Game.h"
 #include "SystemController.h"
-#define TICK_PER_SECOND 400
+#define TICK_PER_SECOND 100
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
     if( !glfwInit() ) {
@@ -53,6 +53,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 void Game::update() {
     double lastTime = glfwGetTime();
     int tickCount = 0;
+    bool isUpdated = false;
 	do {
         double currentTime = glfwGetTime();
         deltaTime = float(currentTime - lastTime);
@@ -61,11 +62,14 @@ void Game::update() {
         while (timer->tick()) {
             controller->update(timer->getTickSize());
             tickCount++;
+            isUpdated = true;
         }
-
-
         timer->endLoop();
-        controller->draw();
+
+        if (isUpdated)
+            controller->draw();
+
+        isUpdated = false;
         
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -2,6 +2,7 @@
 #include <Scene.h>
 #include <VertexBuffer.h>
 #include "Renderer.h"
+#include "Renderable.h"
 #include "Objloader.h"
 #include "Camera.h"
 
@@ -30,14 +31,16 @@ void Renderer::render(Camera* camera) {
     glUseProgram(generalShader->id);
     camera->lookAt(glm::vec3(pos, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-
-    glm::mat4 model(1.0f);
-    glm::mat4 MVP = camera->projection * camera->view * model;
-    glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
-    generalBuffer->bind();
-    generalBuffer->draw();
-    generalBuffer->unbind();
+    for (auto renderable: renderList) {
+        glm::mat4 MVP = camera->projection * camera->view * renderable->getTransformation();
+        glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+        renderable->getVertexBuffer()->bind();
+        renderable->getVertexBuffer()->draw();
+        renderable->getVertexBuffer()->unbind();
+    }
     glUseProgram(0);
+
+
 
 }
 

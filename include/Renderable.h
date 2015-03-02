@@ -14,6 +14,8 @@
 #include <glm/glm.hpp>
 
 
+class VertexBuffer;
+
 class Renderable {
 
 private:
@@ -21,7 +23,9 @@ private:
 
     
 protected:
-    glm::vec3 position;
+    //glm::vec3 position;
+    glm::mat4 transformation;
+    VertexBuffer *vertexBuffer;
     GLuint vertexbuffer;
 
 
@@ -33,7 +37,10 @@ public:
     virtual void load() {}
     virtual void unload() {}
 
-    glm::vec3 getPosition();
+    virtual VertexBuffer* getVertexBuffer() { return vertexBuffer; }
+
+
+    glm::mat4 getTransformation();
     void setPosition(glm::vec3  position);
 };
 

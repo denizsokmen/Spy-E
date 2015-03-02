@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-void Scene::render() {
+void Scene::draw() {
     renderer->render(camera);
 }
 
