@@ -8,10 +8,7 @@
 
 #include "Renderable.h"
 
-glm::vec3 Renderable::getPosition() {
-    return this->position;
+glm::mat4 Renderable::getTransformation() {
+    return transformation;
 }
 
-void Renderable::setPosition(glm::vec3 position) {
-    this->position = position;
-}
