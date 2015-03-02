@@ -11,9 +11,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-### TinyXML2 ###
 
-add_subdirectory(tinyxml2)
 
 
 
