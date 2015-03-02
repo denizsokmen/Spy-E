@@ -11,6 +11,14 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
+### TinyXML2 ###
+
+add_subdirectory(tinyxml2)
+
+
+
+
+
 ### GLFW ###
 
 add_subdirectory (glfw-3.0.3)
@@ -18,6 +26,7 @@ add_subdirectory (glfw-3.0.3)
 include_directories(
 	glfw-3.0.3/include/GLFW/
 	glew-1.9.0/include/
+	
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
