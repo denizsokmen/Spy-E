@@ -73,6 +73,7 @@ add_executable(game
 	src/PhysicsWorld.cpp
 	src/Body.cpp
 	src/Timer.cpp
+	src/SystemController.cpp
 
 	include/Camera.h
 	include/Renderable.h

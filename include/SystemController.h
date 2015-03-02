@@ -25,6 +25,7 @@ public:
 
     void update(float dt);
     void draw();
+    void addCoreSystem(System *s);
 
     /* begin(), end() ? */
 
