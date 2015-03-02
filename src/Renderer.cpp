@@ -22,14 +22,12 @@ void Renderer::loadGeneralShader() {
 }
 
 void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
-    static float pos = 5.0f;
 
-    pos -= 0.01f;
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
     glUseProgram(generalShader->id);
-    camera->lookAt(glm::vec3(pos, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    camera->lookAt(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
     for (auto renderable: renderList) {
         glm::mat4 MVP = camera->projection * camera->view * renderable->getTransformation();
