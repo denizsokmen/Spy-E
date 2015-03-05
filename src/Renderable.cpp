@@ -10,9 +10,10 @@
 #include "Mesh.h"
 
 Renderable::Renderable() {
-    position.x=1.0f;
-    position.y=1.0f;
-    position.z=1.0f;
+    position.x=0.0f;
+    position.y=0.0f;
+    position.z=0.0f;
+
 
 
 }

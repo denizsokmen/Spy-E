@@ -12,15 +12,23 @@ class Entity {
 
 protected:
 
+public:
     glm::vec3 position;
     glm::quat orientation;
+    glm::mat4 transformation;
 
-public:
 
     Entity();
-    glm::mat4& getTransformation() { glm::translate(glm::toMat4(orientation),position); }
+    glm::mat4& getTransformation() {
+        transformation = glm::toMat4(orientation);
+        transformation[3][0] = position[0];
+        transformation[3][1] = position[1];
+        transformation[3][2] = position[2];
+        return transformation;
+
+    }
     void setTransformation(glm::mat4& trans) {
-        orientation = glm::toQuat(trans);
+        orientation = glm::normalize(glm::toQuat(trans));
         position = glm::vec3(trans[3]);
     }
 

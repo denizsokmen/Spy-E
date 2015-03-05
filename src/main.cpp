@@ -20,14 +20,14 @@ Game* game;
 int main( void )
 {
 
-    World *world = new World();
+/*    World *world = new World();
     Entity *entity = new Entity();
     entity->name = "Box";
     world->addEntity(entity);
 
 
     WorldExporter *exporter = new WorldExporter();
-    exporter->save("Test","0.1", "./maps/", world);
+    exporter->save("Test","0.1", "./maps/", world);*/
 
     game = new Game();
     if (game->init(800, 600, "Spy-E", false)) {

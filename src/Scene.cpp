@@ -18,7 +18,7 @@ Scene::~Scene() {
 Scene::Scene() {
     renderer = new Renderer();
     camera = new Camera();
-    camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
+    camera->perspective(20.0f, 4.0f/3.0f, 0.1f, 100.0f);
     world = new World();
     std::cout << "Scene initilization" << std::endl;
 }

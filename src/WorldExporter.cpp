@@ -69,7 +69,7 @@ tinyxml2::XMLElement *WorldExporter::saveEntity(Entity *&entity) {
     positionElement->InsertEndChild(zElement);
 
     fileNameElement->SetText("../fileName.xml");
-    nameElement->SetText(entity->name.c_str());
+//    nameElement->SetText(entity->name.c_str());
 
 
     entityElement->InsertEndChild(nameElement);
