@@ -12,5 +12,6 @@ public:
     ~PhysicsWorld();
 
     Body* createBody(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc);
+    void update(float dt);
 };
 #endif
