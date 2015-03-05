@@ -7,18 +7,27 @@
 //
 #include <stdbool.h>
 #include <iostream>
-#include "Game.h"
-#include "Exporter.h"
+
+#include "WorldExporter.h"
 #include "TestGameSystem.h"
+
+#include "Game.h"
+#include "World.h"
+#include "Entity.h"
 
 Game* game;
 
 int main( void )
 {
 
-    Exporter *exporter = new Exporter();
+    World *world = new World();
+    Entity *entity = new Entity();
+    entity->name = "Box";
+    world->addEntity(entity);
 
-    exporter->save();
+
+    WorldExporter *exporter = new WorldExporter();
+    exporter->save("Test","0.1", "./maps/", world);
 
     game = new Game();
     if (game->init(800, 600, "Spy-E", false)) {

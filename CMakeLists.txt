@@ -75,7 +75,7 @@ add_executable(game
 	src/Timer.cpp
 	src/SystemController.cpp
 	src/tinyxml2.cpp
-	src/Exporter.cpp
+	src/WorldExporter.cpp
 	src/TestGameSystem.cpp
 	src/Mesh.cpp
 
@@ -101,7 +101,7 @@ add_executable(game
 	include/System.h
 	include/SystemController.h
 	include/tinyxml2.h
-	include/Exporter.h
+	include/WorldExporter.h
 	include/TestGameSystem.h
 )
 target_link_libraries(game
