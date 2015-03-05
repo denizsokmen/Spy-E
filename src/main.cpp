@@ -30,7 +30,7 @@ int main( void )
     exporter->save("Test","0.1", "./maps/", world);*/
 
     game = new Game();
-    if (game->init(800, 600, "Spy-E", false)) {
+    if (game->init(640, 480, "Spy-E", false)) {
         TestGameSystem *test = new TestGameSystem(game);
         game->getController()->addCoreSystem(test);
         game->update();

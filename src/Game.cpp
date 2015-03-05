@@ -20,7 +20,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 ) ;
     SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
 
-    mainWindow = SDL_CreateWindow("SDL2 OpenGL Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL);
+    mainWindow = SDL_CreateWindow("Spy-E", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, ((fullScreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN) |SDL_WINDOW_OPENGL);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
 
     glewExperimental = GL_TRUE;
@@ -82,19 +82,19 @@ void Game::update() {
             controller->draw();
 
         isUpdated = false;
-
-
-        SDL_GL_SwapWindow(mainWindow);
-
         if (deltaTime > 1000) {
             lastTime = currentTime;
-            printf("%d tick \n", tickCount);
+            printf("%d tick %d\n", tickCount, SDL_GetTicks());
         }
+
+        SDL_GL_SwapWindow(mainWindow);
 
     }
 }
 
 void Game::end() {
-    glfwTerminate();
+    SDL_GL_DeleteContext(mainGLContext);
+    SDL_DestroyWindow(mainWindow);
+    SDL_Quit();
 }
 
