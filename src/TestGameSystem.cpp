@@ -1,9 +1,9 @@
 #include "TestGameSystem.h"
-#include "Entity.h"
 #include "Game.h"
 #include "Scene.h"
 #include "Mesh.h"
 #include "Objloader.h"
+#include "Renderable.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -13,8 +13,9 @@ TestGameSystem::TestGameSystem(Game *game) {
     Mesh* mesh = new Mesh();
     ObjLoader* objLoader = new ObjLoader();
     mesh->setVertexBuffer(objLoader->loadOBJ("./models/camera/camera-bottom.obj"));
-    entity = game->scene->getWorld()->createEntity();
+    entity = game->scene->getWorld()->createRenderable();
     glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
+
     entity->mesh = mesh;
     entity->setTransformation(trans);
 }

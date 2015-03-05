@@ -1,10 +1,16 @@
 #include <vector>
-#include "Entity.h"
+#include "Renderable.h"
 #include "World.h"
 
 
 int World::getEntityCount() {
     return entities.size();
+}
+
+Renderable* World::createRenderable() {
+    Renderable* entity = new Renderable();
+    renderables.push_back(entity);
+    return entity;
 }
 
 std::vector<Entity*> World::getEntities() {
@@ -28,4 +34,8 @@ void World::addEntities(std::vector<Entity *> *entities) {
     for(auto &entity: *entities) {
         this->addEntity(entity);
     }
+}
+
+std::vector<Renderable *> World::getRenderables() {
+    return renderables;
 }

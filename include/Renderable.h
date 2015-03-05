@@ -12,24 +12,22 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include "Entity.h"
 
 
 class VertexBuffer;
+class Mesh;
 
-class Renderable {
+class Renderable : public Entity {
 public:
-    void setTransformation(glm::mat4 &transformation) {
-        this->transformation = transformation;
-    }
 
 protected:
-//glm::vec3 position;
-    glm::mat4 transformation;
-    VertexBuffer *vertexBuffer;
-    GLuint vertexbuffer;
 
 
 public:
+    Renderable();
+    Mesh* mesh;
     unsigned int identifier;
 
     virtual ~Renderable() {}
@@ -37,11 +35,10 @@ public:
     virtual void load() {}
     virtual void unload() {}
 
-    virtual VertexBuffer* getVertexBuffer() { return vertexBuffer; }
+    VertexBuffer* getVertexBuffer();
 
 
-    glm::mat4& getTransformation();
-    void setPosition(glm::vec3  position);
+
 };
 
 

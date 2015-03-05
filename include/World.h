@@ -4,12 +4,14 @@
 #include <vector>
 
 class Entity;
+class Renderable;
 
 
 class World {
 
 	private:
 		std::vector<Entity *> entities;
+		std::vector<Renderable *> renderables;
 
 
 	public:
@@ -17,10 +19,13 @@ class World {
 
 		Entity* getEntity(int identifier);
 		std::vector<Entity*> getEntities();
+		std::vector<Renderable*> getRenderables();
 		void addEntity(Entity *entity);
+		Renderable* createRenderable();
 		void addEntities(std::vector<Entity *> *entities);
 
-	Entity *createEntity();
+		Entity *createEntity();
+
 };
 
 

@@ -4,9 +4,10 @@
 #include "System.h"
 class Entity;
 class Game;
+class Renderable;
 
 class TestGameSystem: public System {
-    Entity* entity;
+    Renderable* entity;
 
 public:
     TestGameSystem(Game *game);
