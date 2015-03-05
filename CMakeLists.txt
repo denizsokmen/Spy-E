@@ -111,7 +111,7 @@ target_link_libraries(game
 
 # Xcode and Visual working directories
 set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")
-create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
