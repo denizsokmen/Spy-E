@@ -47,7 +47,7 @@ void VertexBuffer::addIndex(unsigned int index) {
 void VertexBuffer::upload() {
     glGenBuffers(5, vbo);
 
-    fprintf(stderr, "%d - %d", vertex[vboPosition].size(), vertex[vboNormal].size());
+    printf("VBO %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size());
     if (vertex[vboPosition].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboPosition]);
         glBufferData(GL_ARRAY_BUFFER, vertex[vboPosition].size() * sizeof(glm::vec4), &vertex[vboPosition][0], GL_STATIC_DRAW);
@@ -86,6 +86,7 @@ void VertexBuffer::upload() {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     }
+    printf("Success \n");
 }
 
 void VertexBuffer::bind() {
