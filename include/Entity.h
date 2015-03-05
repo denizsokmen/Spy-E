@@ -1,5 +1,5 @@
 #ifndef __SpyE_Entity__
-#define __SpyE_Entitiy__
+#define __SpyE_Entity___
 
 class Mesh;
 

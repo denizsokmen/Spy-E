@@ -74,6 +74,8 @@ add_executable(game
 	src/Body.cpp
 	src/Timer.cpp
 	src/SystemController.cpp
+	src/tinyxml2.cpp
+	src/Exporter.cpp
 
 	include/Camera.h
 	include/Renderable.h
@@ -96,6 +98,8 @@ add_executable(game
 	include/Timer.h
 	include/System.h
 	include/SystemController.h
+	include/tinyxml2.h
+	include/Exporter.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

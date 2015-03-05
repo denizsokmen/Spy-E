@@ -8,11 +8,16 @@
 #include <stdbool.h>
 #include <iostream>
 #include "Game.h"
+#include "Exporter.h"
 
 Game* game;
 
 int main( void )
 {
+
+    Exporter *exporter = new Exporter();
+
+    exporter->save();
 
     game = new Game();
     if (game->init(800, 600, "Spy-E", false)) {
