@@ -14,5 +14,10 @@ public:
     Body(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc);
     ~Body();
 
+    void setLocation(glm::vec3 loc);
+    void setSpeed(glm::vec3 speed);
+    glm::vec3 getAcceleration();
+    glm::vec3 getSpeed();
+    glm::vec3 getLocation();
 };
 #endif
