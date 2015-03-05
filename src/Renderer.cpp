@@ -32,10 +32,6 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
     for (auto renderable: renderList) {
         glm::mat4 MVP = camera->projection * (camera->view * renderable->getTransformation());
 
-        printf("%f %f %f %f %f %f %f %f %f\n",
-                renderable->getTransformation()[0][0],  renderable->getTransformation()[0][1],  renderable->getTransformation()[0][2],
-                renderable->getTransformation()[1][0],  renderable->getTransformation()[1][1],  renderable->getTransformation()[1][2],
-                renderable->getTransformation()[2][0],  renderable->getTransformation()[2][1],  renderable->getTransformation()[3][3] );
         glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
         renderable->getVertexBuffer()->bind();
         renderable->getVertexBuffer()->draw();

@@ -24,6 +24,8 @@ add_subdirectory (external)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-1c73e35")
 include(CreateLaunchers)
 include(MSVCMultipleProcessCompile) # /MP
+include(FindSDL2)
+
 
 if(INCLUDE_DISTRIB)
 	add_subdirectory(distrib)
@@ -36,6 +38,7 @@ include_directories(
 	external/glm-0.9.4.0/
 	external/glew-1.9.0/include/
 	include/
+	${SDL2_INCLUDE_DIR}
 	.
 )
 
@@ -43,6 +46,7 @@ set(ALL_LIBS
 	${OPENGL_LIBRARY}
 	GLFW_303
 	GLEW_190
+	${SDL2_LIBRARY}
 )
 
 add_definitions(

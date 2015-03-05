@@ -1,12 +1,13 @@
 #include "Timer.h"
 #include <glfw3.h>
 #include <stdio.h>
+#include <SDL.h>
 
 Timer::Timer(int ticksPerSecond) {
 
     maxUpdate = ticksPerSecond;
     updateCount = 0;
-    stepClock = 1.0/((double)ticksPerSecond);
+    stepClock = 1000.0/((double)ticksPerSecond);
     clock = 0.0;
 }
 
@@ -18,7 +19,7 @@ bool Timer::tick() {
     if (++updateCount > maxUpdate)
         return false;
 
-    if (clock < glfwGetTime()) {
+    if (clock < (double)SDL_GetTicks()) {
         clock += stepClock;
         return true;
     }
@@ -35,5 +36,5 @@ void Timer::endLoop() {
 }
 
 float Timer::getTickSize() {
-    return stepClock;
+    return ((float)stepClock)/1000.0f;
 }

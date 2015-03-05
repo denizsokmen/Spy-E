@@ -2,6 +2,7 @@
 #define GAME_H_INC
 
 #include "SystemController.h"
+#include <SDL.h>
 
 struct GLFWwindow;
 
@@ -24,7 +25,7 @@ public:
 
 private:
     SystemController* controller;
-    float deltaTime;
+    unsigned long deltaTime;
 
 public:
     bool init(int width, int height, char const *title, bool fullScreen);
@@ -36,6 +37,8 @@ public:
     Timer *timer;
     Scene *scene;
     Input *input;
+    SDL_Window *mainWindow;
+    SDL_GLContext mainGLContext;
 };
 
 
