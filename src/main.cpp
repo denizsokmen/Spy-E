@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Exporter.h"
+#include "TestGameSystem.h"
 
 Game* game;
 
@@ -21,6 +22,8 @@ int main( void )
 
     game = new Game();
     if (game->init(800, 600, "Spy-E", false)) {
+        TestGameSystem *test = new TestGameSystem(game);
+        game->getController()->addCoreSystem(test);
         game->update();
     }
 

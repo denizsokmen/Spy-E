@@ -15,21 +15,19 @@ Renderer::Renderer() {
 void Renderer::loadGeneralShader() {
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
-    generalBuffer = objLoader->loadOBJ("./models/camera/camera-bottom.obj");
+    //generalBuffer = objLoader->loadOBJ("./models/camera/camera-bottom.obj");
 
     glGenVertexArrays(1, &vaoid);
     glBindVertexArray(vaoid);
 }
 
-void Renderer::render(Camera* camera) {
-    static float pos = 5.0f;
+void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
 
-    pos -= 0.01f;
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
     glUseProgram(generalShader->id);
-    camera->lookAt(glm::vec3(pos, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    camera->lookAt(glm::vec3(5.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
     for (auto renderable: renderList) {
         glm::mat4 MVP = camera->projection * camera->view * renderable->getTransformation();

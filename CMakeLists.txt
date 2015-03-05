@@ -76,6 +76,8 @@ add_executable(game
 	src/SystemController.cpp
 	src/tinyxml2.cpp
 	src/Exporter.cpp
+	src/TestGameSystem.cpp
+	src/Mesh.cpp
 
 	include/Camera.h
 	include/Renderable.h
@@ -100,6 +102,7 @@ add_executable(game
 	include/SystemController.h
 	include/tinyxml2.h
 	include/Exporter.h
+	include/TestGameSystem.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

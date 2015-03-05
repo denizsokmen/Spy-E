@@ -1,13 +1,21 @@
+
+
 #ifndef __SpyE_Entity__
 #define __SpyE_Entity___
 
+#include "Renderable.h"
+#include "Mesh.h"
+
 class Mesh;
 
-class Entity {
+class Entity : public Renderable {
 
 public:
     Mesh* mesh;
 
+    Entity();
+
+    VertexBuffer* getVertexBuffer() { return mesh->getVertexBuffer(); }
 
 };
 

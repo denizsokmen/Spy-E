@@ -8,7 +8,7 @@
 
 #include "Renderable.h"
 
-glm::mat4 Renderable::getTransformation() {
+glm::mat4& Renderable::getTransformation() {
     return transformation;
 }
 
