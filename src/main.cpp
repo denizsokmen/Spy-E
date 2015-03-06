@@ -17,7 +17,7 @@
 
 Game* game;
 
-int main( void )
+int main(int argc, char* argv[])
 {
 
 /*    World *world = new World();

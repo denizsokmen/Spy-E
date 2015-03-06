@@ -9,7 +9,9 @@ add_definitions(
 	-DTW_NO_DIRECT3D
 	-DGLEW_STATIC
 	-D_CRT_SECURE_NO_WARNINGS
+	-DSDL_STATIC
 )
+
 
 
 
@@ -61,6 +63,10 @@ target_link_libraries(GLEW_190
 	${OPENGL_LIBRARY}
 	${EXTRA_LIBS}
 )
+
+### SDL ###
+set(DIRECTX OFF)
+add_subdirectory (SDL2-2.0.3)
 
 
 ### ANTTWEAKBAR ###

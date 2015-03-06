@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <glfw3.h>
-#include <SDL.h>
+#include "SDL.h"
 #include "Timer.h"
 #include "Scene.h"
 #include "Renderer.h"
@@ -10,6 +10,7 @@
 #include "Game.h"
 #include "SystemController.h"
 #define TICK_PER_SECOND 100
+
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_Init(SDL_INIT_EVERYTHING);

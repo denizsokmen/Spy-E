@@ -2,7 +2,7 @@
 #define GAME_H_INC
 
 #include "SystemController.h"
-#include <SDL.h>
+#include "SDL.h"
 
 struct GLFWwindow;
 

@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include <glfw3.h>
 #include <stdio.h>
-#include <SDL.h>
+#include "SDL.h"
 
 Timer::Timer(int ticksPerSecond) {
 
