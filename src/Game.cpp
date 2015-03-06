@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <glfw3.h>
 #include <SDL_video.h>
+#include <SDL_events.h>
 #include "SDL.h"
 #include "Timer.h"
 #include "Scene.h"
@@ -10,7 +11,7 @@
 #include "Input.h"
 #include "Game.h"
 #include "SystemController.h"
-#define TICK_PER_SECOND 100
+#define TICK_PER_SECOND 1000
 
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
@@ -61,6 +62,11 @@ void Game::update() {
         /* TODO: polled events should be handled by Input*/
         while(SDL_PollEvent(&event)) {
             switch(event.type) {
+                case SDL_WINDOWEVENT:
+                    if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+                        quit=true;
+                    break;
+
                 case SDL_KEYDOWN:
                     switch(event.key.keysym.sym) {
                         case SDLK_ESCAPE:
