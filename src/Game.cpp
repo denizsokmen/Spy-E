@@ -41,7 +41,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     glDepthFunc(GL_LESS);
 
     scene = new Scene();
-    input = new Input(window);
+    input = new Input(mainWindow);
 
     controller = new SystemController();
     controller->addCoreSystem(input);

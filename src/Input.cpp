@@ -1,21 +1,35 @@
+/* 09/03/2015	-> switched from GLFW to SDL / arman	*/
+
 #include "Input.h"
 
-
-
-Input::Input(GLFWwindow *window) {
-	this -> window = window;
-	this -> keyState = NULL;
+Input::Input(SDL_Window *mainWindow) {
+	this-> mainWindow = mainWindow;
+	this-> keyState = new bool[SDL_NUM_SCANCODES];
 }
 
-void Input::update(float dt) {
-
+void Input::update() {
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+		case SDL_KEYUP:
+			switch (event.key.keysym.sym) {
+				//TODO: add cases
+			default:
+				keyState[event.key.keysym.scancode] = false;
+			}
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+				//TODO: add cases
+			default:
+				keyState[event.key.keysym.scancode] = true;
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+	}
 }
-
-GLFWkeyfun Input::glfwSetKeyCallback(GLFWwindow *window, GLFWkeyfun cbfun){
-	std::cout << ("%d\n", cbfun);
-	return cbfun;
-}
-
 Input::~Input() {
 
 }
