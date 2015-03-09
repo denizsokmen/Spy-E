@@ -16,6 +16,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity = game->scene->getWorld()->createRenderable();
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
+    entity->orientation = glm::rotate(entity->orientation, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     entity->mesh = mesh;
     //entity->setTransformation(trans);
 }
@@ -23,7 +24,7 @@ TestGameSystem::TestGameSystem(Game *game) {
 void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-    entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(1.0f, 1.0f, 1.0f));
+    entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->position += glm::vec3(0.000f, 0.00f, 0.00f);
    // entity->setTransformation(trans);
 }
