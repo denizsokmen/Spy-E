@@ -84,6 +84,7 @@ add_executable(game
 	src/WorldExporter.cpp
 	src/TestGameSystem.cpp
 	src/Mesh.cpp
+	src/Event.cpp
 
 	include/Camera.h
 	include/Renderable.h
@@ -109,6 +110,7 @@ add_executable(game
 	include/tinyxml2.h
 	include/WorldExporter.h
 	include/TestGameSystem.h
+	include/Event.h
 )
 target_link_libraries(game
 	${ALL_LIBS}
