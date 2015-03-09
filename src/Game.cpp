@@ -56,31 +56,9 @@ void Game::update() {
     unsigned long lastTime = SDL_GetTicks();
     int tickCount = 0;
     bool isUpdated = false;
-    SDL_Event event;
+    //SDL_Event event;
     bool quit = false;
     while(!quit) {
-        /* TODO: polled events should be handled by Input*/
-        while(SDL_PollEvent(&event)) {
-            switch(event.type) {
-                case SDL_WINDOWEVENT:
-                    if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-                        quit=true;
-                    break;
-
-                case SDL_KEYDOWN:
-                    switch(event.key.keysym.sym) {
-                        case SDLK_ESCAPE:
-                            quit=true;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-
-            }
-        }
         unsigned long currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
 
@@ -100,9 +78,7 @@ void Game::update() {
             lastTime = currentTime;
             printf("%d tick %d\n", tickCount, SDL_GetTicks());
         }
-
         SDL_GL_SwapWindow(mainWindow);
-
     }
 }
 

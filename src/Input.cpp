@@ -1,32 +1,24 @@
-/* 09/03/2015	-> switched from GLFW to SDL / arman	*/
+/* 09/03/2015	-> switched from GLFW to SDL / arman	
+*  09/03/2015	-> implemented eventQueue / arman 
+*/
 
 #include "Input.h"
+#include <string>
 
 Input::Input(SDL_Window *mainWindow) {
-	this-> mainWindow = mainWindow;
-	this-> keyState = new bool[SDL_NUM_SCANCODES];
+	this -> mainWindow = mainWindow;
+	this -> keyState = new Uint32[SDL_NUM_SCANCODES];
 }
 
-void Input::update() {
+void Input::update(float dt) {
 	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
-		case SDL_KEYUP:
-			switch (event.key.keysym.sym) {
-				//TODO: add cases
-			default:
-				keyState[event.key.keysym.scancode] = false;
-			}
-		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym) {
-				//TODO: add cases
-			default:
-				keyState[event.key.keysym.scancode] = true;
-				break;
-			}
-			break;
-		default:
-			break;
+	Event *tempEvent;
+	while (SDL_PollEvent(&event)){
+		if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP){
+			tempEvent = new Event(event);
+			std::string s = std::to_string(tempEvent->keyCode);
+			printf(s.c_str());
+			eventQueue.push(*tempEvent);
 		}
 	}
 }
