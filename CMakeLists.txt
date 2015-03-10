@@ -61,56 +61,61 @@ add_definitions(
 
 add_executable(game 
 	src/main.cpp
-	src/Shader.cpp
-	src/Camera.cpp
-	src/Objloader.cpp
-	src/Renderable.cpp
-	src/VertexBuffer.cpp
-	src/Label.cpp
-	src/SubMesh.cpp
-	src/Input.cpp
-	src/Game.cpp
-	src/Renderer.cpp
-	src/Entity.cpp
-	src/World.cpp
-	src/Scene.cpp
-	src/BoundingBox.cpp
-	src/Physics.cpp
-	src/PhysicsWorld.cpp
-	src/Body.cpp
-	src/Timer.cpp
-	src/SystemController.cpp
-	src/tinyxml2.cpp
-	src/WorldExporter.cpp
+	src/graphics/Shader.cpp
+	src/graphics/Objloader.cpp
+	src/graphics/Renderable.cpp
+	src/graphics/VertexBuffer.cpp
+	src/graphics/Label.cpp
+	src/graphics/SubMesh.cpp
+	src/graphics/Renderer.cpp
+	src/graphics/Mesh.cpp
+	src/world/Camera.cpp
+	src/world/Entity.cpp
+	src/world/World.cpp
+	src/world/Scene.cpp
+	src/world/WorldExporter.cpp
+	src/input/Input.cpp
+	src/input/Event.cpp
+	src/physics/BoundingBox.cpp
+	src/physics/Physics.cpp
+	src/physics/PhysicsWorld.cpp
+	src/physics/Body.cpp
+	src/logic/Timer.cpp
+	src/logic/SystemController.cpp
+	src/logic/Game.cpp
+	src/utils/tinyxml2.cpp
 	src/TestGameSystem.cpp
-	src/Mesh.cpp
-	src/Event.cpp
 
-	include/Camera.h
-	include/Renderable.h
-	include/Shader.h
-	include/Objloader.h
-	include/Mesh.h
-	include/VertexBuffer.h
-	include/Label.h
-	include/SubMesh.h
-	include/Input.h
-	include/Game.h
-	include/Renderer.h
-	include/World.h
-	include/Entity.h
-	include/Scene.h
-	include/BoundingBox.h
-	include/Body.h
-	include/Physics.h
-	include/PhysicsWorld.h
-	include/Timer.h
-	include/System.h
-	include/SystemController.h
-	include/tinyxml2.h
-	include/WorldExporter.h
+	include/graphics/Renderable.h
+	include/graphics/Shader.h
+	include/graphics/Objloader.h
+	include/graphics/Mesh.h
+	include/graphics/VertexBuffer.h
+	include/graphics/Label.h
+	include/graphics/SubMesh.h
+	include/graphics/Renderer.h
+
+	include/input/Input.h
+	include/input/Event.h
+
+	include/world/World.h
+	include/world/Entity.h
+	include/world/Scene.h
+	include/world/Camera.h
+	include/world/WorldExporter.h
+
+	include/physics/BoundingBox.h
+	include/physics/Body.h
+	include/physics/Physics.h
+	include/physics/PhysicsWorld.h
+
+	include/logic/Timer.h
+	include/logic/System.h
+	include/logic/SystemController.h
+	include/logic/Game.h
+
+	include/utils/tinyxml2.h
 	include/TestGameSystem.h
-	include/Event.h
 )
 target_link_libraries(game
 	${ALL_LIBS}

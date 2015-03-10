@@ -8,12 +8,12 @@
 #include <stdbool.h>
 #include <iostream>
 
-#include "WorldExporter.h"
+#include "world/WorldExporter.h"
 #include "TestGameSystem.h"
 
-#include "Game.h"
-#include "World.h"
-#include "Entity.h"
+#include "logic/Game.h"
+#include "world/World.h"
+#include "world/Entity.h"
 
 Game* game;
 

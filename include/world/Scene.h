@@ -1,8 +1,8 @@
 #ifndef SCENE_H_INC
 #define SCENE_H_INC
 
-#include "System.h"
-#include "World.h"
+#include "logic/System.h"
+#include "world/World.h"
 #include <vector>
 
 class World;

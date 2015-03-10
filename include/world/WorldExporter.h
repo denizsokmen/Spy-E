@@ -2,7 +2,7 @@
 #define WORLDEXPORT_H_INC
 
 #include <string>
-#include "tinyxml2.h"
+#include "utils/tinyxml2.h"
 
 class World;
 class Entity;

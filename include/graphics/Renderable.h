@@ -13,7 +13,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "Entity.h"
+#include "world/Entity.h"
 
 
 class VertexBuffer;

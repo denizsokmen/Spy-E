@@ -2,9 +2,9 @@
 #define INPUT_H_INC
 
 #include <iostream>
-#include "System.h"
+#include "logic/System.h"
 #include "SDL.h"
-#include "Event.h"
+#include "input/Event.h"
 #include <queue>
 
 class Input : public System {

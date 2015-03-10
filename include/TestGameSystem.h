@@ -1,7 +1,7 @@
 #ifndef TEST_GAME_H
 #define TEST_GAME_H
 
-#include "System.h"
+#include "logic/System.h"
 class Entity;
 class Game;
 class Renderable;

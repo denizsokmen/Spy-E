@@ -1,9 +1,9 @@
 #include "TestGameSystem.h"
-#include "Game.h"
-#include "Scene.h"
-#include "Mesh.h"
-#include "Objloader.h"
-#include "Renderable.h"
+#include "logic/Game.h"
+#include "world/Scene.h"
+#include "graphics/Mesh.h"
+#include "graphics/Objloader.h"
+#include "graphics/Renderable.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
