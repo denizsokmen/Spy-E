@@ -13,8 +13,6 @@ private:
 	Keyboard *keyboard;
 public:
 	bool isPressed();
-	bool justPressed();
-	void update();
 	Input *input;
 	KeyboardButtonHandler(Uint32, Input*);
 	~KeyboardButtonHandler();

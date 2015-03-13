@@ -1,6 +1,8 @@
 #include "input/ButtonHandler.h"
 
 ButtonHandler::ButtonHandler(Uint32 keyCode, Input *input){
+	currentlyPressed = false;
+	firstPress = false;
 	this->pressFlag = false;
 	this->keyCode = keyCode;
 	this->input = input;
@@ -24,4 +26,28 @@ bool ButtonHandler::getPressFlag() {
 
 ButtonHandler::~ButtonHandler(){
 
+}
+
+bool ButtonHandler::justPressed() {
+	if (!firstPress && isPressed()) {
+		firstPress = true;
+		return true;
+	}
+	return false;
+}
+
+bool ButtonHandler::wasReleased() {
+	if (currentlyPressed && !isPressed()) {
+		currentlyPressed = false;
+		return true;
+	}
+
+	return false;
+}
+
+void ButtonHandler::update() {
+	if (!isPressed())
+		firstPress = false;
+	else
+		currentlyPressed = true;
 }

@@ -25,6 +25,7 @@ public:
 	
 	bool justPressed(std::string);
 	bool isPressed(std::string);
+	bool wasReleased(std::string buttonKey);
 
 	void mapButton(std::string, ButtonHandler*);
 
@@ -37,6 +38,7 @@ public:
 
     Input(SDL_Window *mainWindow);
     ~Input();
+
 };
 
 #endif

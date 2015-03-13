@@ -36,7 +36,15 @@ void Input::updateDevices(SDL_Event &event) {
 bool Input::justPressed(std::string buttonKey){
 	auto it = this->buttonMap.find(buttonKey);
 	if (it != buttonMap.end()) {
-		it->second->justPressed();
+		return it->second->justPressed();
+	}
+	return false;
+}
+
+bool Input::wasReleased(std::string buttonKey) {
+	auto it = this->buttonMap.find(buttonKey);
+	if (it != buttonMap.end()) {
+		return it->second->wasReleased();
 	}
 	return false;
 }

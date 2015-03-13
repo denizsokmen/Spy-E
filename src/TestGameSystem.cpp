@@ -44,7 +44,7 @@ void TestGameSystem::update(float dt) {
     entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->position += glm::vec3(0.000f, 0.00f, 0.00f);
 
-	if (game->input->isPressed("Escape")) {
+	if (game->input->wasReleased("Escape")) {
 		printf("asd\n");
 		game->quit = true;
 	}

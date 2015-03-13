@@ -12,9 +12,10 @@ private:
 public:
 	Input *input;
 
-	virtual void update() {}
+	virtual void update();
 	virtual bool isPressed() { return false; }
-	virtual bool justPressed() { return false; }
+	virtual bool justPressed();
+	virtual bool wasReleased();
 	void setKeyCode(Uint32);
 	Uint32 getKeyCode();
 	void setPressFlag(bool);
@@ -22,6 +23,9 @@ public:
 
 	ButtonHandler(Uint32, Input*);
 	~ButtonHandler();
+
+	bool firstPress;
+	bool currentlyPressed;
 };
 
 #endif
