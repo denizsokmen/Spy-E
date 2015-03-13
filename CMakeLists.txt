@@ -34,7 +34,6 @@ endif(INCLUDE_DISTRIB)
 
 
 include_directories(
-	external/glfw-3.0.3/include/GLFW/
 	external/glm-0.9.4.0/
 	external/glew-1.9.0/include/
 	external/SDL2-2.0.3/include/
@@ -45,16 +44,12 @@ include_directories(
 
 set(ALL_LIBS
 	${OPENGL_LIBRARY}
-	GLFW_303
 	GLEW_190
 	SDL2
 	SDL2main
 )
 
 add_definitions(
-	-DTW_STATIC
-	-DTW_NO_LIB_PRAGMA
-	-DTW_NO_DIRECT3D
 	-DGLEW_STATIC
 	-D_CRT_SECURE_NO_WARNINGS
 )

@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <GL/glew.h>
-#include <glfw3.h>
 #include <SDL_video.h>
 #include <SDL_events.h>
 #include "SDL.h"
