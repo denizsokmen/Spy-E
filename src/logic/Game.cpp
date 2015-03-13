@@ -56,7 +56,6 @@ void Game::update() {
     unsigned long lastTime = SDL_GetTicks();
     int tickCount = 0;
     bool isUpdated = false;
-    //SDL_Event event;
     bool quit = false;
     while(!quit) {
         unsigned long currentTime = SDL_GetTicks();

@@ -3,16 +3,19 @@
 
 #include <iostream>
 #include "logic/System.h"
+#include "input/Device.h"
 #include "SDL.h"
-#include "input/Event.h"
 #include <queue>
+#include <list>
 
 class Input : public System {
 
 public:
+	std::list<Device*> deviceList;
 	SDL_Window *mainWindow;
-	std::queue<Event> eventQueue;
-	Uint32 *keyState;
+	std::queue<SDL_Event> eventQueue;
+	void initDeviceList();
+	void cleanQueue();
 	void update(float dt);
     Input(SDL_Window *mainWindow);
     ~Input();
