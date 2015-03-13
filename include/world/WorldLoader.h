@@ -5,24 +5,22 @@
 #ifndef _SPYE_WORLDLOADER_H_
 #define _SPYE_WORLDLOADER_H_
 
-
-
-
 class World;
 class ObjLoader;
+class EntityLoader;
 
 class WorldLoader {
 
 private:
     World* world;
-    ObjLoader* objLoader;
+    EntityLoader* entityLoader;
 
 public:
     WorldLoader(World* world);
 
     void load(const char* path);
 
-
+    ~WorldLoader();
 
 };
 

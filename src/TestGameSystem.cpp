@@ -31,8 +31,8 @@ TestGameSystem::TestGameSystem(Game *game) {
 //    WorldExporter *exporter = new WorldExporter();
 //    exporter->save("HelloWorld","1.0", "./worlds/", world);
 
-    WorldLoader *loader = new WorldLoader(game->scene->getWorld());
-    loader->load("./worlds/HelloWorld-1.0.xml");
+    WorldLoader loader(game->scene->getWorld());
+    loader.load("./worlds/HelloWorld-1.0.xml");
 }
 
 void TestGameSystem::update(float dt) {

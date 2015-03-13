@@ -6,15 +6,21 @@
 #define _SPYE_ENTITYLOADER_H_
 
 #include <string>
+#include "utils/rapidxml.hpp"
 
+class Entity;
+class ObjLoader;
 
 class EntityLoader {
 
 public:
     EntityLoader();
+    Entity* load(char const *name);
+
     ~EntityLoader();
 
 private:
+    ObjLoader *objLoader;
 
 };
 
