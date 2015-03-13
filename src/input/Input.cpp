@@ -18,12 +18,18 @@ void Input::update(float dt) {
 		eventQueue.push(event);
 		switch (event.type){
 		case SDL_WINDOWEVENT:
-			printf("windowevent");
+			printf("");
 		default:
-			printf("event");
+			updateDevices(event);
+			printf("");
 		}
 	}
 	cleanQueue();
+}
+
+void Input::updateDevices(SDL_Event event) {
+	for (auto it = deviceList.begin(); it != deviceList.end(); ++it)
+		(*it)->update(event);
 }
 
 void Input::cleanQueue() {

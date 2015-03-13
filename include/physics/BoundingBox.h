@@ -14,6 +14,9 @@ public:
     BoundingBox(std::vector<glm::vec3> v);
     ~BoundingBox();
 
+    glm::vec3 getMinVertex();
+    glm::vec3 getMaxVertex();
+
 private:
     void createFromVertices();
 

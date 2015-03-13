@@ -37,3 +37,12 @@ BoundingBox::~BoundingBox(){
 
 }
 
+glm::vec3 BoundingBox::getMaxVertex(){
+
+    return maxVertex;
+}
+
+glm::vec3 BoundingBox::getMinVertex(){
+
+    return minVertex;
+}

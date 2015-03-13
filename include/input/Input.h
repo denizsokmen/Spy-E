@@ -15,6 +15,7 @@ public:
 	SDL_Window *mainWindow;
 	std::queue<SDL_Event> eventQueue;
 	void initDeviceList();
+	void updateDevices(SDL_Event event);
 	void cleanQueue();
 	void update(float dt);
     Input(SDL_Window *mainWindow);

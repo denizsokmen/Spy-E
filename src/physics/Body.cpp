@@ -35,3 +35,8 @@ glm::vec3 Body::getLocation(){
 
     return location;
 }
+
+BoundingBox* Body::getBoundingBox(){
+
+    return boundingBox;
+}
