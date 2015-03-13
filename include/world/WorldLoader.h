@@ -7,18 +7,20 @@
 
 
 
+
 class World;
+class ObjLoader;
 
 class WorldLoader {
 
 private:
     World* world;
+    ObjLoader* objLoader;
 
 public:
+    WorldLoader(World* world);
 
-    WorldLoader();
-
-    World* load(const char* path);
+    void load(const char* path);
 
 
 

@@ -6,6 +6,7 @@
 #include "graphics/Renderable.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <world/WorldLoader.h>
 
 
 TestGameSystem::TestGameSystem(Game *game) {
@@ -19,6 +20,19 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->orientation = glm::rotate(entity->orientation, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     entity->mesh = mesh;
     //entity->setTransformation(trans);
+
+
+    //    World *world = new World();
+//    Entity *entity = new Entity();
+////    entity->name = "Box";
+//    world->addEntity(entity);
+//
+//
+//    WorldExporter *exporter = new WorldExporter();
+//    exporter->save("HelloWorld","1.0", "./worlds/", world);
+
+    WorldLoader *loader = new WorldLoader(game->scene->getWorld());
+    loader->load("./worlds/HelloWorld-1.0.xml");
 }
 
 void TestGameSystem::update(float dt) {

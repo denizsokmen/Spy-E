@@ -15,17 +15,7 @@ Game* game;
 int main(int argc, char* argv[])
 {
 
-//    World *world = new World();
-//    Entity *entity = new Entity();
-////    entity->name = "Box";
-//    world->addEntity(entity);
-//
-//
-//    WorldExporter *exporter = new WorldExporter();
-//    exporter->save("HelloWorld","1.0", "./worlds/", world);
 
-    WorldLoader *loader = new WorldLoader();
-    World *worldSecond = loader->load("./worlds/HelloWorld-1.0.xml");
 
 
     game = new Game();

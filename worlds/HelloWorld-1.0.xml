@@ -2,12 +2,19 @@
     <Name>HelloWorld</Name>
     <Version>1.0</Version>
     <SkyBox>N/A</SkyBox>
-    <Entities count="1">
+    <Entities>
         <Entity>
             <Position>
-                <X>1</X>
+                <X>0</X>
                 <Y>1</Y>
-                <Z>1</Z>
+                <Z>0</Z>
+            </Position>
+        </Entity>
+        <Entity>
+            <Position>
+                <X>0</X>
+                <Y>0.4</Y>
+                <Z>0</Z>
             </Position>
         </Entity>
     </Entities>

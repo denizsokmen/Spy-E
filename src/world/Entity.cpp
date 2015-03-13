@@ -14,7 +14,7 @@ glm::quat Entity::getOrientation() const {
 }
 
 void Entity::setOrientation(glm::quat &orientation) {
-    orientation = orientation;
+    this->orientation = orientation;
 }
 
 glm::vec3 Entity::getPosition() const {
@@ -22,5 +22,5 @@ glm::vec3 Entity::getPosition() const {
 }
 
 void Entity::setPosition(glm::vec3 &position) {
-    position = position;
+    this->position = position;
 }
