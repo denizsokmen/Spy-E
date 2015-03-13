@@ -74,6 +74,7 @@ add_executable(game
 	src/world/World.cpp
 	src/world/Scene.cpp
 	src/world/WorldExporter.cpp
+	src/world/EntityLoader.cpp
 	src/input/Input.cpp
 
 	src/physics/BoundingBox.cpp
@@ -106,6 +107,7 @@ add_executable(game
 	include/world/Scene.h
 	include/world/Camera.h
 	include/world/WorldExporter.h
+	include/world/EntityLoader.h
 
 	include/physics/BoundingBox.h
 	include/physics/Body.h
