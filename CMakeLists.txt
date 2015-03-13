@@ -123,7 +123,8 @@ add_executable(game
 	include/TestGameSystem.h
 	include/world/WorldLoader.h
 
-	)
+	src/TestPhysics.cpp
+	include/TestPhysics.h)
 target_link_libraries(game
 	${ALL_LIBS}
 )
