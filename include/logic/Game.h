@@ -28,6 +28,7 @@ private:
     unsigned long deltaTime;
 
 public:
+	bool quit;
     bool init(int width, int height, char const *title, bool fullScreen);
     
     void update();

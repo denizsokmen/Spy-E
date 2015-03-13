@@ -4,13 +4,14 @@
 #include "graphics/Mesh.h"
 #include "graphics/Objloader.h"
 #include "graphics/Renderable.h"
+#include "input/KeyboardButtonHandler.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <world/WorldLoader.h>
 
 
 TestGameSystem::TestGameSystem(Game *game) {
-
+	this->game = game;
     Mesh* mesh = new Mesh();
     ObjLoader* objLoader = new ObjLoader();
     mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/camera/camera-bottom.obj"));
@@ -19,6 +20,8 @@ TestGameSystem::TestGameSystem(Game *game) {
 
     entity->orientation = glm::rotate(entity->orientation, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     entity->mesh = mesh;
+
+	game->input->mapButton("Escape", new KeyboardButtonHandler(SDLK_ESCAPE, game->input));
     //entity->setTransformation(trans);
 
 
@@ -40,6 +43,11 @@ void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->position += glm::vec3(0.000f, 0.00f, 0.00f);
+
+	if (game->input->isPressed("Escape")) {
+		printf("asd\n");
+		game->quit = true;
+	}
    // entity->setTransformation(trans);
 }
 

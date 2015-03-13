@@ -90,7 +90,8 @@ add_executable(game
 	src/input/Input.cpp
 	src/input/Device.cpp
 	src/input/Keyboard.cpp
-	src/input/KeyMapper.cpp
+	src/input/ButtonHandler.cpp
+	src/input/KeyboardButtonHandler.cpp
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
@@ -102,9 +103,10 @@ add_executable(game
 	include/graphics/Renderer.h
 
 	include/input/Input.h
-	include/input/KeyMapper.h
 	include/input/Keyboard.h
 	include/input/Device.h
+	include/input/ButtonHandler.h
+	include/input/KeyboardButtonHandler.h
 	
 	include/world/World.h
 	include/world/Entity.h

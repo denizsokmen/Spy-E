@@ -4,20 +4,37 @@
 #include <iostream>
 #include "logic/System.h"
 #include "input/Device.h"
+#include "input/ButtonHandler.h"
 #include "SDL.h"
 #include <queue>
 #include <list>
+#include <map>
+
+class Keyboard;
 
 class Input : public System {
 
 public:
-	std::list<Device*> deviceList;
+	std::map<std::string, ButtonHandler*> buttonMap;
+	std::list<Device*> deviceList; 
 	SDL_Window *mainWindow;
 	std::queue<SDL_Event> eventQueue;
+	Keyboard* keyboard;
+
+	Keyboard* getKeyboard();
+	
+	bool justPressed(std::string);
+	bool isPressed(std::string);
+
+	void mapButton(std::string, ButtonHandler*);
+
 	void initDeviceList();
-	void updateDevices(SDL_Event event);
+	void updateDevices(SDL_Event &event);
+	void updateHandlers();
+
 	void cleanQueue();
 	void update(float dt);
+
     Input(SDL_Window *mainWindow);
     ~Input();
 };

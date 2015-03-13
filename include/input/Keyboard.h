@@ -8,11 +8,9 @@ class Keyboard : public Device{
 
 public:
 	bool *keyArray;
-	void update(SDL_Event event);
+	void update(SDL_Event &event);
 	Keyboard();
 	~Keyboard();
 
 };
-
-
 #endif
