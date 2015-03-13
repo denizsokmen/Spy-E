@@ -85,6 +85,7 @@ add_executable(game
 	src/logic/Game.cpp
 	src/utils/tinyxml2.cpp
 	src/TestGameSystem.cpp
+	src/world/WorldLoader.cpp
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
@@ -116,7 +117,9 @@ add_executable(game
 
 	include/utils/tinyxml2.h
 	include/TestGameSystem.h
-)
+	include/world/WorldLoader.h
+
+	)
 target_link_libraries(game
 	${ALL_LIBS}
 )

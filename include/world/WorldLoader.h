@@ -1,19 +1,15 @@
-#ifndef WORLDLOADER_H_INC
-#define WORLDLOADER_H_INC
+//
+// Created by Taha Doğan Güneş on 13/03/15.
+//
 
-#include <string>
-#include "tinyxml2.h"
+#ifndef _SPYE_WORLDLOADER_H_
+#define _SPYE_WORLDLOADER_H_
 
-class World;
-class Entity;
 
 class WorldLoader {
 
-public:
-    WorldLoader();
-    //Return null if it is impossible to load the world
-    World* load(std::string path);
 
 };
 
-#endif
+
+#endif //_SPYE_WORLDLOADER_H_

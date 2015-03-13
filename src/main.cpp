@@ -20,14 +20,14 @@ Game* game;
 int main(int argc, char* argv[])
 {
 
-/*    World *world = new World();
+    World *world = new World();
     Entity *entity = new Entity();
-    entity->name = "Box";
+//    entity->name = "Box";
     world->addEntity(entity);
 
 
     WorldExporter *exporter = new WorldExporter();
-    exporter->save("Test","0.1", "./maps/", world);*/
+    exporter->save("HelloWorld","1.0", "./worlds/", world);
 
     game = new Game();
     if (game->init(640, 480, "Spy-E", false)) {

@@ -10,7 +10,7 @@
 
 
 WorldExporter::WorldExporter() {
-    this->rootNode = xmlDocument.NewElement("Map");
+    this->rootNode = xmlDocument.NewElement("World");
     xmlDocument.InsertFirstChild(rootNode);
 }
 
@@ -25,8 +25,6 @@ bool WorldExporter::save(std::string mapName, std::string mapVersion, std::strin
 
     std::string documentName = path+mapName+"-"+mapVersion+".xml";
     tinyxml2::XMLError errorResult = xmlDocument.SaveFile(documentName.c_str());
-//    tinyxml2::XMLCheckResult(errorResult);
-
 
     if (errorResult == tinyxml2::XML_NO_ERROR) {
         printf("World saved to '%s' \n", documentName.c_str());
@@ -52,7 +50,6 @@ tinyxml2::XMLElement *WorldExporter::saveEntity(Entity *&entity) {
     tinyxml2::XMLElement *entityElement = xmlDocument.NewElement("Entity");
 
     tinyxml2::XMLElement *nameElement = xmlDocument.NewElement("Name");
-    tinyxml2::XMLElement *fileNameElement = xmlDocument.NewElement("FileName");
 
     tinyxml2::XMLElement *positionElement = xmlDocument.NewElement("Position");
     tinyxml2::XMLElement *xElement = xmlDocument.NewElement("X");
@@ -68,12 +65,8 @@ tinyxml2::XMLElement *WorldExporter::saveEntity(Entity *&entity) {
     positionElement->InsertEndChild(yElement);
     positionElement->InsertEndChild(zElement);
 
-    fileNameElement->SetText("../fileName.xml");
-//    nameElement->SetText(entity->name.c_str());
-
 
     entityElement->InsertEndChild(nameElement);
-    entityElement->InsertEndChild(fileNameElement);
     entityElement->InsertEndChild(positionElement);
 
 
