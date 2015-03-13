@@ -1,11 +1,3 @@
-//
-//  Renderable.h
-//  Agile
-//
-//  Created by Taha Doğan Güneş on 17/02/15.
-//  Copyright (c) 2015 CS476. All rights reserved.
-//
-
 #ifndef __Agile__Renderable__
 #define __Agile__Renderable__
 
@@ -20,7 +12,6 @@ class VertexBuffer;
 class Mesh;
 
 class Renderable : public Entity {
-public:
 
 protected:
 

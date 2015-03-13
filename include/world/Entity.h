@@ -1,7 +1,7 @@
 
 
-#ifndef __SpyE_Entity__
-#define __SpyE_Entity___
+#ifndef _SPYE_ENTITY_H_
+#define _SPYE_ENTITY_H_
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -32,6 +32,10 @@ public:
         position = glm::vec3(trans[3]);
     }
 
+    glm::quat getOrientation() const;
+    void setOrientation(glm::quat &orientation);
+    glm::vec3 getPosition() const;
+    void setPosition(glm::vec3 &position);
 };
 
 #endif

@@ -12,15 +12,16 @@ class WorldExporter {
 private:
     tinyxml2::XMLDocument xmlDocument;
     tinyxml2::XMLNode* rootNode;
+    tinyxml2::XMLElement *saveEntity(Entity *&entity);
     void addTextElement(const char* key , const char *value);
     void saveEntities(World *world);
 
 
 public:
     WorldExporter();
+
     //returns true if the world is saved successfully
     bool save(std::string mapName, std::string mapVersion, std::string path, World* world);
-    tinyxml2::XMLElement *saveEntity(Entity *&entity);
 };
 
 #endif

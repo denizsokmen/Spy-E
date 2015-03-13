@@ -24,13 +24,13 @@ bool WorldExporter::save(std::string mapName, std::string mapVersion, std::strin
     saveEntities(world);
 
     std::string documentName = path+mapName+"-"+mapVersion+".xml";
-    tinyxml2::XMLError errorResult = xmlDocument.SaveFile(documentName.c_str());
+    tinyxml2::XMLError error = xmlDocument.SaveFile(documentName.c_str());
 
-    if (errorResult == tinyxml2::XML_NO_ERROR) {
+    if (error == tinyxml2::XML_NO_ERROR) {
         printf("World saved to '%s' \n", documentName.c_str());
         return true;
     }
-    printf("Unable to save world to '%s' with error %i \n", documentName.c_str(), errorResult);
+    printf("Unable to save world to '%s' with error %i \n", documentName.c_str(), error);
     return false;
 }
 

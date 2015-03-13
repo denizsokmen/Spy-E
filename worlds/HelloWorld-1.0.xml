@@ -1,0 +1,14 @@
+<World>
+    <Name>HelloWorld</Name>
+    <Version>1.0</Version>
+    <SkyBox>N/A</SkyBox>
+    <Entities count="1">
+        <Entity>
+            <Position>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Position>
+        </Entity>
+    </Entities>
+</World>
