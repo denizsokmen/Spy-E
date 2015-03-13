@@ -75,7 +75,6 @@ add_executable(game
 	src/world/Scene.cpp
 	src/world/WorldExporter.cpp
 	src/world/EntityLoader.cpp
-	src/input/Input.cpp
 
 	src/physics/BoundingBox.cpp
 	src/physics/Physics.cpp
@@ -87,8 +86,11 @@ add_executable(game
 	src/utils/tinyxml2.cpp
 	src/TestGameSystem.cpp
 	src/world/WorldLoader.cpp
+
+	src/input/Input.cpp
 	src/input/Device.cpp
 	src/input/Keyboard.cpp
+	src/input/KeyMapper.cpp
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
@@ -100,8 +102,10 @@ add_executable(game
 	include/graphics/Renderer.h
 
 	include/input/Input.h
-
-
+	include/input/KeyMapper.h
+	include/input/Keyboard.h
+	include/input/Device.h
+	
 	include/world/World.h
 	include/world/Entity.h
 	include/world/Scene.h
