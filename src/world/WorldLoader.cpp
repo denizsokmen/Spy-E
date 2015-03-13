@@ -19,17 +19,17 @@ WorldLoader::WorldLoader() {
 }
 
 World* WorldLoader::load(char const *path) {
-    tinyxml2::XMLDocument xmlDocument;
-
-    printf("Loading world from '%s'\n", path);
-    tinyxml2::XMLError error = xmlDocument.LoadFile(path);
-    printf("Loading world from '%s'\n", path);
-
-    if (error != tinyxml2::XML_NO_ERROR) {
-        printf("Unable to load world from '%s' with error: %i \n", path, error);
-        return NULL;
-    }
+//    tinyxml2::XMLDocument xmlDocument;
 //
+//    printf("Loading world from '%s'\n", path);
+//    tinyxml2::XMLError error = xmlDocument.LoadFile(path);
+//    printf("Loading world from '%s'\n", path);
+//
+//    if (error != tinyxml2::XML_NO_ERROR) {
+//        printf("Unable to load world from '%s' with error: %i \n", path, error);
+//        return NULL;
+//    }
+////
 //    tinyxml2::XMLNode* worldNode = xmlDocument.FirstChild();
 //    tinyxml2::XMLElement* nameElement = worldNode->FirstChildElement("Name");
 //    tinyxml2::XMLElement* versionElement = worldNode->FirstChildElement("Version");

@@ -83,7 +83,7 @@ add_executable(game
 	src/logic/Timer.cpp
 	src/logic/SystemController.cpp
 	src/logic/Game.cpp
-	src/utils/tinyxml2.cpp
+
 	src/TestGameSystem.cpp
 	src/world/WorldLoader.cpp
 
@@ -123,7 +123,10 @@ add_executable(game
 	include/logic/SystemController.h
 	include/logic/Game.h
 
-	include/utils/tinyxml2.h
+	include/utils/rapidxml.hpp
+	include/utils/rapidxml_iterators.hpp
+	include/utils/rapidxml_print.hpp
+	include/utils/rapidxml_utils.hpp
 	include/TestGameSystem.h
 	include/world/WorldLoader.h
 

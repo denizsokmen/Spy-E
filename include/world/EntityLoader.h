@@ -6,7 +6,7 @@
 #define _SPYE_ENTITYLOADER_H_
 
 #include <string>
-#include "utils/tinyxml2.h"
+
 
 class EntityLoader {
 
@@ -15,7 +15,7 @@ public:
     ~EntityLoader();
 
 private:
-    tinyxml2::XMLDocument xmlDocument;
+
 };
 
 
