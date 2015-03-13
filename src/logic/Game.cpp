@@ -15,6 +15,7 @@
 
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
+	quit = false;
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
@@ -56,7 +57,6 @@ void Game::update() {
     unsigned long lastTime = SDL_GetTicks();
     int tickCount = 0;
     bool isUpdated = false;
-    bool quit = false;
     while(!quit) {
         unsigned long currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;

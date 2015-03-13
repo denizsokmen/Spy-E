@@ -8,10 +8,6 @@ Device::Device(){
 
 }
 
-void Device::update(SDL_Event){
-
-}
-
 Device::~Device(){
 
 }

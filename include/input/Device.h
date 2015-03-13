@@ -9,7 +9,7 @@ class Input;
 class Device {
 public:
 	Input *thisinput;
-	void update(SDL_Event event);
+	virtual void update(SDL_Event &event) {}
 	Device();
 	Device(Input *input);
 	~Device();

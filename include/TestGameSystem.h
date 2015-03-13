@@ -8,6 +8,7 @@ class Renderable;
 
 class TestGameSystem: public System {
     Renderable* entity;
+	Game *game;
 
 public:
     TestGameSystem(Game *game);
