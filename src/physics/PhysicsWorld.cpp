@@ -39,3 +39,14 @@ void PhysicsWorld::update(float dt) {
         body->setLocation(glm::vec3(updatedLocationX, updatedLocationY, updatedLocationZ));
     }
 }
+
+bool PhysicsWorld::isCollided(Body *b1, Body *b2){
+
+    BoundingBox *box1 = b1->getBoundingBox();
+    BoundingBox *box2 = b2->getBoundingBox();
+
+    if(box1->getMaxVertex().x < box2->getMinVertex().x || box1->getMinVertex().x > box1->getMaxVertex().x) return false;
+    if(box1->getMaxVertex().y < box2->getMinVertex().y || box1->getMinVertex().y > box1->getMaxVertex().y) return false;
+    if(box1->getMaxVertex().z < box2->getMinVertex().z || box1->getMinVertex().z > box1->getMaxVertex().z) return false;
+    else return true;
+}
