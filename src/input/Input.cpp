@@ -33,6 +33,16 @@ void Input::updateDevices(SDL_Event &event) {
 	}
 }
 
+void Input::updateHandlers(){
+	for (auto it = buttonMap.begin(); it != buttonMap.end(); ++it){
+		it->second->update();
+	}
+}
+
+void Input::mapButton(std::string key, ButtonHandler *buttonHandler){
+	this->buttonMap[key] = buttonHandler;
+}
+
 bool Input::justPressed(std::string buttonKey){
 	auto it = this->buttonMap.find(buttonKey);
 	if (it != buttonMap.end()) {
@@ -43,9 +53,8 @@ bool Input::justPressed(std::string buttonKey){
 
 bool Input::wasReleased(std::string buttonKey) {
 	auto it = this->buttonMap.find(buttonKey);
-	if (it != buttonMap.end()) {
+	if (it != buttonMap.end()) 
 		return it->second->wasReleased();
-	}
 	return false;
 }
 
@@ -60,21 +69,10 @@ Keyboard* Input::getKeyboard(){
 	return this->keyboard;
 }
 
-void Input::updateHandlers(){
-	for (auto it = buttonMap.begin(); it != buttonMap.end(); ++it){
-		it->second->update();
-	}
-}
-
-void Input::mapButton(std::string key, ButtonHandler *buttonHandler){
-	this->buttonMap[key] = buttonHandler;
-}
-
 void Input::cleanQueue() {
 	while (!eventQueue.empty())
 		eventQueue.pop();
 }
-
 
 Input::~Input() {
 

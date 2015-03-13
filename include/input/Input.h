@@ -10,7 +10,7 @@
 #include <list>
 #include <map>
 
-class Keyboard;
+class Device;
 
 class Input : public System {
 

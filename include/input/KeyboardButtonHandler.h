@@ -14,7 +14,7 @@ private:
 public:
 	bool isPressed();
 	Input *input;
-	KeyboardButtonHandler(Uint32, Input*);
+	KeyboardButtonHandler(int, Input*);
 	~KeyboardButtonHandler();
 };
 

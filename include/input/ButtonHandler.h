@@ -7,7 +7,7 @@
 class ButtonHandler {
 private:
 	bool pressFlag;
-	Uint32 keyCode;
+	int keyCode;
 
 public:
 	Input *input;
@@ -16,12 +16,12 @@ public:
 	virtual bool isPressed() { return false; }
 	virtual bool justPressed();
 	virtual bool wasReleased();
-	void setKeyCode(Uint32);
-	Uint32 getKeyCode();
+	void setKeyCode(int);
+	int getKeyCode();
 	void setPressFlag(bool);
 	bool getPressFlag();
 
-	ButtonHandler(Uint32, Input*);
+	ButtonHandler(int, Input*);
 	~ButtonHandler();
 
 	bool firstPress;

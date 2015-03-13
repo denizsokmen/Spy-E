@@ -7,10 +7,17 @@ Keyboard::Keyboard(){
 }
 
 void Keyboard::update(SDL_Event &event){
+	int keyCode;
+	if (event.key.keysym.scancode < 512 && event.key.keysym.scancode >= 0)
+		keyCode = event.key.keysym.scancode;
+	else
+		keyCode = SDL_GetKeyFromScancode(event.key.keysym.scancode);
 	if (event.type == SDL_KEYUP)
-		keyArray[event.key.keysym.scancode] = false;
-	else if (event.type == SDL_KEYDOWN) 
-		keyArray[event.key.keysym.scancode] = true;
+		keyArray[keyCode] = false;
+	else if (event.type == SDL_KEYDOWN) {
+		keyArray[keyCode] = true;
+	}
+
 }
 
 Keyboard::~Keyboard(){

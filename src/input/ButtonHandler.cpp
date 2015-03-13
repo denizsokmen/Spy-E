@@ -1,6 +1,6 @@
 #include "input/ButtonHandler.h"
 
-ButtonHandler::ButtonHandler(Uint32 keyCode, Input *input){
+ButtonHandler::ButtonHandler(int keyCode, Input *input){
 	currentlyPressed = false;
 	firstPress = false;
 	this->pressFlag = false;
@@ -8,11 +8,11 @@ ButtonHandler::ButtonHandler(Uint32 keyCode, Input *input){
 	this->input = input;
 }
 
-void ButtonHandler::setKeyCode(Uint32 keyCode){
+void ButtonHandler::setKeyCode(int keyCode){
 	this->keyCode = keyCode;
 }
 
-Uint32 ButtonHandler::getKeyCode(){
+int ButtonHandler::getKeyCode(){
 	return this->keyCode;
 }
 

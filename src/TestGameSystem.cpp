@@ -21,7 +21,14 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->orientation = glm::rotate(entity->orientation, 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     entity->mesh = mesh;
 
-	game->input->mapButton("Escape", new KeyboardButtonHandler(SDLK_ESCAPE, game->input));
+
+	/*IMPORTANT! USE SCANCODES FOR MAPPING FROM NOW ON. FOR FULL LIST OF SCANCODES:
+	*	SDL_scancode.h 
+	*	OR
+	*	https://wiki.libsdl.org/SDLScancodeLookup
+	*/
+	game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
+
     //entity->setTransformation(trans);
 
 

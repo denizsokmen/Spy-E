@@ -1,6 +1,6 @@
 #include "input/KeyboardButtonHandler.h"
 
-KeyboardButtonHandler::KeyboardButtonHandler(Uint32 keycode, Input *input)
+KeyboardButtonHandler::KeyboardButtonHandler(int keycode, Input *input)
 	: ButtonHandler(keycode, input) {
 	this->keyboard = input->getKeyboard();
 }
