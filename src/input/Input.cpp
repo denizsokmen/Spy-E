@@ -8,7 +8,9 @@ Input::Input(SDL_Window *mainWindow) {
 
 void Input::initDeviceList(){
 	this->keyboard = new Keyboard();
+	this->mouse = new Mouse();
 	this->deviceList.push_back(keyboard);
+	this->deviceList.push_back(mouse);
 }
 
 void Input::update(float dt) {
@@ -67,6 +69,10 @@ bool Input::isPressed(std::string buttonKey){
 
 Keyboard* Input::getKeyboard(){
 	return this->keyboard;
+}
+
+Mouse* Input::getMouse(){
+	return this->mouse;
 }
 
 void Input::cleanQueue() {

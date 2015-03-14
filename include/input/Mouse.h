@@ -7,7 +7,6 @@
 class Mouse : public Device{
 
 public:
-	bool *keyArray;
 	void update(SDL_Event &event);
 	Mouse();
 	~Mouse();

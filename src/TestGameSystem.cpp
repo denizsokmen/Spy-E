@@ -52,7 +52,6 @@ void TestGameSystem::update(float dt) {
     entity->position += glm::vec3(0.000f, 0.00f, 0.00f);
 
 	if (game->input->wasReleased("Escape")) {
-		printf("asd\n");
 		game->quit = true;
 	}
    // entity->setTransformation(trans);

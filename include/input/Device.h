@@ -8,10 +8,9 @@ class Input;
 
 class Device {
 public:
-	Input *thisinput;
+	Input *input;
 	virtual void update(SDL_Event &event) {}
 	Device();
-	Device(Input *input);
 	~Device();
 };
 

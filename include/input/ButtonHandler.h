@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "input/Keyboard.h"
+#include "input/Mouse.h"
 
 class ButtonHandler {
 private:

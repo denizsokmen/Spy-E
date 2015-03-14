@@ -19,8 +19,11 @@ public:
 	std::list<Device*> deviceList; 
 	SDL_Window *mainWindow;
 	std::queue<SDL_Event> eventQueue;
-	Keyboard* keyboard;
 
+	Mouse* mouse;
+	Mouse* getMouse();
+
+	Keyboard* keyboard;
 	Keyboard* getKeyboard();
 	
 	bool justPressed(std::string);
