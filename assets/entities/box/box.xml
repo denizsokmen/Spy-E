@@ -1,5 +1,3 @@
 <Entity>
-    <Type>
-        Mesh
-    </Type>
+    <Type>Mesh</Type>
 </Entity>

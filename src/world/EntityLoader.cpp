@@ -11,7 +11,7 @@
 #include "world/EntityLoader.h"
 #include <graphics/Objloader.h>
 #include "graphics/Renderable.h"
-
+#include "utils/rapidxml_utils.hpp"
 
 #define ENTITIES_DIR "./assets/entities/"
 
@@ -22,23 +22,27 @@ EntityLoader::EntityLoader(){
 
 
 Entity* EntityLoader::load(char const *name){
-    rapidxml::xml_document<> document;
+
     std::string path = std::string(ENTITIES_DIR) + std::string(name) + "/" + std::string(name) + ".xml";
+    printf("Loading file: %s \n", path.c_str());
+
     Entity *entity = NULL;
 
     std::ifstream file (path.c_str());
     std::string tmp;
     if (!(file >> tmp)) return NULL;
 
-    printf("Loading file: %s \n", path.c_str());
 
-    std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    buffer.push_back('\0');
-    document.parse<rapidxml::parse_validate_closing_tags>(&buffer[0]);
+
+    rapidxml::file<> xmlFile(path.c_str()); // Default template is char
+    rapidxml::xml_document<> document;
+    document.parse<0>(xmlFile.data());
+
 
     rapidxml::xml_node<>* rootNode = document.first_node("Entity");
 
     std::string type(rootNode->first_node("Type")->value());
+    printf("    ");
     printf("Type: %s\n",type.c_str());
 
 

@@ -56,13 +56,13 @@ void WorldLoader::load(char const *path) {
 
 
         //FIXME: entityLoader has an issue
-//        Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value());
-//        if (entity) {
-//            entity->setPosition(position);
-//        }
-//        else {
-//            printf("Unable to load %s.\n",entityNode->first_attribute("name")->value());
-//        }
+        Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value());
+        if (entity) {
+            entity->setPosition(position);
+        }
+        else {
+            printf("Unable to load %s.\n",entityNode->first_attribute("name")->value());
+        }
 
     }
 
