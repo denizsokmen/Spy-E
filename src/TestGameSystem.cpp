@@ -5,6 +5,7 @@
 #include "graphics/Objloader.h"
 #include "graphics/Renderable.h"
 #include "input/KeyboardButtonHandler.h"
+#include "input/MouseButtonHandler.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <world/WorldLoader.h>
@@ -22,12 +23,21 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->mesh = mesh;
 
 
-	/*IMPORTANT! USE SCANCODES FOR MAPPING FROM NOW ON. FOR FULL LIST OF SCANCODES:
-	*	SDL_scancode.h 
+	/*Use scancodes for mapping keyboard from now on. For full list of scancodes:
+	*	check SDL_scancode.h 
 	*	OR
 	*	https://wiki.libsdl.org/SDLScancodeLookup
 	*/
 	game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
+
+	/*  Use keycodes given below for mouse:
+	*	SDL_BUTTON_LEFT
+	*	SDL_BUTTON_RIGHT
+	*	SDL_BUTTON_MIDDLE
+	*	SDL_BUTTON_X1
+	*	SDL_BUTTON_X2
+	*/
+	game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
 
     //entity->setTransformation(trans);
 
@@ -51,9 +61,9 @@ void TestGameSystem::update(float dt) {
     entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->position += glm::vec3(0.000f, 0.00f, 0.00f);
 
-	if (game->input->wasReleased("Escape")) {
+	if (game->input->wasReleased("Escape"))
 		game->quit = true;
-	}
+
    // entity->setTransformation(trans);
 }
 

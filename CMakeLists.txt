@@ -87,6 +87,7 @@ add_executable(game
 	src/input/Keyboard.cpp
 	src/input/ButtonHandler.cpp
 	src/input/KeyboardButtonHandler.cpp
+	src/input/MouseButtonHandler.cpp
 	src/input/Mouse.cpp
 
 	include/graphics/Renderable.h
@@ -103,6 +104,7 @@ add_executable(game
 	include/input/Device.h
 	include/input/ButtonHandler.h
 	include/input/KeyboardButtonHandler.h
+	include/input/MouseButtonHandler.h
 	include/input/Mouse.h
 	
 	include/world/World.h

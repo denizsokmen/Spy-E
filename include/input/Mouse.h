@@ -7,6 +7,9 @@
 class Mouse : public Device{
 
 public:
+	bool *buttonArray;
+	int mouseX;
+	int mouseY;
 	void update(SDL_Event &event);
 	Mouse();
 	~Mouse();

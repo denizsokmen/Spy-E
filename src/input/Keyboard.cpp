@@ -7,7 +7,6 @@ Keyboard::Keyboard(){
 }
 
 void Keyboard::update(SDL_Event &event){
-	int keyCode;
 	if (event.key.keysym.scancode < 512 && event.key.keysym.scancode >= 0)
 		keyCode = event.key.keysym.scancode;
 	else
