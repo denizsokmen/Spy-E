@@ -8,7 +8,7 @@ The player is expected to use **stealth techniques** to avoid enemies, surveilla
 
 ### External Libraries
 
-All of the open source external libraries are in externals folder and [GLEW](http://glew.sourceforge.net), [GLFW3](http://www.glfw.org), [GLM](http://glm.g-truc.net/0.9.6/index.html), OpenAL are used for wrapping newer OpenGL versions, getting rid of platform dependent window creation and efficient math library for vector and matrix arithmetic. We are also using [CMake](http://www.cmake.org) for cross-platform makefiles to compile C++ code. 
+All of the open source external libraries are in externals folder and [GLEW](http://glew.sourceforge.net), [SDL2](https://www.libsdl.org/), [GLM](http://glm.g-truc.net/0.9.6/index.html), OpenAL are used for wrapping newer OpenGL versions, getting rid of platform dependent window creation and efficient math library for vector and matrix arithmetic. We are also using [CMake](http://www.cmake.org) for cross-platform makefiles to compile C++ code. 
 
 
 ### Platforms Supported
