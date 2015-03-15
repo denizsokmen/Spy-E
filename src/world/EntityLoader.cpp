@@ -50,7 +50,7 @@ Entity* EntityLoader::load(char const *name){
         Renderable *renderable = new Renderable();
         Mesh* mesh = new Mesh();
         std::string modelPath = std::string(ENTITIES_DIR) + std::string(name) + "/" +  std::string(name) + ".obj";
-        mesh->setVertexBuffer(objLoader->loadOBJ(modelPath.c_str()));
+        //mesh->setVertexBuffer(objLoader->loadOBJ(modelPath.c_str()));
         renderable->mesh = mesh;
         entity = renderable;
     }
