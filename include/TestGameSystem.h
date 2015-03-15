@@ -5,6 +5,8 @@
 class Entity;
 class Game;
 class Renderable;
+class ShaderProgram;
+class VertexBuffer;
 
 class TestGameSystem: public System {
     Renderable* entity;
@@ -16,6 +18,11 @@ public:
     void update(float dt);
     void draw();
 
+    ShaderProgram *generalShader;
+
+    void draw2D();
+
+    VertexBuffer *vbo;
 };
 
 

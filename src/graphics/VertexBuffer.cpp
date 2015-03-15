@@ -111,3 +111,22 @@ void VertexBuffer::unbind() {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
 }
+
+VertexBuffer *VertexBuffer::createQuad() {
+    VertexBuffer *vbo = new VertexBuffer();
+    float vertices[] = {
+            // Left bottom triangle
+            -1.0f, 1.0f, 0.0f,
+            -1.0f, -1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            // Right top triangle
+            1.0f, -1.0f, 0.0f,
+            1.0f, 1.0f, 0.0f,
+            -1.0f, 1.0f, 0.0f
+    };
+    for(int i = 0; i < 6; i++)
+        vbo->addVertex(glm::vec3(vertices[i*3], vertices[(i*3)+1], vertices[(i*3)+2]));
+
+    vbo->upload();
+    return vbo;
+}

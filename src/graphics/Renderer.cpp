@@ -23,10 +23,13 @@ void Renderer::loadGeneralShader() {
 
 void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
 
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
     glUseProgram(generalShader->id);
+    camera->perspective(20.0f, 4.0f/3.0f, 0.1f, 100.0f);
     camera->lookAt(glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
     for (auto renderable: renderList) {

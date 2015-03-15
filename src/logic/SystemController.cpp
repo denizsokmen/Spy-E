@@ -32,6 +32,18 @@ void SystemController::draw() {
     }
 }
 
+void SystemController::draw2D() {
+    for (auto system: coreSystems) {
+        system->draw2D();
+    }
+
+    if (currentState != NULL) {
+        for (auto system: *currentState) {
+            system->draw2D();
+        }
+    }
+}
+
 void SystemController::setState(std::string name) {
     std::map<std::string, std::vector<System*>>::iterator state = gameStates.find(name);
     if (state != gameStates.end()) {

@@ -11,7 +11,6 @@ class Renderer;
 class Renderable;
 
 class Scene : public System {
-	Camera* camera;
 
 
 private:
@@ -22,6 +21,7 @@ private:
 
 
 public:
+	Camera* camera;
 	Scene();
 	~Scene();
 	void draw();

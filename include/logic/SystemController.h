@@ -30,6 +30,7 @@ public:
 
     /* begin(), end() ? */
 
+    void draw2D();
 };
 
 #endif

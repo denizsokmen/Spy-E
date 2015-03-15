@@ -38,6 +38,8 @@ public:
     void draw();
     void unbind();
 
+    static VertexBuffer* createQuad();
+
 
 };
 

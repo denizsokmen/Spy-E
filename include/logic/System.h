@@ -8,6 +8,7 @@ public:
 
     virtual void update(float dt) {}
     virtual void draw() {}
+    virtual void draw2D() {}
 };
 
 #endif

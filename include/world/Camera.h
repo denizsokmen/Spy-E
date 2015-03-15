@@ -19,7 +19,7 @@ public:
         projection = glm::perspective(fov, ratio, near, far);
     }
     void ortho(float left, float right, float top, float bot) {
-        glm::ortho(left, right, bot, top);
+        projection = glm::ortho(left, right, bot, top);
     }
 
 

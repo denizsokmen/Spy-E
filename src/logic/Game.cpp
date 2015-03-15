@@ -37,8 +37,6 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
         fprintf(stderr, "Failed to initialize GLEW\n");
         return false;
     }
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
 
     scene = new Scene();
     input = new Input(mainWindow);
@@ -70,6 +68,8 @@ void Game::update() {
 
         if (isUpdated)
             controller->draw();
+
+        controller->draw2D();
 
         isUpdated = false;
         if (deltaTime > 1000) {

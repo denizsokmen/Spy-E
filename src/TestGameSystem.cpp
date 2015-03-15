@@ -6,9 +6,11 @@
 #include "graphics/Renderable.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
+#include "world/Camera.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <world/WorldLoader.h>
+#include <graphics/Shader.h>
 
 
 TestGameSystem::TestGameSystem(Game *game) {
@@ -39,17 +41,10 @@ TestGameSystem::TestGameSystem(Game *game) {
 	*/
 	game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
 
-    //entity->setTransformation(trans);
 
-
-    //    World *world = new World();
-//    Entity *entity = new Entity();
-////    entity->name = "Box";
-//    world->addEntity(entity);
-//
-//
-//    WorldExporter *exporter = new WorldExporter();
-//    exporter->save("HelloWorld","1.0", "./worlds/", world);
+    generalShader = new ShaderProgram();
+    generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
+    vbo = VertexBuffer::createQuad();
 
     WorldLoader loader(game->scene->getWorld());
     loader.load("./worlds/HelloWorld-1.0.xml");
@@ -64,9 +59,27 @@ void TestGameSystem::update(float dt) {
 	if (game->input->wasReleased("Escape"))
 		game->quit = true;
 
+    if (game->input->justPressed("Left Click"))
+        printf("clicked\n");
+
    // entity->setTransformation(trans);
 }
 
 void TestGameSystem::draw() {
 
+}
+
+void TestGameSystem::draw2D() {
+    Camera *cam = game->scene->camera;
+    cam->ortho(0, 800, 0, 600);
+    glUseProgram(generalShader->id);
+
+    glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 100.0f, 0.0f)),glm::vec3(80.0f, 80.0f, 0.0f));
+
+    glDisable(GL_DEPTH_TEST);
+    glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+
+    vbo->bind();
+    vbo->draw();
+    vbo->unbind();
 }
