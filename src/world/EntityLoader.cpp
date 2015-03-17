@@ -9,7 +9,7 @@
 #include "graphics/Mesh.h"
 #include "world/World.h"
 #include "world/EntityLoader.h"
-#include <graphics/Objloader.h>
+#include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "utils/rapidxml_utils.hpp"
 
@@ -50,7 +50,9 @@ Entity* EntityLoader::load(char const *name){
         Renderable *renderable = new Renderable();
         Mesh* mesh = new Mesh();
         std::string modelPath = std::string(ENTITIES_DIR) + std::string(name) + "/" +  std::string(name) + ".obj";
-        //mesh->setVertexBuffer(objLoader->loadOBJ(modelPath.c_str()));
+        printf("Loading %s", modelPath.c_str());
+        VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
+        mesh->setVertexBuffer(buffer);
         renderable->mesh = mesh;
         entity = renderable;
     }

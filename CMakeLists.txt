@@ -57,7 +57,7 @@ add_definitions(
 add_executable(game 
 	src/main.cpp
 	src/graphics/Shader.cpp
-	src/graphics/Objloader.cpp
+	src/graphics/ObjLoader.cpp
 	src/graphics/Renderable.cpp
 	src/graphics/VertexBuffer.cpp
 	src/graphics/Label.cpp
@@ -92,7 +92,7 @@ add_executable(game
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
-	include/graphics/Objloader.h
+	include/graphics/ObjLoader.h
 	include/graphics/Mesh.h
 	include/graphics/VertexBuffer.h
 	include/graphics/Label.h

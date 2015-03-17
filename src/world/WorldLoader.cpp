@@ -7,7 +7,7 @@
 #include "world/EntityLoader.h"
 #include <glm/glm.hpp>
 #include <graphics/Mesh.h>
-#include <graphics/Objloader.h>
+#include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "utils/rapidxml.hpp"
 
@@ -19,7 +19,7 @@
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
-    this->entityLoader = entityLoader;
+    this->entityLoader = new EntityLoader();
 }
 
 void WorldLoader::load(char const *path) {
