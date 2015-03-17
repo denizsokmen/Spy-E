@@ -26,6 +26,9 @@ include(CreateLaunchers)
 include(MSVCMultipleProcessCompile) # /MP
 
 
+find_package(SDL2_Image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+
 
 if(INCLUDE_DISTRIB)
 	add_subdirectory(distrib)
@@ -39,6 +42,8 @@ include_directories(
 	external/SDL2-2.0.3/include/
 	include/
 	${SDL2_INCLUDE_DIR}
+	${SDL2_IMAGE_INCLUDE_DIR}
+    ${SDL2_TTF_INCLUDE_DIR}
 	.
 )
 
@@ -47,6 +52,8 @@ set(ALL_LIBS
 	GLEW_190
 	SDL2
 	SDL2main
+	${SDL2_IMAGE_LIBRARIES}
+    ${SDL2_TTF_LIBRARIES}
 )
 
 add_definitions(
@@ -54,7 +61,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-add_executable(game 
+add_executable(game
 	src/main.cpp
 	src/graphics/Shader.cpp
 	src/graphics/Objloader.cpp
@@ -64,6 +71,7 @@ add_executable(game
 	src/graphics/SubMesh.cpp
 	src/graphics/Renderer.cpp
 	src/graphics/Mesh.cpp
+
 	src/world/Camera.cpp
 	src/world/Entity.cpp
 	src/world/World.cpp
@@ -98,6 +106,8 @@ add_executable(game
 	include/graphics/Label.h
 	include/graphics/SubMesh.h
 	include/graphics/Renderer.h
+	include/graphics/Texture.h
+	include/graphics/FontSDL.h
 
 	include/input/Input.h
 	include/input/Keyboard.h
@@ -132,7 +142,9 @@ add_executable(game
 	include/world/WorldLoader.h
 
 	src/TestPhysics.cpp
-	include/TestPhysics.h)
+	include/TestPhysics.h
+
+	src/graphics/Texture.cpp src/graphics/FontSDL.cpp src/graphics/Material.cpp)
 target_link_libraries(game
 	${ALL_LIBS}
 )

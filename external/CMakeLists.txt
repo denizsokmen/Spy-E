@@ -14,6 +14,7 @@ add_definitions(
 
 
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-1c73e35")
 
 
 
@@ -40,6 +41,7 @@ set(OPENGL_LIBRARY
 )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
+
 ### GLEW ###
 
 set(GLEW_SOURCE
@@ -50,18 +52,25 @@ set(GLEW_HEADERS
 )
 
 
+
 add_library( GLEW_190 STATIC
 	${GLEW_SOURCE}
 	${GLEW_INCLUDE}
 )
+
 
 target_link_libraries(GLEW_190
 	${OPENGL_LIBRARY}
 	${EXTRA_LIBS}
 )
 
+
 ### SDL ###
 set(DIRECTX OFF)
 add_subdirectory (SDL2-2.0.3)
+
+
+find_package(SDL2_image REQUIRED)
+
 
 
