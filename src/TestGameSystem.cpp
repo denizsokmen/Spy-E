@@ -2,7 +2,7 @@
 #include "logic/Game.h"
 #include "world/Scene.h"
 #include "graphics/Mesh.h"
-#include "graphics/Objloader.h"
+#include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
@@ -17,7 +17,7 @@ TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     Mesh* mesh = new Mesh();
     ObjLoader* objLoader = new ObjLoader();
-    mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/camera/camera-bottom.obj"));
+    mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
     entity = game->scene->getWorld()->createRenderable();
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
