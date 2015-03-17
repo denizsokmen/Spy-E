@@ -25,8 +25,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-module
 include(CreateLaunchers)
 include(MSVCMultipleProcessCompile) # /MP
 
+message("${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}  ${CMAKE_MODULE_PATH}")
 
-find_package(SDL2_Image REQUIRED)
+find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 
