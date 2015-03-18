@@ -36,8 +36,8 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
     vbo = VertexBuffer::createQuad();
 
-    game->scene->camera->position = glm::vec3(0.0f,0.0f,20.0f);
-    game->scene->camera->viewDirection = glm::vec3(0.0f,0.0f,20.0f);
+    game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
+    game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 }
 
 void WorldEditorSystem::update(float dt) {
@@ -50,10 +50,11 @@ void WorldEditorSystem::update(float dt) {
 
 
     if (game->input->isPressed("W")) {
-        game->scene->camera->position = glm::vec3(game->scene->camera->position.x+1.0f*dt, game->scene->camera->position.y, game->scene->camera->position.z);
+       // game->scene->camera->position = glm::vec3(game->scene->camera->position.x, game->scene->camera->position.y+2.0f*dt, game->scene->camera->position.z);
     }
     if (game->input->isPressed("A")) {
-        game->scene->camera->position = glm::vec3(game->scene->camera->position.x-1.0f*dt, game->scene->camera->position.y, game->scene->camera->position.z);
+        game->scene->camera->position = glm::vec3(game->scene->camera->position.x-2.0f*dt, game->scene->camera->position.y, game->scene->camera->position.z);
+        game->scene->camera->focus = glm::vec3(game->scene->camera->focus.x-2.0f*dt, game->scene->camera->focus.y, game->scene->camera->focus.z);
     }
     if (game->input->isPressed("S")) {
 
