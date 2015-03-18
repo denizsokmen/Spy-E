@@ -11,10 +11,12 @@
 class ShaderProgram;
 class VertexBuffer;
 class Game;
+class SoundManager;
 
 class WorldEditorSystem: public System {
 
     Game *game;
+    SoundManager *manager;
 
 public:
     WorldEditorSystem(Game *game);

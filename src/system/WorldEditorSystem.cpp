@@ -30,6 +30,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
     game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
     game->input->mapButton("D", new KeyboardButtonHandler(SDL_SCANCODE_D, game->input));
+    game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
     game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
     game->input->mapButton("Right Click", new MouseButtonHandler(SDL_BUTTON_RIGHT, game->input));
 
@@ -40,7 +41,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
-	SoundManager *manager = new SoundManager(1);
+    manager = new SoundManager(1);
 	manager->play(manager->load("assets/sounds/0x1b.wav"));
 }
 
@@ -67,6 +68,10 @@ void WorldEditorSystem::update(float dt) {
 
     }
 
+    if (game->input->wasReleased("Escape")) {
+        delete manager;
+        game->quit = true;
+    }
 }
 
 void WorldEditorSystem::draw() {
