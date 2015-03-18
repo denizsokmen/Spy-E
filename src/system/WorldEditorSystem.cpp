@@ -41,7 +41,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
 	SoundManager *manager = new SoundManager(1);
-	manager->play(manager->load("assets/sounds/0x01.wav"));
+	manager->play(manager->load("assets/sounds/0x1b.wav"));
 }
 
 void WorldEditorSystem::update(float dt) {

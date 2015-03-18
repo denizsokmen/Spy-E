@@ -84,7 +84,7 @@ int SoundManager::load(char* sound_name){
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
 
-   FILE *file_ptr;
+   FILE *file_ptr; //FIXME: Check whether file is readable or not
    file_ptr = fopen(sound_name,"rb");
 
    RIFF_Wave_file* sound_file = (RIFF_Wave_file*) malloc(sizeof(RIFF_Wave_file));
