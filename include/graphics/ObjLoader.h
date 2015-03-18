@@ -12,6 +12,7 @@ class ObjLoader {
 
 public:
         VertexBuffer* loadOBJ(const char * path);
+        ObjLoader();
 };
 
 
