@@ -12,9 +12,30 @@
         </Entity>
         <Entity name="box">
             <Position>
-                <X>1.3</X>
-                <Y>1.3</Y>
-                <Z>1.3</Z>
+                <X>1</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Position>
+        </Entity>
+        <Entity name="box">
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>0</Z>
+            </Position>
+        </Entity>
+        <Entity name="box">
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Position>
+        </Entity>
+        <Entity name="box">
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>0</Z>
             </Position>
         </Entity>
         <Entity name="player">

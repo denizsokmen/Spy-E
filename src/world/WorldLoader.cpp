@@ -54,8 +54,6 @@ void WorldLoader::load(char const *path) {
 
         glm::vec3 position = glm::vec3(x,y,z);
 
-
-        //FIXME: entityLoader has an issue
         Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value());
         if (entity) {
             entity->setPosition(position);
