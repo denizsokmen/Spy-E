@@ -41,6 +41,7 @@ include_directories(
 	external/glm-0.9.4.0/
 	external/glew-1.9.0/include/
 	external/SDL2-2.0.3/include/
+	external/openal-soft-1.16.0/include/
 	include/
 	${SDL2_INCLUDE_DIR}
 	${SDL2_IMAGE_INCLUDE_DIR}
@@ -55,6 +56,8 @@ set(ALL_LIBS
 	SDL2main
 	${SDL2_IMAGE_LIBRARIES}
     ${SDL2_TTF_LIBRARIES}
+	openal
+	
 )
 
 add_definitions(
@@ -98,6 +101,8 @@ add_executable(game
 	src/input/KeyboardButtonHandler.cpp
 	src/input/MouseButtonHandler.cpp
 	src/input/Mouse.cpp
+	src/sound/SoundManager.cpp
+	include/sound/SoundManager.h
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h

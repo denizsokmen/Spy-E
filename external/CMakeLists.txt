@@ -69,6 +69,9 @@ target_link_libraries(GLEW_190
 set(DIRECTX OFF)
 add_subdirectory (SDL2-2.0.3)
 
+set(LIBTYPE SHARED)
+add_subdirectory (openal-soft-1.16.0)
+
 
 find_package(SDL2_image REQUIRED)
 

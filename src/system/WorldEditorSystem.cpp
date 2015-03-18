@@ -11,6 +11,7 @@
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
+#include "sound/SoundManager.h"
 #include <graphics/Shader.h>
 #include "world/Camera.h"
 
@@ -38,6 +39,9 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
+
+	SoundManager *manager = new SoundManager(1);
+	manager->play(manager->load("assets/sounds/0x01.wav"));
 }
 
 void WorldEditorSystem::update(float dt) {
