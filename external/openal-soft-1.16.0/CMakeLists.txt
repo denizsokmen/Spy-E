@@ -40,13 +40,13 @@ OPTION(ALSOFT_HRTF_DEFS "Install HRTF definition files" ON)
 
 
 IF(WIN32)
-    SET(LIBNAME OpenAL32)
+    SET(LIBNAME openal)
     ADD_DEFINITIONS("-D_WIN32 -D_WIN32_WINNT=0x0502")
 
     # This option is mainly for static linking OpenAL Soft into another project
     # that already defines the IDs. It is up to that project to ensure all
     # required IDs are defined.
-    OPTION(ALSOFT_NO_UID_DEFS "Do not define GUIDs, IIDs, CLSIDs, or PropertyKeys" OFF)
+    OPTION(ALSOFT_NO_UID_DEFS "Do not define GUIDs, IIDs, CLSIDs, or PropertyKeys" ON)
 
     IF(MINGW)
         OPTION(ALSOFT_BUILD_IMPORT_LIB "Build an import .lib using dlltool (requires sed)" ON)

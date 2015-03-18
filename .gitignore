@@ -2,7 +2,7 @@ build/*
 .idea/*
 CMakeFiles/*
 CMakeCache.txt
-
+*.dll
 
 game/game
 game/game.exe
