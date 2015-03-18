@@ -11,6 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
+#include <SDL_scancode.h>
 
 
 TestGameSystem::TestGameSystem(Game *game) {
@@ -21,7 +22,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity = game->scene->getWorld()->createRenderable();
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
-    entity->orientation = glm::rotate(entity->orientation, 90.0f, glm::vec3(1.0f, 1.0f, 0.0f));
+
     entity->mesh = mesh;
 
 
@@ -31,6 +32,12 @@ TestGameSystem::TestGameSystem(Game *game) {
 	*	https://wiki.libsdl.org/SDLScancodeLookup
 	*/
 	game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
+    game->input->mapButton("Left", new KeyboardButtonHandler(SDL_SCANCODE_LEFT, game->input));
+    game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
+    game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
+    game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
+    game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
+    game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
 
 	/*  Use keycodes given below for mouse:
 	*	SDL_BUTTON_LEFT
@@ -54,12 +61,39 @@ void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 0.0f, -1.0f));
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
     if (game->input->isPressed("Left Click")) {
         entity->pivot = glm::vec3(1.0f, 0.0f, 1.0f);
+
     }
+
+    if (game->input->isPressed("Left")) {
+        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+    }
+
+    if (game->input->isPressed("Right")) {
+        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
+    }
+    entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(1.0f, 0.0f, 0.0f));
+}
+
+if (game->input->isPressed("S")) {
+entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(-1.0f, 0
+
+    if (game->input->isPressed("W")) {.0f, 0.0f));
+    }
+
+    if (game->input->isPressed("Up")) {
+        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
+        entity->position += forward * 5.0f * dt;
+    }
+
+    if (game->input->isPressed("Down")) {
+        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
+        entity->position += back * 5.0f * dt;
+    }
+
 
 
 	if (game->input->wasReleased("Escape"))

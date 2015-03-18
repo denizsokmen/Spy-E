@@ -22,7 +22,7 @@ public:
     Entity();
     glm::mat4& getTransformation() {
 
-        transformation = glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::translate(glm::mat4(1.0f), pivot)* glm::translate(glm::mat4(1.0f), position);
+        transformation = glm::translate(glm::mat4(1.0f), position) * glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::translate(glm::mat4(1.0f), pivot);
        /* transformation[3][0] = position[0];
         transformation[3][1] = position[1];
         transformation[3][2] = position[2];*/
