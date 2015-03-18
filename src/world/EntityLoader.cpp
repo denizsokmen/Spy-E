@@ -21,7 +21,7 @@ EntityLoader::EntityLoader(){
 
 
 
-Entity* EntityLoader::load(char const *name){
+Entity* EntityLoader::load(char const *name, World* world){
 
     std::string path = std::string(ENTITIES_DIR) + std::string(name) + "/" + std::string(name) + ".xml";
     printf("Loading file: %s \n", path.c_str());
@@ -47,7 +47,7 @@ Entity* EntityLoader::load(char const *name){
 
 
     if (type == "Mesh") {
-        Renderable *renderable = new Renderable();
+        Renderable *renderable = world->createRenderable();
         Mesh* mesh = new Mesh();
         std::string modelPath = std::string(ENTITIES_DIR) + std::string(name) + "/" +  std::string(name) + ".obj";
         VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());

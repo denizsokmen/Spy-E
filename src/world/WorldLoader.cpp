@@ -54,13 +54,14 @@ void WorldLoader::load(char const *path) {
 
         glm::vec3 position = glm::vec3(x,y,z);
 
-        Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value());
+        Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value(), world);
         if (entity) {
             entity->setPosition(position);
         }
         else {
             printf("Unable to load %s.\n",entityNode->first_attribute("name")->value());
         }
+
 
     }
 

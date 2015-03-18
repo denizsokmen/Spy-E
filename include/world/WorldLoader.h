@@ -18,7 +18,7 @@ private:
 public:
     WorldLoader(World* world);
 
-    void load(const char* path);
+    void load(char const *name);
 
     ~WorldLoader();
 

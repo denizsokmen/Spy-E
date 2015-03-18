@@ -15,7 +15,7 @@ class EntityLoader {
 
 public:
     EntityLoader();
-    Entity* load(char const *name);
+    Entity* load(char const *name, World* world);
 
     ~EntityLoader();
 
