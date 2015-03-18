@@ -9,7 +9,7 @@ in vec3 normal_eyespace;
 out vec3 color;
 
 void main() {
-    vec3 l = normalize(vec3(1.0, 2.0, 0.0));
+    vec3 l = normalize(vec3(0.0, 0.0, 10.0));
 	float cosTheta = clamp( dot( normal_eyespace, l), 0,1 );
     color = vec3(1.0, 0.0, 0.0) * cosTheta;
 

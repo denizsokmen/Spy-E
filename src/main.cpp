@@ -5,10 +5,11 @@
 #include "world/WorldLoader.h"
 
 #include "TestGameSystem.h"
-
 #include "logic/Game.h"
 #include "world/World.h"
 #include "world/Entity.h"
+
+#include "system/WorldEditorSystem.h"
 
 Game* game;
 
@@ -17,7 +18,8 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     if (game->init(640, 480, "Spy-E", false)) {
-        TestGameSystem *test = new TestGameSystem(game);
+//        TestGameSystem *test = new TestGameSystem(game);
+        WorldEditorSystem *test = new WorldEditorSystem(game);
         game->getController()->addCoreSystem(test);
         game->update();
     }
