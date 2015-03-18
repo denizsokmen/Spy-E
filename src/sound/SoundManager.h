@@ -22,7 +22,27 @@ class SoundManager{
       int current_sound;
 
       ALCdevice *current_device;
-      ALCcontext *current_context; 
+      ALCcontext *current_context;
+
+#pragma pack(push,1)
+
+      struct RIFF_Wave_file{
+         char RIFF_t[4];            // 'RIFF'
+         unsigned int size;     
+         char WAVE_t[4];            // 'WAVE'
+         char fmt_t[4];             // 'fmt ' 
+         unsigned int chunk_size; 
+         short format_type;
+         short channels; 
+         unsigned int sample_rate;
+         unsigned int average_bytes_per_second; 
+         short bytes_per_sample;
+         short bits_per_sample; 
+         char data_t[4];            // 'data'   
+         unsigned int data_size; 
+      };
+
+#pragma pack(pop)
 
    public:   
       SoundManager(int number_of_sounds);

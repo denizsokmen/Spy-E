@@ -1,1 +1,12 @@
-to be filled
+2015-03-18 18:48:58 : Load Wav file added.
+
+Usage : 
+
+SoundManager sound_manager(1);                    // Number of sound file to be loaded as parameter
+ALuint sound = sound_manager.load("sound3.wav");  // #include <AL/al.h>
+sound_manager.play(sound);
+
+TODO:
+
+- More error checks
+- May extend to cover AU and ADPCM
