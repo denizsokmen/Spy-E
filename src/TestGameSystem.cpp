@@ -61,6 +61,8 @@ void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
+    game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y+10.0f, entity->getPosition().z + 20.0f);
+    game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
     if (game->input->isPressed("Left Click")) {
@@ -85,13 +87,13 @@ void TestGameSystem::update(float dt) {
     }
 
     if (game->input->isPressed("Up")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-        entity->position += forward * 5.0f * dt;
+        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
+        entity->position += forward * 10.0f * dt;
     }
 
     if (game->input->isPressed("Down")) {
-        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-        entity->position += back * 5.0f * dt;
+        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
+        entity->position += back * 10.0f * dt;
     }
 
 
