@@ -145,6 +145,9 @@ add_executable(game
 	src/TestPhysics.cpp
 	include/TestPhysics.h
 
+	src/sound/SoundManager.cpp
+	include/sound/SoundManager.h
+
 	src/graphics/Texture.cpp src/graphics/FontSDL.cpp src/graphics/Material.cpp src/system/WorldEditorSystem.cpp include/system/WorldEditorSystem.h)
 target_link_libraries(game
 	${ALL_LIBS}
