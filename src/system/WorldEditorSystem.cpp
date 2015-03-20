@@ -66,22 +66,15 @@ void WorldEditorSystem::update(float dt) {
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
-    horizontalAngle += mouseSpeed * float(game->width/2 - mouseX);
-    verticalAngle += mouseSpeed * float(game->height/2 - mouseY);
+    horizontalAngle = mouseSpeed * float(game->width/2 - mouseX);
+    verticalAngle = mouseSpeed * float(game->height/2 - mouseY);
 
     SDL_Window* window = game->input->mainWindow;
 
     game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
 
-    glm::vec3 direction(cos(verticalAngle) * sin(horizontalAngle),
-                        sin(verticalAngle),
-                        cos(verticalAngle) * cos(horizontalAngle));
 
-    glm::vec3 right = glm::vec3(sin(horizontalAngle - 3.14f/2.0f),0,cos(horizontalAngle - 3.14f/2.0f));
-    glm::vec3 up = glm::cross( right, direction );
-    glm::vec3 target = game->scene->camera->position;
-    target += direction;
-    game->scene->camera->lookAt(game->scene->camera->position, target, up);
+	game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
 
     if (game->input->justPressed("Left Click"))
         printf("left clicked\n");
@@ -91,21 +84,21 @@ void WorldEditorSystem::update(float dt) {
 
 
     if (game->input->isPressed("W")) {
-        game->scene->camera->position += direction * dt * speed;
+		game->scene->camera->move(0.0f, 0.0f, speed*dt);
 
     }
     if (game->input->isPressed("A")) {
-        game->scene->camera->position -= right * dt * speed;
+		game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
 
 
     }
-    if (game->input->isPressed("S")) {
-        game->scene->camera->position -= direction * dt * speed;
+	if (game->input->isPressed("S")) {
+		game->scene->camera->move(0.0f, 0.0f, -speed*dt);
 
 
     }
-    if (game->input->isPressed("D")) {
-        game->scene->camera->position += right * dt * speed;
+	if (game->input->isPressed("D")) {
+		game->scene->camera->move(speed*dt, 0.0f, 0.0f);
 
     }
 

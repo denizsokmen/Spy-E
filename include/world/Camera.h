@@ -16,6 +16,12 @@ public:
 
     glm::vec3 focus;
 
+	glm::vec3 localX;
+	glm::vec3 localY;
+	glm::vec3 localZ;
+
+	float safePitch;
+
     void lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 up);
     void perspective(float fov, float ratio, float near, float far) {
         projection = glm::perspective(fov, ratio, near, far);
@@ -23,6 +29,10 @@ public:
     void ortho(float left, float right, float top, float bot) {
         projection = glm::ortho(left, right, bot, top);
     }
+
+	void fpsRotation(float head, float pitch);
+	void move(float dx, float dy, float dz);
+	void updateView();
 
 
 };
