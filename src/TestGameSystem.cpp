@@ -26,7 +26,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->mesh = mesh;
 
 
-	/*Use scancodes for mapping keyboard from now on. For full list of scancodes:
+	/*Use scan codes for mapping keyboard from now on. For full list of scan codes:
 	*	check SDL_scancode.h 
 	*	OR
 	*	https://wiki.libsdl.org/SDLScancodeLookup

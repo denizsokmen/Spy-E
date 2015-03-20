@@ -10,6 +10,8 @@ public:
 	bool *buttonArray;
 	int mouseX;
 	int mouseY;
+
+	void setPosition(int mouseX, int mouseY, SDL_Window *mainWindow);
 	void update(SDL_Event &event);
 	Mouse();
 	~Mouse();

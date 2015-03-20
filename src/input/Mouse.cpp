@@ -1,4 +1,6 @@
+
 #include "input/Mouse.h"
+#include "SDL.h"
 
 Mouse::Mouse(){
 	this->buttonArray = new bool[SDL_NUM_SYSTEM_CURSORS];
@@ -17,4 +19,10 @@ void Mouse::update(SDL_Event &event){
 }
 
 Mouse::~Mouse(){
+}
+
+
+
+void Mouse::setPosition(int mouseX, int mouseY, SDL_Window *mainWindow) {
+	SDL_WarpMouseInWindow(mainWindow, mouseX, mouseY);
 }

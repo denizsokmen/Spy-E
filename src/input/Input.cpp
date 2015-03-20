@@ -1,8 +1,11 @@
+#include <SDL_stdinc.h>
 #include "input/Input.h"
 
 
 Input::Input(SDL_Window *mainWindow) {
 	this->mainWindow = mainWindow;
+	SDL_ShowCursor(SDL_DISABLE);
+
 	initDeviceList();
 }
 
@@ -11,6 +14,7 @@ void Input::initDeviceList(){
 	this->mouse = new Mouse();
 	this->deviceList.push_back(keyboard);
 	this->deviceList.push_back(mouse);
+
 }
 
 void Input::update(float dt) {
