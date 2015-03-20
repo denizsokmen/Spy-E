@@ -8,6 +8,8 @@
 
 void Texture::createFromSDL(SDL_Surface *surface) {
     id = 0;
+	width = surface->w;
+	height = surface->h;
 
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);

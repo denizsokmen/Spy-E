@@ -10,6 +10,8 @@ public:
 
     void createFromSDL(SDL_Surface* surface);
 
+	int width;
+	int height;
     GLuint id;
 };
 
