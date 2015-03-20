@@ -48,7 +48,7 @@ class SoundManager{
       SoundManager(int number_of_sounds);
       ~SoundManager();
 
-      int load(char* sound_name);
+      int load(const char* sound_name);
       void play(ALuint sound);
 };
 

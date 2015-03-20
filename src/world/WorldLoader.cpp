@@ -55,6 +55,7 @@ void WorldLoader::load(char const *path) {
         glm::vec3 position = glm::vec3(x,y,z);
 
         Entity* entity = entityLoader->load(entityNode->first_attribute("name")->value(), world);
+        //TODO: Must get color for cube's
         if (entity) {
             entity->setPosition(position);
         }

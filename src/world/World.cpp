@@ -1,4 +1,5 @@
 #include <vector>
+#include <graphics/Cube.h>
 #include "graphics/Renderable.h"
 #include "world/World.h"
 
@@ -38,4 +39,10 @@ void World::addEntities(std::vector<Entity *> *entities) {
 
 std::vector<Renderable *> World::getRenderables() {
     return renderables;
+}
+
+Cube *World::createCube() {
+    Cube* cube = new Cube();
+    renderables.push_back((Renderable*) cube);
+    return cube;
 }

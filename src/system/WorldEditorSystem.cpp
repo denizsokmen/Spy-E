@@ -7,13 +7,12 @@
 #include "graphics/Mesh.h"
 #include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
-#include "world/Entity.h"
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
 #include "sound/SoundManager.h"
-#include <graphics/Shader.h>
-
+#include "graphics/Shader.h"
+#include "graphics/Cube.h"
 #include "world/Camera.h"
 
 
@@ -28,9 +27,28 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     Mesh* mesh = new Mesh();
     ObjLoader* objLoader = new ObjLoader();
     mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    Renderable* entity = game->scene->getWorld()->createRenderable();
+    Cube* entity = game->scene->getWorld()->createCube();
     entity->position = glm::vec3(0,0,0);
     entity->mesh = mesh;
+    entity->color = glm::vec3(1.0,1.0,1.0);
+
+
+
+    Mesh* mesh2 = new Mesh();
+    mesh2->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
+    Cube* entity2 = game->scene->getWorld()->createCube();
+    entity2->position = glm::vec3(2.0,0,0);
+    entity2->mesh = mesh2;
+    entity2->color = glm::vec3(0.5,1.0,1.0);
+
+
+
+    Mesh* mesh3 = new Mesh();
+    mesh3->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
+    Cube* entity3 = game->scene->getWorld()->createCube();
+    entity3->position = glm::vec3(-2.0,0.0,0);
+    entity3->mesh = mesh3;
+    entity3->color = glm::vec3(0.5,0.5,1.0);
 
 
     Mesh* floorMesh = new Mesh();

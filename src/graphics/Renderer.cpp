@@ -9,6 +9,7 @@
 
 Renderer::Renderer() {
     this->loadGeneralShader();
+
     objLoader = new ObjLoader();
 }
 
@@ -31,6 +32,7 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
     glUseProgram(generalShader->id);
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
 
+
     for (auto renderable: renderList) {
         glm::mat4 MVP = camera->projection * (camera->view * renderable->getTransformation());
         glm::mat3 normalMatrix = glm::mat3(camera->view * renderable->getTransformation());
@@ -38,9 +40,8 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
         glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
         glUniformMatrix3fv(glGetUniformLocation(generalShader->id, "NormalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelMatrix"), 1, GL_FALSE, &renderable->getTransformation()[0][0]);
-        renderable->getVertexBuffer()->bind();
-        renderable->getVertexBuffer()->draw();
-        renderable->getVertexBuffer()->unbind();
+
+        renderable->render(this);
     }
     glUseProgram(0);
 

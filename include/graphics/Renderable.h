@@ -10,6 +10,7 @@
 
 class VertexBuffer;
 class Mesh;
+class Renderer;
 
 class Renderable : public Entity {
 
@@ -21,10 +22,10 @@ public:
     Mesh* mesh;
     unsigned int identifier;
 
-    virtual ~Renderable() {}
-    virtual void render() {}
-    virtual void load() {}
-    virtual void unload() {}
+    ~Renderable();
+    virtual void render(Renderer *renderer);
+//    void load(); FIXME: Someone should make a decision whether to keep them or delete them.
+//    void unload();
 
     VertexBuffer* getVertexBuffer();
 

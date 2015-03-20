@@ -77,7 +77,7 @@ SoundManager::~SoundManager(){
    alDeleteBuffers(number_of_sounds, sound_buffers);
 }
 
-int SoundManager::load(char* sound_name){
+int SoundManager::load(const char* sound_name){
    current_sound++;
 
 /*                  ALUT Version                  */     

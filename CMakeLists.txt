@@ -153,7 +153,13 @@ add_executable(game
 	src/sound/SoundManager.cpp
 	include/sound/SoundManager.h
 
-	src/graphics/Texture.cpp src/graphics/FontSDL.cpp src/graphics/Material.cpp src/system/WorldEditorSystem.cpp include/system/WorldEditorSystem.h)
+	src/graphics/Texture.cpp
+	src/graphics/FontSDL.cpp
+	src/graphics/Material.cpp
+	src/system/WorldEditorSystem.cpp
+	include/system/WorldEditorSystem.h
+	src/graphics/Cube.cpp include/graphics/Cube.h)
+
 target_link_libraries(game
 	${ALL_LIBS}
 )
