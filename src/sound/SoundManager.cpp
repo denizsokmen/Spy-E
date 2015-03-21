@@ -20,7 +20,7 @@
 #include <AL/alc.h>
 #include <AL/alext.h>
 
-#include "SoundManager.h"
+#include "sound/SoundManager.h"
 
 ALenum get_format(short bit_for_sample, short channels){
    ALenum format=0;
