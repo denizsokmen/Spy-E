@@ -158,7 +158,7 @@ add_executable(game
 	src/graphics/Material.cpp
 	src/system/WorldEditorSystem.cpp
 	include/system/WorldEditorSystem.h
-	src/graphics/Cube.cpp include/graphics/Cube.h)
+	src/graphics/Cube.cpp include/graphics/Cube.h src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h)
 
 target_link_libraries(game
 	${ALL_LIBS}

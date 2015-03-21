@@ -5,6 +5,7 @@
 #include "graphics/FontSDL.h"
 #include <SDL_ttf.h>
 #include <GL/glew.h>
+#include <wchar.h>
 #include "graphics/Texture.h"
 
 FontSDL::FontSDL() {
