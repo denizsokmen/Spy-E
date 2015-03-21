@@ -2,19 +2,19 @@
 
 void BoundingBox::createFromVertices(){
 
-    float xmax = -100.0;
-    float xmin = 100.0;
-    float ymax = -100.0;
-    float ymin = 100.0;
-    float zmax = -100.0;
-    float zmin = 100.0;
+    float xmax = -1000.0;
+    float xmin = 1000.0;
+    float ymax = -1000.0;
+    float ymin = 1000.0;
+    float zmax = -1000.0;
+    float zmin = 1000.0;
 
     for(int i = 0; i < vertices.size(); i++){
 
         glm::vec3 vertex = vertices[i];
 
         if(vertex.x > xmax) xmax = vertex.x;
-        if(vertex.x < xmax) xmin = vertex.x;
+        if(vertex.x < xmin) xmin = vertex.x;
 
         if(vertex.y > ymax) ymax = vertex.y;
         if(vertex.y < ymin) ymin = vertex.y;

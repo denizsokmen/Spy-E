@@ -10,10 +10,11 @@ class Body{
     glm::vec3 location;
     glm::vec3 speed;
     glm::vec3 acceleration;
+    std::vector<glm::vec3> vertices;
     BoundingBox *boundingBox;
 
 public:
-    Body(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc);
+    Body(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v);
     ~Body();
 
     void setLocation(glm::vec3 loc);

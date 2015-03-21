@@ -1,10 +1,19 @@
 #include "physics/Body.h"
 
-Body::Body(glm::vec3 loc, glm::vec3 s, glm::vec3 acc){
+Body::Body(glm::vec3 loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
 
     location = loc;
     speed = s;
     acceleration = acc;
+    vertices = v;
+
+    for(int i = 0; i < vertices.size(); i++){
+
+        vertices[i].x = vertices[i].x+loc.x;
+        vertices[i].y = vertices[i].z+loc.y;
+        vertices[i].z = vertices[i].z+loc.z;
+    }
+    boundingBox = new BoundingBox(vertices);
 }
 
 Body::~Body(){

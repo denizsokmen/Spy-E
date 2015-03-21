@@ -8,9 +8,9 @@ PhysicsWorld::~PhysicsWorld() {
 
 }
 
-Body* PhysicsWorld::createBody(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc){
+Body* PhysicsWorld::createBody(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v){
 
-    Body *body = new Body(loc, speed, acc);
+    Body *body = new Body(loc, speed, acc, v);
     bodies.push_back(body);
 
     return body;
@@ -45,8 +45,11 @@ bool PhysicsWorld::isCollided(Body *b1, Body *b2){
     BoundingBox *box1 = b1->getBoundingBox();
     BoundingBox *box2 = b2->getBoundingBox();
 
-    if(box1->getMaxVertex().x < box2->getMinVertex().x || box1->getMinVertex().x > box1->getMaxVertex().x) return false;
-    if(box1->getMaxVertex().y < box2->getMinVertex().y || box1->getMinVertex().y > box1->getMaxVertex().y) return false;
-    if(box1->getMaxVertex().z < box2->getMinVertex().z || box1->getMinVertex().z > box1->getMaxVertex().z) return false;
-    else return true;
+    return ( box1->getMaxVertex().x > box2->getMinVertex().x &&
+             box1->getMinVertex().x < box2->getMaxVertex().x &&
+             box1->getMaxVertex().y > box2->getMinVertex().y &&
+             box1->getMinVertex().y < box2->getMaxVertex().y &&
+             box1->getMaxVertex().z > box2->getMinVertex().z &&
+             box1->getMinVertex().z < box2->getMaxVertex().z   );
+
 }
