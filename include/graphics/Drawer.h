@@ -9,6 +9,8 @@
 
 class Drawable;
 class Game;
+class ShaderProgram;
+class VertexBuffer;
 
 class DrawObj {
 
@@ -23,6 +25,9 @@ class Drawer {
 
 
     std::vector<DrawObj> drawList;
+	ShaderProgram *quadShader;
+	VertexBuffer *quadBuffer;
+
 public:
     void draw(Drawable*, glm::vec2 pos);
     void drawAll();
