@@ -15,8 +15,16 @@
 
 class SoundManager{
    private:
-      ALuint *sound_buffers;
-      ALuint *sound_sources;
+
+      struct sound{
+         ALuint buffer;
+         ALuint source;
+      };
+
+      sound *sounds;
+
+      /* ALuint *sound_buffers;
+         ALuint *sound_sources; */
 
       int number_of_sounds;
       int current_sound;
@@ -48,8 +56,10 @@ class SoundManager{
       SoundManager(int number_of_sounds);
       ~SoundManager();
 
-      int load(const char* sound_name);
+      int load(char* sound_name);
       void play(ALuint sound);
+      void loop(ALuint sound, bool do_loop);
+      void stop(ALuint sound);
 };
 
 #endif
