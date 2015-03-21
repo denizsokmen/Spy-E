@@ -10,6 +10,7 @@ VertexBuffer::~VertexBuffer() {
 }
 
 void VertexBuffer::addVertex(glm::vec3 position) {
+    vertexList.push_back(position);
     vertex[vboPosition].push_back(position.x);
     vertex[vboPosition].push_back(position.y);
     vertex[vboPosition].push_back(position.z);

@@ -26,6 +26,7 @@ public:
     VertexBuffer();
     ~VertexBuffer();
 
+    std::vector<glm::vec3> vertexList;
     void addVertex(glm::vec3 position);
     void addUV(glm::vec2 uv);
     void addColor(glm::vec4 color);
