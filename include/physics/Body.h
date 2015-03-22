@@ -23,5 +23,6 @@ public:
     glm::vec3 getSpeed();
     glm::vec3 getLocation();
     BoundingBox* getBoundingBox();
+    void updateBoundingBox(std::vector<glm::vec3> v);
 };
 #endif

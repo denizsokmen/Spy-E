@@ -13,6 +13,7 @@ Body::Body(glm::vec3 loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
         vertices[i].y = vertices[i].z+loc.y;
         vertices[i].z = vertices[i].z+loc.z;
     }
+
     boundingBox = new BoundingBox(vertices);
 }
 
@@ -48,4 +49,19 @@ glm::vec3 Body::getLocation(){
 BoundingBox* Body::getBoundingBox(){
 
     return boundingBox;
+}
+
+void Body::updateBoundingBox(std::vector<glm::vec3> v){
+
+    vertices = v;
+
+    for(int i = 0; i < vertices.size(); i++){
+
+        vertices[i].x = vertices[i].x+location.x;
+        vertices[i].y = vertices[i].z+location.y;
+        vertices[i].z = vertices[i].z+location.z;
+        vertices[i].z = vertices[i].z+location.z;
+    }
+    delete boundingBox;
+    boundingBox = new BoundingBox(vertices);
 }
