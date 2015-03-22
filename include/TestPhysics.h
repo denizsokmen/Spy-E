@@ -23,7 +23,11 @@ class VertexBuffer;
 class Game;
 
 class TestPhysics: public System {
-    Renderable* entity;
+    Cube* entity;
+    Cube* entity2;
+    Cube* entity3;
+    Cube* entity4;
+
     Game *game;
 
 public:
@@ -32,6 +36,12 @@ public:
     float verticalAngle = 0.0f;
     float mouseSpeed = 0.005f;
     float speed = 10.0f;
+
+    PhysicsWorld *physicsWorld;
+    Body *b1;
+    Body *b2;
+    Body *b3;
+    Body *b4;
 
     TestPhysics(Game *game);
     ~TestPhysics();
