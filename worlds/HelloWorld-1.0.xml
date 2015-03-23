@@ -10,7 +10,7 @@
                 <Z>0</Z>
             </Position>
         </Entity>
-        <Entity name="cube">
+        <Entity name="box">
             <Color>
                 <R>1.0</R>
                 <G>0.1</G>
@@ -22,21 +22,22 @@
                 <Z>0</Z>
             </Position>
         </Entity>
-        <Entity name="cube">
+        <Entity name="box">
             <Position>
                 <X>0</X>
                 <Y>1</Y>
                 <Z>0</Z>
             </Position>
         </Entity>
-        <Entity name="cube">
+        <Entity name="ambientSound1">
+            <type>ambient</type>
             <Position>
                 <X>0</X>
                 <Y>1</Y>
                 <Z>1</Z>
             </Position>
         </Entity>
-        <Entity name="cube">
+        <Entity name="box">
             <Position>
                 <X>0</X>
                 <Y>1</Y>
