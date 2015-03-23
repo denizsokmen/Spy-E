@@ -15,7 +15,7 @@ class SystemController {
        gameStates["ingame"]
        gameStates["pause"]
      */
-    std::map<std::string, std::vector<System*>> gameStates;
+    std::map<std::string, std::vector<System*> > gameStates;
     std::vector<System*>* currentState;
     std::string currentStateName;
 

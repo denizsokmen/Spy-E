@@ -3,7 +3,7 @@
 //
 
 #include <logic/Game.h>
-#include "system/WorldEditorSystem.h"
+#include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
@@ -20,6 +20,29 @@ float horizontalAngle = 3.14f;
 float verticalAngle = 0.0f;
 float mouseSpeed = 0.005f;
 float speed = 10.0f;
+
+
+
+Game* game;
+
+int main(int argc, char* argv[])
+{
+    game = new Game();
+    if (game->init(640, 480, "Spy-E", false)) {
+        //TestGameSystem *test = new TestGameSystem(game);
+        WorldEditorSystem *test = new WorldEditorSystem(game);
+        // TestPhysics *test = new TestPhysics(game);
+        game->getController()->addCoreSystem(test);
+        game->update();
+    }
+
+
+
+    game->end();
+    delete game;
+    return 0;
+}
+
 
 WorldEditorSystem::WorldEditorSystem(Game *game) {
     this->game = game;

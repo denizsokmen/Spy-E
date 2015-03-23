@@ -14,6 +14,26 @@
 #include <SDL_scancode.h>
 
 
+Game* game;
+
+int main(int argc, char* argv[])
+{
+    game = new Game();
+    if (game->init(640, 480, "Spy-E", false)) {
+        //TestGameSystem *test = new TestGameSystem(game);
+        TestGameSystem *test = new TestGameSystem(game);
+        // TestPhysics *test = new TestPhysics(game);
+        game->getController()->addCoreSystem(test);
+        game->update();
+    }
+
+
+
+    game->end();
+    delete game;
+    return 0;
+}
+
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     Mesh* mesh = new Mesh();
@@ -62,6 +82,7 @@ void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y+10.0f, entity->getPosition().z + 20.0f);
+    game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 

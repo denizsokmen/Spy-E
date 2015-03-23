@@ -65,8 +65,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-add_executable(game
-	src/main.cpp
+add_library(engine STATIC
 	src/graphics/Shader.cpp
 	src/graphics/ObjLoader.cpp
 	src/graphics/Renderable.cpp
@@ -91,7 +90,6 @@ add_executable(game
 	src/logic/SystemController.cpp
 	src/logic/Game.cpp
 
-	src/TestGameSystem.cpp
 	src/world/WorldLoader.cpp
 
 	src/input/Input.cpp
@@ -144,11 +142,9 @@ add_executable(game
 	include/utils/rapidxml_iterators.hpp
 	include/utils/rapidxml_print.hpp
 	include/utils/rapidxml_utils.hpp
-	include/TestGameSystem.h
 	include/world/WorldLoader.h
 
-	src/TestPhysics.cpp
-	include/TestPhysics.h
+
 
 	src/sound/SoundManager.cpp
 	include/sound/SoundManager.h
@@ -156,18 +152,37 @@ add_executable(game
 	src/graphics/Texture.cpp
 	src/graphics/FontSDL.cpp
 	src/graphics/Material.cpp
-	src/system/WorldEditorSystem.cpp
-	include/system/WorldEditorSystem.h
 	src/graphics/Cube.cpp include/graphics/Cube.h src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h)
 
-target_link_libraries(game
+target_link_libraries(engine
 	${ALL_LIBS}
 )
 
+add_executable(testphysics
+    tests/physics/TestPhysics.cpp
+	tests/physics/TestPhysics.h
+)
+
+target_link_libraries(testphysics engine)
+
+add_executable(testworldeditor
+    tests/worldeditor/TestWorldEditor.cpp
+    tests/worldeditor/TestWorldEditor.h
+)
+
+target_link_libraries(testworldeditor engine)
+
+add_executable(testscene
+	tests/scene/TestGameSystem.cpp
+	tests/scene/TestGameSystem.h
+)
+
+target_link_libraries(testscene engine)
+
 
 # Xcode and Visual working directories
-set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")
-create_target_launcher(game WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+set_target_properties(engine PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")
+create_target_launcher(engine WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
