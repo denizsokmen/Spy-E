@@ -1,6 +1,5 @@
 
 #include "input/Mouse.h"
-#include "SDL.h"
 
 Mouse::Mouse(){
 	this->buttonArray = new bool[SDL_NUM_SYSTEM_CURSORS];

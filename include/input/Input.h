@@ -25,7 +25,10 @@ public:
 
 	Keyboard* keyboard;
 	Keyboard* getKeyboard();
-	
+
+	bool quit;
+	bool focus;
+
 	bool justPressed(std::string);
 	bool isPressed(std::string);
 	bool wasReleased(std::string buttonKey);

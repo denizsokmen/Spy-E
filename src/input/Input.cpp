@@ -1,11 +1,14 @@
 #include <SDL_stdinc.h>
+#include <SDL_video.h>
+#include <SDL_events.h>
 #include "input/Input.h"
 
 
 Input::Input(SDL_Window *mainWindow) {
 	this->mainWindow = mainWindow;
+	this->quit = false;
+	this->focus = false;
 	SDL_ShowCursor(SDL_DISABLE);
-
 	initDeviceList();
 }
 
@@ -22,12 +25,18 @@ void Input::update(float dt) {
 	while (SDL_PollEvent(&event)){
 		eventQueue.push(event);
 		switch (event.type){
-		case SDL_WINDOWEVENT:
-			printf("");
-		default:
-			updateDevices(event);
-			updateHandlers();
-			printf("");
+			case SDL_WINDOWEVENT:
+				switch(event.window.event){
+					case SDL_WINDOWEVENT_CLOSE:
+						quit = true;
+					case SDL_WINDOWEVENT_FOCUS_LOST:
+						focus = false;
+					case SDL_WINDOWEVENT_FOCUS_GAINED:
+						focus = true;
+				}
+			default:
+				updateDevices(event);
+				updateHandlers();
 		}
 	}
 	cleanQueue();
@@ -40,9 +49,8 @@ void Input::updateDevices(SDL_Event &event) {
 }
 
 void Input::updateHandlers(){
-	for (auto it = buttonMap.begin(); it != buttonMap.end(); ++it){
+	for (auto it = buttonMap.begin(); it != buttonMap.end(); ++it)
 		it->second->update();
-	}
 }
 
 void Input::mapButton(std::string key, ButtonHandler *buttonHandler){
@@ -51,9 +59,8 @@ void Input::mapButton(std::string key, ButtonHandler *buttonHandler){
 
 bool Input::justPressed(std::string buttonKey){
 	auto it = this->buttonMap.find(buttonKey);
-	if (it != buttonMap.end()) {
+	if (it != buttonMap.end())
 		return it->second->justPressed();
-	}
 	return false;
 }
 
