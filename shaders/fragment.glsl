@@ -13,6 +13,6 @@ out vec3 color;
 void main() {
     vec3 l = normalize((light_eyespace-position_eyespace).xyz);
 	float cosTheta = clamp( dot( normal_eyespace, l), 0.0, 1 );
-    color = fragment_color * cosTheta;
+    color = fragment_color * cosTheta + vec3(0.1, 0.1, 0.1);
 
 }
