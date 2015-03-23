@@ -60,7 +60,6 @@ void Body::updateBoundingBox(std::vector<glm::vec3> v){
         vertices[i].x = vertices[i].x+location.x;
         vertices[i].y = vertices[i].z+location.y;
         vertices[i].z = vertices[i].z+location.z;
-        vertices[i].z = vertices[i].z+location.z;
     }
     delete boundingBox;
     boundingBox = new BoundingBox(vertices);
