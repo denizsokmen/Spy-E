@@ -46,7 +46,7 @@ ALenum get_format(short bit_for_sample, short channels){
    return format;
 }
 
-int SoundManager::find_source_by_name(char* sound_name){
+int SoundManager::find_source_by_name(const char* sound_name){
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
@@ -104,7 +104,7 @@ SoundManager::~SoundManager(){
    }
 }
 
-int SoundManager::load(char* name, char* file_name){
+int SoundManager::load(const char* name, const char* file_name){
    number_of_sounds++;
    sounds.resize(number_of_sounds);
 
@@ -178,11 +178,11 @@ int SoundManager::load(char* name, char* file_name){
 
 }
 
-int SoundManager::open(char* file_name){
+int SoundManager::open(const char* file_name){
    return load(NO_NAME,file_name);
 }
 
-int SoundManager::open(char* sound_name, char* file_name){
+int SoundManager::open(const char* sound_name, const char* file_name){
    return load(sound_name, file_name);
 }
 
@@ -190,7 +190,7 @@ void SoundManager::play(ALuint sound){
    alSourcePlay(sound);
 }
 
-void SoundManager::play(char* sound_name){
+void SoundManager::play(const char* sound_name){
    alSourcePlay(find_source_by_name(sound_name));
 }
 
