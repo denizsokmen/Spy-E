@@ -28,14 +28,10 @@ int main(int argc, char* argv[])
 
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
-    Mesh* mesh = new Mesh();
-    ObjLoader* objLoader = new ObjLoader();
-    mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    entity = game->scene->getWorld()->createRenderable();
+    entity = game->scene->getWorld()->createRenderable("box");
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
 
-    entity->mesh = mesh;
 
 
 	/*Use scan codes for mapping keyboard from now on. For full list of scan codes:

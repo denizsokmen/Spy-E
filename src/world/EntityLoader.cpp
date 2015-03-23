@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <Constants.h>
 
 
 #include "world/Entity.h"
@@ -13,7 +14,7 @@
 #include "graphics/Renderable.h"
 #include "utils/rapidxml_utils.hpp"
 
-#define ENTITIES_DIR "./assets/entities/"
+
 
 EntityLoader::EntityLoader(){
     objLoader = new ObjLoader();
@@ -22,8 +23,8 @@ EntityLoader::EntityLoader(){
 
 
 Entity* EntityLoader::load(char const *name, World* world){
-
-    std::string path = std::string(ENTITIES_DIR) + std::string(name) + "/" + std::string(name) + ".xml";
+    std::string entityName(name);
+    std::string path = std::string(ENTITIES_DIR) + entityName + "/" + entityName + ".xml";
     printf("Loading file: %s \n", path.c_str());
 
     Entity *entity = NULL;
@@ -45,15 +46,13 @@ Entity* EntityLoader::load(char const *name, World* world){
     printf("    ");
     printf("Type: %s\n",type.c_str());
 
+    if (entityName == "Cube") {
+
+    }
+
 
     if (type == "Mesh") {
-        Renderable *renderable = world->createRenderable();
-        Mesh* mesh = new Mesh();
-        std::string modelPath = std::string(ENTITIES_DIR) + std::string(name) + "/" +  std::string(name) + ".obj";
-        VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
-        mesh->setVertexBuffer(buffer);
-        renderable->mesh = mesh;
-        entity = renderable;
+        return world->createRenderable(name);
     }
 
     // else if ...

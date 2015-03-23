@@ -152,7 +152,7 @@ add_library(engine STATIC
 	src/graphics/Texture.cpp
 	src/graphics/FontSDL.cpp
 	src/graphics/Material.cpp
-	src/graphics/Cube.cpp include/graphics/Cube.h src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h)
+	src/graphics/Cube.cpp include/graphics/Cube.h src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h include/Constants.h)
 
 target_link_libraries(engine
 	${ALL_LIBS}

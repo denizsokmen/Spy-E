@@ -6,13 +6,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
-
+#include <string>
 
 class Entity {
 
 protected:
 
 public:
+    std::string name;
     glm::vec3 position;
     glm::vec3 pivot;
     glm::quat orientation;
@@ -20,6 +21,7 @@ public:
 
 
     Entity();
+    virtual ~Entity() {};
     glm::mat4& getTransformation() {
 
         transformation = glm::translate(glm::mat4(1.0f), position) * glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::translate(glm::mat4(1.0f), pivot);
@@ -36,6 +38,7 @@ public:
 
     glm::quat getOrientation() const;
     void setOrientation(glm::quat &orientation);
+
     glm::vec3 getPosition() const;
     void setPosition(glm::vec3 &position);
 };

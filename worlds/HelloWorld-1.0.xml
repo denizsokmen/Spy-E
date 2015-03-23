@@ -4,6 +4,7 @@
     <SkyBox>N/A</SkyBox>
     <Entities>
         <Entity name="camera">
+            <Type>box</Type>
             <Position>
                 <X>0</X>
                 <Y>2</Y>
@@ -11,6 +12,7 @@
             </Position>
         </Entity>
         <Entity name="box">
+            <Type>cube</Type>
             <Color>
                 <R>1.0</R>
                 <G>0.1</G>
@@ -23,6 +25,7 @@
             </Position>
         </Entity>
         <Entity name="box">
+            <Type>box</Type>
             <Position>
                 <X>0</X>
                 <Y>1</Y>
@@ -30,7 +33,7 @@
             </Position>
         </Entity>
         <Entity name="ambientSound1">
-            <type>ambient</type>
+            <Type>box</Type>
             <Position>
                 <X>0</X>
                 <Y>1</Y>
@@ -38,6 +41,7 @@
             </Position>
         </Entity>
         <Entity name="box">
+            <Type>box</Type>
             <Position>
                 <X>0</X>
                 <Y>1</Y>
@@ -45,6 +49,7 @@
             </Position>
         </Entity>
         <Entity name="player">
+            <Type>box</Type>
             <Position>
                 <X>0</X>
                 <Y>0</Y>

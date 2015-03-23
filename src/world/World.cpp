@@ -2,14 +2,24 @@
 #include <graphics/Cube.h>
 #include "graphics/Renderable.h"
 #include "world/World.h"
-
+#include "graphics/Mesh.h"
+#include "graphics/ObjLoader.h"
+#include "Constants.h"
 
 int World::getEntityCount() {
     return entities.size();
 }
 
-Renderable* World::createRenderable() {
+Renderable* World::createRenderable(const char* name) {
+    std::string entityName(name);
     Renderable* entity = new Renderable();
+    Mesh* mesh = new Mesh();
+    std::string modelPath = std::string(ENTITIES_DIR) + entityName  + "/" +  entityName + ".obj";
+    VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
+    mesh->setVertexBuffer(buffer);
+    entity->mesh = mesh;
+
+
     renderables.push_back(entity);
     return entity;
 }
@@ -45,4 +55,12 @@ Cube *World::createCube() {
     Cube* cube = new Cube();
     renderables.push_back((Renderable*) cube);
     return cube;
+}
+
+World::World() {
+    objLoader = new ObjLoader();
+}
+
+World::~World() {
+    delete objLoader;
 }
