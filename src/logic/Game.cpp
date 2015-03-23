@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <SDL_video.h>
 #include <SDL_events.h>
+#include <graphics/Drawer.h>
+#include <SDL_ttf.h>
 #include "SDL.h"
 #include "logic/Timer.h"
 #include "world/Scene.h"
@@ -40,12 +42,16 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
         return false;
     }
 
+    TTF_Init();
+
     scene = new Scene();
     input = new Input(mainWindow);
+    drawer = new Drawer(this);
 
     controller = new SystemController();
     controller->addCoreSystem(input);
     controller->addCoreSystem(scene);
+    controller->addCoreSystem(drawer);
 
     timer = new Timer(TICK_PER_SECOND);
 

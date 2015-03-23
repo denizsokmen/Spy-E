@@ -6,10 +6,13 @@
 #include <SDL_ttf.h>
 #include <GL/glew.h>
 #include <wchar.h>
+#include <graphics/Drawable.h>
+#include "graphics/Drawer.h"
 #include "graphics/Texture.h"
 
-FontSDL::FontSDL() {
+FontSDL::FontSDL(Drawer *drawer) {
 	charSet.reserve(256);
+	this->drawer = drawer;
 }
 
 FontSDL::~FontSDL() {
@@ -19,16 +22,17 @@ FontSDL::~FontSDL() {
 void FontSDL::loadFont(const char* fontname, int size) {
 	TTF_Font* tmpfont;
 	tmpfont = TTF_OpenFont(fontname, size);
-	SDL_Color clr = { 0, 0, 255, 0 };
+	SDL_Color clr = { 0, 0, 255, 255 };
 
-	for (unsigned short i = 65; i < 91; i++) {
+	for (unsigned short i = 1; i < 131; i++) {
 		SDL_Surface *sText = TTF_RenderGlyph_Blended(tmpfont, i, clr);
 
 		//TODO: terminology. Using textures directly is wrong. 
 		//should be encapsulated by another class named Glyph.
 		Texture* texture = new Texture();
 		texture->createFromSDL(sText);
-		charSet[i] = texture;
+		Drawable *drawable = new Drawable(texture);
+		charSet[i] = drawable;
 		SDL_FreeSurface(sText);
 	}
 	
@@ -44,11 +48,13 @@ void FontSDL::draw(glm::vec3 position, const wchar_t* text, ...) {
 
 	int cnt = 0;
 	glm::vec3 offset(0.0f, 0.0f, 0.0f);
+	offset.x +=12;
 	while (txt[cnt] != '\0') {
-
 		//TODO: textures should be drawn.
-		//offset.x += charSet[txt[cnt]]->width; ??
 		//charSet[txt[cnt]]->draw(position + offset);
+		position.x +=charSet[txt[cnt]]->getTexture()->width;
+		//glm::vec3 newpos = position + offset;
+		drawer->draw(charSet[txt[cnt]], glm::vec2(position.x, position.y));
 		cnt++;
 	}
 }

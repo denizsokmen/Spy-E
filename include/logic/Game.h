@@ -10,6 +10,7 @@ class Scene;
 class Input;
 class Timer;
 class SystemController;
+class Drawer;
 
 class Game {
 
@@ -41,6 +42,7 @@ public:
     Input *input;
     SDL_Window *mainWindow;
     SDL_GLContext mainGLContext;
+    Drawer *drawer;
 };
 
 

@@ -3,6 +3,7 @@
 
 #include <SDL_surface.h>
 #include <GL/glew.h>
+#include <GL/gl.h>
 
 class Texture {
 
@@ -12,6 +13,11 @@ public:
 
 	int width;
 	int height;
+
+    GLuint getId() const {
+        return id;
+    }
+
     GLuint id;
 };
 

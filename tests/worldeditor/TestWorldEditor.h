@@ -12,6 +12,7 @@ class ShaderProgram;
 class VertexBuffer;
 class Game;
 class SoundManager;
+class FontSDL;
 
 class WorldEditorSystem: public System {
 
@@ -28,6 +29,7 @@ public:
 
     void draw2D();
     VertexBuffer *vbo;
+    FontSDL *font;
 };
 
 

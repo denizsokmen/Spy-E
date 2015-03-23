@@ -6,6 +6,7 @@
 #define _SPYE_DRAWER_H_
 #include <vector>
 #include <glm/glm.hpp>
+#include "logic/System.h"
 
 class Drawable;
 class Game;
@@ -21,7 +22,7 @@ public:
     glm::vec2 size;
 };
 
-class Drawer {
+class Drawer : public System {
 
 
     std::vector<DrawObj> drawList;
@@ -29,8 +30,14 @@ class Drawer {
 	VertexBuffer *quadBuffer;
 
 public:
+    Drawer(Game* gm);
+    ~Drawer();
     void draw(Drawable*, glm::vec2 pos);
     void drawAll();
+
+    void update(float dt);
+    void draw();
+    void draw2D();
 
     Game* game;
 };
