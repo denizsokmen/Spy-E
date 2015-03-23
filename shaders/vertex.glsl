@@ -20,6 +20,6 @@ void main() {
     gl_Position = MVP * vertexPosition_modelspace;
     normal_eyespace = NormalMatrix * normal;
     position_eyespace = ModelViewMatrix * vertexPosition_modelspace;
-    light_eyespace = ModelViewMatrix * vec4(10.0, 1.0,10.0, 1.0);
+    light_eyespace = ModelViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
     fragment_color = Color;
 }

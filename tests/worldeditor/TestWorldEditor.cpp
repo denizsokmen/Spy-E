@@ -77,7 +77,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     Mesh* floorMesh = new Mesh();
     floorMesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/floor/floor.obj"));
     Renderable* floorEntity = game->scene->getWorld()->createRenderable();
-    floorEntity->position = glm::vec3(0,-1.0f,0);
+    floorEntity->position = glm::vec3(0,-2.0f,0);
     floorEntity->mesh = floorMesh;
 
 
