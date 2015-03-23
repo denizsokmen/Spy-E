@@ -1,12 +1,19 @@
+2015-03-23 13:18:21 : Defining and playing a sound by name added.
 2015-03-23 10:37:07 : STD vector is used to keep sound information
 2015-03-21 15:09:28 : Stop, Loop and file check added.
 2015-03-18 18:48:58 : Load Wav file added.
 
 Usage : 
 
-SoundManager sound_manager;                  
-ALuint sound = sound_manager.load("sound.wav"); // <AL/al.h>
+SoundManager sound_manager;        
+          
+ALuint sound = sound_manager.open("sound.wav"); // <AL/al.h>
 sound_manager.play(sound);
+
+or
+
+ALuint sound = sound_manager.open("sound","sound.wav");
+sound_manager.play("sound");
 
 TODO:
 
@@ -17,6 +24,8 @@ TODO:
 - Standalone sound class
 - Direct data erasure
 - Checking file if its WAVE RIFF
+- Changing char arrays to STD strings
+- Making GCC shut up
 
 Done
 - Safer structure to keep buffer IDs(x)

@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <cstdlib> 
 #include <cstdio> 
@@ -21,6 +22,8 @@
 #include <AL/alext.h>
 
 #include "sound/SoundManager.h"
+
+#define NO_NAME "NONAME"
 
 ALenum get_format(short bit_for_sample, short channels){
    ALenum format=0;
@@ -43,6 +46,18 @@ ALenum get_format(short bit_for_sample, short channels){
    return format;
 }
 
+int SoundManager::find_source_by_name(char* sound_name){
+   for(int c = 0; c<sounds.size(); c++){
+      /* printf("c1: %s |",   sound_name);
+         printf("c2: %s | \n",sounds[c].name); */
+      if(strcmp(sounds[c].name, sound_name) == 0){
+         return (sounds[c].source);
+      }else{
+         // Need to add error function here!
+      }
+   }
+}
+
 SoundManager::SoundManager() {	
    // For deleting all the buffers at once
 
@@ -52,8 +67,10 @@ SoundManager::SoundManager() {
    /* sound_buffers = (ALuint*) malloc(number_of_sounds);
       sound_sources = (ALuint*) malloc(number_of_sounds); */
 
-   current_sound=0;
-   sounds.reserve(current_sound);  
+   number_of_sounds = 0;
+   current_sound    = 0;
+
+   sounds.reserve(number_of_sounds);  
 
 /* current_context = alcGetCurrentContext();   
    current_device = alcGetContextsDevice(current_context); */
@@ -80,18 +97,23 @@ SoundManager::~SoundManager(){
 
    /* alDeleteSources(number_of_sounds, sound_sources);
       alDeleteBuffers(number_of_sounds, sound_buffers);*/
+   
+   for(uint c = 0; c<sounds.size(); c++){
+       alDeleteSources(1,&sounds[c].source);
+       alDeleteBuffers(1,&sounds[c].buffer);
+   }
 }
 
-int SoundManager::load(char* sound_name){
-   current_sound++;
-   sounds.resize(current_sound);
+int SoundManager::load(char* name, char* file_name){
+   number_of_sounds++;
+   sounds.resize(number_of_sounds);
 
 /*                  ALUT Version                  */     
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
 
    FILE *file_ptr;
-   file_ptr = fopen(sound_name,"rb");
+   file_ptr = fopen(file_name,"rb");
 
    if (file_ptr) 
    { 
@@ -145,15 +167,31 @@ int SoundManager::load(char* sound_name){
       // Linking Source
       alSourcei(sounds[current_sound].source, AL_BUFFER, 
                 sounds[current_sound].buffer);
+         
+      strncpy(sounds[current_sound].name,name,sizeof(name));
+      current_sound++;
 
       return sounds[current_sound].source;
-   }else{printf("Couldn't Find File! (fopen())");}
+   }else{printf("Couldn't Find File! (fopen()) \n");}
    // a function is needed for giving errors.
    // ? what to return here
+
+}
+
+int SoundManager::open(char* file_name){
+   return load(NO_NAME,file_name);
+}
+
+int SoundManager::open(char* sound_name, char* file_name){
+   return load(sound_name, file_name);
 }
 
 void SoundManager::play(ALuint sound){
    alSourcePlay(sound);
+}
+
+void SoundManager::play(char* sound_name){
+   alSourcePlay(find_source_by_name(sound_name));
 }
 
 void SoundManager::loop(ALuint sound, bool do_loop){
