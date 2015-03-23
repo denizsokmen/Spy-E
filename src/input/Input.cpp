@@ -30,15 +30,12 @@ void Input::update(float dt) {
 				if(event.window.windowID == this->windowID) {
 					switch (event.window.event) {
 						case SDL_WINDOWEVENT_CLOSE:
-							printf("a");
 							this->quit = true;
 							break;
 						case SDL_WINDOWEVENT_FOCUS_LOST:
-							printf("b");
 							this->focus = false;
 							break;
 						case SDL_WINDOWEVENT_FOCUS_GAINED:
-							printf("c");
 							this->focus = true;
 							break;
 						default:
