@@ -182,8 +182,9 @@ target_link_libraries(testscene engine)
 
 # Xcode and Visual working directories
 set_target_properties(engine PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")
-create_target_launcher(engine WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
-
+create_target_launcher(testscene WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+create_target_launcher(testworldeditor WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+create_target_launcher(testphysics WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
