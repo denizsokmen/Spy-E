@@ -13,6 +13,8 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
+#include <vector>
+
 class SoundManager{
    private:
 
@@ -21,7 +23,8 @@ class SoundManager{
          ALuint source;
       };
 
-      sound *sounds;
+      //sound *sounds;
+      std::vector<sound> sounds;
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
@@ -53,7 +56,7 @@ class SoundManager{
 #pragma pack(pop)
 
    public:   
-      SoundManager(int number_of_sounds);
+      SoundManager();
       ~SoundManager();
 
       int load(char* sound_name);

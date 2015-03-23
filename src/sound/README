@@ -1,10 +1,11 @@
+2015-03-23 10:37:07 : STD vector is used to keep sound information
 2015-03-21 15:09:28 : Stop, Loop and file check added.
 2015-03-18 18:48:58 : Load Wav file added.
 
 Usage : 
 
-SoundManager sound_manager(1);                  // Number of sound file to load
-ALuint sound = sound_manager.load("sound.wav"); // #include <AL/al.h> for ALuint
+SoundManager sound_manager;                  
+ALuint sound = sound_manager.load("sound.wav"); // <AL/al.h>
 sound_manager.play(sound);
 
 TODO:
@@ -14,4 +15,8 @@ TODO:
 - More error checks
 - Source and Listener Positioning
 - Standalone sound class
-- Safer structure to keep buffer IDs
+- Direct data erasure
+- Checking file if its WAVE RIFF
+
+Done
+- Safer structure to keep buffer IDs(x)

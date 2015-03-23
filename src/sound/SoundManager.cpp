@@ -6,7 +6,7 @@
  */
 
 /* Sound Manager object provides processes of loading and playing RIFF Wave
-/* files (PCM 8-16 BIT) */
+ * files (PCM 8-16 BIT) */
 
 #include <iostream>
 
@@ -43,14 +43,17 @@ ALenum get_format(short bit_for_sample, short channels){
    return format;
 }
 
-SoundManager::SoundManager(int number_of_sounds) {	
+SoundManager::SoundManager() {	
    // For deleting all the buffers at once
-   this->number_of_sounds = number_of_sounds;
-   sounds = (sound*) malloc(number_of_sounds);
+
+   // this->number_of_sounds = number_of_sounds;
+   // sounds = (sound*) malloc(number_of_sounds);
+
    /* sound_buffers = (ALuint*) malloc(number_of_sounds);
       sound_sources = (ALuint*) malloc(number_of_sounds); */
 
    current_sound=0;
+   sounds.reserve(current_sound);  
 
 /* current_context = alcGetCurrentContext();   
    current_device = alcGetContextsDevice(current_context); */
@@ -81,6 +84,7 @@ SoundManager::~SoundManager(){
 
 int SoundManager::load(char* sound_name){
    current_sound++;
+   sounds.resize(current_sound);
 
 /*                  ALUT Version                  */     
 
@@ -143,7 +147,9 @@ int SoundManager::load(char* sound_name){
                 sounds[current_sound].buffer);
 
       return sounds[current_sound].source;
-   }else{printf("Couldn't Find File! (fopen())");} 
+   }else{printf("Couldn't Find File! (fopen())");}
+   // a function is needed for giving errors.
+   // ? what to return here
 }
 
 void SoundManager::play(ALuint sound){
