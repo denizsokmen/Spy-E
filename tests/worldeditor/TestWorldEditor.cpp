@@ -113,7 +113,8 @@ void WorldEditorSystem::update(float dt) {
 
     SDL_Window* window = game->input->mainWindow;
 
-    game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
+    if(game->input->focus) //TODO: all game should be inside this loop
+        game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
 
 
 	game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
@@ -144,7 +145,7 @@ void WorldEditorSystem::update(float dt) {
 
     }
 
-    if (game->input->wasReleased("Escape")) {
+    if (game->input->wasReleased("Escape") || game->input->quit) {
         delete manager;
         game->quit = true;
     }

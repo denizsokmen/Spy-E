@@ -7,7 +7,8 @@
 Input::Input(SDL_Window *mainWindow) {
 	this->mainWindow = mainWindow;
 	this->quit = false;
-	this->focus = false;
+	this->focus = true;
+	this->windowID = SDL_GetWindowID(mainWindow);
 	SDL_ShowCursor(SDL_DISABLE);
 	initDeviceList();
 }
@@ -26,13 +27,23 @@ void Input::update(float dt) {
 		eventQueue.push(event);
 		switch (event.type){
 			case SDL_WINDOWEVENT:
-				switch(event.window.event){
-					case SDL_WINDOWEVENT_CLOSE:
-						quit = true;
-					case SDL_WINDOWEVENT_FOCUS_LOST:
-						focus = false;
-					case SDL_WINDOWEVENT_FOCUS_GAINED:
-						focus = true;
+				if(event.window.windowID == this->windowID) {
+					switch (event.window.event) {
+						case SDL_WINDOWEVENT_CLOSE:
+							printf("a");
+							this->quit = true;
+							break;
+						case SDL_WINDOWEVENT_FOCUS_LOST:
+							printf("b");
+							this->focus = false;
+							break;
+						case SDL_WINDOWEVENT_FOCUS_GAINED:
+							printf("c");
+							this->focus = true;
+							break;
+						default:
+							break;
+					}
 				}
 			default:
 				updateDevices(event);

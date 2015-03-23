@@ -118,7 +118,10 @@ void TestPhysics::update(float dt) {
 
     SDL_Window* window = game->input->mainWindow;
 
-    game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
+    if(game->input->focus) {
+        game->input->getMouse()->setPosition(game->width / 2, game->height / 2, window);
+        printf("%i \n", game->input->focus);
+    }
 
 
     game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);

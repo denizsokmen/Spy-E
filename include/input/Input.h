@@ -26,6 +26,8 @@ public:
 	Keyboard* keyboard;
 	Keyboard* getKeyboard();
 
+	Uint32 windowID;
+
 	bool quit;
 	bool focus;
 
