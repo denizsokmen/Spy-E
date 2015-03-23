@@ -7,12 +7,8 @@
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
 #include "world/Camera.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
-#include <SDL_scancode.h>
-
 
 Game* game;
 
@@ -20,14 +16,10 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     if (game->init(640, 480, "Spy-E", false)) {
-        //TestGameSystem *test = new TestGameSystem(game);
         TestGameSystem *test = new TestGameSystem(game);
-        // TestPhysics *test = new TestPhysics(game);
         game->getController()->addCoreSystem(test);
         game->update();
     }
-
-
 
     game->end();
     delete game;
@@ -59,7 +51,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
     game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
 
-	/*  Use keycodes given below for mouse:
+	/*  Use keycodes given below for mouse input:
 	*	SDL_BUTTON_LEFT
 	*	SDL_BUTTON_RIGHT
 	*	SDL_BUTTON_MIDDLE
@@ -119,7 +111,7 @@ void TestGameSystem::update(float dt) {
 
 
 
-	if (game->input->wasReleased("Escape"))
+	if (game->input->wasReleased("Escape") || game->input->quit)
 		game->quit = true;
 
     if (game->input->justPressed("Left Click"))

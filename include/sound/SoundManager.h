@@ -13,15 +13,21 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
+#include <vector>
+
+#define S_NAME_CHAR_LIM 200
+
 class SoundManager{
    private:
 
       struct sound{
+         char  name[200];
          ALuint buffer;
          ALuint source;
       };
 
-      sound *sounds;
+      //sound *sounds;
+      std::vector<sound> sounds;
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
@@ -31,6 +37,9 @@ class SoundManager{
 
       ALCdevice *current_device;
       ALCcontext *current_context;
+
+      int load(char* name, char* file_name);
+      int find_source_by_name(char* sound_name);
 
 #pragma pack(push,1)
 
@@ -53,11 +62,13 @@ class SoundManager{
 #pragma pack(pop)
 
    public:   
-      SoundManager(int number_of_sounds);
+      SoundManager();
       ~SoundManager();
 
-      int load(char* sound_name);
+      int  open(char* file_name);
+      int  open(char* sound_name, char* file_name);
       void play(ALuint sound);
+      void play(char* sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
 };
