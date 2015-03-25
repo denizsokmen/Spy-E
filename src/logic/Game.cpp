@@ -19,7 +19,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 	quit = false;
     this->width = width;
     this->height = height;
-    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_EVERYTHING&(~SDL_INIT_AUDIO));
     SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
