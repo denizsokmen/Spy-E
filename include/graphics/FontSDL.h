@@ -6,6 +6,19 @@
 class Texture;
 class Drawer;
 class Drawable;
+
+
+class Glyph {
+
+public:
+	int code;
+	int minx, maxx;
+	int miny, maxy;
+	int advance;
+	Drawable* surface;
+	int usecount;
+};
+
 class FontSDL {
 	Drawer* drawer;
 public:
@@ -13,6 +26,7 @@ public:
     ~FontSDL();
 	
 	std::vector<Drawable*> charSet;
+	Glyph glyphs[256];
 	void loadFont(const char *fontname, int size);
 	void draw(glm::vec3 position, const wchar_t* text, ...);
 

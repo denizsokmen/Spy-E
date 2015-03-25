@@ -3,7 +3,6 @@
 
 #include <SDL_surface.h>
 #include <GL/glew.h>
-#include <GL/gl.h>
 
 class Texture {
 
