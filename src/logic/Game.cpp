@@ -24,10 +24,14 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 ) ;
-    SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
+    SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 1 ) ;
+
 
     mainWindow = SDL_CreateWindow("Spy-E", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, ((fullScreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN) |SDL_WINDOW_OPENGL);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
@@ -42,7 +46,11 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
         return false;
     }
 
-    TTF_Init();
+    if( TTF_Init() == -1 )
+    {
+        printf("Failed to init ttf\n");
+        return false;
+    }
 
     scene = new Scene();
     input = new Input(mainWindow);

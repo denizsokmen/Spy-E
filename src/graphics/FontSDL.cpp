@@ -23,9 +23,9 @@ void FontSDL::loadFont(const char* fontname, int size) {
 	TTF_Font* tmpfont;
 	tmpfont = TTF_OpenFont(fontname, size);
 	SDL_Color clr = { 0, 0, 255, 255 };
-
+	SDL_Surface *sText;
 	for (unsigned short i = 1; i < 131; i++) {
-		SDL_Surface *sText = TTF_RenderGlyph_Blended(tmpfont, i, clr);
+		sText = TTF_RenderGlyph_Blended(tmpfont, i, clr);
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		//TODO: terminology. Using textures directly is wrong. 
 		//should be encapsulated by another class named Glyph.
@@ -35,7 +35,7 @@ void FontSDL::loadFont(const char* fontname, int size) {
 		TTF_GlyphMetrics(tmpfont, i, &glyphs[i].minx, &glyphs[i].maxx, &glyphs[i].miny, &glyphs[i].maxy, &glyphs[i].advance);
 		Drawable *drawable = new Drawable(texture);
 		glyphs[i].surface = drawable;
-		SDL_FreeSurface(sText);
+		delete sText;
 	}
 	
 	TTF_CloseFont(tmpfont);

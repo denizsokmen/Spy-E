@@ -98,7 +98,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 
 void WorldEditorSystem::update(float dt) {
 
-    font->draw(glm::vec3(100.0f, 100.0f, 0.0), L"ASD asjdk h");
+    font->draw(glm::vec3(100.0f, 100.0f, 0.0), L"ASDasjdkh");
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
