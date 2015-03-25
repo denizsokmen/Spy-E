@@ -1,5 +1,4 @@
 #include <vector>
-#include <graphics/Cube.h>
 #include "graphics/Renderable.h"
 #include "world/World.h"
 #include "graphics/Mesh.h"
@@ -14,7 +13,7 @@ Renderable* World::createRenderable(const char* name) {
     std::string entityName(name);
     Renderable* entity = new Renderable();
     Mesh* mesh = new Mesh();
-    std::string modelPath = std::string(ENTITIES_DIR) + entityName  + "/" +  entityName + ".obj";
+    std::string modelPath = ENTITIES_DIR+entityName+PATH_SEPARATOR+entityName+OBJ_EXTENSION;
     VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
     mesh->setVertexBuffer(buffer);
     entity->mesh = mesh;
@@ -49,12 +48,6 @@ void World::addEntities(std::vector<Entity *> *entities) {
 
 std::vector<Renderable *> World::getRenderables() {
     return renderables;
-}
-
-Cube *World::createCube() {
-    Cube* cube = new Cube();
-    renderables.push_back((Renderable*) cube);
-    return cube;
 }
 
 World::World() {

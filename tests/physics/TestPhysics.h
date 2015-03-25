@@ -14,7 +14,6 @@
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
 #include "graphics/Shader.h"
-#include "graphics/Cube.h"
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
 
@@ -23,10 +22,10 @@ class VertexBuffer;
 class Game;
 
 class TestPhysics: public System {
-    Cube* entity;
-    Cube* entity2;
-    Cube* entity3;
-    Cube* entity4;
+    Renderable* entity;
+    Renderable* entity2;
+    Renderable* entity3;
+    Renderable* entity4;
 
     Game *game;
 

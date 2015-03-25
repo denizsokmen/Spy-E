@@ -29,37 +29,23 @@ TestPhysics::TestPhysics(Game *game){
     this->game = game;
 
     //pink
-    Mesh* mesh = new Mesh();
-    ObjLoader* objLoader = new ObjLoader();
-    mesh->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    entity = game->scene->getWorld()->createCube();
+    entity = game->scene->getWorld()->createRenderable("box");
     entity->position = glm::vec3(0,0,0);
-    entity->mesh = mesh;
     entity->color = glm::vec3(1.0,1.0,1.0);
 
     //white
-    Mesh* mesh2 = new Mesh();
-
-    mesh2->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    entity2 = game->scene->getWorld()->createCube();
+    entity2 = game->scene->getWorld()->createRenderable("box");
     entity2->position = glm::vec3(10, 0, 0);
-    entity2->mesh = mesh2;
     entity2->color = glm::vec3(0.5,1.0,1.0);
 
     //blue
-    Mesh* mesh3 = new Mesh();
-    mesh3->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    entity3 = game->scene->getWorld()->createCube();
+    entity3 = game->scene->getWorld()->createRenderable("box");
     entity3->position = glm::vec3(-5, 0, 0);
-    entity3->mesh = mesh3;
     entity3->color = glm::vec3(1.0,1.0,0.5);
 
     //yellow
-    Mesh* mesh4 = new Mesh();
-    mesh4->setVertexBuffer(objLoader->loadOBJ("./assets/entities/box/box.obj"));
-    entity4 = game->scene->getWorld()->createCube();
+    entity4 = game->scene->getWorld()->createRenderable("box");
     entity4->position = glm::vec3(5, 1, 0);
-    entity4->mesh = mesh4;
     entity4->color = glm::vec3(1.0,0.5,1.0);
 
 

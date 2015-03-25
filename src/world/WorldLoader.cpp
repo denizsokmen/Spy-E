@@ -14,7 +14,7 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-#include <graphics/Cube.h>
+
 
 
 WorldLoader::WorldLoader(World* world) {
@@ -60,17 +60,17 @@ void WorldLoader::load(char const *path) {
         //TODO: Must get color for cube's
         if (entity) {
             entity->setPosition(position);
-            if(Cube *cube = dynamic_cast<Cube*>(entity)) {
-                rapidxml::xml_node<>* colorNode = entityNode->first_node("Color");
-                float r = (float) atof(positionNode->first_node("R")->value());
-                float g = (float) atof(positionNode->first_node("G")->value());
-                float b = (float) atof(positionNode->first_node("B")->value());
-                printf("    ");
-                printf("r:%f b:%f g:%f \n",r,g,b);
-
-                glm::vec3 color = glm::vec3(r,g,b);
-                cube->color = color;
-            }
+//            if(Cube *cube = dynamic_cast<Cube*>(entity)) {
+//                rapidxml::xml_node<>* colorNode = entityNode->first_node("Color");
+//                float r = (float) atof(positionNode->first_node("R")->value());
+//                float g = (float) atof(positionNode->first_node("G")->value());
+//                float b = (float) atof(positionNode->first_node("B")->value());
+//                printf("    ");
+//                printf("r:%f b:%f g:%f \n",r,g,b);
+//
+//                glm::vec3 color = glm::vec3(r,g,b);
+//                cube->color = color;
+//            }
 
         }
         else {

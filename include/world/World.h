@@ -5,7 +5,6 @@
 
 class Entity;
 class Renderable;
-class Cube;
 class ObjLoader;
 
 class World {
@@ -27,7 +26,6 @@ class World {
 		std::vector<Renderable*> getRenderables();
 		void addEntity(Entity *entity);
 		Renderable* createRenderable(const char* name);
-		Cube* createCube();
 		void addEntities(std::vector<Entity *> *entities);
 
 		Entity *createEntity();
