@@ -4,14 +4,15 @@
 #include <glm/glm.hpp>
 
 class Texture;
-
+class Drawer;
+class Drawable;
 class FontSDL {
-
+	Drawer* drawer;
 public:
-    FontSDL();
+    FontSDL(Drawer* drawer);
     ~FontSDL();
 	
-	std::vector<Texture*> charSet;
+	std::vector<Drawable*> charSet;
 	void loadFont(const char *fontname, int size);
 	void draw(glm::vec3 position, const wchar_t* text, ...);
 

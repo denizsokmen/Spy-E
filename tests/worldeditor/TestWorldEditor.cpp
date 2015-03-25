@@ -3,6 +3,7 @@
 //
 
 #include <logic/Game.h>
+#include "graphics/FontSDL.h"
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/ObjLoader.h"
@@ -89,10 +90,15 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     manager = new SoundManager();
 	manager->open("asd","assets/sounds/0x1b.wav");
     manager->play("asd");
+
+    font = new FontSDL(game->drawer);
+    font->loadFont("fonts/source/ABSTRACT.TTF",12);
+
 }
 
 void WorldEditorSystem::update(float dt) {
 
+    font->draw(glm::vec3(100.0f, 100.0f, 0.0), L"ASD asjdk h");
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 

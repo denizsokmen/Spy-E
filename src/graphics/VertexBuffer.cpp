@@ -48,7 +48,7 @@ void VertexBuffer::addIndex(unsigned int index) {
 void VertexBuffer::upload() {
     glGenBuffers(5, vbo);
 
-    printf("VBO %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size());
+    printf("VBO %d - %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size(), indices.size());
     if (vertex[vboPosition].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboPosition]);
         glBufferData(GL_ARRAY_BUFFER, vertex[vboPosition].size() * sizeof(glm::vec4), &vertex[vboPosition][0], GL_STATIC_DRAW);
@@ -80,7 +80,7 @@ void VertexBuffer::upload() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
+    glGenBuffers(1, &vboind);
     if (indices.size() > 0) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboind);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
@@ -98,36 +98,62 @@ void VertexBuffer::bind() {
     glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, vbo[vboNormal]);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+    if (vertex[vboUV].size() > 0) {
+        glEnableVertexAttribArray(2);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboUV]);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+    }
+
+    if (indices.size() > 0) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboind);
+    }
 
 
 
 }
 
 void VertexBuffer::draw() {
-    glDrawArrays(GL_TRIANGLES, 0, vertex[vboPosition].size() / 4);
+    if (indices.size() > 0)
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*) 0);
+    else
+        glDrawArrays(GL_TRIANGLES, 0, vertex[vboPosition].size() / 4);
 }
 
 void VertexBuffer::unbind() {
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
 }
 
 VertexBuffer *VertexBuffer::createQuad() {
     VertexBuffer *vbo = new VertexBuffer();
-    float vertices[] = {
-            // Left bottom triangle
-            -1.0f, 1.0f, 0.0f,
-            -1.0f, -1.0f, 0.0f,
-            1.0f, -1.0f, 0.0f,
-            // Right top triangle
-            1.0f, -1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            -1.0f, 1.0f, 0.0f
+
+
+    GLfloat vertices[] = {-1, 1, 0, // top left corner
+            1,  1, 0, // top right corner
+            1,  -1, 0, // bottom right corner
+            -1, -1, 0}; // bottom left corner
+
+    GLfloat uvs[] = {
+            0, 1,
+            1, 1,
+            1, 0,
+            0, 0
     };
-    for(int i = 0; i < 6; i++)
+
+    GLubyte indices[] = {0,1,2, // first triangle (bottom left - top left - top right)
+            0,2,3}; // second triangle (bottom left - top right - bottom right)
+
+    for(int i = 0; i < 4; i++)
         vbo->addVertex(glm::vec3(vertices[i*3], vertices[(i*3)+1], vertices[(i*3)+2]));
 
+    for(int i = 0; i < 4; i++)
+        vbo->addUV(glm::vec2(uvs[i*2], uvs[(i*2)+1]));
+
+    for(int i = 0; i < 6; i++)
+        vbo->addIndex(indices[i]);
     vbo->upload();
     return vbo;
 }

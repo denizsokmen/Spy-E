@@ -6,8 +6,14 @@
 #define _SPYE_DRAWABLE_H_
 
 
+class Texture;
 class Drawable {
+    Texture *texture;
 
+public:
+    Drawable(Texture *tex);
+
+    Texture* getTexture();
 };
 
 
