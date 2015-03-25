@@ -74,6 +74,7 @@ add_library(engine STATIC
 	src/graphics/SubMesh.cpp
 	src/graphics/Renderer.cpp
 	src/graphics/Mesh.cpp
+	src/graphics/Material.cpp
 
 	src/world/Camera.cpp
 	src/world/Entity.cpp
@@ -112,6 +113,7 @@ add_library(engine STATIC
 	include/graphics/Renderer.h
 	include/graphics/Texture.h
 	include/graphics/FontSDL.h
+	include/graphics/Material.h
 
 	include/input/Input.h
 	include/input/Keyboard.h

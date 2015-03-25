@@ -21,5 +21,5 @@ void main() {
     normal_eyespace = NormalMatrix * normal;
     position_eyespace = ModelViewMatrix * vertexPosition_modelspace;
     light_eyespace = ModelViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
-    fragment_color = Color;
+    fragment_color = vec3(0.0, 0.0, 1.0);
 }
