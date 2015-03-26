@@ -42,6 +42,7 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
         glUniformMatrix3fv(glGetUniformLocation(generalShader->id, "NormalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelMatrix"), 1, GL_FALSE, &renderable->getTransformation()[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelViewMatrix"), 1, GL_FALSE, &modelViewMatrix[0][0]);
+        glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->color[0]);
 
         renderable->render(this);
     }

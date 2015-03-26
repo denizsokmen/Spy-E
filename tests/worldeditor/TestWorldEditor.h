@@ -13,6 +13,7 @@ class VertexBuffer;
 class Game;
 class SoundManager;
 class FontSDL;
+class FPS;
 
 class WorldEditorSystem: public System {
 
@@ -21,6 +22,7 @@ class WorldEditorSystem: public System {
 
 public:
     WorldEditorSystem(Game *game);
+    FPS* fps;
 
     void update(float dt);
     void draw();

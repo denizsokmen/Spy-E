@@ -154,7 +154,7 @@ add_library(engine STATIC
 	src/graphics/Texture.cpp
 	src/graphics/FontSDL.cpp
 	src/graphics/Material.cpp
-	src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h include/Constants.h)
+	src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h include/Constants.h include/utils/FPS.h)
 
 target_link_libraries(engine
 	${ALL_LIBS}

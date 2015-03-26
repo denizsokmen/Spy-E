@@ -14,7 +14,7 @@
 #include "sound/SoundManager.h"
 #include "graphics/Shader.h"
 #include "world/Camera.h"
-
+#include "utils/FPS.h"
 
 float horizontalAngle = 3.14f;
 float verticalAngle = 0.0f;
@@ -67,7 +67,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 
     Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
     floorEntity->position = glm::vec3(0,-2.0f,0);
-
+    floorEntity->color = glm::vec3(1.0,1.0,1.0);
 
 
 
@@ -92,13 +92,15 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     manager->play("asd");
 
     font = new FontSDL(game->drawer);
-    font->loadFont("fonts/source/ABSTRACT.TTF",12);
+    font->loadFont("fonts/Abstract.ttf",10);
 
+    fps = new FPS();
 }
 
 void WorldEditorSystem::update(float dt) {
 
-    font->draw(glm::vec3(100.0f, 100.0f, 0.0), L"ASDasjdkh");
+    std::wstring s = std::wstring(L"FPS-") + std::to_wstring(fps->get());
+    font->draw(glm::vec3(0, game->height-20, 0.0), s.c_str());
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
@@ -143,6 +145,8 @@ void WorldEditorSystem::update(float dt) {
         delete manager;
         game->quit = true;
     }
+
+    fps->update(dt);
 }
 
 void WorldEditorSystem::draw() {

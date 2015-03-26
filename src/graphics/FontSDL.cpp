@@ -22,11 +22,10 @@ FontSDL::~FontSDL() {
 void FontSDL::loadFont(const char* fontname, int size) {
 	TTF_Font* tmpfont;
 	tmpfont = TTF_OpenFont(fontname, size);
-	SDL_Color clr = { 0, 0, 255, 255 };
+	SDL_Color clr = { 255, 0, 255, 255 };
 	SDL_Surface *sText;
 	for (unsigned short i = 1; i < 131; i++) {
 		sText = TTF_RenderGlyph_Blended(tmpfont, i, clr);
-		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		//TODO: terminology. Using textures directly is wrong. 
 		//should be encapsulated by another class named Glyph.
 		Texture* texture = new Texture();
