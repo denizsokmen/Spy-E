@@ -92,7 +92,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     manager->play("asd");
 
     font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf",18);
+    font->loadFont("fonts/Abstract.ttf",16);
 
     fps = new FPS();
 }
@@ -100,7 +100,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 void WorldEditorSystem::update(float dt) {
 
     //std::wstring s = std::wstring(L"FPS-") + std::to_wstring(fps->get());
-    font->draw(glm::vec3(20, game->height-60, 0.0), L"SNAKU~~ ;_; FPS - %d",fps->get());
+    font->draw(glm::vec3(20, game->height-60, 0.0), L"asdasdasfsd\nf~~ ;_; FPS - %d",fps->get());
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
