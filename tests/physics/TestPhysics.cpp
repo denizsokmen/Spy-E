@@ -72,10 +72,10 @@ TestPhysics::TestPhysics(Game *game){
     printf("------------------------- \n");
 
     physicsWorld = new PhysicsWorld();
-    b1 = physicsWorld->createBody(entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
-    b2 = physicsWorld->createBody(entity2->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity2->getVertexBuffer()->vertexList);
-    b3 = physicsWorld->createBody(entity3->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity3->getVertexBuffer()->vertexList);
-    b4 = physicsWorld->createBody(entity4->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity4->getVertexBuffer()->vertexList);
+    b1 = physicsWorld->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
+    b2 = physicsWorld->createBody(&entity2->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity2->getVertexBuffer()->vertexList);
+    b3 = physicsWorld->createBody(&entity3->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity3->getVertexBuffer()->vertexList);
+    b4 = physicsWorld->createBody(&entity4->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity4->getVertexBuffer()->vertexList);
 
 
     //b1-b2-b3-b4 -> pink-white-blue-yellow
@@ -127,8 +127,14 @@ void TestPhysics::update(float dt) {
 
     if (game->input->isPressed("A")) {
         glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(-1.0f, 0.0f, 0.0f));
+        printf("Old entity x position: %f \n", entity->position.x);
+        printf("Old body x position: %f \n \n", b1->getLocation().x);
         entity->position += forward * 10.0f * dt;
+        printf("New entity x position: %f \n", entity->position.x);
+        printf("Old body x position: %f \n \n", b1->getLocation().x);
         b1->setLocation(entity->position);
+        printf("New entity x position: %f \n", entity->position.x);
+        printf("New body x position: %f \n \n", b1->getLocation().x);
         b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
     }
 
