@@ -7,15 +7,14 @@
 
 #include <string>
 #include "utils/rapidxml.hpp"
-#include "utils/XMLLoader.h"
+
 
 class Entity;
 class ObjLoader;
 
-class EntityLoader : public XMLLoader {
+class EntityLoader {
 
 private:
-    rapidxml::xml_document<> *document;
     ObjLoader *objLoader;
 
     std::string getPath(std::string name);
