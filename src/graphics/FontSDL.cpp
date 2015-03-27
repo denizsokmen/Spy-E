@@ -22,7 +22,10 @@ FontSDL::~FontSDL() {
 void FontSDL::loadFont(const char* fontname, int size) {
 	TTF_Font* tmpfont;
 	tmpfont = TTF_OpenFont(fontname, size);
-	SDL_Color clr = { 255, 0, 255, 255 };
+	SDL_Color clr = { 255, 255, 255, 255 };
+	SDL_Color clr2 = { 0, 0, 255, 255 };
+	TTF_SetFontStyle(tmpfont, TTF_STYLE_NORMAL);
+	TTF_SetFontHinting(tmpfont,  TTF_HINTING_NONE);
 	SDL_Surface *sText;
 	for (unsigned short i = 1; i < 131; i++) {
 		sText = TTF_RenderGlyph_Blended(tmpfont, i, clr);
@@ -34,6 +37,8 @@ void FontSDL::loadFont(const char* fontname, int size) {
 		TTF_GlyphMetrics(tmpfont, i, &glyphs[i].minx, &glyphs[i].maxx, &glyphs[i].miny, &glyphs[i].maxy, &glyphs[i].advance);
 		Drawable *drawable = new Drawable(texture);
 		glyphs[i].surface = drawable;
+		glm::vec2 offset = glm::vec2(glyphs[i].minx, 0);
+		glyphs[i].offset = offset;
 		delete sText;
 	}
 	
@@ -62,14 +67,14 @@ void FontSDL::draw(glm::vec3 position, const wchar_t* text, ...) {
 
 		}
 		else {
-			position.x += glyphs[ch].advance;
 		}
-		drawer->draw(glyphs[ch].surface, glm::vec2(position.x, position.y));
+		drawer->draw(glyphs[ch].surface, glm::vec2(position.x, position.y) + glyphs[ch].offset, glm::vec2(glyphs[ch].surface->getTexture()->width, glyphs[ch].surface->getTexture()->height));
 		//TODO: textures should be drawn.
 		//charSet[txt[cnt]]->draw(position + offset);
 		//position.x +=charSet[txt[cnt]]->getTexture()->width;
 		//glm::vec3 newpos = position + offset;
 		//drawer->draw(charSet[txt[cnt]], glm::vec2(position.x, position.y));
+		position.x += glyphs[ch].advance;
 		cnt++;
 	}
 }
