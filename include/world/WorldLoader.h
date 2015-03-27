@@ -5,34 +5,27 @@
 #ifndef _SPYE_WORLDLOADER_H_
 #define _SPYE_WORLDLOADER_H_
 
-#include "utils/XMLLoader.h"
+
 #include <glm/glm.hpp>
+#include "utils/rapidxml.hpp"
 
 class World;
 class ObjLoader;
 class EntityLoader;
 
-class WorldLoader : public XMLLoader {
+class WorldLoader {
 
 private:
     World* world;
     EntityLoader* entityLoader;
-    rapidxml::xml_document<> *document;
     rapidxml::xml_node<> *worldNode;
 
     void parseWorldNode();
-
     void parseNameNode();
-
     void parseVersionNode();
-
     void parseEntities();
-
     void parseEntity(rapidxml::xml_node<> *entityNode);
-
     glm::vec3 parsePosition(rapidxml::xml_node<> *entityNode);
-
-
     glm::vec3 parseColor(rapidxml::xml_node<> *entityNode);
 
     void getComponent(rapidxml::xml_node<> *positionNode,

@@ -5,20 +5,19 @@
 #include "world/Entity.h"
 #include "world/WorldLoader.h"
 #include "world/EntityLoader.h"
-#include "utils/XMLLoader.h"
 #include <glm/glm.hpp>
 #include <graphics/Mesh.h>
 #include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include <iostream>
 #include <sstream>
-
-
+#include <fstream>
+#include <utils/rapidxml_utils.hpp>
+#include <vector>
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
     this->entityLoader = new EntityLoader();
-    this->document = NULL;
     this->worldNode = NULL;
 }
 
@@ -27,10 +26,20 @@ void WorldLoader::load(char const *path) {
     printf("---------- WorldLoader -------------\n");
     printf("[WorldLoader] Loading file: %s \n", path);
 
-    document = this->getDocument(path);
-    if (document == NULL) {
+    rapidxml::xml_document<> document;
+    try {
+        std::ifstream file(path);
+        std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        buffer.push_back('\0');
+        document.parse<0>(&buffer[0]);
+    }
+    catch (const std::runtime_error &error) {
+        printf("[XMLLoader] With error: %s\n", error.what());
         return;
     }
+    worldNode = document.first_node("World");
+
+
 
     this->parseWorldNode();
 
@@ -38,7 +47,6 @@ void WorldLoader::load(char const *path) {
 
 
 void WorldLoader::parseWorldNode() {
-    worldNode = document->first_node("World");
     if (worldNode == NULL) {
         printf("[WorldLoader] <World> node is not found!\n");
         return;
@@ -155,9 +163,7 @@ void WorldLoader::getComponent(rapidxml::xml_node<> *mainNode,
 
 WorldLoader::~WorldLoader(){
     printf("[WorldLoader] Deallocating...\n");
-    if (document != NULL) {
-        document->clear();
-    }
+
 
     printf("------------------------------------\n");
 }

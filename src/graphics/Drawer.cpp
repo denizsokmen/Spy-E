@@ -16,11 +16,11 @@
 
 
 
-void Drawer::draw(Drawable *drawable, glm::vec2 position) {
+void Drawer::draw(Drawable *drawable, glm::vec2 position, glm::vec2 size) {
     DrawObj obj;
     obj.drawable = drawable;
     obj.position = position;
-
+    obj.size = size;
     drawList.push_back(obj);
 
 
@@ -32,14 +32,14 @@ void Drawer::drawAll() {
     cam->ortho(0, game->width, 0, game->height);
 	glUseProgram(quadShader->id);
 
-
+    glDisable(GL_DEPTH_TEST);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );
     DrawObj *obj = NULL;
     for(auto it = drawList.begin(); it != drawList.end(); it++) {
         obj = &(*it);
-        glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(obj->position.x, obj->position.y, 0.0f)),glm::vec3(12.0f, 12.0f, 1.0f));
+        glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(obj->position.x, obj->position.y, 0.0f)),glm::vec3(obj->size.x, obj->size.y, 0.0f));
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, obj->drawable->getTexture()->getId());
         glUniformMatrix4fv(glGetUniformLocation(quadShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
@@ -51,6 +51,7 @@ void Drawer::drawAll() {
     }
 
 	glDisable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
     drawList.clear();
 }
 

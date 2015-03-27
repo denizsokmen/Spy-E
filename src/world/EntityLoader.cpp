@@ -17,7 +17,6 @@
 
 EntityLoader::EntityLoader(){
     objLoader = new ObjLoader();
-    document = NULL;
 }
 
 
@@ -26,10 +25,19 @@ Entity* EntityLoader::load(char const *name, World* world){
 
     std::string entityName(name);
     std::string path = this->getPath(entityName);
-    document = this->getDocument(path.c_str());
+    rapidxml::xml_document<> document;
+    try {
+        rapidxml::file<> file(path.c_str());
+
+        document.parse<0>(file.data());
+    }
+    catch (const std::runtime_error &error) {
+        printf("[XMLLoader] With error: %s\n", error.what());
+        return NULL;
+    }
 
 
-    rapidxml::xml_node<> *rootNode = document->first_node("Entity");
+    rapidxml::xml_node<> *rootNode = document.first_node("Entity");
     std::string type(rootNode->first_node("Type")->value());
     printf("    Type: %s\n", type.c_str());
 
@@ -48,5 +56,5 @@ std::string EntityLoader::getPath(std::string entityName) {
 
 
 EntityLoader::~EntityLoader() {
-    document->clear();
+
 }

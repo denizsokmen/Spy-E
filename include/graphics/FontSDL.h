@@ -17,6 +17,7 @@ public:
 	int advance;
 	Drawable* surface;
 	int usecount;
+	glm::vec2 offset;
 };
 
 class FontSDL {

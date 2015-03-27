@@ -131,10 +131,10 @@ VertexBuffer *VertexBuffer::createQuad() {
     VertexBuffer *vbo = new VertexBuffer();
 
 
-    GLfloat vertices[] = {-1, 1, 0, // top left corner
-            1,  1, 0, // top right corner
-            1,  -1, 0, // bottom right corner
-            -1, -1, 0}; // bottom left corner
+    GLfloat vertices[] = {-0.5, 0.5, 0, // top left corner
+            0.5,  0.5, 0, // top right corner
+            0.5,  -0.5, 0, // bottom right corner
+            -0.5, -0.5, 0}; // bottom left corner
 
     GLfloat uvs[] = {
             0, 1,
