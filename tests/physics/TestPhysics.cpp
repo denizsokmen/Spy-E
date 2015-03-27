@@ -79,12 +79,12 @@ TestPhysics::TestPhysics(Game *game){
 
 
     //b1-b2-b3-b4 -> pink-white-blue-yellow
-    if(physicsWorld->isCollided(b1, b2)) printf("pink Box and white Box Collided \n");
-    if(physicsWorld->isCollided(b1, b3)) printf("pink Box and blue Box Collided \n" );
-    if(physicsWorld->isCollided(b1, b4)) printf("pink Box and yellow Box Collided \n" );
-    if(physicsWorld->isCollided(b2, b3)) printf("white Box and blue Box Collided \n" );
-    if(physicsWorld->isCollided(b2, b4)) printf("white Box and yellow Box Collided \n" );
-    if(physicsWorld->isCollided(b3, b4)) printf("blue Box and yellow Box Collided \n" );
+//    if(physicsWorld->isCollided(b1, b2, nullptr)) printf("pink Box and white Box Collided \n");
+//    if(physicsWorld->isCollided(b1, b3, nullptr)) printf("pink Box and blue Box Collided \n" );
+//    if(physicsWorld->isCollided(b1, b4, nullptr)) printf("pink Box and yellow Box Collided \n" );
+//    if(physicsWorld->isCollided(b2, b3, nullptr)) printf("white Box and blue Box Collided \n" );
+//    if(physicsWorld->isCollided(b2, b4, nullptr)) printf("white Box and yellow Box Collided \n" );
+//    if(physicsWorld->isCollided(b3, b4, nullptr)) printf("blue Box and yellow Box Collided \n" );
 
     printf("------------------------- \n");
 
@@ -96,85 +96,43 @@ TestPhysics::~TestPhysics(){
 
 void TestPhysics::update(float dt) {
 
+
+    physicsWorld->update(dt);
+
+    b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
+
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
-    horizontalAngle = mouseSpeed * float(game->width/2 - mouseX);
-    verticalAngle = mouseSpeed * float(game->height/2 - mouseY);
+    horizontalAngle = mouseSpeed * float(game->width / 2 - mouseX);
+    verticalAngle = mouseSpeed * float(game->height / 2 - mouseY);
 
-    SDL_Window* window = game->input->mainWindow;
+    SDL_Window *window = game->input->mainWindow;
 
-    if(game->input->focus)
+    if (game->input->focus)
         game->input->getMouse()->setPosition(game->width / 2, game->height / 2, window);
 
 
-    game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
+    game->scene->camera->fpsRotation(horizontalAngle * 25.0f, verticalAngle * 25.0f);
 
-    if (game->input->justPressed("Left Click"))
-        printf("left clicked\n");
+    if (game->input->isPressed("W"))  b1->setSpeed(10.0f, 'z');
+    else if (game->input->isPressed("S"))  b1->setSpeed(-10.0f, 'z');
+    else  b1->setSpeed(0, 'z');
 
-    if (game->input->justPressed("Right Click"))
-        printf("right clicked\n");
+    if (game->input->isPressed("A"))    b1->setSpeed(-10.0f, 'x');
+    else if (game->input->isPressed("D"))  b1->setSpeed(10.0f, 'x');
+    else  b1->setSpeed(0, 'x');
 
 
-    if (game->input->isPressed("W")) {
+    if (game->input->wasReleased("Escape")) game->quit = true;
 
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-        entity->position += forward * 10.0f * dt;
-        b1->setLocation(entity->position);
-        b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
-    }
+    if (game->input->isPressed("Up"))   game->scene->camera->move(0.0f, 0.0f, speed*dt);
 
-    if (game->input->isPressed("A")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(-1.0f, 0.0f, 0.0f));
-        printf("Old entity x position: %f \n", entity->position.x);
-        printf("Old body x position: %f \n \n", b1->getLocation().x);
-        entity->position += forward * 10.0f * dt;
-        printf("New entity x position: %f \n", entity->position.x);
-        printf("Old body x position: %f \n \n", b1->getLocation().x);
-        b1->setLocation(entity->position);
-        printf("New entity x position: %f \n", entity->position.x);
-        printf("New body x position: %f \n \n", b1->getLocation().x);
-        b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
-    }
+    if (game->input->isPressed("Down")) game->scene->camera->move(0.0f, 0.0f, -speed*dt);
 
-    if (game->input->isPressed("S")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-        entity->position += forward * 10.0f * dt;
-        b1->setLocation(entity->position);
-        b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
-    }
+    if (game->input->isPressed("Left")) game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
 
-    if (game->input->isPressed("D")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(1.0f, 0.0f, 0.0f));
-        entity->position += forward * 10.0f * dt;
-        b1->setLocation(entity->position);
-        b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
-    }
-
-    if (game->input->wasReleased("Escape")) {
-        game->quit = true;
-    }
-
-    if (game->input->isPressed("Up")) {
-        game->scene->camera->move(0.0f, 0.0f, speed*dt);
-    }
-
-    if (game->input->isPressed("Down")) {
-        game->scene->camera->move(0.0f, 0.0f, -speed*dt);
-    }
-
-    if (game->input->isPressed("Left")) {
-        game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
-    }
-
-    if (game->input->isPressed("Right")) {
-        game->scene->camera->move(speed*dt, 0.0f, 0.0f);
-    }
-
-    if(physicsWorld->isCollided(b1, b2)) printf("pink Box and white Box Collided \n");
-    if(physicsWorld->isCollided(b1, b3)) printf("pink Box and blue Box Collided \n" );
-    if(physicsWorld->isCollided(b1, b4)) printf("pink Box and yellow Box Collided \n" );
+    if (game->input->isPressed("Right"))  game->scene->camera->move(speed*dt, 0.0f, 0.0f);
 }
 
 void TestPhysics::draw() {

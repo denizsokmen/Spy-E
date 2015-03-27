@@ -2,6 +2,7 @@
 
 Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
 
+    isCollided = false;
     location = loc;
     speed = s;
     acceleration = acc;
@@ -31,6 +32,23 @@ void Body::setSpeed(glm::vec3 s) {
     speed = s;
 }
 
+void Body::setSpeed(float speed, char direction){
+    switch (direction) {
+        case 'x':
+            this->speed.x = speed;
+            break;
+        case 'y':
+            this->speed.y = speed;
+            break;
+        case 'z':
+            this->speed.z = speed;
+            break;
+        default:
+            printf("No such direction!");
+            break;
+    }
+}
+
 glm::vec3 Body::getAcceleration() {
 
     return acceleration;
@@ -46,9 +64,21 @@ glm::vec3 Body::getLocation(){
     return *location;
 }
 
+void Body::setIsCollided(bool isCollided) {
+    this->isCollided = isCollided;
+}
+
+bool Body::getIsCollided() {
+    return this->isCollided;
+}
+
 BoundingBox* Body::getBoundingBox(){
 
     return boundingBox;
+}
+
+std::vector<glm::vec3> Body::getVertices() {
+    return this->vertices;
 }
 
 void Body::updateBoundingBox(std::vector<glm::vec3> v){
@@ -64,3 +94,5 @@ void Body::updateBoundingBox(std::vector<glm::vec3> v){
     delete boundingBox;
     boundingBox = new BoundingBox(vertices);
 }
+
+
