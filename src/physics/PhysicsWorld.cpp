@@ -8,7 +8,7 @@ PhysicsWorld::~PhysicsWorld() {
 
 }
 
-Body* PhysicsWorld::createBody(glm::vec3 loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v){
+Body* PhysicsWorld::createBody(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v){
 
     Body *body = new Body(loc, speed, acc, v);
     bodies.push_back(body);
@@ -33,7 +33,6 @@ void PhysicsWorld::update(float dt) {
         float updatedSpeedX = speed.x + acceleration.x * dt;
         float updatedSpeedY = speed.y + acceleration.y * dt;
         float updatedSpeedZ = speed.z + acceleration.z * dt;
-
 
         body->setSpeed(glm::vec3(updatedSpeedX, updatedSpeedY, updatedSpeedZ));
         body->setLocation(glm::vec3(updatedLocationX, updatedLocationY, updatedLocationZ));

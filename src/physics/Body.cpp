@@ -1,6 +1,6 @@
 #include "physics/Body.h"
 
-Body::Body(glm::vec3 loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
+Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
 
     location = loc;
     speed = s;
@@ -9,9 +9,9 @@ Body::Body(glm::vec3 loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
 
     for(int i = 0; i < vertices.size(); i++){
 
-        vertices[i].x = vertices[i].x+loc.x;
-        vertices[i].y = vertices[i].z+loc.y;
-        vertices[i].z = vertices[i].z+loc.z;
+        vertices[i].x = vertices[i].x+(*location).x;
+        vertices[i].y = vertices[i].z+(*location).y;
+        vertices[i].z = vertices[i].z+(*location).z;
     }
 
     boundingBox = new BoundingBox(vertices);
@@ -23,7 +23,7 @@ Body::~Body(){
 
 void Body::setLocation(glm::vec3 loc) {
 
-    location = loc;
+    *location = loc;
 }
 
 void Body::setSpeed(glm::vec3 s) {
@@ -43,7 +43,7 @@ glm::vec3 Body::getSpeed() {
 
 glm::vec3 Body::getLocation(){
 
-    return location;
+    return *location;
 }
 
 BoundingBox* Body::getBoundingBox(){
@@ -57,9 +57,9 @@ void Body::updateBoundingBox(std::vector<glm::vec3> v){
 
     for(int i = 0; i < vertices.size(); i++){
 
-        vertices[i].x = vertices[i].x+location.x;
-        vertices[i].y = vertices[i].z+location.y;
-        vertices[i].z = vertices[i].z+location.z;
+        vertices[i].x = vertices[i].x+(*location).x;
+        vertices[i].y = vertices[i].z+(*location).y;
+        vertices[i].z = vertices[i].z+(*location).z;
     }
     delete boundingBox;
     boundingBox = new BoundingBox(vertices);
