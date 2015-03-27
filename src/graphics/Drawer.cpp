@@ -39,7 +39,7 @@ void Drawer::drawAll() {
     DrawObj *obj = NULL;
     for(auto it = drawList.begin(); it != drawList.end(); it++) {
         obj = &(*it);
-        glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(obj->position.x, obj->position.y, 1.0f)),glm::vec3(obj->size.x, obj->size.y, 1.0f));
+        glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(obj->position.x, obj->position.y, 0.0f)),glm::vec3(obj->size.x, obj->size.y, 0.0f));
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, obj->drawable->getTexture()->getId());
         glUniformMatrix4fv(glGetUniformLocation(quadShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
