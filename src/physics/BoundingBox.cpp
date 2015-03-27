@@ -1,4 +1,13 @@
+#include <vector>
+
 #include "physics/BoundingBox.h"
+#include "physics/Face.h"
+
+BoundingBox::BoundingBox(std::vector<glm::vec3> vertices) {
+    this->vertices = vertices;
+    this->createFromVertices();
+    this->createFaces();
+}
 
 void BoundingBox::createFromVertices(){
 
@@ -25,24 +34,40 @@ void BoundingBox::createFromVertices(){
 
     minVertex = glm::vec3(xmin, ymin, zmin);
     maxVertex = glm::vec3(xmax, ymax, zmax);
+
+
+    width = abs(minVertex.x - maxVertex.x);
+    height = abs(minVertex.y - maxVertex.y);
+    depth = abs(minVertex.z - maxVertex.z);
 }
 
-BoundingBox::BoundingBox(std::vector<glm::vec3> v){
+void BoundingBox::createFaces() {
+    //seven points are required
 
-    vertices = v;
-    createFromVertices();
+    glm::vec3 firstPoint = minVertex;
+    glm::vec3 secondPoint = glm::vec3(minVertex.x, minVertex.y, minVertex.z + depth);
+    glm::vec3 thirdPoint = glm::vec3(secondPoint.x, secondPoint - height, secondPoint.z);
+    glm::vec3 fourthPoint = maxVertex;
+    glm::vec3 fifthPoint = glm::vec3(maxVertex.x, maxVertex.y, maxVertex.z - depth);
+    glm::vec3 sixthPoint = glm::vec3(fifthPoint.x + width, fifthPoint.y + height, fifthPoint.z);
+
+
+    faces.push_back(new Face(firstPoint, secondPoint, thirdPoint));
+    faces.push_back(new Face(secondPoint, thirdPoint, fourthPoint));
+    faces.push_back(new Face(fifthPoint, sixthPoint, fourthPoint));
+    faces.push_back(new Face(fifthPoint, sixthPoint, firstPoint));
+    faces.push_back(new Face(fifthPoint, thirdPoint, fourthPoint));
+    faces.push_back(new Face(firstPoint, secondPoint, sixthPoint));
 }
 
-BoundingBox::~BoundingBox(){
-
-}
 
 glm::vec3 BoundingBox::getMaxVertex(){
-
     return maxVertex;
 }
 
 glm::vec3 BoundingBox::getMinVertex(){
-
     return minVertex;
 }
+
+BoundingBox::~BoundingBox() { }
+

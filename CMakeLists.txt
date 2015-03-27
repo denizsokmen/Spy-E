@@ -146,15 +146,24 @@ add_library(engine STATIC
 	include/utils/rapidxml_utils.hpp
 	include/world/WorldLoader.h
 
-
-
 	src/sound/SoundManager.cpp
 	include/sound/SoundManager.h
 
 	src/graphics/Texture.cpp
 	src/graphics/FontSDL.cpp
 	src/graphics/Material.cpp
-	src/graphics/Drawer.cpp include/graphics/Drawer.h src/graphics/Drawable.cpp include/graphics/Drawable.h include/Constants.h include/utils/FPS.h include/utils/XMLLoader.h)
+	src/graphics/Drawer.cpp
+
+	include/graphics/Drawer.h
+	src/graphics/Drawable.cpp
+	include/graphics/Drawable.h
+	include/Constants.h
+	include/utils/FPS.h
+	src/physics/Face.cpp
+	include/physics/Face.h
+
+)
+
 
 target_link_libraries(engine
 	${ALL_LIBS}

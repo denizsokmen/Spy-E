@@ -18,7 +18,6 @@
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
     this->entityLoader = new EntityLoader();
-
     this->worldNode = NULL;
 }
 
