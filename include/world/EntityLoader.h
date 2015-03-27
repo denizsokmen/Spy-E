@@ -7,23 +7,24 @@
 
 #include <string>
 #include "utils/rapidxml.hpp"
+#include "utils/XMLLoader.h"
 
 class Entity;
 class ObjLoader;
 
-class EntityLoader {
+class EntityLoader : public XMLLoader {
 
+private:
+    rapidxml::xml_document<> *document;
+    ObjLoader *objLoader;
+
+    std::string getPath(std::string name);
 
 public:
     EntityLoader();
     Entity* load(char const *name, World* world);
-
     ~EntityLoader();
 
-private:
-    ObjLoader *objLoader;
-
-    std::string getPath(std::string name);
 
 };
 
