@@ -98,7 +98,7 @@ SoundManager::~SoundManager(){
    /* alDeleteSources(number_of_sounds, sound_sources);
       alDeleteBuffers(number_of_sounds, sound_buffers);*/
    
-   for(uint c = 0; c<sounds.size(); c++){
+   for(unsigned int c = 0; c<sounds.size(); c++){
        alDeleteSources(1,&sounds[c].source);
        alDeleteBuffers(1,&sounds[c].buffer);
    }
@@ -169,9 +169,10 @@ int SoundManager::load(const char* name, const char* file_name){
                 sounds[current_sound].buffer);
          
       strncpy(sounds[current_sound].name,name,sizeof(name));
-      current_sound++;
+      
 
-      return sounds[current_sound].source;
+      return sounds[current_sound++].source;
+
    }else{printf("Couldn't Find File! (fopen()) \n");}
    // a function is needed for giving errors.
    // ? what to return here

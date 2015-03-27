@@ -8,6 +8,9 @@
 
 
 Renderer::Renderer() {
+	glGenVertexArrays(1, &vaoid);
+	glBindVertexArray(vaoid);
+
     this->loadGeneralShader();
 
     objLoader = new ObjLoader();
@@ -18,8 +21,8 @@ void Renderer::loadGeneralShader() {
     generalShader->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
     //generalBuffer = objLoader->loadOBJ("./models/camera/camera-bottom.obj");
 
-    glGenVertexArrays(1, &vaoid);
-    glBindVertexArray(vaoid);
+
+	
 }
 
 void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {

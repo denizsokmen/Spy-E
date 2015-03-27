@@ -51,31 +51,31 @@ void VertexBuffer::upload() {
     printf("VBO %d - %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size(), indices.size());
     if (vertex[vboPosition].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboPosition]);
-        glBufferData(GL_ARRAY_BUFFER, vertex[vboPosition].size() * sizeof(glm::vec4), &vertex[vboPosition][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboPosition].size() * sizeof(float), &vertex[vboPosition][0], GL_STATIC_DRAW);
     }
 
 
     if (vertex[vboNormal].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboNormal]);
-        glBufferData(GL_ARRAY_BUFFER, vertex[vboNormal].size() * sizeof(glm::vec3), &vertex[vboNormal][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboNormal].size() * sizeof(float), &vertex[vboNormal][0], GL_STATIC_DRAW);
     }
 
 
     if (vertex[vboColor].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboColor]);
-        glBufferData(GL_ARRAY_BUFFER, vertex[vboColor].size() * sizeof(glm::vec4), &vertex[vboColor][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboColor].size() * sizeof(float), &vertex[vboColor][0], GL_STATIC_DRAW);
     }
 
 
     if (vertex[vboUV].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboUV]);
-        glBufferData(GL_ARRAY_BUFFER, vertex[vboUV].size() * sizeof(glm::vec2), &vertex[vboUV][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboUV].size() * sizeof(float), &vertex[vboUV][0], GL_STATIC_DRAW);
     }
 
 
     if (vertex[vboTangent].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboTangent]);
-        glBufferData(GL_ARRAY_BUFFER, vertex[vboTangent].size() * sizeof(glm::vec3), &vertex[vboTangent][0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboTangent].size() * sizeof(float), &vertex[vboTangent][0], GL_STATIC_DRAW);
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

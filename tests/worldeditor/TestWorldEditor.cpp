@@ -92,7 +92,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     manager->play("asd");
 
     font = new FontSDL(game->drawer);
-    font->loadFont("fonts/OpenSans-Regular.ttf",18);
+    font->loadFont("fonts/Arial.ttf",18);
 
     fps = new FPS();
 }

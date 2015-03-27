@@ -39,7 +39,7 @@ void FontSDL::loadFont(const char* fontname, int size) {
 		glyphs[i].surface = drawable;
 		glm::vec2 offset = glm::vec2(glyphs[i].minx, 0);
 		glyphs[i].offset = offset;
-		delete sText;
+//		delete sText;
 	}
 	
 	TTF_CloseFont(tmpfont);
