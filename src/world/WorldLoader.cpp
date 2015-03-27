@@ -11,8 +11,9 @@
 #include "graphics/Renderable.h"
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <utils/rapidxml_utils.hpp>
-
+#include <vector>
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
@@ -28,8 +29,10 @@ void WorldLoader::load(char const *path) {
 
     rapidxml::xml_document<> document;
     try {
-        rapidxml::file<> file(path);
-        document.parse<0>(file.data());
+        std::ifstream file(path);
+        std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        buffer.push_back('\0');
+        document.parse<0>(&buffer[0]);
     }
     catch (const std::runtime_error &error) {
         printf("[XMLLoader] With error: %s\n", error.what());
