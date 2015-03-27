@@ -55,7 +55,7 @@ void FontSDL::draw(glm::vec3 position, const wchar_t* text, ...) {
 	int sy = position.y;
 
 	while (txt[cnt] != '\0') {
-		int ch = (wchar_t)text[cnt];
+		int ch = (wchar_t)txt[cnt];
 		if (ch == '\n') {
 			position.y += 20;
 			position.x = sx;
