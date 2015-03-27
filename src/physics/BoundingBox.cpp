@@ -46,7 +46,7 @@ void BoundingBox::createFaces() {
 
     glm::vec3 firstPoint = minVertex;
     glm::vec3 secondPoint = glm::vec3(minVertex.x, minVertex.y, minVertex.z + depth);
-    glm::vec3 thirdPoint = glm::vec3(secondPoint.x, secondPoint - height, secondPoint.z);
+    glm::vec3 thirdPoint = glm::vec3(secondPoint.x, secondPoint.y - height, secondPoint.z);
     glm::vec3 fourthPoint = maxVertex;
     glm::vec3 fifthPoint = glm::vec3(maxVertex.x, maxVertex.y, maxVertex.z - depth);
     glm::vec3 sixthPoint = glm::vec3(fifthPoint.x + width, fifthPoint.y + height, fifthPoint.z);
