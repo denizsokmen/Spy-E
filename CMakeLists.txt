@@ -181,6 +181,12 @@ add_executable(testscene
 
 target_link_libraries(testscene engine)
 
+add_executable(game
+	game/main.cpp
+game/SpyE.cpp game/SpyE.h game/InputState.cpp game/InputState.h)
+
+target_link_libraries(game engine)
+
 
 # Xcode and Visual working directories
 set_target_properties(engine PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/" COMPILE_FLAGS "-std=c++11")

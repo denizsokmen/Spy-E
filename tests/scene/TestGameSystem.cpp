@@ -123,7 +123,7 @@ void TestGameSystem::draw() {
 
 void TestGameSystem::draw2D() {
     Camera *cam = game->scene->camera;
-    cam->ortho(0, 800, 0, 600);
+    cam->ortho(0, game->width, 0, game->height);
     glUseProgram(generalShader->id);
 
     glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 100.0f, 0.0f)),glm::vec3(80.0f, 80.0f, 0.0f));

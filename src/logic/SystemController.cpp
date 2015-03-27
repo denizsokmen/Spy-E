@@ -20,6 +20,17 @@ void SystemController::update(float dt) {
     }
 }
 
+void SystemController::init() {
+    for (auto system: coreSystems) {
+        system->init();
+    }
+
+    if (currentState != NULL) {
+        for (auto system: *currentState) {
+        }
+    }
+}
+
 void SystemController::draw() {
     for (auto system: coreSystems) {
         system->draw();

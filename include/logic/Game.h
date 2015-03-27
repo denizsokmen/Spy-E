@@ -16,6 +16,8 @@ class Game {
 
 private:
 public:
+    Game();
+
     SystemController *getController() const {
         return controller;
     }

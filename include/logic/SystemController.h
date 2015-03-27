@@ -25,6 +25,7 @@ public:
 
     void update(float dt);
     void draw();
+    void init();
     void addCoreSystem(System *s);
     void setState(std::string name);
 

@@ -14,6 +14,10 @@
 #include "logic/SystemController.h"
 #define TICK_PER_SECOND 1000
 
+Game::Game() {
+
+    controller = new SystemController();
+}
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
 	quit = false;
@@ -56,10 +60,12 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     input = new Input(mainWindow);
     drawer = new Drawer(this);
 
-    controller = new SystemController();
     controller->addCoreSystem(input);
     controller->addCoreSystem(scene);
     controller->addCoreSystem(drawer);
+
+
+    controller->init();
 
     timer = new Timer(TICK_PER_SECOND);
 
@@ -70,6 +76,7 @@ void Game::update() {
     unsigned long lastTime = SDL_GetTicks();
     int tickCount = 0;
     bool isUpdated = false;
+
     while(!quit) {
         unsigned long currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
