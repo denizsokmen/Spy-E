@@ -32,7 +32,7 @@ class Drawer : public System {
 public:
     Drawer(Game* gm);
     ~Drawer();
-    void draw(Drawable*, glm::vec2 pos);
+    void draw(Drawable*, glm::vec2 pos, glm::vec2 size);
     void drawAll();
 
     void update(float dt);
