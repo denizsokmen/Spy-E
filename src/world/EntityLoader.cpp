@@ -1,11 +1,11 @@
+
 #include <glm/glm.hpp>
 #include <fstream>
 #include <vector>
 #include <iostream>
 #include <string>
-#include <Constants.h>
 
-
+//from Spy-E Engine
 #include "world/Entity.h"
 #include "graphics/Mesh.h"
 #include "world/World.h"
@@ -13,21 +13,21 @@
 #include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "utils/rapidxml_utils.hpp"
-
-
+#include "Constants.h"
 
 EntityLoader::EntityLoader(){
     objLoader = new ObjLoader();
 }
 
 
-
 Entity* EntityLoader::load(char const *name, World* world){
+    Entity *entity = NULL;
+
     std::string entityName(name);
-    std::string path = std::string(ENTITIES_DIR) + entityName + "/" + entityName + ".xml";
+    std::string path = this->getPath(entityName);
     printf("Loading file: %s \n", path.c_str());
 
-    Entity *entity = NULL;
+
 
     std::ifstream file (path.c_str());
     std::string tmp;
@@ -62,7 +62,12 @@ Entity* EntityLoader::load(char const *name, World* world){
     return entity;
 }
 
-EntityLoader::~EntityLoader(){
 
+std::string EntityLoader::getPath(std::string entityName) {
+    return std::string(ENTITIES_DIR) + entityName + PATH_SEPARATOR + entityName + ".xml";
 }
 
+
+EntityLoader::~EntityLoader() {
+
+}

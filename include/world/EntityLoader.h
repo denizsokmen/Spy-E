@@ -13,6 +13,7 @@ class ObjLoader;
 
 class EntityLoader {
 
+
 public:
     EntityLoader();
     Entity* load(char const *name, World* world);
@@ -21,6 +22,8 @@ public:
 
 private:
     ObjLoader *objLoader;
+
+    std::string getPath(std::string name);
 
 };
 

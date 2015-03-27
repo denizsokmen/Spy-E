@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     entity = game->scene->getWorld()->createRenderable("box");
+    entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
 

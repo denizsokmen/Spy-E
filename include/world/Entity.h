@@ -18,7 +18,7 @@ public:
     glm::vec3 pivot;
     glm::quat orientation;
     glm::mat4 transformation;
-
+    glm::vec3 color;
 
     Entity();
     virtual ~Entity() {};

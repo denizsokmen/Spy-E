@@ -22,7 +22,7 @@ public:
     Mesh* mesh;
 
     unsigned int identifier;
-    glm::vec3 color;
+
     ~Renderable();
     virtual void render(Renderer *renderer);
 //    void load(); FIXME: Someone should make a decision whether to keep them or delete them.

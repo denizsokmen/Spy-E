@@ -57,3 +57,19 @@ World::World() {
 World::~World() {
     delete objLoader;
 }
+
+std::string World::getName() {
+    return name;
+}
+
+void World::setName(std::string name) {
+    this->name = name;
+}
+
+std::string World::getVersion() {
+    return version;
+}
+
+void World::setVersion(std::string version) {
+    this->version = version;
+}
