@@ -28,6 +28,8 @@ public:
     void init();
     void addCoreSystem(System *s);
     void setState(std::string name);
+	void addState(std::string name);
+	void addSystem(std::string state, System *s);
 
     /* begin(), end() ? */
 

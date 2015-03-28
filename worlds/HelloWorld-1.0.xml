@@ -1,11 +1,7 @@
-<World>
-
+﻿<World>
     <Name>HelloWorld</Name>
 
 
     <Version>1.0</Version>
     <SkyBox>N/A</SkyBox>
-
-
-
 </World>

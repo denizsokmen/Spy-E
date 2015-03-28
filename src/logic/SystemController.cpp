@@ -62,7 +62,21 @@ void SystemController::setState(std::string name) {
     }
 }
 
+void SystemController::addState(std::string name) {
+	gameStates.insert(std::map<std::string, std::vector<System*>>::value_type(name, std::vector<System*>()));
+}
+
 void SystemController::addCoreSystem(System *s) {
     coreSystems.push_back(s);
+}
+
+void SystemController::addSystem(std::string state, System *s) {
+	std::map<std::string, std::vector<System*>>::iterator res = gameStates.find(state);
+	if (res != gameStates.end()) {
+		res->second.push_back(s);
+	}
+	else {
+		printf("State not found: %s\n", state.c_str());
+	}
 }
 

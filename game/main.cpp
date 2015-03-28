@@ -17,6 +17,8 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     SpyE *spye = new SpyE(game);
+	game->getController()->addState("Mainmenu");
+	//game->getController()->addSystem("Mainmenu", new MainMenu());
     game->getController()->addCoreSystem(spye);
     if (game->init(640, 480, "Spy-E", false)) {
 
