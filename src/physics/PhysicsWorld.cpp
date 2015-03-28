@@ -19,31 +19,35 @@ Body* PhysicsWorld::createBody(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, s
 void PhysicsWorld::update(float dt) {
 
     for (Body *body : bodies) {
+        if(body->getSpeed() != glm::vec3(0,0,0)) {
+            glm::vec3 acceleration = body->getAcceleration();
+            glm::vec3 speed = body->getSpeed();
+            glm::vec3 location = body->getLocation();
 
-        glm::vec3 acceleration = body->getAcceleration();
-        glm::vec3 speed = body->getSpeed();
-        glm::vec3 location = body->getLocation();
+            glm::vec3 updatedLocation = getUpdatedLocation(dt, acceleration, speed, location);
+            body->setLocation(updatedLocation);
 
-        glm::vec3 updatedLocation = getUpdatedLocation(dt, acceleration, speed, location);
-        body->setLocation(updatedLocation);
+            for (Body *controlBody : bodies) {
+                if (body != controlBody) {
+                    if (isCollided(body, controlBody)) {
+                        body->setLocation(location);
 
-
-        for (Body *controlBody : bodies) {
-            if (body != controlBody) {
-                if (isCollided(body, controlBody)) {
-                    body->setSpeed(glm::vec3(0, 0, 0));
-                    controlBody->setSpeed(glm::vec3(0, 0, 0));
-                    body->setIsCollided(true);
-                    controlBody->setIsCollided(true);
-                    body->setLocation(location);
-                }
-                if (!isCollided(body, controlBody) && body->getIsCollided() && controlBody->getIsCollided()) {
-                    body->setIsCollided(false);
-                    controlBody->setIsCollided(false);
+                    }
+                   /* if(isCollidedX(body, controlBody)){
+                        printf("x \n");
+                        body->setLocation(glm::vec3(location.x, body->getLocation().y, body->getLocation().z));
+                    }
+                    if(isCollidedY(body, controlBody)){
+                        printf("y \n");
+                        body->setLocation(glm::vec3(body->getLocation().x, location.y, body->getLocation().z));
+                    }
+                    if(isCollidedZ(body, controlBody)){
+                        printf("z \n");
+                        body->setLocation(glm::vec3(body->getLocation().x, body->getLocation().y, location.z));
+                    }*/
                 }
             }
         }
-
     }
 }
 
@@ -73,5 +77,35 @@ bool PhysicsWorld::isCollided(Body *b1, Body *b2){
              box1->getMinVertex().y < box2->getMaxVertex().y &&
              box1->getMaxVertex().z > box2->getMinVertex().z &&
              box1->getMinVertex().z < box2->getMaxVertex().z   );
+
+}
+
+bool PhysicsWorld::isCollidedX(Body *b1, Body *b2) {
+
+    BoundingBox *box1 = b1->getBoundingBox();
+    BoundingBox *box2 = b2->getBoundingBox();
+
+    return ( box1->getMaxVertex().x > box2->getMinVertex().x &&
+             box1->getMinVertex().x < box2->getMaxVertex().x);
+
+}
+
+bool PhysicsWorld::isCollidedY(Body *b1, Body *b2) {
+
+    BoundingBox *box1 = b1->getBoundingBox();
+    BoundingBox *box2 = b2->getBoundingBox();
+
+    return ( box1->getMaxVertex().y > box2->getMinVertex().y &&
+             box1->getMinVertex().y < box2->getMaxVertex().y);
+
+}
+
+bool PhysicsWorld::isCollidedZ(Body *b1, Body *b2) {
+
+    BoundingBox *box1 = b1->getBoundingBox();
+    BoundingBox *box2 = b2->getBoundingBox();
+
+    return ( box1->getMaxVertex().z > box2->getMinVertex().z &&
+             box1->getMinVertex().z < box2->getMaxVertex().z );
 
 }

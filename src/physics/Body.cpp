@@ -2,7 +2,6 @@
 
 Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
 
-    isCollided = false;
     location = loc;
     speed = s;
     acceleration = acc;
@@ -10,9 +9,9 @@ Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v)
 
     for(int i = 0; i < vertices.size(); i++){
 
-        vertices[i].x = vertices[i].x+(*location).x;
-        vertices[i].y = vertices[i].z+(*location).y;
-        vertices[i].z = vertices[i].z+(*location).z;
+        vertices[i].x += (*location).x;
+        vertices[i].y += (*location).y;
+        vertices[i].z += (*location).z;
     }
 
     boundingBox = new BoundingBox(vertices);
@@ -23,12 +22,11 @@ Body::~Body(){
 }
 
 void Body::setLocation(glm::vec3 loc) {
-
     *location = loc;
+    boundingBox->update(loc);
 }
 
 void Body::setSpeed(glm::vec3 s) {
-
     speed = s;
 }
 
@@ -64,14 +62,6 @@ glm::vec3 Body::getLocation(){
     return *location;
 }
 
-void Body::setIsCollided(bool isCollided) {
-    this->isCollided = isCollided;
-}
-
-bool Body::getIsCollided() {
-    return this->isCollided;
-}
-
 BoundingBox* Body::getBoundingBox(){
 
     return boundingBox;
@@ -81,18 +71,5 @@ std::vector<glm::vec3> Body::getVertices() {
     return this->vertices;
 }
 
-void Body::updateBoundingBox(std::vector<glm::vec3> v){
-
-    vertices = v;
-
-    for(int i = 0; i < vertices.size(); i++){
-
-        vertices[i].x = vertices[i].x+(*location).x;
-        vertices[i].y = vertices[i].z+(*location).y;
-        vertices[i].z = vertices[i].z+(*location).z;
-    }
-    delete boundingBox;
-    boundingBox = new BoundingBox(vertices);
-}
 
 

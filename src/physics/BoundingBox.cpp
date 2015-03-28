@@ -31,14 +31,18 @@ void BoundingBox::createFromVertices(){
         if(vertex.z > zmax) zmax = vertex.z;
         if(vertex.z < zmin) zmin = vertex.z;
     }
-
     minVertex = glm::vec3(xmin, ymin, zmin);
     maxVertex = glm::vec3(xmax, ymax, zmax);
-
 
     width = abs(minVertex.x - maxVertex.x);
     height = abs(minVertex.y - maxVertex.y);
     depth = abs(minVertex.z - maxVertex.z);
+}
+
+void BoundingBox::update(glm::vec3 position) {
+    minVertex = glm::vec3(position.x - width/2, position.y - height/2, position.z - depth/2);
+    maxVertex = glm::vec3(position.x + width/2, position.y + height/2, position.z + depth/2);
+
 }
 
 void BoundingBox::createFaces() {

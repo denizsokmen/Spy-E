@@ -96,11 +96,6 @@ TestPhysics::~TestPhysics(){
 
 void TestPhysics::update(float dt) {
 
-
-    physicsWorld->update(dt);
-
-    b1->updateBoundingBox(entity->getVertexBuffer()->vertexList);
-
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 
@@ -112,17 +107,21 @@ void TestPhysics::update(float dt) {
     if (game->input->focus)
         game->input->getMouse()->setPosition(game->width / 2, game->height / 2, window);
 
-
     game->scene->camera->fpsRotation(horizontalAngle * 25.0f, verticalAngle * 25.0f);
 
-    if (game->input->isPressed("W"))  b1->setSpeed(10.0f, 'z');
-    else if (game->input->isPressed("S"))  b1->setSpeed(-10.0f, 'z');
-    else  b1->setSpeed(0, 'z');
+    if (game->input->isPressed("W"))
+        b1->setSpeed(10.0f, 'z');
+    else if (game->input->isPressed("S"))
+        b1->setSpeed(-10.0f, 'z');
+    else
+        b1->setSpeed(0, 'z');
 
-    if (game->input->isPressed("A"))    b1->setSpeed(-10.0f, 'x');
-    else if (game->input->isPressed("D"))  b1->setSpeed(10.0f, 'x');
-    else  b1->setSpeed(0, 'x');
-
+    if (game->input->isPressed("A"))
+        b1->setSpeed(-10.0f, 'x');
+    else if (game->input->isPressed("D"))
+        b1->setSpeed(10.0f, 'x');
+    else
+        b1->setSpeed(0, 'x');
 
     if (game->input->wasReleased("Escape")) game->quit = true;
 
@@ -133,6 +132,9 @@ void TestPhysics::update(float dt) {
     if (game->input->isPressed("Left")) game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
 
     if (game->input->isPressed("Right"))  game->scene->camera->move(speed*dt, 0.0f, 0.0f);
+
+    physicsWorld->update(dt);
+
 }
 
 void TestPhysics::draw() {

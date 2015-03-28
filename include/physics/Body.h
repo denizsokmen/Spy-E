@@ -7,7 +7,6 @@
 
 class Body{
 
-    bool isCollided;
     glm::vec3 *location;
     glm::vec3 speed;
     glm::vec3 acceleration;
@@ -16,11 +15,9 @@ class Body{
 
 public:
 
-    Body(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> vertices);
+    Body(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v);
     ~Body();
 
-    void setIsCollided(bool);
-    bool getIsCollided();
     void setLocation(glm::vec3 loc);
     void setSpeed(glm::vec3 speed);
     void setSpeed(float speed, char direction);
@@ -29,6 +26,5 @@ public:
     glm::vec3 getLocation();
     std::vector<glm::vec3> getVertices();
     BoundingBox* getBoundingBox();
-    void updateBoundingBox(std::vector<glm::vec3> v);
 };
 #endif

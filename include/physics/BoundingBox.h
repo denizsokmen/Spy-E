@@ -11,8 +11,6 @@ class BoundingBox{
     std::vector<glm::vec3> vertices;
     std::vector<Face *> faces;
 
-
-
 public:
     BoundingBox(std::vector<glm::vec3> vertices);
     ~BoundingBox();
@@ -25,6 +23,8 @@ public:
 
     glm::vec3 getMinVertex();
     glm::vec3 getMaxVertex();
+
+    void update(glm::vec3 position);
 
 
 private:
