@@ -40,7 +40,7 @@ public:
     void draw();
     void unbind();
 
-    static VertexBuffer* createQuad();
+	static VertexBuffer* createQuad();
 
 
 };

@@ -17,6 +17,7 @@ public:
 
     void update(float dt);
     void draw();
+	void init(){}
 
     ShaderProgram *generalShader;
 

@@ -27,6 +27,8 @@ public:
 	void draw();
 	void update(float dt);
 
+	void init() {}
+
 	World *getWorld() const {
 		return world;
 	}

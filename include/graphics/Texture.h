@@ -9,6 +9,7 @@ class Texture {
 public:
 
     void createFromSDL(SDL_Surface* surface);
+	void bind(GLuint unit);
 
 	int width;
 	int height;

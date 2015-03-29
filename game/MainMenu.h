@@ -2,8 +2,18 @@
 #define MAINMENU_H_INC
 #include <logic/System.h>
 
-class MainMenu : public System {
+class Game;
 
+class MainMenu : public System {
+	Game* game;
+
+public:
+	MainMenu(Game* game);
+	~MainMenu();
+	void init();
+	void update(float dt);
+	void draw();
+	void draw2D();
 };
 
 

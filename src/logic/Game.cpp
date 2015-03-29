@@ -5,6 +5,7 @@
 #include <SDL_events.h>
 #include <graphics/Drawer.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 #include "SDL.h"
 #include "logic/Timer.h"
 #include "world/Scene.h"
@@ -56,6 +57,13 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
         return false;
     }
 
+	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
+	int initted = IMG_Init(flags);
+	if (initted&flags != flags) {
+		printf("IMG_Init: Failed to init required jpg and png support!\n");
+		printf("IMG_Init: %s\n", IMG_GetError());
+	}
+
     scene = new Scene();
     input = new Input(mainWindow);
     drawer = new Drawer(this);
@@ -89,10 +97,10 @@ void Game::update() {
         }
         timer->endLoop();
 
-        if (isUpdated)
-            controller->draw();
-
-        controller->draw2D();
+		if (isUpdated) {
+			controller->draw();
+			controller->draw2D();
+		}
 
         isUpdated = false;
         if (deltaTime > 1000) {

@@ -5,10 +5,10 @@ class System {
 
 public:
     System() {}
-    virtual void init() {}
-    virtual void update(float dt) {}
-    virtual void draw() {}
-    virtual void draw2D() {}
+	virtual void init() {}
+	virtual void update(float dt) {}
+	virtual void draw() {}
+	virtual void draw2D() {}
 };
 
 #endif

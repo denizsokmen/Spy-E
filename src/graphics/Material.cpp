@@ -3,10 +3,13 @@
 //
 
 #include "graphics/Material.h"
-
+#include "graphics/Shader.h"
+#include "graphics/Texture.h"
+#include <GL/glew.h>
 void Material::beginRendering() {
     if (program != NULL) {
-
+		glUseProgram(program->id);
+		diffuseTexture->bind(0);
     }
 }
 

@@ -10,6 +10,7 @@
 #include "SpyE.h"
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
+#include "MainMenu.h"
 
 Game* game;
 
@@ -18,8 +19,9 @@ int main(int argc, char* argv[])
     game = new Game();
     SpyE *spye = new SpyE(game);
 	game->getController()->addState("Mainmenu");
-	//game->getController()->addSystem("Mainmenu", new MainMenu());
+	game->getController()->addSystem("Mainmenu", new MainMenu(game));
     game->getController()->addCoreSystem(spye);
+	game->getController()->setState("Mainmenu");
     if (game->init(640, 480, "Spy-E", false)) {
 
 
