@@ -13,6 +13,8 @@ public:
 
     float floorY;
 
+    bool bounce;
+
     Body* createBody(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v);
     void update(float dt);
     bool isCollided(Body *b1, Body *b2);

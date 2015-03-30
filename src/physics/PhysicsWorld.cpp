@@ -1,7 +1,7 @@
 #include "physics/PhysicsWorld.h"
 
 PhysicsWorld::PhysicsWorld(){
-
+    bounce = false;
 }
 
 PhysicsWorld::~PhysicsWorld() {
@@ -39,8 +39,10 @@ void PhysicsWorld::update(float dt) {
                         body->setLocation(location);
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.01f, 'y');
-                            //body->setSpeed(-(body->getSpeed().y), 'y'); //for bouncing floor
-                            body->setSpeed(0, 'y'); //for non-bouncing floor
+                            if(bounce)
+                                body->setSpeed(-(body->getSpeed().y), 'y'); //for bouncing floor
+                            else
+                                body->setSpeed(0, 'y'); //for non-bouncing floor
 
                         }/*
                         else {

@@ -96,6 +96,9 @@ void TestGameSystem::update(float dt) {
     if(game->input->isPressed("Space"))
         box->setSpeed(10.0f, 'y');
 
+    if(game->input->justPressed("B"))
+        physicsWorld->bounce = !physicsWorld->bounce;
+
 
 
 	if (game->input->wasReleased("Escape") || game->input->quit)
@@ -125,6 +128,7 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
     game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
     game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
     game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
+    game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
 }
 
 void TestGameSystem::draw() {
