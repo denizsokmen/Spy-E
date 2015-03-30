@@ -19,8 +19,7 @@ for x in range(-10,10):
 		if x == -10 or x == 9:
 			column.append(1)
 
-		if y == -10 or y == 9:
-			column.append(1)		
+
 
 	layerTwo.append(column)
 
