@@ -10,6 +10,10 @@ class Renderable;
 class ShaderProgram;
 class VertexBuffer;
 
+class FPS;
+
+class FontSDL;
+
 class TestGameSystem: public System {
     Renderable* entity;
 	Game *game;
@@ -29,6 +33,8 @@ public:
     void draw2D();
 
     VertexBuffer *vbo;
+    FPS *fps;
+    FontSDL *font;
 
     void assignKeyboardInputs(Game *game);
 

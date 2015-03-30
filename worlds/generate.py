@@ -34,11 +34,10 @@ level = [layerOne, layerTwo, layerTwo]
 
 level[2][5][3] = 1
 level[2][5][4] = 1
-level[2][5][2] = 1
-level[2][5][1] = 1
-level[2][5][0] = 1
-level[2][4][1] = 1
-level[2][4][3] = 1
+level[2][5][5] = 1
+level[2][5][5] = 1
+level[2][5][5] = 1
+level[2][5][5] = 1
 
 name = "LevelOne"
 version = "1.0"

@@ -22,7 +22,7 @@ class WorldEditorSystem: public System {
 
 public:
     WorldEditorSystem(Game *game);
-    FPS* fps;
+
 
     void update(float dt);
     void draw();
@@ -31,6 +31,8 @@ public:
 
     void draw2D();
     VertexBuffer *vbo;
+
+    FPS *fps;
     FontSDL *font;
 };
 
