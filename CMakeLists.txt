@@ -192,7 +192,8 @@ target_link_libraries(testscene engine)
 
 add_executable(game
 	game/main.cpp
-game/SpyE.cpp game/SpyE.h game/InputState.cpp game/InputState.h)
+game/SpyE.cpp game/SpyE.h game/InputState.cpp game/InputState.h
+game/MainMenu.cpp game/MainMenu.h)
 
 target_link_libraries(game engine)
 
