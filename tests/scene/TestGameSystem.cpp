@@ -9,6 +9,8 @@
 #include "world/Camera.h"
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
+#include <utils/FPS.h>
+#include <graphics/FontSDL.h>
 
 Game* game;
 
@@ -56,14 +58,23 @@ TestGameSystem::TestGameSystem(Game *game) {
     box = physicsWorld->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
+    font = new FontSDL(game->drawer);
+    font->loadFont("fonts/Arial.ttf", 16);
+
+    fps = new FPS();
+
 
 }
 
 void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+
+    font->draw(glm::vec3(20, game->height - 60, 0.0), L"FPS - %d", fps->get());
+
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
-    game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y+10.0f, entity->getPosition().z + 20.0f);
+    game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,
+                                              entity->getPosition().z + -10.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
@@ -105,6 +116,7 @@ void TestGameSystem::update(float dt) {
 		game->quit = true;
 
     physicsWorld->update(dt);
+    fps->update(dt);
 }
 
 void TestGameSystem::assignMouseInputs(Game *game) {/*  Use keycodes given below for mouse input:
@@ -136,16 +148,16 @@ void TestGameSystem::draw() {
 }
 
 void TestGameSystem::draw2D() {
-    Camera *cam = game->scene->camera;
-    cam->ortho(0, game->width, 0, game->height);
-    glUseProgram(generalShader->id);
-
-    glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 100.0f, 0.0f)),glm::vec3(80.0f, 80.0f, 0.0f));
-
-    glDisable(GL_DEPTH_TEST);
-    glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
-
-    vbo->bind();
-    vbo->draw();
-    vbo->unbind();
+//    Camera *cam = game->scene->camera;
+//    cam->ortho(0, game->width, 0, game->height);
+//    glUseProgram(generalShader->id);
+//
+//    glm::mat4 MVP = cam->projection  * glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 100.0f, 0.0f)),glm::vec3(80.0f, 80.0f, 0.0f));
+//
+//    glDisable(GL_DEPTH_TEST);
+//    glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+//
+//    vbo->bind();
+//    vbo->draw();
+//    vbo->unbind();
 }
