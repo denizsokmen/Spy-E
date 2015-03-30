@@ -8,9 +8,9 @@
 
 class Texture;
 class Drawable {
-    Texture *texture;
 
 public:
+    Texture *texture;
     Drawable(Texture *tex);
 
     Texture* getTexture();

@@ -7,4 +7,5 @@ uniform sampler2D tex;
 
 void main() {
     color = texture(tex, uvFrag);
+
 }

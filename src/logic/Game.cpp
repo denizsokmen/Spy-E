@@ -77,6 +77,9 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 
     timer = new Timer(TICK_PER_SECOND);
 
+
+
+
     return true;
 }
 
@@ -99,8 +102,9 @@ void Game::update() {
 
 		if (isUpdated) {
 			controller->draw();
-			controller->draw2D();
 		}
+
+        controller->draw2D();
 
         isUpdated = false;
         if (deltaTime > 1000) {

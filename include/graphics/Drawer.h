@@ -4,6 +4,7 @@
 
 #ifndef _SPYE_DRAWER_H_
 #define _SPYE_DRAWER_H_
+#include <string>
 #include <vector>
 #include <glm/glm.hpp>
 #include "logic/System.h"
@@ -12,6 +13,7 @@ class Drawable;
 class Game;
 class ShaderProgram;
 class VertexBuffer;
+class Texture;
 
 class DrawObj {
 
@@ -40,6 +42,8 @@ public:
     void draw2D();
 
     Game* game;
+
+    Drawable* createDrawable(std::string name);
 };
 
 

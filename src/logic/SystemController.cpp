@@ -27,6 +27,7 @@ void SystemController::init() {
 
     if (currentState != NULL) {
         for (auto system: *currentState) {
+            system->init();
         }
     }
 }
