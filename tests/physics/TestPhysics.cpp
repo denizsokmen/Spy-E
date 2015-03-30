@@ -52,7 +52,6 @@ TestPhysics::TestPhysics(Game *game){
     floor->position = glm::vec3(0,-5,0);
     floor->color = glm::vec3(1.0, 1.0, 1.0);
 
-
     game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
     game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
     game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
@@ -84,9 +83,22 @@ TestPhysics::TestPhysics(Game *game){
     b4 = physicsWorld->createBody(&entity4->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity4->getVertexBuffer()->vertexList);
     floorBody = physicsWorld->createBody(&floor->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), floor->getVertexBuffer()->vertexList);
 
-    b1->setAcceleration(-9.8f, 'y');
+    //Floor Y coordinate
+    physicsWorld->floorY = -3.0f;
+
+    //GRAVITIES
+    b1->setAcceleration(-30.0f, 'y');
+    //b2->setAcceleration(-9.8f, 'y');
+    //b3->setAcceleration(-9.8f, 'y');
+    //b4->setAcceleration(-9.8f, 'y');
+
 
     printf("------------------------- \n");
+
+    font = new FontSDL(game->drawer);
+    font->loadFont("fonts/Arial.ttf", 16);
+
+    fps = new FPS();
 
 }
 
@@ -95,6 +107,8 @@ TestPhysics::~TestPhysics(){
 }
 
 void TestPhysics::update(float dt) {
+
+    font->draw(glm::vec3(20, game->height-60, 0.0), L"FPS - %d",fps->get());
 
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
@@ -113,25 +127,21 @@ void TestPhysics::update(float dt) {
         b1->setSpeed(10.0f, 'z');
     else if (game->input->isPressed("S"))
         b1->setSpeed(-10.0f, 'z');
-//    else
-//        b1->setAcceleration(0, 'z');
+    else
+        b1->setSpeed(0, 'z');
 
-//    if (game->input->isPressed("A"))
-//        b1->setSpeed(-10.0f, 'x');
-//    else if (game->input->isPressed("D"))
-//        b1->setSpeed(10.0f, 'x');
-//    else
-//        b1->setSpeed(0, 'x');
-//
-//    if (game->input->isPressed("Shift"))
-//        b1->setSpeed(10.0f, 'y');
-//    else if (game->input->isPressed("Space"))
-//        b1->setSpeed(-10.0f, 'y');
-//    else
-//        b1->setSpeed(0, 'y');
+    if (game->input->isPressed("A"))
+        b1->setSpeed(-10.0f, 'x');
+    else if (game->input->isPressed("D"))
+        b1->setSpeed(10.0f, 'x');
+    else
+        b1->setSpeed(0, 'x');
 
-    if(game->input->isPressed("Space"))
-        b1->setSpeed(5.0f, 'y');
+    if (game->input->isPressed("Shift"))
+        b1->setSpeed(-10.0f, 'y');
+    else if (game->input->isPressed("Space") && b1->getLocation().y <= physicsWorld->floorY+0.1f)
+        b1->setSpeed(10.0f, 'y');
+
 
 
     if (game->input->wasReleased("Escape")) game->quit = true;
@@ -145,6 +155,7 @@ void TestPhysics::update(float dt) {
     if (game->input->isPressed("Right"))  game->scene->camera->move(speed*dt, 0.0f, 0.0f);
 
     physicsWorld->update(dt);
+    fps->update(dt);
 
 }
 

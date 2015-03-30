@@ -19,6 +19,7 @@ public:
     ~Body();
 
     void setLocation(glm::vec3 loc);
+    void setLocation(float location, char direction);
     void setSpeed(glm::vec3 speed);
     void setSpeed(float speed, char direction);
     void setAcceleration(glm::vec3 acceleration);

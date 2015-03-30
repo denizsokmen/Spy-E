@@ -6,6 +6,7 @@
 #include <graphics/Drawable.h>
 #include <world/Camera.h>
 #include <GL/glew.h>
+#include <SDL_image.h>
 #include "graphics/Drawer.h"
 #include "logic/Game.h"
 #include "world/Scene.h"
@@ -15,6 +16,13 @@
 
 
 
+Drawable* Drawer::createDrawable(std::string name) {
+
+    Texture *tex = new Texture();
+    tex->createFromSDL(IMG_Load(name.c_str()));
+    return new Drawable(tex);
+
+}
 
 void Drawer::draw(Drawable *drawable, glm::vec2 position, glm::vec2 size) {
     DrawObj obj;
@@ -22,8 +30,6 @@ void Drawer::draw(Drawable *drawable, glm::vec2 position, glm::vec2 size) {
     obj.position = position;
     obj.size = size;
     drawList.push_back(obj);
-
-
 }
 
 
