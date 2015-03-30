@@ -11,6 +11,7 @@ class Input;
 class Timer;
 class SystemController;
 class Drawer;
+class Physics;
 
 class Game {
 
@@ -45,6 +46,7 @@ public:
     SDL_Window *mainWindow;
     SDL_GLContext mainGLContext;
     Drawer *drawer;
+    Physics *physics;
 };
 
 

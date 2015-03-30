@@ -6,6 +6,7 @@
 #include <graphics/Drawer.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include <physics/Physics.h>
 #include "SDL.h"
 #include "logic/Timer.h"
 #include "world/Scene.h"
@@ -67,10 +68,12 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     scene = new Scene();
     input = new Input(mainWindow);
     drawer = new Drawer(this);
+    physics = new Physics();
 
     controller->addCoreSystem(input);
     controller->addCoreSystem(scene);
     controller->addCoreSystem(drawer);
+    controller->addCoreSystem(physics);
 
 
     controller->init();

@@ -9,5 +9,4 @@ Physics::~Physics(){
 }
 
 void Physics::update(float dt) {
-
 }
