@@ -29,8 +29,16 @@ for x in range(-10,10):
 
 
 
+
 level = [layerOne, layerTwo, layerTwo]
 
+level[2][5][3] = 1
+level[2][5][4] = 1
+level[2][5][2] = 1
+level[2][5][1] = 1
+level[2][5][0] = 1
+level[2][4][1] = 1
+level[2][4][3] = 1
 
 name = "LevelOne"
 version = "1.0"
@@ -79,8 +87,8 @@ def generateEntity(number, x,y,z, color=None):
 	if color == None:
 		r = str(random.randint(0,255)/255.0)
 		g = str(random.randint(0,255)/255.0)
-		b = str(random.randint(100,255)/255.0)
-		color = Color("0.3","0.0",b)
+		b = str(random.randint(0,255)/255.0)
+		color = Color(r,g,b)
 	entity = entitySchema.format(number, \
 								 pos[0]+x*boxSize, \
 								 pos[1]+y*boxSize, \
