@@ -15,17 +15,21 @@ layerTwo = []
 
 for x in range(-10,10):
 	column = []
+	
 	for y in range(-10,10):
+		box = 0
+		if y == -10 or y == 9:
+			box = 1
 		if x == -10 or x == 9:
-			column.append(1)
+			box = 1
 
-
+		column.append(box)
 
 	layerTwo.append(column)
 
 
 
-level = [layerOne, layerTwo]
+level = [layerOne, layerTwo, layerTwo]
 
 
 name = "LevelOne"
