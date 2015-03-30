@@ -72,4 +72,23 @@ std::vector<glm::vec3> Body::getVertices() {
 }
 
 
+void Body::setAcceleration(glm::vec3 acceleration) {
+    this->acceleration = acceleration;
+}
 
+void Body::setAcceleration(float acceleration, char direction) {
+    switch (direction) {
+        case 'x':
+            this->acceleration.x = acceleration;
+            break;
+        case 'y':
+            this->acceleration.y = acceleration;
+            break;
+        case 'z':
+            this->acceleration.z = acceleration;
+            break;
+        default:
+            printf("No such direction!");
+            break;
+    }
+}

@@ -26,6 +26,7 @@ class TestPhysics: public System {
     Renderable* entity2;
     Renderable* entity3;
     Renderable* entity4;
+    Renderable* floor;
 
     Game *game;
 
@@ -41,6 +42,7 @@ public:
     Body *b2;
     Body *b3;
     Body *b4;
+    Body *floorBody;
 
     TestPhysics(Game *game);
     ~TestPhysics();

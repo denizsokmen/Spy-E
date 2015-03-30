@@ -17,7 +17,5 @@ public:
     bool isCollidedX(Body *b1, Body *b2);
     bool isCollidedY(Body *b1, Body *b2);
     bool isCollidedZ(Body *b1, Body *b2);
-
-    glm::vec3 getUpdatedLocation(float dt, glm::vec3 &acceleration, glm::vec3 &speed, glm::vec3 &location);
 };
 #endif
