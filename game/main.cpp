@@ -11,6 +11,7 @@
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
 #include "MainMenu.h"
+#include "InputState.h"
 
 Game* game;
 
@@ -18,10 +19,17 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     SpyE *spye = new SpyE(game);
-	game->getController()->addState("Mainmenu");
-	game->getController()->addSystem("Mainmenu", new MainMenu(game, game->drawer));
+    MainMenu *mainmenu = new MainMenu(game, game->drawer);
+    InputState* inputState = new InputState(game, spye, mainmenu);
+
+    game->getController()->addState("Mainmenu");
+    game->getController()->addSystem("Mainmenu", mainmenu);
+
     game->getController()->addCoreSystem(spye);
-	game->getController()->setState("Mainmenu");
+    game->getController()->addCoreSystem(inputState);
+
+
+    game->getController()->setState("Mainmenu");
     if (game->init(640, 480, "Spy-E", false)) {
 
 

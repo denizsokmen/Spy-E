@@ -6,8 +6,35 @@
 #define SPYE_INPUTSTATE_H
 
 
-class InputState {
+#include <logic/System.h>
+#include "SpyE.h"
 
+enum GameState {
+    STATE_MAINMENU = 0,
+    STATE_GAME
+};
+
+class Game;
+class SpyE;
+class MainMenu;
+
+class InputState : public System {
+
+
+public:
+    GameState currentState;
+
+    InputState(Game *game, SpyE *spye, MainMenu* mainmenu);
+
+    ~InputState();
+    void init();
+    void update(float dt);
+    void draw();
+    void draw2D();
+
+    Game *game;
+    SpyE *spye;
+    MainMenu *mainmenu;
 };
 
 

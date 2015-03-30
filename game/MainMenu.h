@@ -16,6 +16,7 @@ public:
 	void update(float dt);
 	void draw();
 	void draw2D();
+	bool active;
 
 	Drawable *gfxMainMenu;
 	Drawer *drawer;

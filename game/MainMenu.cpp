@@ -8,6 +8,7 @@
 
 MainMenu::MainMenu(Game *game, Drawer* drawer) {
 	this->game = game;
+	active = true;
 }
 
 
@@ -17,7 +18,7 @@ MainMenu::~MainMenu() {
 
 void MainMenu::init() {
 	this->drawer = game->drawer;
-	gfxMainMenu = drawer->createDrawable("assets/texture/menu/background.png");
+	gfxMainMenu = drawer->createDrawable("assets/texture/menu/menu.png");
 
 }
 
@@ -26,6 +27,9 @@ void MainMenu::draw() {
 }
 
 void MainMenu::draw2D() {
+	if (!active)
+		return;
+	if (drawer != NULL)
 	drawer->draw(gfxMainMenu, glm::vec2(game->width/2, game->height/2), glm::vec2(gfxMainMenu->texture->width, gfxMainMenu->texture->height));
 }
 
