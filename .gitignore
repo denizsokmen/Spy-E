@@ -7,3 +7,4 @@ CMakeCache.txt
 game/game
 game/game.exe
 fonts/Thumbs.db
+editor/node_modules

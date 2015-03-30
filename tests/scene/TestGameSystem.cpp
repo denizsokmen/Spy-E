@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     entity = game->scene->getWorld()->createRenderable("box");
+    entity->position = glm::vec3(0, 2.0f, 0);
     entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
@@ -63,7 +64,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     vbo = VertexBuffer::createQuad();
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/HelloWorld-1.0.xml");
+    loader.load("./worlds/LevelOne-1.0.xml");
 }
 
 void TestGameSystem::update(float dt) {
