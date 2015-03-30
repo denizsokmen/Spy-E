@@ -7,6 +7,12 @@
 
 
 void Texture::createFromSDL(SDL_Surface *surface) {
+    if (surface == NULL) {
+        printf("Texture not found\n");
+        return;
+    }
+
+
     id = 0;
 	width = surface->w;
 	height = surface->h;
@@ -23,8 +29,8 @@ void Texture::createFromSDL(SDL_Surface *surface) {
 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   // glGenerateMipmap(GL_TEXTURE_2D);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
