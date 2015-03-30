@@ -16,6 +16,8 @@
 #include "graphics/Shader.h"
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
+#include "utils/fps.h"
+#include "graphics/FontSDL.h"
 
 class ShaderProgram;
 class VertexBuffer;
@@ -43,6 +45,9 @@ public:
     Body *b3;
     Body *b4;
     Body *floorBody;
+
+    FontSDL* font;
+    FPS* fps;
 
     TestPhysics(Game *game);
     ~TestPhysics();

@@ -92,3 +92,20 @@ void Body::setAcceleration(float acceleration, char direction) {
             break;
     }
 }
+
+void Body::setLocation(float location, char direction) {
+    switch (direction) {
+        case 'x':
+            (*this->location).x = location;
+            break;
+        case 'y':
+            (*this->location).y = location;
+            break;
+        case 'z':
+            (*this->location).z = location;
+            break;
+        default:
+            printf("No such direction!");
+            break;
+    }
+}
