@@ -38,8 +38,8 @@ class SoundManager{
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(const char* name, const char* file_name);
-      int find_source_by_name(const char* sound_name);
+      int load(char* name, char* file_name);
+      int find_source_by_name(char* sound_name);
 
 #pragma pack(push,1)
 
@@ -65,10 +65,10 @@ class SoundManager{
       SoundManager();
       ~SoundManager();
 
-      int  open(const char* file_name);
-      int  open(const char* sound_name, const char* file_name);
+      int  open(char* file_name);
+      int  open(char* sound_name, char* file_name);
       void play(ALuint sound);
-      void play(const char* sound_name);
+      void play(char* sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
 };
