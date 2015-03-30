@@ -79,8 +79,8 @@ def generateEntity(number, x,y,z, color=None):
 	if color == None:
 		r = str(random.randint(0,255)/255.0)
 		g = str(random.randint(0,255)/255.0)
-		b = str(random.randint(0,255)/255.0)
-		color = Color(r,g,b)
+		b = str(random.randint(100,255)/255.0)
+		color = Color("0.3","0.0",b)
 	entity = entitySchema.format(number, \
 								 pos[0]+x*boxSize, \
 								 pos[1]+y*boxSize, \
