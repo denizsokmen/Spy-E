@@ -46,7 +46,18 @@ ALenum get_format(short bit_for_sample, short channels){
    return format;
 }
 
-int SoundManager::find_source_by_name(const char* sound_name){
+bool check_wave_riff(char* data_t, char* WAVE_t){
+   bool ifWAVEriff = false;
+   if((data_t[0] == 'd' && data_t[1] == 'a' && data_t[2] == 't' && data_t[3] == 'a') &&
+      (WAVE_t[0] == 'W' && WAVE_t[1] == 'A' && WAVE_t[2] == 'V' && WAVE_t[3] == 'E')){ 
+
+      ifWAVEriff = true;
+      printf("RIFF WAVE FILE, confirmed...");
+   }
+   return ifWAVEriff;
+}
+
+int SoundManager::find_source_by_name(char* sound_name){
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
@@ -98,13 +109,13 @@ SoundManager::~SoundManager(){
    /* alDeleteSources(number_of_sounds, sound_sources);
       alDeleteBuffers(number_of_sounds, sound_buffers);*/
    
-   for(unsigned int c = 0; c<sounds.size(); c++){
+   for(uint c = 0; c<sounds.size(); c++){
        alDeleteSources(1,&sounds[c].source);
        alDeleteBuffers(1,&sounds[c].buffer);
    }
 }
 
-int SoundManager::load(const char* name, const char* file_name){
+int SoundManager::load(char* name, char* file_name){
    number_of_sounds++;
    sounds.resize(number_of_sounds);
 
@@ -122,6 +133,11 @@ int SoundManager::load(const char* name, const char* file_name){
 
       ALenum format = get_format(sound_file->bits_per_sample, 
                                  sound_file->channels);
+
+
+   /* File chuck check */
+
+   check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
    /*   
       printf("------------- INFO -------------    \n");
       printf("FORMAT TYPE :              %d       \n", sound_file->format_type);
@@ -169,21 +185,20 @@ int SoundManager::load(const char* name, const char* file_name){
                 sounds[current_sound].buffer);
          
       strncpy(sounds[current_sound].name,name,sizeof(name));
-      
+      current_sound++;
 
-      return sounds[current_sound++].source;
-
+      return sounds[current_sound].source;
    }else{printf("Couldn't Find File! (fopen()) \n");}
    // a function is needed for giving errors.
    // ? what to return here
 
 }
 
-int SoundManager::open(const char* file_name){
+int SoundManager::open(char* file_name){
    return load(NO_NAME,file_name);
 }
 
-int SoundManager::open(const char* sound_name, const char* file_name){
+int SoundManager::open(char* sound_name, char* file_name){
    return load(sound_name, file_name);
 }
 
@@ -191,7 +206,7 @@ void SoundManager::play(ALuint sound){
    alSourcePlay(sound);
 }
 
-void SoundManager::play(const char* sound_name){
+void SoundManager::play(char* sound_name){
    alSourcePlay(find_source_by_name(sound_name));
 }
 
