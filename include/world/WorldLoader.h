@@ -16,7 +16,6 @@ class EntityLoader;
 class WorldLoader : public XMLLoader {
 
 private:
-    World* world;
     EntityLoader* entityLoader;
     rapidxml::xml_node<> *worldNode;
 
@@ -34,6 +33,7 @@ private:
 
 
 public:
+    World* world;
     WorldLoader(World* world);
     void load(char const *name);
 

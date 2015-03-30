@@ -17,15 +17,14 @@ private:
 	World* world;
 	Renderer* renderer;
 
-	std::vector<Renderable*> renderList;
-
-
 public:
 	Camera* camera;
 	Scene();
 	~Scene();
 	void draw();
 	void update(float dt);
+
+	std::vector<Renderable*> renderList;
 
 	void init() {}
 

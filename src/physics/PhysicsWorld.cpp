@@ -37,12 +37,11 @@ void PhysicsWorld::update(float dt) {
                 if (body != controlBody) {
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
-
-                        if (body->getLocation().y <= floorY) {
-                            body->setLocation(floorY-0.4, 'y');
-
-                            //body->setSpeed(-(body->getSpeed().y), 'y'); for bouncing floor
+                        if (body->getLocation().y <= 2.5f) {
+                            body->setLocation(2.01f, 'y');
+                            //body->setSpeed(-(body->getSpeed().y), 'y'); //for bouncing floor
                             body->setSpeed(0, 'y'); //for non-bouncing floor
+
                         }/*
                         else {
                             body->setSpeed(-(body->getSpeed().x), 'x');

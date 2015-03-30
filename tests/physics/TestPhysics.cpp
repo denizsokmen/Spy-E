@@ -137,9 +137,8 @@ void TestPhysics::update(float dt) {
     else
         b1->setSpeed(0, 'x');
 
-    if (game->input->isPressed("Shift"))
-        b1->setSpeed(-10.0f, 'y');
-    else if (game->input->isPressed("Space") && b1->getLocation().y <= physicsWorld->floorY+0.1f)
+
+    if (game->input->isPressed("Space") && b1->getLocation().y <= physicsWorld->floorY+0.1f)
         b1->setSpeed(10.0f, 'y');
 
 

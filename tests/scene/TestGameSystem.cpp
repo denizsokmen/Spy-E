@@ -29,42 +29,34 @@ int main(int argc, char* argv[])
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0, 2.0f, 0);
+    entity->position = glm::vec3(0, 10.0f, 0);
     entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
+    physicsWorld = new PhysicsWorld();
+    assignKeyboardInputs(game);
+    assignMouseInputs(game);
 
-
-
-	/*Use scan codes for mapping keyboard from now on. For full list of scan codes:
-	*	check SDL_scancode.h 
-	*	OR
-	*	https://wiki.libsdl.org/SDLScancodeLookup
-	*/
-	game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
-    game->input->mapButton("Left", new KeyboardButtonHandler(SDL_SCANCODE_LEFT, game->input));
-    game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
-    game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
-    game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
-    game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
-    game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
-
-	/*  Use keycodes given below for mouse input:
-	*	SDL_BUTTON_LEFT
-	*	SDL_BUTTON_RIGHT
-	*	SDL_BUTTON_MIDDLE
-	*	SDL_BUTTON_X1
-	*	SDL_BUTTON_X2
-	*/
-	game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
 
 
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
     vbo = VertexBuffer::createQuad();
 
+
+
     WorldLoader loader(game->scene->getWorld());
     loader.load("./worlds/LevelOne-1.0.xml");
+
+    for(int i = 1; i < loader.world->getRenderables().size(); i++) {
+        Renderable* entityTemp = loader.world->getRenderables()[i];
+        physicsWorld->createBody(&entityTemp->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entityTemp->getVertexBuffer()->vertexList);
+    }
+
+    box = physicsWorld->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
+    box->setAcceleration(-30.0f, 'y');
+
+
 }
 
 void TestGameSystem::update(float dt) {
@@ -89,33 +81,50 @@ void TestGameSystem::update(float dt) {
         entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
     }
 
-    if (game->input->isPressed("W")) {
-        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(1.0f, 0.0f, 0.0f));
-    }
-
-    if (game->input->isPressed("S")) {
-        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(-1.0f, 0.0f, 0.0f));
-    }
-
     if (game->input->isPressed("Up")) {
         glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-        entity->position += forward * 10.0f * dt;
+        box->setSpeed(forward.x * 10.0f, 'x');
+        box->setSpeed(forward.z * 10.0f, 'z');
     }
 
     if (game->input->isPressed("Down")) {
         glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-        entity->position += back * 10.0f * dt;
+        box->setSpeed(back.x * 5.0f, 'x');
+        box->setSpeed(back.z * 5.0f, 'z');
     }
+
+    if(game->input->isPressed("Space"))
+        box->setSpeed(10.0f, 'y');
 
 
 
 	if (game->input->wasReleased("Escape") || game->input->quit)
 		game->quit = true;
 
-    if (game->input->justPressed("Left Click"))
-        printf("clicked\n");
+    physicsWorld->update(dt);
+}
 
-   // entity->setTransformation(trans);
+void TestGameSystem::assignMouseInputs(Game *game) {/*  Use keycodes given below for mouse input:
+    *	SDL_BUTTON_LEFT
+    *	SDL_BUTTON_RIGHT
+    *	SDL_BUTTON_MIDDLE
+    *	SDL_BUTTON_X1
+    *	SDL_BUTTON_X2
+    */
+    game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
+}
+
+void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapping keyboard from now on. For full list of scan codes:
+	*	check SDL_scancode.h
+	*	OR
+	*	https://wiki.libsdl.org/SDLScancodeLookup
+	*/
+    game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
+    game->input->mapButton("Left", new KeyboardButtonHandler(SDL_SCANCODE_LEFT, game->input));
+    game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
+    game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
+    game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
+    game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
 }
 
 void TestGameSystem::draw() {
