@@ -162,7 +162,7 @@ add_library(engine STATIC
 	src/physics/Face.cpp
 	include/physics/Face.h
 
-)
+include/utils/XMLLoader.h)
 
 
 target_link_libraries(engine

@@ -4,4 +4,86 @@
 
     <Version>1.0</Version>
     <SkyBox>N/A</SkyBox>
+
+    <Entities>
+        <Entity name="camera">
+            <Type>box</Type>
+            <Position>
+                <X>1.0</X>
+                <Y>2</Y>
+                <Z>0</Z>
+            </Position>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+        </Entity>
+
+        <Entity name="box">
+            <Type>cube</Type>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+            <Position>
+                <X>1</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Position>
+        </Entity>
+        <Entity name="box">
+            <Type>box</Type>
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>0</Z>
+            </Position>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+        </Entity>
+        <Entity name="ambientSound1">
+            <Type>box</Type>
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Position>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+        </Entity>
+        <Entity name="box">
+            <Type>box</Type>
+            <Position>
+                <X>0</X>
+                <Y>1</Y>
+                <Z>0</Z>
+            </Position>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+        </Entity>
+        <Entity name="player">
+            <Type>box</Type>
+            <Position>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+            </Position>
+            <Color>
+                <R>1.0</R>
+                <G>0.1</G>
+                <B>0.1</B>
+            </Color>
+        </Entity>
+    </Entities>
 </World>

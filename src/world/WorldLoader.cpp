@@ -26,22 +26,11 @@ void WorldLoader::load(char const *path) {
     printf("---------- WorldLoader -------------\n");
     printf("[WorldLoader] Loading file: %s \n", path);
 
-    rapidxml::xml_document<> document;
-    try {
-        std::ifstream file(path);
-        std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-        buffer.push_back('\0');
-        document.parse<0>(&buffer[0]);
+    rapidxml::xml_document<> *document = this->getDocument(path);
+    if (document != NULL) {
+        worldNode = document->first_node("World");
+        this->parseWorldNode();
     }
-    catch (const std::runtime_error &error) {
-        printf("[XMLLoader] With error: %s\n", error.what());
-        return;
-    }
-    worldNode = document.first_node("World");
-
-
-
-    this->parseWorldNode();
 
 }
 
@@ -103,7 +92,9 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
     }
 
     Entity *entity = entityLoader->load(typeNode->value(), world);
+
     if (entity != NULL) {
+        printf("[WordLoader] Loading %s.\n", nameNode->value());
         entity->position = this->parsePosition(entityNode);
         entity->color = this->parseColor(entityNode);
 
@@ -160,10 +151,11 @@ void WorldLoader::getComponent(rapidxml::xml_node<> *mainNode,
 }
 
 
-
 WorldLoader::~WorldLoader(){
     printf("[WorldLoader] Deallocating...\n");
-
+    delete this->document;
+    delete this->file;
+    delete this->entityLoader;
 
     printf("------------------------------------\n");
 }

@@ -5,15 +5,15 @@
 #ifndef _SPYE_WORLDLOADER_H_
 #define _SPYE_WORLDLOADER_H_
 
-
 #include <glm/glm.hpp>
-#include "utils/rapidxml.hpp"
+#include "utils/XMLLoader.h"
 
 class World;
 class ObjLoader;
 class EntityLoader;
 
-class WorldLoader {
+
+class WorldLoader : public XMLLoader {
 
 private:
     World* world;
