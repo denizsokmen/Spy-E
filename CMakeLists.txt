@@ -70,7 +70,6 @@ add_library(engine STATIC
 	src/graphics/ObjLoader.cpp
 	src/graphics/Renderable.cpp
 	src/graphics/VertexBuffer.cpp
-	src/graphics/Label.cpp
 	src/graphics/SubMesh.cpp
 	src/graphics/Renderer.cpp
 	src/graphics/Mesh.cpp
@@ -108,7 +107,6 @@ add_library(engine STATIC
 	include/graphics/ObjLoader.h
 	include/graphics/Mesh.h
 	include/graphics/VertexBuffer.h
-	include/graphics/Label.h
 	include/graphics/SubMesh.h
 	include/graphics/Renderer.h
 	include/graphics/Texture.h
@@ -162,7 +160,19 @@ add_library(engine STATIC
 	src/physics/Face.cpp
 	include/physics/Face.h
 
-include/utils/XMLLoader.h)
+	include/utils/XMLLoader.h
+	src/graphics/ui/View.cpp
+	include/graphics/ui/View.h
+	src/graphics/ui/Image.cpp
+	include/graphics/ui/Image.h
+	include/graphics/ui/Primitives.h
+	src/graphics/ui/Button.cpp
+	include/graphics/ui/Button.h
+	src/graphics/ui/Label.cpp
+	include/graphics/ui/Label.h
+	src/graphics/ui/GUI.cpp
+	include/graphics/ui/GUI.h
+)
 
 
 target_link_libraries(engine

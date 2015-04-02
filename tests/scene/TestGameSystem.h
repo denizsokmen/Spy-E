@@ -37,7 +37,6 @@ public:
     FontSDL *font;
 
     void assignKeyboardInputs(Game *game);
-
     void assignMouseInputs(Game *game);
 };
 
