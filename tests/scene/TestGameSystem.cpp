@@ -1,16 +1,7 @@
 #include "TestGameSystem.h"
-#include "logic/Game.h"
-#include "world/Scene.h"
-#include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
-#include "graphics/Renderable.h"
-#include "input/KeyboardButtonHandler.h"
-#include "input/MouseButtonHandler.h"
-#include "world/Camera.h"
+
 #include <world/WorldLoader.h>
-#include <graphics/Shader.h>
-#include <utils/FPS.h>
-#include <graphics/FontSDL.h>
+
 
 Game* game;
 
@@ -109,8 +100,6 @@ void TestGameSystem::update(float dt) {
 
     if(game->input->justPressed("B"))
         physicsWorld->bounce = !physicsWorld->bounce;
-
-
 
 	if (game->input->wasReleased("Escape") || game->input->quit)
 		game->quit = true;

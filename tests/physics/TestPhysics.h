@@ -16,12 +16,18 @@
 #include "graphics/Shader.h"
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
+#include "physics/Physics.h"
 #include "utils/fps.h"
 #include "graphics/FontSDL.h"
+
+const float gravity = -30.0f;
+const glm::vec3 zeroVector = glm::vec3(0, 0, 0);
 
 class ShaderProgram;
 class VertexBuffer;
 class Game;
+class Physics;
+class Body;
 
 class TestPhysics: public System {
     Renderable* entity;
@@ -29,7 +35,6 @@ class TestPhysics: public System {
     Renderable* entity3;
     Renderable* entity4;
     Renderable* floor;
-
     Game *game;
 
 public:
@@ -39,7 +44,7 @@ public:
     float mouseSpeed = 0.005f;
     float speed = 10.0f;
 
-    PhysicsWorld *physicsWorld;
+    Physics* physics;
     Body *b1;
     Body *b2;
     Body *b3;
@@ -60,6 +65,28 @@ public:
 
     void draw2D();
     VertexBuffer *vbo;
+
+    void assignInputs(Game *game);
+
+    void initializeEntities(Game *game);
+
+    void initializeShader();
+
+    void initializeCamera(Game *game);
+
+    void createBodies();
+
+    void initializeFonts(Game *game);
+
+    void applyGravity();
+
+    void handleMouseInputs(SDL_Window *window);
+
+    void drawFPS(float dt);
+
+    void handleKeyboardInputs(float dt);
+
+    void setCameraProperties();
 };
 
 

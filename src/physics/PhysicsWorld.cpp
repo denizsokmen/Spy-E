@@ -40,16 +40,10 @@ void PhysicsWorld::update(float dt) {
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.01f, 'y');
                             if(bounce)
-                                body->setSpeed(-(body->getSpeed().y), 'y'); //for bouncing floor
+                                body->setSpeed(-(body->getSpeed().y), 'y');
                             else
-                                body->setSpeed(0, 'y'); //for non-bouncing floor
-
-                        }/*
-                        else {
-                            body->setSpeed(-(body->getSpeed().x), 'x');
-                            body->setSpeed(-(body->getSpeed().z), 'z');
-                        }*/
-
+                                body->setSpeed(0, 'y');
+                        }
                     }
                 }
             }
@@ -65,7 +59,7 @@ void PhysicsWorld::applyAirFriction(Body *body) {
 }
 
 glm::vec3 PhysicsWorld::getUpdatedLocation(float dt, glm::vec3 &acceleration, glm::vec3 &location,
-                                           glm::vec3 &updatedSpeed) {//X = Xo + Vo.t + 1/2*a*t^2
+                                           glm::vec3 &updatedSpeed) {
     float updatedLocationX = location.x + (updatedSpeed.x * dt) + (0.5f * acceleration.x * dt * dt);
     float updatedLocationY = location.y + (updatedSpeed.y * dt) + (0.5f * acceleration.y * dt * dt);
     float updatedLocationZ = location.z + (updatedSpeed.z * dt) + (0.5f * acceleration.z * dt * dt);
@@ -95,32 +89,3 @@ bool PhysicsWorld::isCollided(Body *b1, Body *b2){
 
 }
 
-bool PhysicsWorld::isCollidedX(Body *b1, Body *b2) {
-
-    BoundingBox *box1 = b1->getBoundingBox();
-    BoundingBox *box2 = b2->getBoundingBox();
-
-    return ( box1->getMaxVertex().x > box2->getMinVertex().x &&
-             box1->getMinVertex().x < box2->getMaxVertex().x);
-
-}
-
-bool PhysicsWorld::isCollidedY(Body *b1, Body *b2) {
-
-    BoundingBox *box1 = b1->getBoundingBox();
-    BoundingBox *box2 = b2->getBoundingBox();
-
-    return ( box1->getMaxVertex().y > box2->getMinVertex().y &&
-             box1->getMinVertex().y < box2->getMaxVertex().y);
-
-}
-
-bool PhysicsWorld::isCollidedZ(Body *b1, Body *b2) {
-
-    BoundingBox *box1 = b1->getBoundingBox();
-    BoundingBox *box2 = b2->getBoundingBox();
-
-    return ( box1->getMaxVertex().z > box2->getMinVertex().z &&
-             box1->getMinVertex().z < box2->getMaxVertex().z );
-
-}

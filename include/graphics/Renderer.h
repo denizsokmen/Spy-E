@@ -22,7 +22,6 @@ class Renderer {
     ObjLoader* objLoader;
     VertexBuffer* generalBuffer;
 
-
     GLuint vaoid;
 
     private:
