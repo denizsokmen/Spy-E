@@ -7,6 +7,8 @@ Face::Face(glm::vec3 firstPoint, glm::vec3 secondPoint, glm::vec3 thirdPoint) {
 }
 
 bool Face::intersects(glm::vec3 direction, glm::vec3 origin) {
+
+
     return false;
 }
 

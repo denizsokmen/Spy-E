@@ -44,6 +44,7 @@ void TestPhysics::update(float dt) {
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
     setCameraProperties();
+
     physics->update(dt);
 
 }

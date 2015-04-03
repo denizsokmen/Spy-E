@@ -13,11 +13,11 @@ void Keyboard::update(SDL_Event &event){
 		keyCode = SDL_GetKeyFromScancode(event.key.keysym.scancode);
 	if (event.type == SDL_KEYUP)
 		keyArray[keyCode] = false;
-	else if (event.type == SDL_KEYDOWN) {
+	else if (event.type == SDL_KEYDOWN)
 		keyArray[keyCode] = true;
-	}
 
 }
 
 Keyboard::~Keyboard(){
+
 }
