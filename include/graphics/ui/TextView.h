@@ -13,14 +13,22 @@ class TextView: public View {
 
 private:
     int numberOfLines;
+    bool isTextSplitted;
     Font* font;
+    std::wstring text;
 
 public:
-    TextView(Font* font);
+    TextView();
     ~TextView();
     void setFont(Font* font);
-    void setText(std::string text);
-    void createNewLabel(std::string text);
+
+    void setText(std::wstring text);
+
+    void createNewLabel(std::wstring text);
+
+    void draw();
+
+    void splitText();
 };
 
 

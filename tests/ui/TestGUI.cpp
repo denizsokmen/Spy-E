@@ -15,6 +15,7 @@
 #include <graphics/FontSDL.h>
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
+#include "graphics/ui/TextView.h"
 #include "graphics/ui/Primitives.h"
 
 Game *game;
@@ -75,6 +76,10 @@ TestGUI::TestGUI(Game *game) {
     label->frame = Rect(game->width / 2, game->height / 2, 300, 100);
     game->gui->addSubview(label);
 
+    TextView *textView = new TextView();
+    textView->frame = Rect(30, 10, 100, 100);
+    textView->setText(L"123456789123456789123456789123456789");
+    game->gui->addSubview(textView);
 
 }
 
