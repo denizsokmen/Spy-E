@@ -34,28 +34,27 @@ void TextView::draw() {
         splitText();
         isTextSplitted = true;
     }
-
-
 }
 
 void TextView::splitText() {
     this->setFont(getSystem()->font);
 
     float textWidth = 0.0f;
-    int start = 0;
-    int end = 0;
+    int startingPoint = 0;
+    int lineLength = 0;
     numberOfLines = 0;
 
     for (auto ch: this->text) {
         textWidth += font->glyphs[ch].surface->texture->width;
         printf("[GUI][TextView] textWidth is %f\n", textWidth);
-        end++;
+        lineLength++;
         if (textWidth >= this->frame.w) {
-            std::wstring s = text.substr(start, end);
+            std::wstring s = text.substr(startingPoint, lineLength);
             printf("[GUI][TextView] splitted value: %s \n", s.c_str());
             createNewLabel(s);
-            start = end + 1;
+            startingPoint = lineLength + 1;
+            lineLength = 0;
+            textWidth = 0;
         }
     }
-
 }

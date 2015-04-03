@@ -77,8 +77,8 @@ TestGUI::TestGUI(Game *game) {
     game->gui->addSubview(label);
 
     TextView *textView = new TextView();
-    textView->frame = Rect(30, 10, 100, 100);
-    textView->setText(L"123456789123456789123456789123456789");
+    textView->frame = Rect(30, 10, 100, 400);
+    textView->setText(L"abcabcabaasdadasdasdasdasdadasdasdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdadasdadasdaadadasdadasdasdasda");
     game->gui->addSubview(textView);
 
 }
