@@ -2,13 +2,14 @@
 #define TEST_GAME_H
 
 #include "logic/System.h"
-#include "physics/PhysicsWorld.h"
-#include "physics/Body.h"
+#include "physics/Physics.h"
+
 class Entity;
 class Game;
 class Renderable;
 class ShaderProgram;
 class VertexBuffer;
+class Skybox;
 
 class FPS;
 
@@ -19,7 +20,7 @@ class TestGameSystem: public System {
 	Game *game;
 
 public:
-    PhysicsWorld* physicsWorld;
+    Physics* physics;
     Body* box;
 
     TestGameSystem(Game *game);
@@ -38,6 +39,8 @@ public:
 
     void assignKeyboardInputs(Game *game);
     void assignMouseInputs(Game *game);
+
+    Skybox *skybox;
 };
 
 

@@ -41,8 +41,7 @@ public:
     void unbind();
 
 	static VertexBuffer* createQuad();
-
-
+    static VertexBuffer* createCube();
 };
 
 #endif

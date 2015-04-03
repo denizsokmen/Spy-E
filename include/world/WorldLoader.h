@@ -30,8 +30,6 @@ private:
     void getComponent(rapidxml::xml_node<> *positionNode,
                       const char *name, float *value);
 
-
-
 public:
     World* world;
     WorldLoader(World* world);

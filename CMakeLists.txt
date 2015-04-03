@@ -172,7 +172,13 @@ add_library(engine STATIC
 	include/graphics/ui/Label.h
 	src/graphics/ui/GUI.cpp
 	include/graphics/ui/GUI.h
-tests/ui/TestGUI.cpp tests/ui/TestGUI.h)
+    src/graphics/ui/TextView.cpp
+    include/graphics/ui/TextView.h 
+    src/graphics/ui/Font.cpp 
+    include/graphics/ui/Font.h
+    tests/ui/TestGUI.cpp 
+    tests/ui/TestGUI.h
+    )
 
 
 target_link_libraries(engine
