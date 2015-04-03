@@ -216,6 +216,12 @@ add_executable(testGUI
 
 target_link_libraries(testGUI engine)
 
+add_executable(easteregg
+	tests/easteregg/EasterEgg.cpp
+	tests/easteregg/EasterEgg.h
+)
+
+target_link_libraries(easteregg engine)
 
 add_executable(game
 	game/main.cpp
