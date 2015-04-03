@@ -30,5 +30,7 @@ public:
     glm::vec3 getLocation();
     std::vector<glm::vec3> getVertices();
     BoundingBox* getBoundingBox();
+
+    void applyAirFriction();
 };
 #endif

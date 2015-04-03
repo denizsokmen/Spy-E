@@ -102,15 +102,16 @@ void TestGUI::update(float dt) {
     }
 
     if (game->input->isPressed("Up")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-        box->setSpeed(forward.x * 10.0f, 'x');
-        box->setSpeed(forward.z * 10.0f, 'z');
-    }
-
-    if (game->input->isPressed("Down")) {
-        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-        box->setSpeed(back.x * 5.0f, 'x');
-        box->setSpeed(back.z * 5.0f, 'z');
+        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
+        box->setAcceleration(forward.x * 10.0f, 'x');
+        box->setAcceleration(forward.z * 10.0f, 'z');
+    } else if (game->input->isPressed("Down")) {
+        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
+        box->setAcceleration(back.x * 10.0f, 'x');
+        box->setAcceleration(back.z * 10.0f, 'z');
+    } else if (!game->input->isPressed("Down") && !game->input->isPressed("Up")){
+        box->setAcceleration(0, 'x');
+        box->setAcceleration(0, 'z');
     }
 
     if (game->input->isPressed("Space"))

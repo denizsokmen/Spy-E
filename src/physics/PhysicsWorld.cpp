@@ -20,20 +20,14 @@ void PhysicsWorld::update(float dt) {
     for (Body *body : bodies) {
         if(body->getSpeed() != zeroVector || body->getAcceleration() != zeroVector) {
 
-            applyAirFriction(body);
+            //applyAirFriction(body);
 
             glm::vec3 acceleration = body->getAcceleration();
             glm::vec3 speed = body->getSpeed();
             glm::vec3 location = body->getLocation();
 
-            float updatedSpeedX = speed.x + acceleration.x * dt;
-            float updatedSpeedY = speed.y + acceleration.y * dt;
-            float updatedSpeedZ = speed.z + acceleration.z * dt;
-            glm::vec3 updatedSpeed = glm::vec3(updatedSpeedX, updatedSpeedY, updatedSpeedZ);
-
-            //glm::vec3 updatedSpeed = getUpdatedSpeed(dt, acceleration, speed);
+            glm::vec3 updatedSpeed = getUpdatedSpeed(dt, acceleration, speed);
             body->setSpeed(updatedSpeed);
-
 
             glm::vec3 updatedLocation = getUpdatedLocation(dt, acceleration, location, updatedSpeed);
             body->setLocation(updatedLocation);
@@ -43,7 +37,7 @@ void PhysicsWorld::update(float dt) {
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
                         if (body->getLocation().y <= 2.5f) {
-                            body->setLocation(2.01f, 'y');
+                            body->setLocation(2.001f, 'y');
                             if(bounce)
                                 body->setSpeed(-(body->getSpeed().y), 'y');
                             else
@@ -57,10 +51,9 @@ void PhysicsWorld::update(float dt) {
 }
 
 void PhysicsWorld::applyAirFriction(Body *body) {
-    if(body->getSpeed().x != 0)
-                body->setAcceleration(body->getAcceleration().x-(body->getSpeed().x)/2, 'x');
-    if(body->getSpeed().z != 0)
-                body->setAcceleration(body->getAcceleration().z-(body->getSpeed().z)/2, 'z');
+    //doesn't work
+    body->setAcceleration((body->getSpeed().x > 0 ? -body->getSpeed().x : body->getSpeed().x) /2, 'x');
+    body->setAcceleration((body->getSpeed().z > 0 ? -body->getSpeed().z : body->getSpeed().z) /2, 'z');
 }
 
 glm::vec3 PhysicsWorld::getUpdatedLocation(float dt, glm::vec3 &acceleration, glm::vec3 &location,
