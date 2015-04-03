@@ -17,10 +17,6 @@ Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v)
     boundingBox = new BoundingBox(vertices);
 }
 
-Body::~Body(){
-
-}
-
 void Body::setLocation(glm::vec3 loc) {
     *location = loc;
     boundingBox->update(loc);
@@ -28,23 +24,6 @@ void Body::setLocation(glm::vec3 loc) {
 
 void Body::setSpeed(glm::vec3 s) {
     speed = s;
-}
-
-void Body::setSpeed(float speed, char direction){
-    switch (direction) {
-        case 'x':
-            this->speed.x = speed;
-            break;
-        case 'y':
-            this->speed.y = speed;
-            break;
-        case 'z':
-            this->speed.z = speed;
-            break;
-        default:
-            printf("No such direction!");
-            break;
-    }
 }
 
 glm::vec3 Body::getAcceleration() {
@@ -93,6 +72,23 @@ void Body::setAcceleration(float acceleration, char direction) {
     }
 }
 
+void Body::setSpeed(float speed, char direction){
+    switch (direction) {
+        case 'x':
+            this->speed.x = speed;
+            break;
+        case 'y':
+            this->speed.y = speed;
+            break;
+        case 'z':
+            this->speed.z = speed;
+            break;
+        default:
+            printf("No such direction!");
+            break;
+    }
+}
+
 void Body::setLocation(float location, char direction) {
     switch (direction) {
         case 'x':
@@ -108,4 +104,12 @@ void Body::setLocation(float location, char direction) {
             printf("No such direction!");
             break;
     }
+}
+
+void Body::applyAirFriction(){
+
+}
+
+Body::~Body(){
+
 }

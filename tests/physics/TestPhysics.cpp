@@ -65,19 +65,19 @@ void TestPhysics::handleKeyboardInputs(float dt) {
 
 
     if (game->input->isPressed("W")){
-        b1->setAcceleration(10.0, 'z');
+        b1->setSpeed(10.0, 'z');
     }
     else if (game->input->isPressed("S"))
-        b1->setAcceleration(-10.0, 'z');
+        b1->setSpeed(-10.0, 'z');
     else
-        b1->setAcceleration(0.0, 'z');
+        b1->setSpeed(0.0, 'z');
 
     if (game->input->isPressed("A"))
-        b1->setAcceleration(-10.0, 'x');
+        b1->setSpeed(-10.0, 'x');
     else if (game->input->isPressed("D"))
-        b1->setAcceleration(10.0, 'x');
+        b1->setSpeed(10.0, 'x');
     else
-        b1->setAcceleration(0.0, 'x');
+        b1->setSpeed(0.0, 'x');
 
     if (game->input->isPressed("Space"))
         b1->setSpeed(10.0, 'y');
