@@ -5,3 +5,11 @@
 #include "graphics/ui/Label.h"
 
 
+void Label::setText(std::wstring text) {
+    this->text = text;
+}
+
+void Label::draw() {
+
+
+}

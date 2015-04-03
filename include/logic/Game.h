@@ -13,6 +13,8 @@ class SystemController;
 class Drawer;
 class Physics;
 
+class GUI;
+
 class Game {
 
 private:
@@ -45,6 +47,7 @@ public:
     Input *input;
     SDL_Window *mainWindow;
     SDL_GLContext mainGLContext;
+    GUI *gui;
     Drawer *drawer;
     Physics *physics;
 };

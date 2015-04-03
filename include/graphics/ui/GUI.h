@@ -1,13 +1,34 @@
-//
-// Created by Taha Doğan Güneş on 02/04/15.
-//
+
 
 #ifndef SPYE_GUI_H
 #define SPYE_GUI_H
 
+#include "logic/System.h"
 
-class GUI {
+class Drawer;
 
+class View;
+
+class GUI : public System {
+
+private:
+    View *mainView;
+
+public:
+    Drawer *drawer;
+
+    GUI(Drawer *drawer);
+
+    void addSubview(View *view);
+
+
+    void init();
+
+    void update(float dt);
+
+    void draw();
+
+    void draw2D();
 };
 
 

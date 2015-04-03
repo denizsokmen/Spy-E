@@ -6,18 +6,33 @@
 #include "graphics/ui/Image.h"
 #include "graphics/Texture.h"
 #include "graphics/Drawable.h"
+#include "graphics/Drawer.h"
+#include <glm/glm.hpp>
+#include <graphics/ui/GUI.h>
 
 
-Image::Image(std::string name) {
+Image::Image(std::string name) : View() {
     Texture *texture = new Texture();
+    printf("[GUI] Loading image: %s \n", name.c_str());
     texture->createFromSDL(IMG_Load(name.c_str()));
     this->drawable = new Drawable(texture);
 }
 
-Image::Image(Texture *texture) {
+Image::Image(Texture *texture) : View() {
+
     this->drawable = new Drawable(texture);
 }
 
 Image::~Image() {
     delete this->drawable;
+}
+
+void Image::draw() {
+    View::draw();
+    glm::vec2 position(this->frame.x, this->frame.y);
+    glm::vec2 size(this->frame.w, this->frame.h);
+    GUI *gui = this->getSystem();
+    Drawer *drawer = gui->drawer;
+    drawer->draw(this->drawable, position, size);
+
 }

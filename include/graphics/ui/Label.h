@@ -1,12 +1,21 @@
-//
-// Created by Taha Doğan Güneş on 02/04/15.
-//
+
 
 #ifndef SPYE_LABEL_H
 #define SPYE_LABEL_H
 
+#include "graphics/ui/View.h"
+#include "string"
 
-class Label {
+class Label : public View {
+
+private:
+    std::wstring text;
+
+public:
+    void setText(std::wstring text);
+
+    void draw();
+
 
 };
 

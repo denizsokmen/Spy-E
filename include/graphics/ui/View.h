@@ -1,6 +1,3 @@
-//
-// Created by Taha Doğan Güneş on 02/04/15.
-//
 
 #ifndef SPYE_VIEW_H
 #define SPYE_VIEW_H
@@ -9,10 +6,15 @@
 #include <vector>
 #include "graphics/ui/Primitives.h"
 
+class GUI;
 
 class Image;
 
+
 class View {
+
+private:
+    GUI *system;
 
 public:
     std::vector<View *> subViews;
@@ -20,8 +22,13 @@ public:
     Color color = Color(0, 0, 0);
     Image *backgroundImage;
 
+    GUI *getSystem();
+
+    void setSystem(GUI *system);
 
     void addSubview(View *view);
+
+    virtual void draw();
 };
 
 

@@ -13,6 +13,7 @@
 #include "graphics/Renderer.h"
 #include "input/Input.h"
 #include "logic/Game.h"
+#include "graphics/ui/GUI.h"
 #include "logic/SystemController.h"
 #define TICK_PER_SECOND 1000
 
@@ -68,11 +69,14 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     scene = new Scene();
     input = new Input(mainWindow);
     drawer = new Drawer(this);
+    gui = new GUI(drawer);
     physics = new Physics();
+
 
     controller->addCoreSystem(input);
     controller->addCoreSystem(scene);
     controller->addCoreSystem(drawer);
+    controller->addCoreSystem(gui);
     controller->addCoreSystem(physics);
 
 

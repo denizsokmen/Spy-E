@@ -19,13 +19,15 @@ private:
     Drawable *drawable;
 
 public:
-    Image(std::string name);
 
+    Image(std::string name);
     Image(Texture *texture);
 
     ~Image();
 
+    using View::draw;
 
+    void draw();
 };
 
 

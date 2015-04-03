@@ -1,6 +1,3 @@
-//
-// Created by Taha Doğan Güneş on 02/04/15.
-//
 
 #ifndef SPYE_BUTTON_H
 #define SPYE_BUTTON_H

@@ -172,7 +172,7 @@ add_library(engine STATIC
 	include/graphics/ui/Label.h
 	src/graphics/ui/GUI.cpp
 	include/graphics/ui/GUI.h
-)
+tests/ui/TestGUI.cpp tests/ui/TestGUI.h)
 
 
 target_link_libraries(engine
@@ -199,6 +199,15 @@ add_executable(testscene
 )
 
 target_link_libraries(testscene engine)
+
+
+add_executable(testGUI
+	tests/ui/TestGUI.cpp
+	tests/ui/TestGUI.h
+)
+
+target_link_libraries(testGUI engine)
+
 
 add_executable(game
 	game/main.cpp
