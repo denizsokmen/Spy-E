@@ -16,12 +16,13 @@
 #include "graphics/Shader.h"
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
-#include "utils/fps.h"
 #include "graphics/FontSDL.h"
 
 class ShaderProgram;
 class VertexBuffer;
 class Game;
+class Skybox;
+class FPS;
 
 class TestPhysics: public System {
     Renderable* entity;
@@ -60,6 +61,7 @@ public:
 
     void draw2D();
     VertexBuffer *vbo;
+    Skybox *skybox;
 };
 
 

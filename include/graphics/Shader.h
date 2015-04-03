@@ -4,8 +4,10 @@
 
 class ShaderProgram {
 
+    void compileShaders(char* vertexProgram, char* fragmentProgram);
 public:
     bool load(const char* vertexFilePath, const char* fragmentFilePath);
+
     GLuint id;
 };
 

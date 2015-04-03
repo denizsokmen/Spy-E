@@ -172,6 +172,9 @@ add_library(engine STATIC
 	include/graphics/ui/Label.h
 	src/graphics/ui/GUI.cpp
 	include/graphics/ui/GUI.h
+
+	src/graphics/Skybox.cpp
+	include/graphics/Skybox.h
 )
 
 

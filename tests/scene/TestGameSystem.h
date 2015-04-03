@@ -9,6 +9,7 @@ class Game;
 class Renderable;
 class ShaderProgram;
 class VertexBuffer;
+class Skybox;
 
 class FPS;
 
@@ -38,6 +39,8 @@ public:
 
     void assignKeyboardInputs(Game *game);
     void assignMouseInputs(Game *game);
+
+    Skybox *skybox;
 };
 
 

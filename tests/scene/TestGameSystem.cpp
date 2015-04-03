@@ -11,6 +11,7 @@
 #include <graphics/Shader.h>
 #include <utils/FPS.h>
 #include <graphics/FontSDL.h>
+#include <graphics/Skybox.h>
 
 Game* game;
 
@@ -62,6 +63,9 @@ TestGameSystem::TestGameSystem(Game *game) {
     font->loadFont("fonts/Arial.ttf", 16);
 
     fps = new FPS();
+    skybox = new Skybox("./assets/texture/skybox/jajalien1_right.jpg", "./assets/texture/skybox/jajalien1_left.jpg",
+                        "./assets/texture/skybox/jajalien1_top.jpg", "./assets/texture/skybox/jajalien1_top.jpg",
+                        "./assets/texture/skybox/jajalien1_front.jpg","./assets/texture/skybox/jajalien1_back.jpg");
 
 
 }
@@ -144,7 +148,7 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
 }
 
 void TestGameSystem::draw() {
-
+    skybox->draw(game->scene->camera);
 }
 
 void TestGameSystem::draw2D() {

@@ -2,6 +2,8 @@
 // Created by Enes Şenel on 13/03/15.
 //
 
+#include <graphics/Skybox.h>
+#include <utils/FPS.h>
 #include "TestPhysics.h"
 
 Game* game;
@@ -100,6 +102,11 @@ TestPhysics::TestPhysics(Game *game){
 
     fps = new FPS();
 
+    skybox = new Skybox("./assets/texture/skybox/jajalien1_right.jpg", "./assets/texture/skybox/jajalien1_left.jpg",
+                        "./assets/texture/skybox/jajalien1_top.jpg", "./assets/texture/skybox/jajalien1_top.jpg",
+                        "./assets/texture/skybox/jajalien1_front.jpg","./assets/texture/skybox/jajalien1_back.jpg");
+
+
 }
 
 TestPhysics::~TestPhysics(){
@@ -160,6 +167,7 @@ void TestPhysics::update(float dt) {
 
 void TestPhysics::draw() {
 
+    skybox->draw(game->scene->camera);
 }
 
 void TestPhysics::draw2D() {

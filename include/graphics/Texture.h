@@ -5,10 +5,12 @@
 #include <GL/glew.h>
 
 class Texture {
+    GLuint type;
 
 public:
 
     void createFromSDL(SDL_Surface* surface);
+    void createFromSDL(SDL_Surface* surface, GLuint type);
 	void bind(GLuint unit);
 
 	int width;

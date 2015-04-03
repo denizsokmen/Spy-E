@@ -37,8 +37,15 @@ void Texture::createFromSDL(SDL_Surface *surface) {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+
+
 void Texture::bind(GLuint unit) {
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, id);
+
+}
+
+void Texture::createFromSDL(SDL_Surface *surface, GLuint type) {
+    this->type = type;
 
 }
