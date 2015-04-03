@@ -1,17 +1,6 @@
 #include "TestGameSystem.h"
-#include "logic/Game.h"
-#include "world/Scene.h"
-#include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
-#include "graphics/Renderable.h"
-#include "input/KeyboardButtonHandler.h"
-#include "input/MouseButtonHandler.h"
-#include "world/Camera.h"
 #include <world/WorldLoader.h>
-#include <graphics/Shader.h>
-#include <utils/FPS.h>
-#include <graphics/FontSDL.h>
-#include <graphics/Skybox.h>
+
 
 Game* game;
 
@@ -36,7 +25,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
-    physicsWorld = new PhysicsWorld();
+    physics = new Physics();
     assignKeyboardInputs(game);
     assignMouseInputs(game);
 
@@ -53,19 +42,16 @@ TestGameSystem::TestGameSystem(Game *game) {
 
     for(int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable* entityTemp = loader.world->getRenderables()[i];
-        physicsWorld->createBody(&entityTemp->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entityTemp->getVertexBuffer()->vertexList);
+        physics->getWorld()->createBody(&entityTemp->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entityTemp->getVertexBuffer()->vertexList);
     }
 
-    box = physicsWorld->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
+    box = physics->getWorld()->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
     font = new FontSDL(game->drawer);
     font->loadFont("fonts/Arial.ttf", 16);
 
     fps = new FPS();
-    skybox = new Skybox("./assets/texture/skybox/jajalien1_right.jpg", "./assets/texture/skybox/jajalien1_left.jpg",
-                        "./assets/texture/skybox/jajalien1_top.jpg", "./assets/texture/skybox/jajalien1_top.jpg",
-                        "./assets/texture/skybox/jajalien1_front.jpg","./assets/texture/skybox/jajalien1_back.jpg");
 
 
 }
@@ -98,28 +84,28 @@ void TestGameSystem::update(float dt) {
 
     if (game->input->isPressed("Up")) {
         glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-        box->setSpeed(forward.x * 10.0f, 'x');
-        box->setSpeed(forward.z * 10.0f, 'z');
+        box->setAcceleration(forward.x * 10.0f, 'x');
+        box->setAcceleration(forward.z * 10.0f, 'z');
+    } else if (game->input->isPressed("Down")) {
+        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
+        box->setAcceleration(back.x * 5.0f, 'x');
+        box->setAcceleration(back.z * 5.0f, 'z');
+    } else if (!game->input->isPressed("Down") && !game->input->isPressed("Up")){
+        box->setAcceleration(0, 'x');
+        box->setAcceleration(0, 'z');
     }
 
-    if (game->input->isPressed("Down")) {
-        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-        box->setSpeed(back.x * 5.0f, 'x');
-        box->setSpeed(back.z * 5.0f, 'z');
-    }
 
     if(game->input->isPressed("Space"))
         box->setSpeed(10.0f, 'y');
 
     if(game->input->justPressed("B"))
-        physicsWorld->bounce = !physicsWorld->bounce;
-
-
+        physics->getWorld()->bounce = !physics->getWorld()->bounce;
 
 	if (game->input->wasReleased("Escape") || game->input->quit)
 		game->quit = true;
 
-    physicsWorld->update(dt);
+    physics->getWorld()->update(dt);
     fps->update(dt);
 }
 
@@ -148,7 +134,7 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
 }
 
 void TestGameSystem::draw() {
-    skybox->draw(game->scene->camera);
+
 }
 
 void TestGameSystem::draw2D() {

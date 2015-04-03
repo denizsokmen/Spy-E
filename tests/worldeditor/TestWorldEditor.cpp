@@ -100,7 +100,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 void WorldEditorSystem::update(float dt) {
 
     //std::wstring s = std::wstring(L"FPS-") + std::to_wstring(fps->get());
-    font->draw(glm::vec3(20, game->height-60, 0.0), L"asdasdasfsd\nf~~ ;_; FPS - %d",fps->get());
+    font->draw(glm::vec3(20, game->height-60, 0.0), L"FPS - %d",fps->get());
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
 

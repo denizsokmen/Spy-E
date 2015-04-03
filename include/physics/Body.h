@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include "physics/BoundingBox.h"
 #include <vector>
+#include <tests/physics/TestPhysics.h>
 
 class Body{
 

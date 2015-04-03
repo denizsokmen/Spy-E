@@ -2,8 +2,8 @@
 #define TEST_GAME_H
 
 #include "logic/System.h"
-#include "physics/PhysicsWorld.h"
-#include "physics/Body.h"
+#include "physics/Physics.h"
+
 class Entity;
 class Game;
 class Renderable;
@@ -20,7 +20,7 @@ class TestGameSystem: public System {
 	Game *game;
 
 public:
-    PhysicsWorld* physicsWorld;
+    Physics* physics;
     Body* box;
 
     TestGameSystem(Game *game);

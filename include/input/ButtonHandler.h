@@ -7,7 +7,6 @@
 
 class ButtonHandler {
 private:
-	bool pressFlag;
 	int keyCode;
 
 public:
@@ -19,8 +18,6 @@ public:
 	virtual bool wasReleased();
 	void setKeyCode(int);
 	int getKeyCode();
-	void setPressFlag(bool);
-	bool getPressFlag();
 
 	ButtonHandler(int, Input*);
 	~ButtonHandler();

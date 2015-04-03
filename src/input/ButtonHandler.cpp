@@ -3,7 +3,6 @@
 ButtonHandler::ButtonHandler(int keyCode, Input *input){
 	currentlyPressed = false;
 	firstPress = false;
-	this->pressFlag = false;
 	this->keyCode = keyCode;
 	this->input = input;
 }
@@ -14,14 +13,6 @@ void ButtonHandler::setKeyCode(int keyCode){
 
 int ButtonHandler::getKeyCode(){
 	return this->keyCode;
-}
-
-void ButtonHandler::setPressFlag(bool flag){
-	this->pressFlag = flag;
-}
-
-bool ButtonHandler::getPressFlag() {
-	return this->pressFlag;
 }
 
 ButtonHandler::~ButtonHandler(){

@@ -15,6 +15,12 @@ struct Rect {
     Rect(float x, float y, float w, float h) : x(x), y(y), w(w), h(h) { }
 };
 
+struct Size {
+    float width;
+    float height;
+
+    Size(float w, float h) : width(w), height(h) {}
+};
 
 struct Color {
     float r;
