@@ -13,7 +13,7 @@ class VertexBuffer;
 class Game;
 class SoundManager;
 class FontSDL;
-class FPS;
+
 
 class WorldEditorSystem: public System {
 
@@ -32,7 +32,7 @@ public:
     void draw2D();
     VertexBuffer *vbo;
 
-    FPS *fps;
+
     FontSDL *font;
 };
 

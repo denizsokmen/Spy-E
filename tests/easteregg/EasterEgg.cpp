@@ -63,7 +63,6 @@ EasterEgg::EasterEgg(Game * game) {
     box->setAcceleration(-30.0f, 'y');
 
 
-    fps = new FPS();
 
 
     Image *image = new Image("./assets/texture/easteregg/menu.png");
@@ -125,7 +124,7 @@ void EasterEgg::update(float dt) {
         game->quit = true;
 
     physicsWorld->update(dt);
-    fps->update(dt);
+
 }
 
 void EasterEgg::assignMouseInputs(Game * game) {/*  Use keycodes given below for mouse input:

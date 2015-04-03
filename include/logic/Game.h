@@ -41,7 +41,7 @@ public:
     void update();
     void end();
 
-    float fps = 0;
+    float fps;
 
     GLFWwindow *window;
     Timer *timer;

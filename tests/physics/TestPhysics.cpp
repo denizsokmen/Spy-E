@@ -45,7 +45,7 @@ void TestPhysics::update(float dt) {
 
     SDL_Window *window = game->input->mainWindow;
 
-    drawFPS(dt);
+    drawFPS();
 
 
     physics->update(dt);

@@ -11,16 +11,11 @@
 #include "physics/Body.h"
 
 class Entity;
-
 class Game;
-
 class Renderable;
-
 class ShaderProgram;
-
 class VertexBuffer;
 
-class FPS;
 
 class FontSDL;
 
@@ -43,7 +38,6 @@ public:
     void draw2D();
 
     VertexBuffer *vbo;
-    FPS *fps;
     FontSDL *font;
 
     void assignKeyboardInputs(Game *game);

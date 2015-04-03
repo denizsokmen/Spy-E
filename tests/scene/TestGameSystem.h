@@ -11,7 +11,6 @@ class ShaderProgram;
 class VertexBuffer;
 class Skybox;
 
-class FPS;
 
 class FontSDL;
 
@@ -34,7 +33,6 @@ public:
     void draw2D();
 
     VertexBuffer *vbo;
-    FPS *fps;
     FontSDL *font;
 
     void assignKeyboardInputs(Game *game);

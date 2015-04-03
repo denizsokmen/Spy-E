@@ -51,8 +51,6 @@ TestGameSystem::TestGameSystem(Game *game) {
     font = new FontSDL(game->drawer);
     font->loadFont("fonts/Arial.ttf", 16);
 
-    fps = new FPS();
-
 
 }
 
@@ -60,7 +58,7 @@ void TestGameSystem::update(float dt) {
     //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
     //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 
-    font->draw(glm::vec3(20, game->height - 60, 0.0), L"FPS - %d", fps->get());
+
 
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -109,7 +107,7 @@ void TestGameSystem::update(float dt) {
 		game->quit = true;
 
     physics->getWorld()->update(dt);
-    fps->update(dt);
+
 }
 
 void TestGameSystem::assignMouseInputs(Game *game) {

@@ -18,8 +18,8 @@
 #define TICK_PER_SECOND 1000
 
 Game::Game() {
-
     controller = new SystemController();
+    fps = 0;
 }
 
 bool Game::init(int width, int height, char const *title, bool fullScreen) {
