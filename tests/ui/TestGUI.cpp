@@ -14,6 +14,7 @@
 #include <utils/FPS.h>
 #include <graphics/FontSDL.h>
 #include <graphics/ui/GUI.h>
+#include <graphics/ui/Label.h>
 #include "graphics/ui/Primitives.h"
 
 Game *game;
@@ -61,25 +62,24 @@ TestGUI::TestGUI(Game *game) {
                                    entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
-    font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf", 16);
+
 
     fps = new FPS();
 
 
     Image *image = new Image("./assets/texture/menu/logo.png");
     image->frame = Rect(game->width / 2, game->height / 2, 300, 100);
-
     game->gui->addSubview(image);
+
+    Label *label = new Label(L"HelloWorld");
+    label->frame = Rect(game->width / 2, game->height / 2, 300, 100);
+    game->gui->addSubview(label);
 
 
 }
 
 void TestGUI::update(float dt) {
-    //glm::mat4 trans = glm::translate(entity->getTransformation(), glm::vec3(dt, dt, dt));
-    //glm::mat4 trans = glm::rotate(entity->getTransformation(), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 
-    font->draw(glm::vec3(20, game->height - 60, 0.0), L"FPS - %d", fps->get());
 
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,

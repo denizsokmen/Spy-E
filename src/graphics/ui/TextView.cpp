@@ -17,7 +17,7 @@ void TextView::setText(std::string text){
     int end = 0;
 
     for(auto ch: text) {
-        textWidth += this->font->fontSDL->glyphs[ch].surface->texture->width;
+        textWidth += this->font->glyphs[ch].surface->texture->width;
         end++;
         if(textWidth == this->frame.w){
             createNewLabel(text.substr(start, end));
