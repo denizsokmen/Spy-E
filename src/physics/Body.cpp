@@ -1,4 +1,3 @@
-#include <tests/physics/TestPhysics.h>
 #include "physics/Body.h"
 
 Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){

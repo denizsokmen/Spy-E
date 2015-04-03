@@ -5,6 +5,7 @@
 #ifndef _SPYE_TESTPHYSICS_H_
 #define _SPYE_TESTPHYSICS_H_
 
+#include <iomanip>
 #include "logic/System.h"
 #include <logic/Game.h>
 #include "graphics/Mesh.h"
@@ -21,7 +22,7 @@
 #include "graphics/FontSDL.h"
 
 const float gravity = -30.0f;
-const glm::vec3 zeroVector = glm::vec3(0, 0, 0);
+const glm::vec3 zeroVector = glm::vec3(0.0f, 0.0f, 0.0f);
 
 class ShaderProgram;
 class VertexBuffer;

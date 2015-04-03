@@ -3,6 +3,8 @@
 #include <vector>
 #include "Body.h"
 
+class Body;
+
 class PhysicsWorld{
 
     std::vector<Body*> bodies;

@@ -33,6 +33,7 @@ TestPhysics::TestPhysics(Game *game){
     createBodies();
     applyGravity();
 
+
 }
 
 void TestPhysics::update(float dt) {
@@ -41,11 +42,13 @@ void TestPhysics::update(float dt) {
 
     drawFPS(dt);
 
+
+    physics->update(dt);
+
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
     setCameraProperties();
 
-    physics->update(dt);
 
 }
 
@@ -55,22 +58,24 @@ void TestPhysics::setCameraProperties() {
 
 void TestPhysics::handleKeyboardInputs(float dt) {
 
-    if (game->input->isPressed("W"))
-        b1->setSpeed(10.0f, 'z');
+
+    if (game->input->isPressed("W")){
+        b1->setAcceleration(10.0, 'z');
+    }
     else if (game->input->isPressed("S"))
-        b1->setSpeed(-10.0f, 'z');
+        b1->setAcceleration(-10.0, 'z');
     else
-        b1->setSpeed(0, 'z');
+        b1->setAcceleration(0.0, 'z');
 
     if (game->input->isPressed("A"))
-        b1->setSpeed(-10.0f, 'x');
+        b1->setAcceleration(-10.0, 'x');
     else if (game->input->isPressed("D"))
-        b1->setSpeed(10.0f, 'x');
+        b1->setAcceleration(10.0, 'x');
     else
-        b1->setSpeed(0, 'x');
+        b1->setAcceleration(0.0, 'x');
 
     if (game->input->isPressed("Space"))
-        b1->setSpeed(10.0f, 'y');
+        b1->setSpeed(10.0, 'y');
 
     if (game->input->wasReleased("Escape")) game->quit = true;
     if (game->input->isPressed("Up"))   game->scene->camera->move(0.0f, 0.0f, speed *dt);
