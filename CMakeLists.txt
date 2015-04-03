@@ -178,6 +178,8 @@ add_library(engine STATIC
     include/graphics/ui/Font.h
     tests/ui/TestGUI.cpp 
     tests/ui/TestGUI.h
+    src/graphics/Skybox.cpp
+    include/graphics/Skybox.h
     )
 
 

@@ -1,3 +1,6 @@
+#ifndef CAMERA_H_INC
+#define CAMERA_H_INC
+
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -36,3 +39,5 @@ public:
 
 
 };
+
+#endif

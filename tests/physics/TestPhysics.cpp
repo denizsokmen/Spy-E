@@ -2,6 +2,7 @@
 // Created by Enes Şenel on 13/03/15.
 //
 
+#include <graphics/Skybox.h>
 #include "TestPhysics.h"
 
 Game* game;
@@ -32,6 +33,10 @@ TestPhysics::TestPhysics(Game *game){
     assignInputs(game);
     createBodies();
     applyGravity();
+
+    skybox = new Skybox("./assets/texture/skybox/desert_right.jpg", "./assets/texture/skybox/desert_left.jpg",
+                        "./assets/texture/skybox/desert_top.jpg", "./assets/texture/skybox/desert_top.jpg",
+                        "./assets/texture/skybox/desert_front.jpg","./assets/texture/skybox/desert_back.jpg");
 
 
 }
@@ -177,7 +182,7 @@ TestPhysics::~TestPhysics(){
 }
 
 void TestPhysics::draw() {
-
+    skybox->draw(game->scene->camera);
 }
 
 void TestPhysics::draw2D() {

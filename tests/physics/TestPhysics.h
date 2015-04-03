@@ -18,7 +18,7 @@
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/Physics.h"
-#include "utils/fps.h"
+#include "utils/FPS.h"
 #include "graphics/FontSDL.h"
 
 const float gravity = -30.0f;
@@ -29,6 +29,7 @@ class VertexBuffer;
 class Game;
 class Physics;
 class Body;
+class Skybox;
 
 class TestPhysics: public System {
     Renderable* entity;
@@ -88,6 +89,8 @@ public:
     void handleKeyboardInputs(float dt);
 
     void setCameraProperties();
+
+    Skybox *skybox;
 };
 
 
