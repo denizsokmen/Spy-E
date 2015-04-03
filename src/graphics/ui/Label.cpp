@@ -10,7 +10,6 @@
 #include "graphics/Texture.h"
 #include "graphics/FontSDL.h"
 #include <glm/glm.hpp>
-#include <wchar.h>
 
 Label::Label(std::wstring text) : View() {
     this->setText(text);
@@ -19,6 +18,15 @@ Label::Label(std::wstring text) : View() {
 
 void Label::setText(std::wstring text) {
     this->text = text;
+}
+
+void Label::setText(const wchar_t *text, ...) {
+    wchar_t txt[256];
+    va_list ap;
+    va_start(ap, text);
+    vswprintf(txt, 255, text, ap);
+    va_end(ap);
+    this->text = txt;
 }
 
 void Label::setFont(const char *name, int size) {

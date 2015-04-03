@@ -35,9 +35,7 @@ public:
     EasterEgg(Game *game);
 
     void update(float dt);
-
     void draw();
-
     void init() { }
 
     ShaderProgram *generalShader;
@@ -49,7 +47,6 @@ public:
     FontSDL *font;
 
     void assignKeyboardInputs(Game *game);
-
     void assignMouseInputs(Game *game);
 };
 

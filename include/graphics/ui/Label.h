@@ -24,6 +24,7 @@ public:
     void draw();
 
 
+    void setText(wchar_t const *text, ...);
 };
 
 

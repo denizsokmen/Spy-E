@@ -40,7 +40,8 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
 
 
-    mainWindow = SDL_CreateWindow("Spy-E", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, ((fullScreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN) |SDL_WINDOW_OPENGL);
+    mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
+                                  ((fullScreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN) | SDL_WINDOW_OPENGL);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
 
     if (mainGLContext == 0) {
@@ -120,7 +121,8 @@ void Game::update() {
         isUpdated = false;
         if (deltaTime > 1000) {
             lastTime = currentTime;
-            printf("%d tick %d, fps: %f\n", tickCount, SDL_GetTicks(), 1.0f/frameTime);
+            fps = 1.0f / frameTime;
+            printf("%d tick %d, fps: %f\n", tickCount, SDL_GetTicks(), fps);
 
         }
         SDL_GL_SwapWindow(mainWindow);

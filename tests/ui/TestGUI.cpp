@@ -11,7 +11,6 @@
 #include "world/Camera.h"
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
-#include <utils/FPS.h>
 #include <graphics/FontSDL.h>
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
@@ -22,7 +21,7 @@ Game *game;
 
 int main(int argc, char *argv[]) {
     game = new Game();
-    if (game->init(640, 480, "Spy-E", false)) {
+    if (game->init(640, 480, "Spy-E - GUI Tests", false)) {
         TestGUI *test = new TestGUI(game);
         game->getController()->addCoreSystem(test);
         game->update();
@@ -65,25 +64,23 @@ TestGUI::TestGUI(Game *game) {
 
 
 
-    fps = new FPS();
+
 
 
     Image *image = new Image("./assets/texture/menu/logo.png");
-    image->frame = Rect(game->width / 2, game->height / 2, 300, 100);
+    image->frame = Rect(game->width - 140, game->height - 25, 140, 25);
     game->gui->addSubview(image);
 
-    Label *label = new Label(L"HelloWorld");
-    label->frame = Rect(game->width / 2, game->height / 2, 300, 100);
-    game->gui->addSubview(label);
+    fpsLabel = new Label(L"FPS: 0");
+    fpsLabel->frame = Rect(0, game->height - 20, 300, 100);
+    game->gui->addSubview(fpsLabel);
 
-    TextView *textView = new TextView();
-    textView->frame = Rect(30, 10, 100, 400);
-    textView->setText(L"abcabcabaasdadasdasdasdasdadasdasdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdsdasdasdasdasdasdadasdadasdaadadasdadasdasdasda");
-    game->gui->addSubview(textView);
 
 }
 
 void TestGUI::update(float dt) {
+
+    fpsLabel->setText(L"FPS: %f", game->fps);
 
 
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -130,7 +127,7 @@ void TestGUI::update(float dt) {
         game->quit = true;
 
     physicsWorld->update(dt);
-    fps->update(dt);
+
 }
 
 void TestGUI::assignMouseInputs(Game *game) {/*  Use keycodes given below for mouse input:

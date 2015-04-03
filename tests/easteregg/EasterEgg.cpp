@@ -11,7 +11,6 @@
 #include "world/Camera.h"
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
-#include <utils/FPS.h>
 #include <graphics/FontSDL.h>
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
@@ -68,12 +67,12 @@ EasterEgg::EasterEgg(Game * game) {
 
 
     Image *image = new Image("./assets/texture/easteregg/menu.png");
-    image->frame = Rect(game->width - 300, game->height - 40, 681, 81);
+    image->frame = Rect(0, game->height - 81, 681, 81);
     game->gui->addSubview(image);
 
 
     TextView *textView = new TextView();
-    textView->frame = Rect(game->width / 2, game->height / 2, 100, 400);
+    textView->frame = Rect(game->width / 2, game->height / 2, 200, 400);
     textView->setText(L"YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW");
     game->gui->addSubview(textView);
 

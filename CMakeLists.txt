@@ -156,7 +156,6 @@ add_library(engine STATIC
 	src/graphics/Drawable.cpp
 	include/graphics/Drawable.h
 	include/Constants.h
-	include/utils/FPS.h
 	src/physics/Face.cpp
 	include/physics/Face.h
 

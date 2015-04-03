@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 TestPhysics::TestPhysics(Game *game){
 
     this->game = game;
-    this->fps = new FPS();
+
 
     initializeEntities(game);
     initializeShader();
@@ -89,9 +89,8 @@ void TestPhysics::handleKeyboardInputs(float dt) {
     if (game->input->isPressed("Right"))  game->scene->camera->move(speed *dt, 0.0f, 0.0f);
 }
 
-void TestPhysics::drawFPS(float dt) {
-    font->draw(glm::vec3(20, game->height-60, 0.0), L"FPS - %d", fps->get());
-    fps->update(dt);
+void TestPhysics::drawFPS() {
+    font->draw(glm::vec3(20, game->height - 60, 0.0), L"FPS: %f", game->fps);
 }
 
 void TestPhysics::handleMouseInputs(SDL_Window *window) {

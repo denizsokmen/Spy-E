@@ -14,7 +14,6 @@
 #include "sound/SoundManager.h"
 #include "graphics/Shader.h"
 #include "world/Camera.h"
-#include "utils/FPS.h"
 
 float horizontalAngle = 3.14f;
 float verticalAngle = 0.0f;

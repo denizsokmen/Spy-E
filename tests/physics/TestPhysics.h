@@ -18,7 +18,6 @@
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/Physics.h"
-#include "utils/FPS.h"
 #include "graphics/FontSDL.h"
 
 const float gravity = -30.0f;
@@ -54,7 +53,9 @@ public:
     Body *floorBody;
 
     FontSDL* font;
-    FPS* fps;
+    Skybox *skybox;
+    VertexBuffer *vbo;
+    ShaderProgram *generalShader;
 
     TestPhysics(Game *game);
     ~TestPhysics();
@@ -62,35 +63,20 @@ public:
     void update(float dt);
     void draw();
 	void init() {}
-
-    ShaderProgram *generalShader;
-
     void draw2D();
-    VertexBuffer *vbo;
 
     void assignInputs(Game *game);
-
     void initializeEntities(Game *game);
-
     void initializeShader();
-
     void initializeCamera(Game *game);
-
     void createBodies();
-
     void initializeFonts(Game *game);
-
     void applyGravity();
-
     void handleMouseInputs(SDL_Window *window);
-
-    void drawFPS(float dt);
-
     void handleKeyboardInputs(float dt);
-
     void setCameraProperties();
 
-    Skybox *skybox;
+    void drawFPS();
 };
 
 

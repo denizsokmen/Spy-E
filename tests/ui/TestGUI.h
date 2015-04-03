@@ -10,45 +10,37 @@
 #include "physics/Body.h"
 
 class Entity;
-
 class Game;
-
 class Renderable;
-
 class ShaderProgram;
-
 class VertexBuffer;
 
-class FPS;
-
+class Label;
 class FontSDL;
 
 class TestGUI : public System {
+
+
     Renderable *entity;
     Game *game;
+
+private:
+    Label *fpsLabel;
 
 public:
     PhysicsWorld *physicsWorld;
     Body *box;
-
-    TestGUI(Game *game);
-
-    void update(float dt);
-
-    void draw();
-
-    void init() { }
-
+    VertexBuffer *vbo;
+    FontSDL *font;
     ShaderProgram *generalShader;
 
+    TestGUI(Game *game);
+    void update(float dt);
+    void draw();
+    void init() { }
     void draw2D();
 
-    VertexBuffer *vbo;
-    FPS *fps;
-    FontSDL *font;
-
     void assignKeyboardInputs(Game *game);
-
     void assignMouseInputs(Game *game);
 };
 
