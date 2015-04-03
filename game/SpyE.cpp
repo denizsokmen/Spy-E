@@ -16,6 +16,7 @@
 
 SpyE::SpyE(Game *game) {
     this->game = game;
+	active = false;
 }
 
 void SpyE::init() {

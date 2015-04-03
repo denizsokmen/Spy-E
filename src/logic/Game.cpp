@@ -94,6 +94,7 @@ void Game::update() {
     unsigned long lastTime = SDL_GetTicks();
     int tickCount = 0;
     bool isUpdated = false;
+	float frameTime = 0.0f, tempTime = 0.0f;
 
     while(!quit) {
         unsigned long currentTime = SDL_GetTicks();
@@ -107,16 +108,20 @@ void Game::update() {
         }
         timer->endLoop();
 
+		frameTime = ((float)(SDL_GetTicks() - tempTime)) / 1000.0f;
+		tempTime = SDL_GetTicks();
+
 		if (isUpdated) {
 			controller->draw();
+			controller->draw2D();
 		}
 
-        controller->draw2D();
 
         isUpdated = false;
         if (deltaTime > 1000) {
             lastTime = currentTime;
-            printf("%d tick %d\n", tickCount, SDL_GetTicks());
+            printf("%d tick %d, fps: %f\n", tickCount, SDL_GetTicks(), 1.0f/frameTime);
+
         }
         SDL_GL_SwapWindow(mainWindow);
     }

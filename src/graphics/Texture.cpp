@@ -4,7 +4,7 @@
 
 #include <SDL_image.h>
 #include "graphics/Texture.h"
-
+#include <stdio.h>
 
 void Texture::createFromSDL(SDL_Surface *surface) {
     if (surface == NULL) {

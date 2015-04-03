@@ -41,7 +41,7 @@ void TextView::draw() {
 void TextView::splitText() {
     this->setFont(getSystem()->font);
 
-    float textWidth;
+    float textWidth = 0.0f;
     int start = 0;
     int end = 0;
     numberOfLines = 0;
