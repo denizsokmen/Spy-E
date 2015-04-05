@@ -70,7 +70,7 @@ int Sounds::find_source_by_name(char *sound_name) {
 }
 
 Sounds::Sounds() {
-   // For deleting all the buffers at once
+   /* For deleting all the buffers at once
 
       this->number_of_sounds = number_of_sounds;
       sounds = (sound*) malloc(number_of_sounds);
@@ -78,7 +78,7 @@ Sounds::Sounds() {
       sound_buffers = (ALuint*) malloc(number_of_sounds);
       sound_sources = (ALuint*) malloc(number_of_sounds);
 
-      current_context = alcGetCurrentContext();   
+      current_context = alcGetCurrentContext();
       current_device = alcGetContextsDevice(current_context); */
 
    // Initiating OpenAL 
@@ -111,10 +111,7 @@ Sounds::~Sounds() {
 }
 
 int Sounds::load(char *name, char *file_name) {
-   number_of_sounds++;
-   sounds.resize(number_of_sounds);
 
-int SoundManager::load(char* name, char* file_name){
 /*                  ALUT Version                  */     
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
