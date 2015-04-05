@@ -11,7 +11,7 @@
 #include "world/Camera.h"
 #include <world/WorldLoader.h>
 #include <graphics/Shader.h>
-#include <graphics/FontSDL.h>
+
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
 #include "sound/Sounds.h"

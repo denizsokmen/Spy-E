@@ -48,9 +48,6 @@ TestGameSystem::TestGameSystem(Game *game) {
     box = physics->getWorld()->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
-    font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf", 16);
-
 
 }
 

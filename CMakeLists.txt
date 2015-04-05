@@ -110,7 +110,6 @@ add_library(engine STATIC
 	include/graphics/SubMesh.h
 	include/graphics/Renderer.h
 	include/graphics/Texture.h
-	include/graphics/FontSDL.h
 	include/graphics/Material.h
 
 	include/input/Input.h
@@ -148,7 +147,7 @@ add_library(engine STATIC
 	include/sound/Sounds.h
 
 	src/graphics/Texture.cpp
-	src/graphics/FontSDL.cpp
+
 	src/graphics/Material.cpp
 	src/graphics/Drawer.cpp
 
@@ -222,6 +221,15 @@ add_executable(easteregg
 )
 
 target_link_libraries(easteregg engine)
+
+
+add_executable(testmenu
+	tests/ui/TestMenu.cpp
+	tests/ui/TestMenu.h
+)
+
+target_link_libraries(testmenu engine)
+
 
 add_executable(game
 	game/main.cpp

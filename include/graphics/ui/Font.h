@@ -1,13 +1,25 @@
 #ifndef SPYE_FONT_H
 #define SPYE_FONT_H
 
-#include <graphics/FontSDL.h>
+#include <vector>
+#include <glm/glm.hpp>
 
-class Glyph;
+class Drawable;
+
+class Glyph {
+
+public:
+    int code;
+    int minx, maxx;
+    int miny, maxy;
+    int advance;
+    Drawable *surface;
+    int usecount;
+    glm::vec2 offset;
+};
+
 
 class Font {
-
-
 
 public:
     Glyph glyphs[256];

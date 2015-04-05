@@ -4,6 +4,9 @@
 
 #include <graphics/Skybox.h>
 #include "TestPhysics.h"
+#include "graphics/ui/Label.h"
+#include "graphics/ui/Primitives.h"
+#include "graphics/ui/GUI.h"
 
 Game* game;
 
@@ -29,7 +32,7 @@ TestPhysics::TestPhysics(Game *game){
     initializeEntities(game);
     initializeShader();
     initializeCamera(game);
-    initializeFonts(game);
+
     assignInputs(game);
     createBodies();
     applyGravity();
@@ -39,22 +42,22 @@ TestPhysics::TestPhysics(Game *game){
                         "./assets/texture/skybox/desert_front.jpg","./assets/texture/skybox/desert_back.jpg");
 
 
+    fpsLabel = new Label(L"FPS: 0");
+    fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
+    game->gui->addSubview(fpsLabel);
 }
 
 void TestPhysics::update(float dt) {
 
     SDL_Window *window = game->input->mainWindow;
 
-    drawFPS();
 
+    fpsLabel->setText(L"FPS: %f", game->fps);
 
-    //physics->update(dt);
 
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
     setCameraProperties();
-
-
 }
 
 void TestPhysics::setCameraProperties() {
@@ -89,9 +92,6 @@ void TestPhysics::handleKeyboardInputs(float dt) {
     if (game->input->isPressed("Right"))  game->scene->camera->move(speed *dt, 0.0f, 0.0f);
 }
 
-void TestPhysics::drawFPS() {
-    font->draw(glm::vec3(20, game->height - 60, 0.0), L"FPS: %f", game->fps);
-}
 
 void TestPhysics::handleMouseInputs(SDL_Window *window) {
     double mouseX = game->input->getMouse()->mouseX;
@@ -110,10 +110,6 @@ void TestPhysics::applyGravity() {
 
 }
 
-void TestPhysics::initializeFonts(Game *game) {
-    font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf", 16);
-}
 
 void TestPhysics::createBodies() {
     this->physics = game->physics;

@@ -18,7 +18,6 @@
 #include "world/Camera.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/Physics.h"
-#include "graphics/FontSDL.h"
 
 const float gravity = -30.0f;
 const glm::vec3 zeroVector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -30,6 +29,8 @@ class Physics;
 class Body;
 class Skybox;
 
+class Label;
+
 class TestPhysics: public System {
     Renderable* entity;
     Renderable* entity2;
@@ -37,6 +38,7 @@ class TestPhysics: public System {
     Renderable* entity4;
     Renderable* floor;
     Game *game;
+    Label *fpsLabel;
 
 public:
 
@@ -52,7 +54,6 @@ public:
     Body *b4;
     Body *floorBody;
 
-    FontSDL* font;
     Skybox *skybox;
     VertexBuffer *vbo;
     ShaderProgram *generalShader;
@@ -70,13 +71,12 @@ public:
     void initializeShader();
     void initializeCamera(Game *game);
     void createBodies();
-    void initializeFonts(Game *game);
     void applyGravity();
     void handleMouseInputs(SDL_Window *window);
     void handleKeyboardInputs(float dt);
     void setCameraProperties();
 
-    void drawFPS();
+
 };
 
 
