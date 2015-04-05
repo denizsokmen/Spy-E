@@ -14,6 +14,7 @@
 #include <graphics/FontSDL.h>
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
+#include "sound/Sounds.h"
 #include "graphics/ui/TextView.h"
 #include "graphics/ui/Primitives.h"
 
@@ -68,12 +69,16 @@ TestGUI::TestGUI(Game *game) {
 
 
     Image *image = new Image("./assets/texture/menu/logo.png");
-    image->frame = Rect(game->width - 140, game->height - 25, 140, 25);
+    image->setFrame(Rect(game->width - 140, game->height - 25, 140, 25));
     game->gui->addSubview(image);
 
     fpsLabel = new Label(L"FPS: 0");
-    fpsLabel->frame = Rect(0, game->height - 20, 300, 100);
+    fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     game->gui->addSubview(fpsLabel);
+
+
+    game->sounds->open("asd", "assets/sounds/0x1b.wav");
+    game->sounds->play("asd");
 
 
 }

@@ -11,6 +11,13 @@
 #include "graphics/FontSDL.h"
 #include <glm/glm.hpp>
 
+
+Label::Label() : View() {
+    this->setText(L"");
+    this->font;
+}
+
+
 Label::Label(std::wstring text) : View() {
     this->setText(text);
     this->font = NULL;
@@ -84,5 +91,4 @@ void Label::draw() {
 
 
 }
-
 

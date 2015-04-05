@@ -24,3 +24,7 @@ void View::setSystem(GUI *system) {
 GUI *View::getSystem() {
     return this->system;
 }
+
+void View::setFrame(Rect frame) {
+    this->frame = frame;
+}

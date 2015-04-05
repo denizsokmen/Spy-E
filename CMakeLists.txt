@@ -99,8 +99,8 @@ add_library(engine STATIC
 	src/input/KeyboardButtonHandler.cpp
 	src/input/MouseButtonHandler.cpp
 	src/input/Mouse.cpp
-	src/sound/SoundManager.cpp
-	include/sound/SoundManager.h
+	src/sound/Sounds.cpp
+	include/sound/Sounds.h
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
@@ -144,8 +144,8 @@ add_library(engine STATIC
 	include/utils/rapidxml_utils.hpp
 	include/world/WorldLoader.h
 
-	src/sound/SoundManager.cpp
-	include/sound/SoundManager.h
+	src/sound/Sounds.cpp
+	include/sound/Sounds.h
 
 	src/graphics/Texture.cpp
 	src/graphics/FontSDL.cpp
@@ -179,7 +179,8 @@ add_library(engine STATIC
     tests/ui/TestGUI.h
     src/graphics/Skybox.cpp
     include/graphics/Skybox.h
-    )
+    src/graphics/ui/Menu.cpp
+    include/graphics/ui/Menu.h)
 
 
 target_link_libraries(engine

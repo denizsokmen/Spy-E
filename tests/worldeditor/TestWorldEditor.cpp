@@ -11,7 +11,7 @@
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
-#include "sound/SoundManager.h"
+#include "Sounds.h"
 #include "graphics/Shader.h"
 #include "world/Camera.h"
 

@@ -14,6 +14,7 @@
 #include "input/Input.h"
 #include "logic/Game.h"
 #include "graphics/ui/GUI.h"
+#include "sound/Sounds.h"
 #include "logic/SystemController.h"
 #define TICK_PER_SECOND 1000
 
@@ -67,23 +68,23 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 		printf("IMG_Init: %s\n", IMG_GetError());
 	}
 
-    scene = new Scene();
-    input = new Input(mainWindow);
-    drawer = new Drawer(this);
-    gui = new GUI(drawer);
-    physics = new Physics();
+    this->scene = new Scene();
+    this->input = new Input(this->mainWindow);
+    this->drawer = new Drawer(this);
+    this->gui = new GUI(this->drawer);
+    this->physics = new Physics();
+    this->sounds = new Sounds();
 
+    this->controller->addCoreSystem(input);
+    this->controller->addCoreSystem(scene);
+    this->controller->addCoreSystem(drawer);
+    this->controller->addCoreSystem(gui);
+    this->controller->addCoreSystem(physics);
+    this->controller->addCoreSystem(sounds);
 
-    controller->addCoreSystem(input);
-    controller->addCoreSystem(scene);
-    controller->addCoreSystem(drawer);
-    controller->addCoreSystem(gui);
-    controller->addCoreSystem(physics);
+    this->controller->init();
 
-
-    controller->init();
-
-    timer = new Timer(TICK_PER_SECOND);
+    this->timer = new Timer(TICK_PER_SECOND);
 
 
 
@@ -130,6 +131,8 @@ void Game::update() {
 }
 
 void Game::end() {
+    delete sounds;
+
     SDL_GL_DeleteContext(mainGLContext);
     SDL_DestroyWindow(mainWindow);
     SDL_Quit();

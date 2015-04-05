@@ -8,13 +8,14 @@ struct GLFWwindow;
 
 class Scene;
 class Input;
+
 class Timer;
 class SystemController;
 class Drawer;
 class Physics;
-
 class GUI;
 
+class Sounds;
 class Game {
 
 private:
@@ -47,6 +48,8 @@ public:
     Timer *timer;
     Scene *scene;
     Input *input;
+    Sounds *sounds;
+
     SDL_Window *mainWindow;
     SDL_GLContext mainGLContext;
     GUI *gui;

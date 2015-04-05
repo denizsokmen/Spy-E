@@ -15,6 +15,7 @@ private:
     Font *font;
 
 public:
+    Label();
     Label(std::wstring text);
     void setText(std::wstring text);
 

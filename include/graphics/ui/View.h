@@ -13,21 +13,22 @@ class Image;
 
 class View {
 
+protected:
+    Rect frame = Rect(0, 0, 0, 0);
+
 private:
     GUI *system;
 
 public:
     std::vector<View *> subViews;
-    Rect frame = Rect(0, 0, 0, 0);
     Color color = Color(0, 0, 0);
     Image *backgroundImage;
-
     GUI *getSystem();
 
     void setSystem(GUI *system);
-
     void addSubview(View *view);
 
+    virtual void setFrame(Rect frame);
     virtual void draw();
 };
 

@@ -11,6 +11,10 @@
 #include <graphics/ui/GUI.h>
 
 
+Image::Image() : View() {
+    this->drawable = NULL;
+}
+
 Image::Image(std::string name) : View() {
     Texture *texture = new Texture();
     printf("[GUI] Loading image: %s \n", name.c_str());
@@ -19,20 +23,20 @@ Image::Image(std::string name) : View() {
 }
 
 Image::Image(Texture *texture) : View() {
-
     this->drawable = new Drawable(texture);
-}
-
-Image::~Image() {
-    delete this->drawable;
 }
 
 void Image::draw() {
     View::draw();
-    glm::vec2 position(this->frame.x, this->frame.y);
-    glm::vec2 size(this->frame.w, this->frame.h);
-    GUI *gui = this->getSystem();
-    Drawer *drawer = gui->drawer;
-    drawer->draw(this->drawable, position, size);
+    if (this->drawable != NULL) {
+        glm::vec2 position(this->frame.x, this->frame.y);
+        glm::vec2 size(this->frame.w, this->frame.h);
+        GUI *gui = this->getSystem();
+        Drawer *drawer = gui->drawer;
+        drawer->draw(this->drawable, position, size);
+    }
+}
 
+Image::~Image() {
+    delete this->drawable;
 }

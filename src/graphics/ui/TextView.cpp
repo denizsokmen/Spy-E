@@ -4,7 +4,7 @@
 #include "graphics/ui/Label.h"
 #include "graphics/ui/GUI.h"
 
-TextView::TextView() {
+TextView::TextView() : View() {
     isTextSplitted = false;
 }
 
@@ -21,7 +21,7 @@ void TextView::createNewLabel(std::wstring text) {
     Label *newLabel = new Label(text);
     float height = this->font->glyphs[12].surface->texture->height * numberOfLines;
     numberOfLines++;
-    newLabel->frame = Rect(this->frame.x, this->frame.y + height, this->frame.w, this->frame.h);
+    newLabel->setFrame(Rect(this->frame.x, this->frame.y + height, this->frame.w, this->frame.h));
     this->addSubview(newLabel);
 }
 

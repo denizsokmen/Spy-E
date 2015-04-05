@@ -7,17 +7,18 @@
 
 /* Header file for Sound Manager class */
 
-#ifndef SOUNDMANAGER_H
-#define SOUNDMANAGER_H
+#ifndef SOUNDS_H
+#define SOUNDS_H
 
 #include <AL/al.h>
 #include <AL/alc.h>
 
 #include <vector>
+#include <logic/System.h>
 
 #define S_NAME_CHAR_LIM 200
 
-class SoundManager{
+class Sounds : public System {
    private:
 
       struct sound{
@@ -61,9 +62,10 @@ class SoundManager{
 
 #pragma pack(pop)
 
-   public:   
-      SoundManager();
-      ~SoundManager();
+public:
+   Sounds();
+
+   ~Sounds();
 
       int  open(char* file_name);
       int  open(char* sound_name, char* file_name);
@@ -71,6 +73,14 @@ class SoundManager{
       void play(char* sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
+
+   void init() { }
+
+   void update(float dt) { }
+
+   void draw() { }
+
+   void draw2D() { }
 };
 
 #endif

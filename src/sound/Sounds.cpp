@@ -21,7 +21,7 @@
 #include <AL/alc.h>
 #include <AL/alext.h>
 
-#include "sound/SoundManager.h"
+#include "sound/Sounds.h"
 
 #define NO_NAME "NONAME"
 
@@ -57,7 +57,7 @@ bool check_wave_riff(char* data_t, char* WAVE_t){
    return ifWAVEriff;
 }
 
-int SoundManager::find_source_by_name(char* sound_name){
+int Sounds::find_source_by_name(char *sound_name) {
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
@@ -69,7 +69,7 @@ int SoundManager::find_source_by_name(char* sound_name){
    }
 }
 
-SoundManager::SoundManager() {	
+Sounds::Sounds() {
    // For deleting all the buffers at once
 
    // this->number_of_sounds = number_of_sounds;
@@ -98,7 +98,7 @@ SoundManager::SoundManager() {
          printf("%s\n", alutGetErrorString(error)); */
 }
 
-SoundManager::~SoundManager(){
+Sounds::~Sounds() {
    alcMakeContextCurrent(NULL);
 
    alcDestroyContext(current_context);
@@ -115,7 +115,7 @@ SoundManager::~SoundManager(){
    }
 }
 
-int SoundManager::load(char* name, char* file_name){
+int Sounds::load(char *name, char *file_name) {
    number_of_sounds++;
    sounds.resize(number_of_sounds);
 
@@ -194,29 +194,29 @@ int SoundManager::load(char* name, char* file_name){
 
 }
 
-int SoundManager::open(char* file_name){
+int Sounds::open(char *file_name) {
    return load(NO_NAME,file_name);
 }
 
-int SoundManager::open(char* sound_name, char* file_name){
+int Sounds::open(char *sound_name, char *file_name) {
    return load(sound_name, file_name);
 }
 
-void SoundManager::play(ALuint sound){
+void Sounds::play(ALuint sound) {
    alSourcePlay(sound);
 }
 
-void SoundManager::play(char* sound_name){
+void Sounds::play(char *sound_name) {
    alSourcePlay(find_source_by_name(sound_name));
 }
 
-void SoundManager::loop(ALuint sound, bool do_loop){
+void Sounds::loop(ALuint sound, bool do_loop) {
    if(do_loop)
       alSourcei(sound, AL_LOOPING,  AL_TRUE);
    else
       alSourcei(sound, AL_LOOPING,  AL_FALSE);
 }
 
-void SoundManager::stop(ALuint sound){
+void Sounds::stop(ALuint sound) {
    alSourceStop(sound);
 }
