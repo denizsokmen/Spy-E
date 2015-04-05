@@ -48,7 +48,7 @@ void TestPhysics::update(float dt) {
     drawFPS();
 
 
-    physics->update(dt);
+    //physics->update(dt);
 
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
@@ -116,7 +116,7 @@ void TestPhysics::initializeFonts(Game *game) {
 }
 
 void TestPhysics::createBodies() {
-    this->physics = new Physics();
+    this->physics = game->physics;
     b1 = physics->getWorld()->createBody(&entity->position, zeroVector, zeroVector, entity->getVertexBuffer()->vertexList);
     b2 = physics->getWorld()->createBody(&entity2->position, zeroVector, zeroVector, entity2->getVertexBuffer()->vertexList);
     b3 = physics->getWorld()->createBody(&entity3->position, zeroVector, zeroVector, entity3->getVertexBuffer()->vertexList);

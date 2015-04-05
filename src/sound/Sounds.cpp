@@ -72,19 +72,14 @@ int Sounds::find_source_by_name(char *sound_name) {
 Sounds::Sounds() {
    // For deleting all the buffers at once
 
-   // this->number_of_sounds = number_of_sounds;
-   // sounds = (sound*) malloc(number_of_sounds);
+      this->number_of_sounds = number_of_sounds;
+      sounds = (sound*) malloc(number_of_sounds);
 
-   /* sound_buffers = (ALuint*) malloc(number_of_sounds);
-      sound_sources = (ALuint*) malloc(number_of_sounds); */
+      sound_buffers = (ALuint*) malloc(number_of_sounds);
+      sound_sources = (ALuint*) malloc(number_of_sounds);
 
-   number_of_sounds = 0;
-   current_sound    = 0;
-
-   sounds.reserve(number_of_sounds);  
-
-/* current_context = alcGetCurrentContext();   
-   current_device = alcGetContextsDevice(current_context); */
+      current_context = alcGetCurrentContext();   
+      current_device = alcGetContextsDevice(current_context); */
 
    // Initiating OpenAL 
    current_device = alcOpenDevice(NULL);                                            
@@ -109,7 +104,7 @@ Sounds::~Sounds() {
    /* alDeleteSources(number_of_sounds, sound_sources);
       alDeleteBuffers(number_of_sounds, sound_buffers);*/
    
-   for(unsigned int c = 0; c<sounds.size(); c++){
+   for(int c = 0; c<sounds.size(); c++){
        alDeleteSources(1,&sounds[c].source);
        alDeleteBuffers(1,&sounds[c].buffer);
    }
@@ -119,12 +114,15 @@ int Sounds::load(char *name, char *file_name) {
    number_of_sounds++;
    sounds.resize(number_of_sounds);
 
+int SoundManager::load(char* name, char* file_name){
 /*                  ALUT Version                  */     
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
 
    FILE *file_ptr;
    file_ptr = fopen(file_name,"rb");
+
+   sound c_sound; // rel
 
    if (file_ptr) 
    { 
@@ -134,9 +132,7 @@ int Sounds::load(char *name, char *file_name) {
       ALenum format = get_format(sound_file->bits_per_sample, 
                                  sound_file->channels);
 
-
-   /* File chuck check */
-
+   /* File chunk check */
    check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
    /*   
       printf("------------- INFO -------------    \n");
@@ -158,15 +154,15 @@ int Sounds::load(char *name, char *file_name) {
       
       ALuint freq = sound_file->sample_rate; // as unsigned int of OpenAL
                                           
-      alGenBuffers(1, &sounds[current_sound].buffer);
-      alGenSources(1, &sounds[current_sound].source);
+      alGenBuffers(1, &c_sound.buffer);
+      alGenSources(1, &c_sound.source);
      
       // If there is a problem with generating Source
       if(alGetError() != AL_NO_ERROR){ 
          printf("Couldn't Generate Source! (alGenSource/s()) \n");
       } 
         
-      alBufferData(sounds[current_sound].buffer, 
+      alBufferData(c_sound.buffer, 
                    format,
                    data, 
                    sound_file->data_size,
@@ -181,13 +177,13 @@ int Sounds::load(char *name, char *file_name) {
       } 
       
       // Linking Source
-      alSourcei(sounds[current_sound].source, AL_BUFFER, 
-                sounds[current_sound].buffer);
+      alSourcei(c_sound.source, AL_BUFFER, 
+                c_sound.buffer);
          
-      strncpy(sounds[current_sound].name,name,sizeof(name));
-   
+      strncpy(c_sound.name,name,sizeof(name));
+      sounds.push_back(c_sound);
 
-      return sounds[current_sound].source;
+      return c_sound.source;
    }else{printf("Couldn't Find File! (fopen()) \n");}
    // a function is needed for giving errors.
    // ? what to return here
