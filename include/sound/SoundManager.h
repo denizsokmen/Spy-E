@@ -21,7 +21,7 @@ class SoundManager{
    private:
 
       struct sound{
-         char  name[200];
+         char  name[S_NAME_CHAR_LIM];
          ALuint buffer;
          ALuint source;
       };
@@ -31,9 +31,6 @@ class SoundManager{
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
-
-      int number_of_sounds;
-      int current_sound;
 
       ALCdevice *current_device;
       ALCcontext *current_context;
