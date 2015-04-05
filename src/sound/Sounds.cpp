@@ -57,11 +57,11 @@ bool check_wave_riff(char* data_t, char* WAVE_t){
    return ifWAVEriff;
 }
 
-int Sounds::find_source_by_name(char *sound_name) {
+int Sounds::find_source_by_name(std::string sound_name) {
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
-      if(strcmp(sounds[c].name, sound_name) == 0){
+      if(!(sounds[c].name != sound_name)){
          return (sounds[c].source);
       }else{
          // Need to add error function here!
@@ -110,14 +110,14 @@ Sounds::~Sounds() {
    }
 }
 
-int Sounds::load(char *name, char *file_name) {
+int Sounds::load(std::string name, std::string file_name) {
 
 /*                  ALUT Version                  */     
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
 
    FILE *file_ptr;
-   file_ptr = fopen(file_name,"rb");
+   file_ptr = fopen(file_name.data(),"rb");
 
    sound c_sound; // rel
 
@@ -177,7 +177,7 @@ int Sounds::load(char *name, char *file_name) {
       alSourcei(c_sound.source, AL_BUFFER, 
                 c_sound.buffer);
          
-      strncpy(c_sound.name,name,sizeof(name));
+      c_sound.name = name;
       sounds.push_back(c_sound);
 
       return c_sound.source;
@@ -187,11 +187,11 @@ int Sounds::load(char *name, char *file_name) {
 
 }
 
-int Sounds::open(char *file_name) {
+int Sounds::open(std::string file_name) {
    return load(NO_NAME,file_name);
 }
 
-int Sounds::open(char *sound_name, char *file_name) {
+int Sounds::open(std::string sound_name,std::string file_name) {
    return load(sound_name, file_name);
 }
 
@@ -199,7 +199,7 @@ void Sounds::play(ALuint sound) {
    alSourcePlay(sound);
 }
 
-void Sounds::play(char *sound_name) {
+void Sounds::play(std::string sound_name) {
    alSourcePlay(find_source_by_name(sound_name));
 }
 

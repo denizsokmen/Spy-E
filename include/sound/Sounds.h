@@ -22,7 +22,7 @@ class Sounds : public System {
    private:
 
       struct sound{
-         char  name[S_NAME_CHAR_LIM];
+         std::string name;
          ALuint buffer;
          ALuint source;
       };
@@ -36,8 +36,8 @@ class Sounds : public System {
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(char* name, char* file_name);
-      int find_source_by_name(char* sound_name);
+      int load(std::string name, std::string file_name);
+      int find_source_by_name(std::string sound_name);
 
 #pragma pack(push,1)
 
@@ -64,20 +64,17 @@ public:
 
    ~Sounds();
 
-      int  open(char* file_name);
-      int  open(char* sound_name, char* file_name);
+      int  open(std::string file_name);
+      int  open(std::string sound_name, std::string file_name);
       void play(ALuint sound);
-      void play(char* sound_name);
+      void play(std::string sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
-
-   void init() { }
-
-   void update(float dt) { }
-
-   void draw() { }
-
-   void draw2D() { }
+      //system.h
+      void init() { }
+      void update(float dt) { }
+      void draw() { }
+      void draw2D() { }
 };
 
 #endif
