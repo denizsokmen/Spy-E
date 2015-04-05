@@ -16,6 +16,7 @@
 #include <graphics/ui/Label.h>
 #include "graphics/ui/TextView.h"
 #include "graphics/ui/Primitives.h"
+#include "sound/Sounds.h"
 
 Game *game;
 
@@ -66,14 +67,17 @@ EasterEgg::EasterEgg(Game * game) {
 
 
     Image *image = new Image("./assets/texture/easteregg/menu.png");
-    image->frame = Rect(0, game->height - 81, 681, 81);
+    image->setFrame(Rect(0, game->height - 81, 681, 81));
     game->gui->addSubview(image);
 
 
     TextView *textView = new TextView();
-    textView->frame = Rect(game->width / 2, game->height / 2, 200, 400);
+    textView->setFrame(Rect(game->width / 2, game->height / 2, 200, 400));
     textView->setText(L"YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW");
     game->gui->addSubview(textView);
+
+    game->sounds->open("doom", "assets/sounds/doom.wav");
+    game->sounds->play("doom");
 
 }
 

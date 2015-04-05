@@ -11,7 +11,7 @@
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
-#include "Sounds.h"
+#include "sound/Sounds.h"
 #include "graphics/Shader.h"
 #include "world/Camera.h"
 
@@ -86,9 +86,9 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
-    manager = new SoundManager();
-	manager->open("asd","assets/sounds/0x1b.wav");
-    manager->play("asd");
+
+    game->sounds->open("asd", "assets/sounds/0x1b.wav");
+    game->sounds->play("asd");
 
     font = new FontSDL(game->drawer);
     font->loadFont("fonts/Arial.ttf", 16);
@@ -141,7 +141,6 @@ void WorldEditorSystem::update(float dt) {
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit) {
-        delete manager;
         game->quit = true;
     }
 

@@ -18,7 +18,6 @@ class FontSDL;
 class WorldEditorSystem: public System {
 
     Game *game;
-    SoundManager *manager;
 
 public:
     WorldEditorSystem(Game *game);
