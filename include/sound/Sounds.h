@@ -16,19 +16,17 @@
 #include <vector>
 #include <logic/System.h>
 
-using namespace std;
-
 class Sounds : public System {
    private:
 
       struct sound{
-         string name;
+         std::string name;
          ALuint buffer;
          ALuint source;
       };
 
       //sound *sounds;
-      vector<sound> sounds;
+      std::vector<sound> sounds;
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
@@ -36,8 +34,8 @@ class Sounds : public System {
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(const string name, const string file_name);
-      int find_source_by_name(const string sound_name);
+      int load(const std::string name, const std::string file_name);
+      int find_source_by_name(const std::string sound_name);
 
 #pragma pack(push,1)
 
@@ -61,20 +59,19 @@ class Sounds : public System {
 
 public:
    Sounds();
+  ~Sounds();
 
-   ~Sounds();
-
-      int  open(const string file_name);
-      int  open(const string sound_name, const string file_name);
+      int  open(const std::string file_name);
+      int  open(const std::string sound_name, const std::string file_name);
       void play(ALuint sound);
-      void play(const string sound_name);
+      void play(const std::string sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
       //system.h
-      void init() { }
-      void update(float dt) { }
-      void draw() { }
-      void draw2D() { }
+      void init(){}
+      void update(float dt){}
+      void draw(){}
+      void draw2D(){}
 };
 
 #endif
