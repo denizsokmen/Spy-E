@@ -57,7 +57,7 @@ bool check_wave_riff(char* data_t, char* WAVE_t){
    return ifWAVEriff;
 }
 
-int Sounds::find_source_by_name(std::string sound_name) {
+int Sounds::find_source_by_name(const string sound_name) {
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
@@ -110,7 +110,7 @@ Sounds::~Sounds() {
    }
 }
 
-int Sounds::load(std::string name, std::string file_name) {
+int Sounds::load(const string name, const string file_name) {
 
 /*                  ALUT Version                  */     
 
@@ -130,7 +130,7 @@ int Sounds::load(std::string name, std::string file_name) {
                                  sound_file->channels);
 
    /* File chunk check */
-   check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
+      check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
    /*   
       printf("------------- INFO -------------    \n");
       printf("FORMAT TYPE :              %d       \n", sound_file->format_type);
@@ -187,11 +187,11 @@ int Sounds::load(std::string name, std::string file_name) {
 
 }
 
-int Sounds::open(std::string file_name) {
+int Sounds::open(const string file_name) {
    return load(NO_NAME,file_name);
 }
 
-int Sounds::open(std::string sound_name,std::string file_name) {
+int Sounds::open(const string sound_name,const string file_name) {
    return load(sound_name, file_name);
 }
 
@@ -199,7 +199,7 @@ void Sounds::play(ALuint sound) {
    alSourcePlay(sound);
 }
 
-void Sounds::play(std::string sound_name) {
+void Sounds::play(const string sound_name) {
    alSourcePlay(find_source_by_name(sound_name));
 }
 

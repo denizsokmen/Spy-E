@@ -16,19 +16,19 @@
 #include <vector>
 #include <logic/System.h>
 
-#define S_NAME_CHAR_LIM 200
+using namespace std;
 
 class Sounds : public System {
    private:
 
       struct sound{
-         std::string name;
+         string name;
          ALuint buffer;
          ALuint source;
       };
 
       //sound *sounds;
-      std::vector<sound> sounds;
+      vector<sound> sounds;
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
@@ -36,8 +36,8 @@ class Sounds : public System {
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(std::string name, std::string file_name);
-      int find_source_by_name(std::string sound_name);
+      int load(const string name, const string file_name);
+      int find_source_by_name(const string sound_name);
 
 #pragma pack(push,1)
 
@@ -64,10 +64,10 @@ public:
 
    ~Sounds();
 
-      int  open(std::string file_name);
-      int  open(std::string sound_name, std::string file_name);
+      int  open(const string file_name);
+      int  open(const string sound_name, const string file_name);
       void play(ALuint sound);
-      void play(std::string sound_name);
+      void play(const string sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
       //system.h
