@@ -3,7 +3,6 @@
 //
 
 #include <logic/Game.h>
-#include "graphics/FontSDL.h"
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/ObjLoader.h"
