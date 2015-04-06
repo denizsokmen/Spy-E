@@ -84,11 +84,11 @@ public:
       /* Functions can be used for a single listener according to human nature */
       /* Position and velocity of sound independent variables                  */
       void set_listener_velocity(ALfloat x, ALfloat y, ALfloat z);
-      void set_listener_position(ALfloat x, ALfloat y, ALfloat z);
+      void setListenerPosition(ALfloat x, ALfloat y, ALfloat z);
     // void set_listener_orientation(ALfloat listener_position[4]);
       
       void set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
-      void set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
+      void setSourcePosition(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
       //system.h
       void init(){}
       void update(float dt){}
