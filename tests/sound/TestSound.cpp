@@ -69,6 +69,8 @@ SoundSystem::SoundSystem(Game *game){
     game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
     game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
     game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
+    game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
+    game->input->mapButton("Right Click", new MouseButtonHandler(SDL_BUTTON_RIGHT, game->input));
 
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
@@ -97,15 +99,18 @@ void SoundSystem::update(float dt){
 
 	 game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
 
-    if (game->input->justPressed("Left Click"))
-        printf("left clicked\n");
+    if (game->input->justPressed("Left Click")){
+        game->sounds->play(sound_1); 
+        printf("Left clicked, sound playing...    \n");
+    }
 
-    if (game->input->justPressed("Right Click"))
-        printf("right clicked\n");
+    if (game->input->justPressed("Right Click")){
+        game->sounds->stop(sound_1);
+        printf("Right clicked, sound stopped...   \n");
+    }
 
     if (game->input->isPressed("W")) {
 		game->scene->camera->move(0.0f, 0.0f, speed*dt);
-
     }
     if (game->input->isPressed("A")) {
 		game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
