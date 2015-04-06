@@ -89,8 +89,8 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->sounds->open("asd", "assets/sounds/0x1b.wav");
     game->sounds->play("asd");
 
-    font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf", 16);
+/*    font = new FontSDL(game->drawer);
+      font->loadFont("fonts/Arial.ttf", 16);  */
 
 
 }

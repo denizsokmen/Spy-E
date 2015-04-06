@@ -144,14 +144,14 @@ void SoundSystem::update(float dt){
         game->quit = true;
     }
 
-    game->sounds->setSourcePosition(sound_1,
+    game->sounds->set_source_position(sound_1,
                                     soundcube->position.x,
                                     soundcube->position.y,
                                     soundcube->position.z);
 
-    game->sounds->setListenerPosition(game->scene->camera->position.x,
-                                      game->scene->camera->position.y,
-                                      game->scene->camera->position.z);
+    game->sounds->set_listener_position(game->scene->camera->position.x,
+                                        game->scene->camera->position.y,
+                                        game->scene->camera->position.z);
 }
 
 void SoundSystem::draw(){}
