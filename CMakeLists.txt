@@ -230,6 +230,12 @@ add_executable(testmenu
 
 target_link_libraries(testmenu engine)
 
+add_executable(testsound
+    tests/sound/TestSound.cpp
+    tests/sound/TestSound.h
+)
+
+target_link_libraries(testsound engine)
 
 add_executable(game
 	game/main.cpp
@@ -245,6 +251,7 @@ create_target_launcher(testscene WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/
 create_target_launcher(testworldeditor WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 create_target_launcher(testphysics WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 create_target_launcher(testGUI WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+create_target_launcher(testsound WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
