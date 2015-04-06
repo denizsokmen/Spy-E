@@ -11,6 +11,7 @@ class ShaderProgram;
 class VertexBuffer;
 class Game;
 class SoundManager;
+class Renderable;
 
 class SoundSystem: public System {
    Game *game;
@@ -26,5 +27,6 @@ public:
    void draw2D();
    VertexBuffer *vbo;
 
+   Renderable *soundcube;
 };
 #endif //_SPYE_SOUNDSYSTEM_H_

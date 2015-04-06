@@ -50,6 +50,10 @@ SoundSystem::SoundSystem(Game *game){
     entity3->position = glm::vec3(-2.0,0.0,0);
     entity3->color = glm::vec3(0.5,0.5,1.0);
 
+    soundcube = game->scene->getWorld()->createRenderable("cube");
+    soundcube->position = glm::vec3(0.0,10.0,0);
+    soundcube->color = glm::vec3(0.2,0.2,0.2);
+
     Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
     floorEntity->position = glm::vec3(0,-2.0f,0);
     floorEntity->color = glm::vec3(1.0,1.0,1.0);
@@ -58,6 +62,11 @@ SoundSystem::SoundSystem(Game *game){
     game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
     game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
     game->input->mapButton("D", new KeyboardButtonHandler(SDL_SCANCODE_D, game->input));
+
+    game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
+    game->input->mapButton("Left", new KeyboardButtonHandler(SDL_SCANCODE_LEFT, game->input));
+    game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
+    game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
     game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
 
     generalShader = new ShaderProgram();
@@ -111,6 +120,22 @@ void SoundSystem::update(float dt){
 
 	 if (game->input->isPressed("D")) {
 		game->scene->camera->move(speed*dt, 0.0f, 0.0f);
+    }
+
+    if (game->input->isPressed("Up")) {
+        soundcube->position.y += 5.0f * dt;
+
+    }
+    if (game->input->isPressed("Left")) {
+        soundcube->position.x -= 5.0f * dt;
+    }
+
+    if (game->input->isPressed("Right")) {
+        soundcube->position.x += 5.0f * dt;
+    }
+
+    if (game->input->isPressed("Down")) {
+        soundcube->position.y -= 5.0f * dt;
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit){
