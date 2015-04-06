@@ -9,8 +9,9 @@ View::View() {
 }
 
 void View::addSubview(View *view) {
-    view->setSystem(this->system);
+
     this->subViews.push_back(view);
+    this->setSystem(this->system);
     printf("[GUI] Added a subview count: %i\n", this->subViews.size());
 }
 
@@ -22,6 +23,9 @@ void View::draw() {
 
 void View::setSystem(GUI *system) {
     this->system = system;
+    for (auto subView : subViews) {
+        subView->setSystem(system);
+    }
 }
 
 GUI *View::getSystem() {

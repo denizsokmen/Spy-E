@@ -16,7 +16,7 @@ class ShaderProgram;
 class VertexBuffer;
 
 class Label;
-class FontSDL;
+
 
 class TestGUI : public System {
 
@@ -31,7 +31,7 @@ public:
     PhysicsWorld *physicsWorld;
     Body *box;
     VertexBuffer *vbo;
-    FontSDL *font;
+
     ShaderProgram *generalShader;
 
     TestGUI(Game *game);

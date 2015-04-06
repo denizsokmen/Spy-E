@@ -49,7 +49,6 @@ public:
     Button();
 
     void setText(std::wstring text, ControlState state);
-
     void setState(ControlState state);
 
     ControlState getState();
@@ -59,7 +58,6 @@ public:
     ~Button();
 
     void setFrame(Rect frame);
-
     Label *getLabel();
 
     void draw();

@@ -27,12 +27,13 @@ void Button::runTarget() {
 void Button::setText(std::wstring text, ControlState state) {
     Style *style = styleMap[state];
     style->text = text;
-
+    this->setState(state);
 }
 
 void Button::setImage(Texture *texture, ControlState state) {
     Style *style = styleMap[state];
     style->texture = texture;
+    this->setState(state);
 }
 
 void Button::setFrame(Rect frame) {
@@ -52,7 +53,9 @@ void Button::setState(ControlState state) {
     Texture *texture = style->texture;
     std::wstring text = style->text;
 
+
     this->backgroundImage->setTexture(texture);
+
     this->titleLabel->setText(text);
 }
 

@@ -12,22 +12,19 @@
 class Entity;
 
 class Game;
-
 class Renderable;
-
 class ShaderProgram;
-
 class VertexBuffer;
-
 class Label;
+class Menu;
 
-class FontSDL;
 
 class TestMenu : public System {
 
 
     Renderable *entity;
     Game *game;
+    Menu *menu;
 
 private:
     Label *fpsLabel;
@@ -35,7 +32,6 @@ private:
 public:
     Body *box;
     VertexBuffer *vbo;
-    FontSDL *font;
     ShaderProgram *generalShader;
 
     TestMenu(Game *game);

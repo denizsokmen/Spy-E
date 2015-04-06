@@ -27,7 +27,9 @@ Image::Image(Texture *texture) : View() {
 }
 
 void Image::setTexture(Texture *texture) {
-    this->drawable = new Drawable(texture);
+    if (texture != NULL) {
+        this->drawable = new Drawable(texture);
+    }
 }
 
 void Image::draw() {

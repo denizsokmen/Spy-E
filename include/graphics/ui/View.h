@@ -28,9 +28,10 @@ public:
     Image *backgroundImage;
     GUI *getSystem();
 
-    void setSystem(GUI *system);
-    void addSubview(View *view);
 
+
+    virtual void addSubview(View *view);
+    virtual void setSystem(GUI *system);
     virtual void setFrame(Rect frame);
     virtual void draw();
 };

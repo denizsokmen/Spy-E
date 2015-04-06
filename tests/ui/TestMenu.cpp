@@ -18,9 +18,12 @@
 
 #include <graphics/ui/GUI.h>
 #include <graphics/ui/Label.h>
+#include <graphics/ui/Button.h>
 #include "sound/Sounds.h"
 #include "graphics/ui/TextView.h"
 #include "graphics/ui/Primitives.h"
+#include "graphics/ui/Menu.h"
+#include "graphics/ui/Button.h"
 #include "physics/Physics.h"
 
 Game *game;
@@ -70,7 +73,7 @@ TestMenu::TestMenu(Game *game) {
 
 
     Image *image = new Image("./assets/texture/menu/logo.png");
-    image->setFrame(Rect(game->width - 140, game->height - 25, 140, 25));
+    image->setFrame(Rect(game->width/2-105, 37.5, 210, 37.5));
     game->gui->addSubview(image);
 
     fpsLabel = new Label(L"FPS: 0");
@@ -78,8 +81,27 @@ TestMenu::TestMenu(Game *game) {
     game->gui->addSubview(fpsLabel);
 
 
-    game->sounds->open("asd", "assets/sounds/0x1b.wav");
-    game->sounds->play("asd");
+//    game->sounds->open("asd", "assets/sounds/0x1b.wav");
+//    game->sounds->play("asd");
+
+    menu = new Menu();
+    menu->setFrame(Rect(game->width/2,game->height/2, 300, 300));
+
+    Button *firstButton = new Button();
+    firstButton->setText(L"One", Normal);
+    firstButton->setFrame(Rect(200,200, 300, 300));
+    Button *secondButton = new Button();
+    secondButton->setText(L"Two", Normal);
+
+    Button *thirdButton = new Button();
+    thirdButton->setText(L"Three", Normal);
+
+    menu->addItem(firstButton);
+    menu->addItem(secondButton);
+    menu->addItem(thirdButton);
+
+    game->gui->addSubview(menu);
+
 
 
 }

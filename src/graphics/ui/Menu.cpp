@@ -9,16 +9,11 @@
 
 Menu::Menu() : View() {
     this->cursor = 0;
+    isSplitted = false;
 }
 
 void Menu::addItem(Button *item) {
     this->items.push_back(item);
-    Label *label = item->getLabel();
-    Font *font = label->getFont();
-    int height = font->getHeight();
-    Rect frame = Rect(this->frame.x, this->frame.y + height * this->items.size(), this->frame.w, this->frame.y);
-    item->setFrame(frame);
-    this->addSubview(item);
 }
 
 
@@ -45,14 +40,38 @@ void Menu::reverseState(Button *item) {
     }
 }
 
-
 void Menu::clear() {
     this->items.clear();
 }
+
+void Menu::placeButtons() {
+    if (!isSplitted) {
+        printf("[GUI][Menu] isSplitted is false\n");
+        unsigned int index = 0;
+        for (auto item: items) {
+            Label *label = item->getLabel();
+
+
+            int height = 16;
+            Rect frame = Rect(this->frame.x, this->frame.y + height * index++, this->frame.w, this->frame.y);
+
+            item->setFrame(frame);
+            this->addSubview(item);
+
+        }
+
+        isSplitted= true;
+    }
+}
+
 
 Menu::~Menu() {
 
 }
 
 
+void Menu::draw() {
+    View::draw();
+    this->placeButtons();
 
+}

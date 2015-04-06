@@ -15,7 +15,8 @@ class Menu : public View {
 private:
     std::vector<Button *> items;
     unsigned int cursor;
-
+    bool isSplitted;
+    void placeButtons();
 
 public:
     Menu();
@@ -27,13 +28,12 @@ public:
     Button *getItem(unsigned int index);
 
     void setState(unsigned int index);
-
     void setCursor(unsigned int index);
 
     void reverseState(Button *item);
 
     void clear();
-
+    void draw();
 
 
 

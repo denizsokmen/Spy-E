@@ -13,7 +13,7 @@
 
 Label::Label() : View() {
     this->setText(L"");
-    this->font;
+    this->font = NULL;
 }
 
 
@@ -47,12 +47,13 @@ void Label::draw() {
     View::draw();
 
     if (this->font == NULL) {
-        this->font = this->getSystem()->font;
+        GUI* gui = this->getSystem();
+        this->font = gui->font;
     }
 
     wchar_t *tempText = (wchar_t *) this->text.c_str();
 
-
+    printf("Label in: x:%f y:%f text:%s\n", this->frame.x, this->frame.y, this->text.c_str());
     glm::vec3 position = glm::vec3(this->frame.x, this->frame.y, 0);
 
     int cnt = 0;
