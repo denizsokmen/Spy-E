@@ -308,6 +308,13 @@ void Sounds::set_listener_position(ALfloat x, ALfloat y, ALfloat z){
     ALfloat listener_position[] = {x, y, z};
     alListenerfv(AL_POSITION, listener_position);
 }
+void Sounds::set_listener_orientation(ALfloat x, ALfloat y, ALfloat z,
+                              ALfloat x2, ALfloat y2, ALfloat z2){
+    // position and up(focues)
+    ALfloat listener_orientation[] = {x,  y,  z, x2, y2, z2};
+    alListenerfv(AL_ORIENTATION, listener_orientation);
+}
+
 // sound as sound source
 void Sounds::set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
     ALfloat listener_velocity[] = {x, y, z};
