@@ -300,20 +300,20 @@ void Sounds::stop(ALuint sound){
 }
 
 // Float and Double can be used as substitute of ALfloat
-void set_listener_velocity(ALfloat x, ALfloat y, ALfloat z){
+void Sounds::set_listener_velocity(ALfloat x, ALfloat y, ALfloat z){
     ALfloat listener_velocity[] = {x, y, z};
     alListenerfv(AL_VELOCITY, listener_velocity);
 }
-void set_listener_position(ALfloat x, ALfloat y, ALfloat z){
+void Sounds::set_listener_position(ALfloat x, ALfloat y, ALfloat z){
     ALfloat listener_position[] = {x, y, z};
     alListenerfv(AL_POSITION, listener_position);
 }
 // sound as sound source
-void set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
+void Sounds::set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
     ALfloat listener_velocity[] = {x, y, z};
     alSourcefv(sound, AL_VELOCITY, listener_velocity);
 }
-void set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
+void Sounds::set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
     ALfloat source_position[] = {x, y, z};
     alSourcefv(sound, AL_POSITION, source_position);  
 }

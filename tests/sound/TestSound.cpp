@@ -18,6 +18,7 @@ float horizontalAngle = 3.14f;
 float verticalAngle = 0.0f;
 float mouseSpeed = 0.005f;
 float speed = 10.0f;
+int sound_1;
 
 Game* game;
 
@@ -76,12 +77,8 @@ SoundSystem::SoundSystem(Game *game){
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
-/*  game->sounds->open("back_M", "assets/sounds/0x1b.wav");
-    game->sounds->play("back_M");  */
-
-    int sound_1 = game->sounds->open("assets/sounds/0x1b.wav");
-    int sound_2 = game->sounds->open("assets/sounds/2.wav");
-  
+    sound_1 = game->sounds->open("assets/sounds/beep-01a.wav");
+    game->sounds->loop(sound_1, true);
     game->sounds->play(sound_1);
         
 }
@@ -141,6 +138,15 @@ void SoundSystem::update(float dt){
     if (game->input->wasReleased("Escape") || game->input->quit){
         game->quit = true;
     }
+
+    game->sounds->set_source_position(sound_1, 
+                                      soundcube->position.x, 
+                                      soundcube->position.y, 
+                                      soundcube->position.z);
+
+    game->sounds->set_listener_position(game->scene->camera->position.x, 
+                                        game->scene->camera->position.y, 
+                                        game->scene->camera->position.z);
 }
 
 void SoundSystem::draw(){}
