@@ -152,6 +152,14 @@ void SoundSystem::update(float dt){
     game->sounds->set_listener_position(game->scene->camera->position.x,
                                         game->scene->camera->position.y,
                                         game->scene->camera->position.z);
+
+    game->sounds->set_listener_orientation(game->scene->camera->position.x,
+                                           game->scene->camera->position.y,
+                                           game->scene->camera->position.z,
+                                           game->scene->camera->focus.x,
+                                           game->scene->camera->focus.y,
+                                           game->scene->camera->focus.z);
+
 }
 
 void SoundSystem::draw(){}

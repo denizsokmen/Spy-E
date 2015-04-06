@@ -85,7 +85,8 @@ public:
       /* Position and velocity of sound independent variables                  */
       void set_listener_velocity(ALfloat x, ALfloat y, ALfloat z);
       void set_listener_position(ALfloat x, ALfloat y, ALfloat z);
-    // void set_listener_orientation(ALfloat listener_position[4]);
+      void set_listener_orientation(ALfloat x, ALfloat y, ALfloat z,
+                                    ALfloat x2, ALfloat y2, ALfloat z2);
       
       void set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
       void set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
