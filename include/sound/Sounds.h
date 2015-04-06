@@ -34,7 +34,8 @@ class Sounds : public System {
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(const std::string name, const std::string file_name);
+      int loadWAV(const std::string name, const std::string file_name);
+      int loadAU(const std::string name, const std::string file_name);
       int find_source_by_name(const std::string sound_name);
 
 #pragma pack(push,1)
@@ -53,6 +54,19 @@ class Sounds : public System {
          short bits_per_sample; 
          char data_t[4];            // 'data'   
          unsigned int data_size; 
+      };
+
+#pragma pack(pop)
+
+#pragma pack(push,1)
+
+      struct AU_file{
+         char AU_t[4];              // '.snd'
+         unsigned int chunk_size; 
+         unsigned int data_size;
+         unsigned int format_type;  // encoding 
+         unsigned int sample_rate; 
+         unsigned int channels; 
       };
 
 #pragma pack(pop)
