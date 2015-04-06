@@ -60,13 +60,21 @@ class Sounds : public System {
 public:
    Sounds();
   ~Sounds();
-
+      
       int  open(const std::string file_name);
       int  open(const std::string sound_name, const std::string file_name);
       void play(ALuint sound);
       void play(const std::string sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
+      /* Functions can be used for a single listener according to human nature */
+      /* Position and velocity of sound independent variables                  */
+      void set_listener_velocity(ALfloat x, ALfloat y, ALfloat z);
+      void set_listener_position(ALfloat x, ALfloat y, ALfloat z);
+    // void set_listener_orientation(ALfloat listener_position[4]);
+      
+      void set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
+      void set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
       //system.h
       void init(){}
       void update(float dt){}

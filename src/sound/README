@@ -1,3 +1,4 @@
+2015-04-06 03:57:03 : Listener/Source positioning and velocity added.
 2015-03-30 15:59:42 : Checking WAVE Riff added.
 2015-03-23 13:18:21 : Defining and playing a sound by name added.
 2015-03-23 10:37:07 : STD vector is used to keep sound information.
@@ -20,13 +21,13 @@ TODO:
 
 - May extend to cover AU and ADPCM
 - May decode ogg to raw sound data
+- Big endian order must be covered for WAV/raw sound files.
 - More error checks
-- Source and Listener Positioning
 - Standalone sound class
 - Direct data erasure
-- Changing char arrays to STD strings
-- Making GCC shut up
 
 Done
 - Safer structure to keep buffer IDs(x)
 - Checking file if its WAVE RIFF
+- Changing char arrays to STD strings
+- Source and Listener Positioning
