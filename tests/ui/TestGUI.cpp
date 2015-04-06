@@ -127,9 +127,9 @@ void TestGUI::update(float dt) {
     if (game->input->justPressed("B"))
         physicsWorld->bounce = !physicsWorld->bounce;
 
-
     if (game->input->wasReleased("Escape") || game->input->quit)
         game->quit = true;
+
 
     physicsWorld->update(dt);
 

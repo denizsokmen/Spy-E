@@ -4,6 +4,9 @@
 
 #include "graphics/ui/View.h"
 
+View::View() {
+
+}
 
 void View::addSubview(View *view) {
     view->setSystem(this->system);
@@ -27,4 +30,11 @@ GUI *View::getSystem() {
 
 void View::setFrame(Rect frame) {
     this->frame = frame;
+}
+
+
+View::~View() {
+    for (auto subView : subViews) {
+        delete subView;
+    }
 }

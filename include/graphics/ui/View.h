@@ -20,6 +20,9 @@ private:
     GUI *system;
 
 public:
+    View();
+
+    ~View();
     std::vector<View *> subViews;
     Color color = Color(0, 0, 0);
     Image *backgroundImage;

@@ -26,6 +26,10 @@ Image::Image(Texture *texture) : View() {
     this->drawable = new Drawable(texture);
 }
 
+void Image::setTexture(Texture *texture) {
+    this->drawable = new Drawable(texture);
+}
+
 void Image::draw() {
     View::draw();
     if (this->drawable != NULL) {
@@ -40,3 +44,5 @@ void Image::draw() {
 Image::~Image() {
     delete this->drawable;
 }
+
+

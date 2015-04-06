@@ -5,8 +5,39 @@
 #ifndef SPYE_MENU_H
 #define SPYE_MENU_H
 
+#include <vector>
+#include "graphics/ui/View.h"
 
-class Menu {
+class Button;
+
+class Menu : public View {
+
+private:
+    std::vector<Button *> items;
+    unsigned int cursor;
+
+
+public:
+    Menu();
+
+    ~Menu();
+
+    void addItem(Button *item);
+
+    Button *getItem(unsigned int index);
+
+    void setState(unsigned int index);
+
+    void setCursor(unsigned int index);
+
+    void reverseState(Button *item);
+
+    void clear();
+
+
+
+
+
 
 };
 

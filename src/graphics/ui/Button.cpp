@@ -12,6 +12,8 @@ Button::Button() : View() {
     this->styleMap[ControlState::Selected] = new Style();
     this->backgroundImage = new Image();
     this->titleLabel = new Label();
+    this->addSubview(backgroundImage);
+    this->addSubview(titleLabel);
 }
 
 void Button::setTarget(std::function<void()> target) {
@@ -28,9 +30,9 @@ void Button::setText(std::wstring text, ControlState state) {
 
 }
 
-void Button::setImage(Texture *image, ControlState state) {
+void Button::setImage(Texture *texture, ControlState state) {
     Style *style = styleMap[state];
-    style->image = image;
+    style->texture = texture;
 }
 
 void Button::setFrame(Rect frame) {
@@ -44,6 +46,16 @@ void Button::draw() {
 }
 
 
+void Button::setState(ControlState state) {
+    this->state = state;
+    Style *style = this->styleMap[state];
+    Texture *texture = style->texture;
+    std::wstring text = style->text;
+
+    this->backgroundImage->setTexture(texture);
+    this->titleLabel->setText(text);
+}
+
 Button::~Button() {
     for (std::map<ControlState, Style *>::iterator iterator = styleMap.begin();
          iterator != styleMap.end();
@@ -53,4 +65,12 @@ Button::~Button() {
         delete style;
     }
 
+}
+
+ControlState Button::getState() {
+    return this->state;
+}
+
+Label *Button::getLabel() {
+    return this->titleLabel;
 }

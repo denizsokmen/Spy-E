@@ -21,12 +21,12 @@ enum ControlState {
 class Style {
 public:
     Color color;
-    Texture *image;
+    Texture *texture;
     std::wstring text;
 
     Style() {
         color = Color();
-        image = NULL;
+        texture = NULL;
     }
 
 };
@@ -50,12 +50,17 @@ public:
 
     void setText(std::wstring text, ControlState state);
 
+    void setState(ControlState state);
+
+    ControlState getState();
     void setImage(Texture *image, ControlState state);
     void setTarget(std::function<void()> target);
 
     ~Button();
 
     void setFrame(Rect frame);
+
+    Label *getLabel();
 
     void draw();
 };

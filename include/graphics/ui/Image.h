@@ -24,6 +24,8 @@ public:
     Image(Texture *texture);
     ~Image();
 
+    void setTexture(Texture *texture);
+
     void draw();
 };
 

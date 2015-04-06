@@ -91,3 +91,6 @@ void Label::draw() {
 
 }
 
+Font *Label::getFont() {
+    return this->getFont();
+}

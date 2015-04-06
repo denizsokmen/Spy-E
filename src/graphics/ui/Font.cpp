@@ -36,6 +36,12 @@ Font::Font(const char* fontName, int size){
 
 }
 
+
+int Font::getHeight() {
+    return this->glyphs[12].surface->texture->height;
+}
+
 Font::~Font(){
 
 }
+

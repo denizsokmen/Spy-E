@@ -20,8 +20,10 @@ public:
     void setText(std::wstring text);
 
     void setFont(const char *name, int size);
-
     void setFont(Font *font);
+
+    Font *getFont();
+
     void draw();
 
 

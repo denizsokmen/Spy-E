@@ -25,7 +25,7 @@ public:
     Glyph glyphs[256];
     std::vector<Drawable *> charSet;
 
-
+    int getHeight();
     Font(const char* fontName, int size);
     ~Font();
 
