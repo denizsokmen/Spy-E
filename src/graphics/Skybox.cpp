@@ -73,4 +73,5 @@ void Skybox::draw(Camera *camera) {
     //glDepthMask(GL_TRUE);
 
     glCullFace(GL_BACK);
+    glDepthFunc(GL_LESS);
 }

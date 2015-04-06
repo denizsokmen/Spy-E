@@ -16,13 +16,11 @@
 #include <vector>
 #include <logic/System.h>
 
-#define S_NAME_CHAR_LIM 200
-
 class Sounds : public System {
    private:
 
       struct sound{
-         char  name[S_NAME_CHAR_LIM];
+         std::string name;
          ALuint buffer;
          ALuint source;
       };
@@ -36,8 +34,9 @@ class Sounds : public System {
       ALCdevice *current_device;
       ALCcontext *current_context;
 
-      int load(char* name, char* file_name);
-      int find_source_by_name(char* sound_name);
+      int loadWAV(const std::string name, const std::string file_name);
+      int loadAU(const std::string name, const std::string file_name);
+      int find_source_by_name(const std::string sound_name);
 
 #pragma pack(push,1)
 
@@ -59,25 +58,42 @@ class Sounds : public System {
 
 #pragma pack(pop)
 
+#pragma pack(push,1)
+
+      struct AU_file{
+         char AU_t[4];              // '.snd'
+         unsigned int chunk_size; 
+         unsigned int data_size;
+         unsigned int format_type;  // encoding 
+         unsigned int sample_rate; 
+         unsigned int channels; 
+      };
+
+#pragma pack(pop)
+
 public:
    Sounds();
-
-   ~Sounds();
-
-      int  open(char* file_name);
-      int  open(char* sound_name, char* file_name);
+  ~Sounds();
+      
+      int  open(const std::string file_name);
+      int  open(const std::string sound_name, const std::string file_name);
       void play(ALuint sound);
-      void play(char* sound_name);
+      void play(const std::string sound_name);
       void loop(ALuint sound, bool do_loop);
       void stop(ALuint sound);
-
-   void init() { }
-
-   void update(float dt) { }
-
-   void draw() { }
-
-   void draw2D() { }
+      /* Functions can be used for a single listener according to human nature */
+      /* Position and velocity of sound independent variables                  */
+      void set_listener_velocity(ALfloat x, ALfloat y, ALfloat z);
+      void set_listener_position(ALfloat x, ALfloat y, ALfloat z);
+    // void set_listener_orientation(ALfloat listener_position[4]);
+      
+      void set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
+      void set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z);
+      //system.h
+      void init(){}
+      void update(float dt){}
+      void draw(){}
+      void draw2D(){}
 };
 
 #endif

@@ -25,6 +25,11 @@
 
 #define NO_NAME "NONAME"
 
+#define TEMP_FMT_AU AL_FORMAT_STEREO16
+
+#define swap_uint32(x) (((x) >> 24) | (((x) & 0x00FF0000) >> 8) |  \
+                       (((x) & 0x0000FF00) << 8) | ((x) << 24))    \
+
 ALenum get_format(short bit_for_sample, short channels){
    ALenum format=0;
 
@@ -50,18 +55,28 @@ bool check_wave_riff(char* data_t, char* WAVE_t){
    bool ifWAVEriff = false;
    if((data_t[0] == 'd' && data_t[1] == 'a' && data_t[2] == 't' && data_t[3] == 'a') &&
       (WAVE_t[0] == 'W' && WAVE_t[1] == 'A' && WAVE_t[2] == 'V' && WAVE_t[3] == 'E')){ 
-
+      /* WAVE */
       ifWAVEriff = true;
       printf("RIFF WAVE FILE, confirmed...");
    }
    return ifWAVEriff;
 }
 
-int Sounds::find_source_by_name(char *sound_name) {
+bool check_SUN_AU(char* AU_t){
+   bool ifSUNau = false;
+   if(AU_t[0] == '.' && AU_t[1] == 's' && AU_t[2] == 'n' && AU_t[3] == 'd'){ 
+      /* .snd */
+      ifSUNau = true;
+      printf("Sun AU FILE, confirmed...");
+   }
+   return ifSUNau;
+}
+
+int Sounds::find_source_by_name(const std::string sound_name){
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
          printf("c2: %s | \n",sounds[c].name); */
-      if(strcmp(sounds[c].name, sound_name) == 0){
+      if(!(sounds[c].name != sound_name)){
          return (sounds[c].source);
       }else{
          // Need to add error function here!
@@ -110,14 +125,14 @@ Sounds::~Sounds() {
    }
 }
 
-int Sounds::load(char *name, char *file_name) {
+int Sounds::loadWAV(const std::string name, const std::string file_name){
 
 /*                  ALUT Version                  */     
 
 /* sound_buffers[current_sound] = alutCreateBufferFromFile(sound_name); */ 
 
    FILE *file_ptr;
-   file_ptr = fopen(file_name,"rb");
+   file_ptr = fopen(file_name.data(),"rb");
 
    sound c_sound; // rel
 
@@ -130,9 +145,10 @@ int Sounds::load(char *name, char *file_name) {
                                  sound_file->channels);
 
    /* File chunk check */
-   check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
+      check_wave_riff(sound_file->data_t, sound_file->WAVE_t);
    /*   
       printf("------------- INFO -------------    \n");
+      printf("RIFF WAVE File :                    \n", sound_file->format_type);
       printf("FORMAT TYPE :              %d       \n", sound_file->format_type);
       printf("BITS PER SAMPLE :          %d       \n", sound_file->bits_per_sample);
       printf("FILE SIZE :                %d       \n", sound_file->size);
@@ -177,7 +193,7 @@ int Sounds::load(char *name, char *file_name) {
       alSourcei(c_sound.source, AL_BUFFER, 
                 c_sound.buffer);
          
-      strncpy(c_sound.name,name,sizeof(name));
+      c_sound.name = name;
       sounds.push_back(c_sound);
 
       return c_sound.source;
@@ -187,29 +203,117 @@ int Sounds::load(char *name, char *file_name) {
 
 }
 
-int Sounds::open(char *file_name) {
-   return load(NO_NAME,file_name);
+int Sounds::loadAU(const std::string name, const std::string file_name){
+
+   FILE *file_ptr;
+   file_ptr = fopen(file_name.data(),"rb");
+
+   sound c_sound;
+
+   if (file_ptr) 
+   { 
+      AU_file* sound_file = (AU_file*) malloc(sizeof(AU_file));
+      fread(sound_file ,sizeof(AU_file), 1, file_ptr);
+
+   /* Need to be swap Little endian */
+      sound_file->chunk_size  = swap_uint32(sound_file->chunk_size);
+      sound_file->data_size   = swap_uint32(sound_file->data_size);
+      sound_file->sample_rate = swap_uint32(sound_file->sample_rate);
+      sound_file->channels    = swap_uint32(sound_file->channels);
+
+   /* ALenum format = get_format(sound_file->bits_per_sample, 
+                                 sound_file->channels); */
+
+      check_SUN_AU(sound_file->AU_t);
+   /*   
+      printf("------------- INFO -------------    \n");
+      printf("Sun AU File :                       \n", sound_file->format_type);
+      printf("CHANNEL NUMBER             %d       \n", sound_file->channels);
+      printf("FREQUENCY :                %d       \n", sound_file->sample_rate);
+      printf("DATA SIZE :                %d BYTES \n", sound_file->data_size);
+   */       
+
+      unsigned char* data = new unsigned char[sound_file->data_size];
+      printf("%d BYTES of sound data loaded. \n", 
+              fread(data, sizeof(unsigned char),sound_file->data_size,file_ptr));
+      
+      ALuint freq = sound_file->sample_rate; // as unsigned int of OpenAL
+                                          
+      alGenBuffers(1, &c_sound.buffer);
+      alGenSources(1, &c_sound.source);
+     
+      if(alGetError() != AL_NO_ERROR){ 
+         printf("Couldn't Generate Source! (alGenSource/s()) \n");
+      } 
+        
+      alBufferData(c_sound.buffer, 
+                   TEMP_FMT_AU, // This need to be re-implemented
+                   data, 
+                   sound_file->data_size,
+                   freq);
+
+      delete(sound_file);
+      free(data);
+
+      if(alGetError() != AL_NO_ERROR){ 
+         printf("Couldn't Load Buffer! (alBufferData()) \n");
+      } 
+      
+      alSourcei(c_sound.source, AL_BUFFER, 
+                c_sound.buffer);
+         
+      c_sound.name = name;
+      sounds.push_back(c_sound);
+
+      return c_sound.source;
+   }else{printf("Couldn't Find File! (fopen()) \n");}
+   // a function is needed for giving errors.
+   // ? what to return here
+
 }
 
-int Sounds::open(char *sound_name, char *file_name) {
-   return load(sound_name, file_name);
+int Sounds::open(const std::string file_name){
+   return loadWAV(NO_NAME,file_name);
 }
 
-void Sounds::play(ALuint sound) {
+int Sounds::open(const std::string sound_name,const std::string file_name){
+   return loadWAV(sound_name, file_name);
+}
+
+void Sounds::play(ALuint sound){
    alSourcePlay(sound);
 }
 
-void Sounds::play(char *sound_name) {
+void Sounds::play(const std::string sound_name){
    alSourcePlay(find_source_by_name(sound_name));
 }
 
-void Sounds::loop(ALuint sound, bool do_loop) {
+void Sounds::loop(ALuint sound, bool do_loop){
    if(do_loop)
       alSourcei(sound, AL_LOOPING,  AL_TRUE);
    else
       alSourcei(sound, AL_LOOPING,  AL_FALSE);
 }
 
-void Sounds::stop(ALuint sound) {
+void Sounds::stop(ALuint sound){
    alSourceStop(sound);
+}
+
+// Float and Double can be used as substitute of ALfloat
+void Sounds::set_listener_velocity(ALfloat x, ALfloat y, ALfloat z){
+    ALfloat listener_velocity[] = {x, y, z};
+    alListenerfv(AL_VELOCITY, listener_velocity);
+}
+void Sounds::set_listener_position(ALfloat x, ALfloat y, ALfloat z){
+    ALfloat listener_position[] = {x, y, z};
+    alListenerfv(AL_POSITION, listener_position);
+}
+// sound as sound source
+void Sounds::set_source_velocity(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
+    ALfloat listener_velocity[] = {x, y, z};
+    alSourcefv(sound, AL_VELOCITY, listener_velocity);
+}
+void Sounds::set_source_position(ALuint sound, ALfloat x, ALfloat y, ALfloat z){
+    ALfloat source_position[] = {x, y, z};
+    alSourcefv(sound, AL_POSITION, source_position);  
 }
