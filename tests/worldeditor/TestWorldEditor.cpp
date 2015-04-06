@@ -3,7 +3,6 @@
 //
 
 #include <logic/Game.h>
-#include "graphics/FontSDL.h"
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/ObjLoader.h"
@@ -90,8 +89,6 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->sounds->open("asd", "assets/sounds/0x1b.wav");
     game->sounds->play("asd");
 
-    font = new FontSDL(game->drawer);
-    font->loadFont("fonts/Arial.ttf", 16);
 
 
 }
