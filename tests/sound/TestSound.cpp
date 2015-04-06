@@ -153,12 +153,16 @@ void SoundSystem::update(float dt){
                                         game->scene->camera->position.y,
                                         game->scene->camera->position.z);
 
-    game->sounds->set_listener_orientation(game->scene->camera->position.x,
-                                           game->scene->camera->position.y,
-                                           game->scene->camera->position.z,
-                                           game->scene->camera->focus.x,
-                                           game->scene->camera->focus.y,
-                                           game->scene->camera->focus.z);
+
+
+    Camera* cam = game->scene->camera;
+    glm::vec3 dirup = glm::vec3(cam->view[0][1], cam->view[1][1], cam->view[2][1]);
+    glm::vec3 dir = -glm::vec3(cam->view[0][2], cam->view[1][2], cam->view[2][2]);
+    //glm::vec3 dir = game->scene->camera->orientation * glm::vec3(0.0f, 0.0f, -1.0f);
+    //glm::vec3 dirup = game->scene->camera->orientation * glm::vec3(0.0f, 1.0f, 0.0f);
+    game->sounds->set_listener_orientation(dir.x, dir.y, dir.z,
+                                           dirup.x, dirup.y, dirup.z
+                                            );
 
 }
 
