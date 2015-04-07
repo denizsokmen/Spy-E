@@ -11,9 +11,15 @@ Menu::Menu() : View() {
     this->cursor = 0;
     this->verticalSpace = 0;
     isSplitted = false;
+
 }
 
 void Menu::addItem(Button *item) {
+
+    if (this->items.size() == 0)
+        item->setState(Selected);
+    else
+        item->setState(Normal);
     this->items.push_back(item);
 }
 
@@ -22,18 +28,33 @@ Button *Menu::getItem(unsigned int index) {
     return this->items.at(index);
 }
 
+
+
 void Menu::moveCursorUp() {
-    this->setCursor(this->cursor++);
+    if (this->cursor > 0 ) {
+        Button *previousItem = this->getItem(this->cursor);
+        unsigned int index = this->cursor - 1;
+        Button *currentItem = this->getItem(index);
+        this->reverseState(previousItem);
+        this->reverseState(currentItem);
+        this->setCursor(index);
+    }
 }
 
 void Menu::moveCursorDown() {
-    this->setCursor(this->cursor--);
+    if (this->cursor < this->items.size() - 1) {
+        Button *previousItem = this->getItem(this->cursor);
+        unsigned int index = this->cursor + 1;
+        Button *currentItem = this->getItem(index);
+        this->reverseState(previousItem);
+        this->reverseState(currentItem);
+        this->setCursor(index);
+    }
 }
 
 void Menu::setCursor(unsigned int index) {
-    Button *item = this->getItem(index);
+    printf("[GUI][Menu] cursor is now: %i\n", index);
     this->cursor = index;
-    this->reverseState(item);
 }
 
 void Menu::reverseState(Button *item) {
@@ -89,3 +110,4 @@ void Menu::draw() {
     this->placeButtons();
 
 }
+
