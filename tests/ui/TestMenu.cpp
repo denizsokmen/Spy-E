@@ -89,23 +89,28 @@ TestMenu::TestMenu(Game *game) {
 
     Button* startButton = new Button();
     startButton->setText(L"Start", Normal);
+    startButton->setText(L"_Start_", Selected);
     Button* optionsButton = new Button();
     optionsButton->setText(L"Options", Normal);
-
-    Button* blankButton = new Button();
-
+    optionsButton->setText(L"_Options_", Selected);
+    Button* extraButton = new Button();
+    extraButton->setText(L"Extras", Normal);
+    extraButton->setText(L"_Extras_", Selected);
 
     Button* exitButton= new Button();
     exitButton->setText(L"Exit", Normal);
+    exitButton->setText(L"Are you done ?", Selected);
 
     menu->addItem(startButton);
     menu->addItem(optionsButton);
-    menu->addItem(blankButton);
+    menu->addItem(extraButton);
     menu->addItem(exitButton);
     menu->setVerticalSpace(16);
     game->gui->addSubview(menu);
 
 
+    game->sounds->open("select", "assets/sounds/select.wav");
+    game->sounds->open("start", "assets/sounds/start.wav");
 
 
 
@@ -127,6 +132,19 @@ void TestMenu::update(float dt) {
 
 
 
+    if (game->input->wasReleased("Up")) {
+        menu->moveCursorUp();
+        game->sounds->play("select");
+    }
+
+    if (game->input->wasReleased("Down")) {
+        menu->moveCursorDown();
+        game->sounds->play("select");
+    }
+
+    if (game->input->wasReleased("Enter")) {
+        game->sounds->play("start");
+    }
 
     if (game->input->wasReleased("Escape") || game->input->quit)
         game->quit = true;
@@ -153,6 +171,7 @@ void TestMenu::assignKeyboardInputs(Game *game) {/*Use scan codes for mapping ke
     game->input->mapButton("Right", new KeyboardButtonHandler(SDL_SCANCODE_RIGHT, game->input));
     game->input->mapButton("Down", new KeyboardButtonHandler(SDL_SCANCODE_DOWN, game->input));
     game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
+    game->input->mapButton("Enter", new KeyboardButtonHandler(SDL_SCANCODE_RETURN, game->input));
     game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
     game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
 }
