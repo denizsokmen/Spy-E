@@ -25,7 +25,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
-    physics = new Physics();
+    physics = game->physics;
     assignKeyboardInputs(game);
     assignMouseInputs(game);
 
@@ -62,8 +62,11 @@ void TestGameSystem::update(float dt) {
 
 
 
-    game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,
-                                              entity->getPosition().z + - 10.0f);
+
+    glm::vec3 dir = entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 dirup = entity->orientation * glm::vec3(0.0f, 1.0f, 0.0f);
+
+    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 5.0f) + (dir * 10.0f)), 0.01f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
 
@@ -73,11 +76,11 @@ void TestGameSystem::update(float dt) {
     }
 
     if (game->input->isPressed("Left")) {
-        entity->orientation = glm::rotate(entity->orientation, 180.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+        entity->orientation = glm::rotate(entity->orientation, 120.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
     }
 
     if (game->input->isPressed("Right")) {
-        entity->orientation = glm::rotate(entity->orientation, 180.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
+        entity->orientation = glm::rotate(entity->orientation, 120.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
     }
     
     if (game->input->isPressed("Up")) {
@@ -103,7 +106,6 @@ void TestGameSystem::update(float dt) {
 	if (game->input->wasReleased("Escape") || game->input->quit)
 		game->quit = true;
 
-    physics->getWorld()->update(dt);
 
 }
 

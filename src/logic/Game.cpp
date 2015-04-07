@@ -37,8 +37,8 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 ) ;
-    SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
+    //SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1 ) ;
+    //SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
 
 
     mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
