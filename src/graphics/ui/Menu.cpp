@@ -9,6 +9,7 @@
 
 Menu::Menu() : View() {
     this->cursor = 0;
+    this->verticalSpace = 0;
     isSplitted = false;
 }
 
@@ -19,6 +20,14 @@ void Menu::addItem(Button *item) {
 
 Button *Menu::getItem(unsigned int index) {
     return this->items.at(index);
+}
+
+void Menu::moveCursorUp() {
+    this->setCursor(this->cursor++);
+}
+
+void Menu::moveCursorDown() {
+    this->setCursor(this->cursor--);
 }
 
 void Menu::setCursor(unsigned int index) {
@@ -53,7 +62,7 @@ void Menu::placeButtons() {
 
 
             int height = 16;
-            Rect frame = Rect(this->frame.x, this->frame.y + height * index++, this->frame.w, this->frame.y);
+            Rect frame = Rect(this->frame.x, this->frame.y + (height+verticalSpace) * index++ , this->frame.w, this->frame.y);
 
             item->setFrame(frame);
             this->addSubview(item);
@@ -62,6 +71,11 @@ void Menu::placeButtons() {
 
         isSplitted= true;
     }
+}
+
+
+void Menu::setVerticalSpace(unsigned int space) {
+    this->verticalSpace = space;
 }
 
 

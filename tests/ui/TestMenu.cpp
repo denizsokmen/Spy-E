@@ -85,22 +85,27 @@ TestMenu::TestMenu(Game *game) {
 //    game->sounds->play("asd");
 
     menu = new Menu();
-    menu->setFrame(Rect(game->width/2,game->height/2, 300, 300));
+    menu->setFrame(Rect(40,game->height/2, 300, 300));
 
-    Button *firstButton = new Button();
-    firstButton->setText(L"One", Normal);
-    firstButton->setFrame(Rect(200,200, 300, 300));
-    Button *secondButton = new Button();
-    secondButton->setText(L"Two", Normal);
+    Button* startButton = new Button();
+    startButton->setText(L"Start", Normal);
+    Button* optionsButton = new Button();
+    optionsButton->setText(L"Options", Normal);
 
-    Button *thirdButton = new Button();
-    thirdButton->setText(L"Three", Normal);
+    Button* blankButton = new Button();
 
-    menu->addItem(firstButton);
-    menu->addItem(secondButton);
-    menu->addItem(thirdButton);
 
+    Button* exitButton= new Button();
+    exitButton->setText(L"Exit", Normal);
+
+    menu->addItem(startButton);
+    menu->addItem(optionsButton);
+    menu->addItem(blankButton);
+    menu->addItem(exitButton);
+    menu->setVerticalSpace(16);
     game->gui->addSubview(menu);
+
+
 
 
 
@@ -119,6 +124,8 @@ void TestMenu::update(float dt) {
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
     entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+
+
 
 
     if (game->input->wasReleased("Escape") || game->input->quit)

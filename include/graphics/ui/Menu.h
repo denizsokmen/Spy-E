@@ -10,23 +10,28 @@
 
 class Button;
 
+
 class Menu : public View {
 
 private:
     std::vector<Button *> items;
     unsigned int cursor;
     bool isSplitted;
+    unsigned verticalSpace;
     void placeButtons();
+
 
 public:
     Menu();
-
     ~Menu();
 
-    void addItem(Button *item);
+
 
     Button *getItem(unsigned int index);
 
+    void addItem(Button *item);
+
+    void setVerticalSpace(unsigned int space);
     void setState(unsigned int index);
     void setCursor(unsigned int index);
 
@@ -36,9 +41,9 @@ public:
     void draw();
 
 
+    void moveCursorUp();
 
-
-
+    void moveCursorDown();
 };
 
 

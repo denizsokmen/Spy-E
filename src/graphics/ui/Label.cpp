@@ -53,7 +53,7 @@ void Label::draw() {
 
     wchar_t *tempText = (wchar_t *) this->text.c_str();
 
-    printf("Label in: x:%f y:%f text:%s\n", this->frame.x, this->frame.y, this->text.c_str());
+//    printf("Label in: x:%f y:%f text:%s\n", this->frame.x, this->frame.y, this->text.c_str());
     glm::vec3 position = glm::vec3(this->frame.x, this->frame.y, 0);
 
     int cnt = 0;

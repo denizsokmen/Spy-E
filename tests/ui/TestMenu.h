@@ -29,6 +29,7 @@ class TestMenu : public System {
 private:
     Label *fpsLabel;
 
+
 public:
     Body *box;
     VertexBuffer *vbo;
