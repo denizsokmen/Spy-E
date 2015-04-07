@@ -2,10 +2,17 @@
 #define MATERIAL_H_INC
 
 #include <glm/glm.hpp>
-
+#include <vector>
 
 class ShaderProgram;
 class Texture;
+
+enum TextureTypes {
+	TEXTURE_DIFFUSE=0,
+	TEXTURE_NORMAL,
+	TEXTURE_LAST
+
+};
 
 class Material {
 
@@ -17,8 +24,8 @@ public:
     glm::vec4 color;
     ShaderProgram* program;
 
-    Texture* diffuseTexture;
-    Texture* normalTexture;
+
+	std::vector<Texture*> textures;
 
 
     void beginRendering();

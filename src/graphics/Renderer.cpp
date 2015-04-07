@@ -35,7 +35,6 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
     glUseProgram(generalShader->id);
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
 
-
     for (auto renderable: renderList) {
         glm::mat4 MVP = camera->projection * (camera->view * renderable->getTransformation());
         glm::mat4 modelViewMatrix = camera->view * renderable->getTransformation();
