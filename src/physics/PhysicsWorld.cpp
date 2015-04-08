@@ -8,9 +8,9 @@ PhysicsWorld::~PhysicsWorld() {
 
 }
 
-Body* PhysicsWorld::createBody(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v){
+Body* PhysicsWorld::createBody(Entity* bodyEntity, std::vector<glm::vec3> vertices){
 
-    Body *body = new Body(loc, speed, acc, v);
+    Body *body = new Body(bodyEntity, vertices);
     bodies.push_back(body);
     return body;
 }
@@ -20,7 +20,7 @@ void PhysicsWorld::update(float dt) {
     for (Body *body : bodies) {
         if(body->getSpeed() != zeroVector || body->getAcceleration() != zeroVector) {
 
-            //applyAirFriction(body);
+            applyAirFriction(body);
 
             glm::vec3 acceleration = body->getAcceleration();
             glm::vec3 speed = body->getSpeed();
@@ -36,12 +36,17 @@ void PhysicsWorld::update(float dt) {
                 if (body != controlBody) {
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
+
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.001f, 'y');
                             if(bounce)
                                 body->setSpeed(-(body->getSpeed().y), 'y');
                             else
                                 body->setSpeed(0, 'y');
+                        } else {
+                            printf("a");
+                            body->setAcceleration(0, 'z');
+                            body->setAcceleration(0, 'x');
                         }
                     }
                 }
@@ -52,8 +57,8 @@ void PhysicsWorld::update(float dt) {
 
 void PhysicsWorld::applyAirFriction(Body *body) {
     //doesn't work
-    body->setAcceleration((body->getSpeed().x > 0 ? -body->getSpeed().x : body->getSpeed().x) /2, 'x');
-    body->setAcceleration((body->getSpeed().z > 0 ? -body->getSpeed().z : body->getSpeed().z) /2, 'z');
+    body->addAcceleration(-(body->getSpeed().x)/2, 'x');
+    body->addAcceleration(-(body->getSpeed().z)/2, 'z');
 }
 
 glm::vec3 PhysicsWorld::getUpdatedLocation(float dt, glm::vec3 &acceleration, glm::vec3 &location,

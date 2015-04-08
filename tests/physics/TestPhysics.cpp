@@ -105,19 +105,18 @@ void TestPhysics::handleMouseInputs(SDL_Window *window) {
 }
 
 void TestPhysics::applyGravity() {
-
     b1->setAcceleration(gravity, 'y');
-
 }
 
 
 void TestPhysics::createBodies() {
     this->physics = game->physics;
-    b1 = physics->getWorld()->createBody(&entity->position, zeroVector, zeroVector, entity->getVertexBuffer()->vertexList);
-    b2 = physics->getWorld()->createBody(&entity2->position, zeroVector, zeroVector, entity2->getVertexBuffer()->vertexList);
-    b3 = physics->getWorld()->createBody(&entity3->position, zeroVector, zeroVector, entity3->getVertexBuffer()->vertexList);
-    b4 = physics->getWorld()->createBody(&entity4->position, zeroVector, zeroVector, entity4->getVertexBuffer()->vertexList);
-    floorBody = physics->getWorld()->createBody(&floor->position, zeroVector, zeroVector, floor->getVertexBuffer()->vertexList);
+
+    b1 = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
+    b2 = physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
+    b3 = physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
+    b4 = physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
+    floorBody = physics->getWorld()->createBody(floor, floor->getVertexBuffer()->vertexList);
 }
 
 void TestPhysics::initializeCamera(Game *game) {
