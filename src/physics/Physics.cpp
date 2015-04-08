@@ -19,7 +19,7 @@ PhysicsWorld *Physics::getWorld() {
 
 
 // Intersection method from Real-Time Rendering and Essential Mathematics for Games
-bool castRay(glm::vec3 ray_origin,        // Ray origin, in world space
+bool Physics::castRay(glm::vec3 ray_origin,        // Ray origin, in world space
 	glm::vec3 ray_direction,     // Ray direction (NOT target position!), in world space. Must be normalize()'d.
 	glm::vec3 aabb_min,          // Minimum X,Y,Z coords of the mesh when not transformed at all.
 	glm::vec3 aabb_max,          // Maximum X,Y,Z coords. Often aabb_min*-1 if your mesh is centered, but it's not always the case.
@@ -71,7 +71,6 @@ bool castRay(glm::vec3 ray_origin,        // Ray origin, in world space
 		}
 	}
 
-
 	// Test intersection with the 2 planes perpendicular to the OBB's Y axis
 	// Exactly the same thing than above.
 	{
@@ -80,7 +79,6 @@ bool castRay(glm::vec3 ray_origin,        // Ray origin, in world space
 		float f = glm::dot(ray_direction, yaxis);
 
 		if (fabs(f) > 0.001f){
-
 			float t1 = (e + aabb_min.y) / f;
 			float t2 = (e + aabb_max.y) / f;
 
@@ -99,7 +97,6 @@ bool castRay(glm::vec3 ray_origin,        // Ray origin, in world space
 				return false;
 		}
 	}
-
 
 	// Test intersection with the 2 planes perpendicular to the OBB's Z axis
 	// Exactly the same thing than above.

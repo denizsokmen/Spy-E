@@ -28,7 +28,6 @@ TestPhysics::TestPhysics(Game *game){
 
     this->game = game;
 
-
     initializeEntities(game);
     initializeShader();
     initializeCamera(game);
@@ -41,10 +40,10 @@ TestPhysics::TestPhysics(Game *game){
                         "./assets/texture/skybox/desert_top.jpg", "./assets/texture/skybox/desert_top.jpg",
                         "./assets/texture/skybox/desert_front.jpg","./assets/texture/skybox/desert_back.jpg");
 
-
     fpsLabel = new Label(L"FPS: 0");
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     game->gui->addSubview(fpsLabel);
+
 }
 
 void TestPhysics::update(float dt) {
@@ -54,10 +53,12 @@ void TestPhysics::update(float dt) {
 
     fpsLabel->setText(L"FPS: %f", game->fps);
 
-
+    float dist;
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
     setCameraProperties();
+    printf("Bool: %i \n", (physics->castRay(b2->getLocation(), glm::vec3(-1.0f, 0.0f, 0.0f), b3->getBoundingBox()->minVertex, b3->getBoundingBox()->minVertex, entity3->transformation, dist)));
+    printf("Dist: %f \n", dist);
 }
 
 void TestPhysics::setCameraProperties() {
@@ -65,7 +66,6 @@ void TestPhysics::setCameraProperties() {
 }
 
 void TestPhysics::handleKeyboardInputs(float dt) {
-
 
     if (game->input->isPressed("W")){
         b1->setSpeed(10.0, 'z');
@@ -115,7 +115,6 @@ void TestPhysics::createBodies() {
     b1 = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
     b2 = physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
     b3 = physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
-    b4 = physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
     floorBody = physics->getWorld()->createBody(floor, floor->getVertexBuffer()->vertexList);
 }
 
@@ -130,9 +129,10 @@ void TestPhysics::initializeShader() {
     vbo = VertexBuffer::createQuad();
 }
 
-void TestPhysics::initializeEntities(Game *game) {//pink
+void TestPhysics::initializeEntities(Game *game) {
+    //pink
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0,0,0);
+    entity->position = glm::vec3(10,0,10);
     entity->color = glm::vec3(1.0,1.0,1.0);
 
     //white
@@ -144,11 +144,6 @@ void TestPhysics::initializeEntities(Game *game) {//pink
     entity3 = game->scene->getWorld()->createRenderable("box");
     entity3->position = glm::vec3(-5, 0, 0);
     entity3->color = glm::vec3(1.0,1.0,0.5);
-
-    //yellow
-    entity4 = game->scene->getWorld()->createRenderable("box");
-    entity4->position = glm::vec3(5, 1, 0);
-    entity4->color = glm::vec3(1.0,0.5,1.0);
 
     floor = game->scene->getWorld()->createRenderable("floor");
     floor->position = glm::vec3(0,-5,0);
