@@ -22,10 +22,10 @@ class ResourceManager {
 
 
 public:
-    std::shared_ptr<Texture> createTexture(std::string name);
-    std::shared_ptr<Material> createMaterial(std::string name);
-    std::shared_ptr<Mesh> createMesh(std::string name);
-    std::shared_ptr<ShaderProgram> createShader(std::string name);
+    std::shared_ptr<Texture> createTexture(std::string& name);
+    std::shared_ptr<Material> createMaterial(std::string& name);
+    std::shared_ptr<Mesh> createMesh(std::string& name);
+    std::shared_ptr<ShaderProgram> createShader(std::string& name);
 
 
 };
