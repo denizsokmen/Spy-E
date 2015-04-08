@@ -55,18 +55,11 @@ TestGUI::TestGUI(Game *game) {
 
     for (int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable *entityTemp = loader.world->getRenderables()[i];
-        physicsWorld->createBody(&entityTemp->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0),
-                                 entityTemp->getVertexBuffer()->vertexList);
+        physicsWorld->createBody(entityTemp, entityTemp->getVertexBuffer()->vertexList);
     }
 
-    box = physicsWorld->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0),
-                                   entity->getVertexBuffer()->vertexList);
+    box = physicsWorld->createBody(entity, entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
-
-
-
-
-
 
     Image *image = new Image("./assets/texture/menu/logo.png");
     image->setFrame(Rect(game->width - 140, game->height - 25, 140, 25));

@@ -1,14 +1,14 @@
 #include "physics/Body.h"
 
-Body::Body(glm::vec3 *loc, glm::vec3 s, glm::vec3 acc, std::vector<glm::vec3> v){
+Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
 
-    location = loc;
-    speed = s;
-    acceleration = acc;
-    vertices = v;
+    this -> entity = bodyEntity;
+    this -> location = &bodyEntity->position;
+    this -> speed = zeroVector;
+    this -> acceleration = zeroVector;
+    this -> vertices = v;
 
     for(int i = 0; i < vertices.size(); i++){
-
         vertices[i].x += (*location).x;
         vertices[i].y += (*location).y;
         vertices[i].z += (*location).z;
@@ -106,10 +106,23 @@ void Body::setLocation(float location, char direction) {
     }
 }
 
-void Body::applyAirFriction(){
+Body::~Body(){
 
 }
 
-Body::~Body(){
-
+void Body::addAcceleration(float acceleration, char direction) {
+    switch (direction) {
+        case 'x':
+            this->acceleration.x += acceleration;
+            break;
+        case 'y':
+            this->acceleration.y += acceleration;
+            break;
+        case 'z':
+            this->acceleration.z += acceleration;
+            break;
+        default:
+            printf("No such direction!");
+            break;
+    }
 }

@@ -1,9 +1,12 @@
 #ifndef PHYSICSWORLD_H_INC
 #define PHYSICSWORLD_H_INC
+
 #include <vector>
 #include "Body.h"
+#include "include/world/Entity.h"
 
 class Body;
+class Entity;
 
 class PhysicsWorld{
 
@@ -15,7 +18,7 @@ public:
 
     bool bounce;
 
-    Body* createBody(glm::vec3 *loc, glm::vec3 speed, glm::vec3 acc, std::vector<glm::vec3> v);
+    Body* createBody(Entity* bodyEntity, std::vector<glm::vec3> vertices);
     void update(float dt);
     bool isCollided(Body *b1, Body *b2);
 

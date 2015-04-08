@@ -64,12 +64,10 @@ TestMenu::TestMenu(Game *game) {
 
     for (int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable *entityTemp = loader.world->getRenderables()[i];
-        game->physics->getWorld()->createBody(&entityTemp->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0),
-                                              entityTemp->getVertexBuffer()->vertexList);
+        game->physics->getWorld()->createBody(entityTemp, entityTemp->getVertexBuffer()->vertexList);
     }
 
-    box = game->physics->getWorld()->createBody(&entity->position, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0),
-                                                entity->getVertexBuffer()->vertexList);
+    box = game->physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
 

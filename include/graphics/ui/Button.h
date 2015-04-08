@@ -45,6 +45,7 @@ private:
 
 public:
     Button();
+    Button(std::wstring text, Texture* image, std::function<void()> target);
 
     void setText(std::wstring text, ControlState state);
     void setState(ControlState state);
