@@ -34,6 +34,7 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
     glUseProgram(generalShader->id);
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     for (auto& renderable: renderList) {
         glm::mat4 MVP = camera->projection * (camera->view * renderable->getTransformation());
