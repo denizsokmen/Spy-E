@@ -16,6 +16,7 @@ if( CMAKE_BINARY_DIR MATCHES " " )
 endif()
 
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Compile external dependencies 
 add_subdirectory (external)
@@ -179,7 +180,7 @@ add_library(engine STATIC
     src/graphics/Skybox.cpp
     include/graphics/Skybox.h
     src/graphics/ui/Menu.cpp
-    include/graphics/ui/Menu.h)
+    include/graphics/ui/Menu.h include/resource/ResourceManager.h src/resource/ResourceManager.cpp)
 
 
 target_link_libraries(engine
