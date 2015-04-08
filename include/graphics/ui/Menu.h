@@ -29,21 +29,19 @@ public:
 
     Button *getItem(unsigned int index);
 
+    void runSelected();
     void addItem(Button *item);
-
     void setVerticalSpace(unsigned int space);
-    void setState(unsigned int index);
     void setCursor(unsigned int index);
-
     void reverseState(Button *item);
-
     void clear();
     void draw();
-
-
     void moveCursorUp();
-
     void moveCursorDown();
+
+    void reverseState(unsigned int index);
+
+    Button *getSelectedItem();
 };
 
 

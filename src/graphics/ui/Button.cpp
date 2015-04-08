@@ -14,6 +14,9 @@ Button::Button() : View() {
     this->titleLabel = new Label();
     this->addSubview(backgroundImage);
     this->addSubview(titleLabel);
+    this->setTarget([](){
+        printf ("[GUI][Button] Target of this button is empty!.\n");
+    });
 }
 
 void Button::setTarget(std::function<void()> target) {

@@ -34,8 +34,6 @@ public:
 
 class Button : public View {
 
-protected:
-    void runTarget();
 
 private:
     Image *backgroundImage;
@@ -50,6 +48,7 @@ public:
 
     void setText(std::wstring text, ControlState state);
     void setState(ControlState state);
+    void runTarget();
 
     ControlState getState();
     void setImage(Texture *image, ControlState state);

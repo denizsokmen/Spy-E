@@ -28,27 +28,24 @@ Button *Menu::getItem(unsigned int index) {
     return this->items.at(index);
 }
 
+Button *Menu::getSelectedItem() {
+    return this->items.at(this->cursor);
+}
 
 
 void Menu::moveCursorUp() {
     if (this->cursor > 0 ) {
-        Button *previousItem = this->getItem(this->cursor);
-        unsigned int index = this->cursor - 1;
-        Button *currentItem = this->getItem(index);
-        this->reverseState(previousItem);
-        this->reverseState(currentItem);
-        this->setCursor(index);
+        this->reverseState(this->cursor);
+        this->reverseState(this->cursor-1);
+        this->setCursor(this->cursor-1);
     }
 }
 
 void Menu::moveCursorDown() {
     if (this->cursor < this->items.size() - 1) {
-        Button *previousItem = this->getItem(this->cursor);
-        unsigned int index = this->cursor + 1;
-        Button *currentItem = this->getItem(index);
-        this->reverseState(previousItem);
-        this->reverseState(currentItem);
-        this->setCursor(index);
+        this->reverseState(this->cursor);
+        this->reverseState(this->cursor+1);
+        this->setCursor(this->cursor+1);
     }
 }
 
@@ -56,6 +53,12 @@ void Menu::setCursor(unsigned int index) {
     printf("[GUI][Menu] cursor is now: %i\n", index);
     this->cursor = index;
 }
+
+void Menu::reverseState(unsigned int index) {
+    Button* item = this->getItem(index);
+    this->reverseState(item);
+}
+
 
 void Menu::reverseState(Button *item) {
     ControlState state = item->getState();
@@ -70,6 +73,7 @@ void Menu::reverseState(Button *item) {
     }
 }
 
+
 void Menu::clear() {
     this->items.clear();
 }
@@ -79,15 +83,15 @@ void Menu::placeButtons() {
         printf("[GUI][Menu] isSplitted is false\n");
         unsigned int index = 0;
         for (auto item: items) {
-            Label *label = item->getLabel();
-
-
+            //FIXME: Height must be calculated from label's font
+            //Label *label = item->getLabel();
             int height = 16;
-            Rect frame = Rect(this->frame.x, this->frame.y + (height+verticalSpace) * index++ , this->frame.w, this->frame.y);
-
+            Rect frame = Rect(this->frame.x,
+                              this->frame.y + (height+verticalSpace) * index++,
+                              this->frame.w,
+                              this->frame.y);
             item->setFrame(frame);
             this->addSubview(item);
-
         }
 
         isSplitted= true;
@@ -99,15 +103,19 @@ void Menu::setVerticalSpace(unsigned int space) {
     this->verticalSpace = space;
 }
 
+void Menu::draw() {
+    View::draw();
+    this->placeButtons();
+
+}
+
+void Menu::runSelected() {
+    this->getSelectedItem()->runTarget();
+}
 
 Menu::~Menu() {
 
 }
 
 
-void Menu::draw() {
-    View::draw();
-    this->placeButtons();
-
-}
 

@@ -25,6 +25,7 @@
 #include "graphics/ui/Menu.h"
 #include "graphics/ui/Button.h"
 #include "physics/Physics.h"
+#include  <functional>
 
 Game *game;
 
@@ -81,8 +82,6 @@ TestMenu::TestMenu(Game *game) {
     game->gui->addSubview(fpsLabel);
 
 
-//    game->sounds->open("asd", "assets/sounds/0x1b.wav");
-//    game->sounds->play("asd");
 
     menu = new Menu();
     menu->setFrame(Rect(40,game->height/2, 300, 300));
@@ -90,6 +89,11 @@ TestMenu::TestMenu(Game *game) {
     Button* startButton = new Button();
     startButton->setText(L"Start", Normal);
     startButton->setText(L"_Start_", Selected);
+    startButton->setTarget(
+            [](){
+                printf ("Start Button!.\n");
+            }
+    );
     Button* optionsButton = new Button();
     optionsButton->setText(L"Options", Normal);
     optionsButton->setText(L"_Options_", Selected);
@@ -143,7 +147,7 @@ void TestMenu::update(float dt) {
     }
 
     if (game->input->wasReleased("Enter")) {
-        game->sounds->play("start");
+        menu->runSelected();
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit)

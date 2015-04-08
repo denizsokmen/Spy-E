@@ -42,7 +42,6 @@ public:
     void draw();
 
     void init() { }
-
     void draw2D();
 
     void assignKeyboardInputs(Game *game);
