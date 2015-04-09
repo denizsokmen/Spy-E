@@ -3,6 +3,10 @@
 //
 
 #include "resource/ResourceManager.h"
+#include <graphics/Texture.h>
+#include <graphics/Material.h>
+#include <graphics/Mesh.h>
+#include <graphics/Shader.h>
 
 std::shared_ptr<Texture> ResourceManager::createTexture(std::string& name) {
 
