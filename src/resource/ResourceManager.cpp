@@ -7,6 +7,10 @@
 #include <graphics/Material.h>
 #include <graphics/Mesh.h>
 #include <graphics/Shader.h>
+#include "graphics/ObjLoader.h"
+
+/* TODO: FILE DOESN'T EXIST HANDLING*/
+
 
 
 std::shared_ptr<Texture> ResourceManager::createTexture(std::string& name) {
@@ -21,17 +25,45 @@ std::shared_ptr<Material> ResourceManager::createMaterial(std::string& name) {
 
 std::shared_ptr<Mesh> ResourceManager::createMesh(std::string& name) {
 
-    return std::make_shared<Mesh>();
+    auto it = meshes.find(name);
+    if (it == meshes.end()) {
+        std::shared_ptr<Mesh> ptr = std::make_shared<Mesh>();
+
+        /* TODO: Support more extensions */
+        VertexBuffer *buffer = objLoader->loadOBJ(name.c_str());
+        ptr->setVertexBuffer(buffer);
+
+        meshes[name] = ptr;
+        return ptr;
+    }
+    else {
+        return it->second;
+    }
+
 }
 
+
+/* Exception for shaders, shaders programs consist of a vertex and a fragment program
+ * you shouldn't specify an extension while invoking this function. It will look for
+ * .vp and .fp files.
+ */
 std::shared_ptr<ShaderProgram> ResourceManager::createShader(std::string& name) {
     auto it = shaders.find(name);
     if (it == shaders.end()) {
         std::shared_ptr<ShaderProgram> ptr = std::make_shared<ShaderProgram>();
+        ptr->load(std::string(name+".vp").c_str(), std::string(name+".fp").c_str());
         shaders[name] = ptr;
         return ptr;
     }
     else {
         return it->second;
     }
+}
+
+ResourceManager::ResourceManager() {
+
+}
+
+ResourceManager::~ResourceManager() {
+
 }

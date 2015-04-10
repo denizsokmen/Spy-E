@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 
 
     game->getController()->setState("Mainmenu");
-    if (game->init(640, 480, "Spy-E", false)) {
+    if (game->init(800, 600, "Spy-E", false)) {
 
 
         game->update();

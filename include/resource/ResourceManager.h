@@ -12,6 +12,7 @@ class Texture;
 class Material;
 class Mesh;
 class ShaderProgram;
+class ObjLoader;
 
 
 class ResourceManager {
@@ -23,12 +24,15 @@ class ResourceManager {
 
 
 public:
+    ResourceManager();
+    ~ResourceManager();
     std::shared_ptr<Texture> createTexture(std::string& name);
     std::shared_ptr<Material> createMaterial(std::string& name);
     std::shared_ptr<Mesh> createMesh(std::string& name);
     std::shared_ptr<ShaderProgram> createShader(std::string& name);
 
 
+    ObjLoader* objLoader;
 };
 
 #endif //SPYE_RESOURCEMANAGER_H
