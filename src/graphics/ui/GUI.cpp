@@ -34,3 +34,7 @@ void GUI::addSubview(View *view) {
 GUI::~GUI() {
     delete this->font;
 }
+
+View *GUI::viewWithTag(std::string tag) {
+    return this->mainView->viewWithTag(tag);
+}

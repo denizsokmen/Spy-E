@@ -8,11 +8,37 @@ View::View() {
 
 }
 
-void View::addSubview(View *view) {
-
+void View::addSubview(View* view) {
     this->subViews.push_back(view);
     this->setSystem(this->system);
     printf("[GUI] Added a subview count: %i\n", this->subViews.size());
+
+    std::string viewTag = view->getTag();
+    if (!viewTag.empty()) {
+        this->viewMap[viewTag] = view;
+    }
+}
+
+View* View::viewWithTag(std::string tag){
+    std::map<std::string, View*>::iterator iterator = this->viewMap.find(tag);
+    View* view = NULL;
+
+    if (iterator != this->viewMap.end()) {
+        view = iterator->second;
+    }
+    else {
+        printf("[GUI][View] Does not have a view with tag: %s \n", tag.c_str());
+    }
+
+    return view;
+}
+
+void View::setTag(std::string tag) {
+    this->tag = tag;
+}
+
+std::string View::getTag(){
+    return this->tag;
 }
 
 void View::draw() {

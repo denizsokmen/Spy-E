@@ -4,6 +4,7 @@
 #define SPYE_GUI_H
 
 #include "logic/System.h"
+#include <string>
 
 class Drawer;
 
@@ -23,6 +24,7 @@ public:
 
     ~GUI();
     void addSubview(View *view);
+    View* viewWithTag(std::string tag);
     void init();
     void update(float dt);
     void draw();

@@ -44,7 +44,7 @@ void PhysicsWorld::update(float dt) {
                             else
                                 body->setSpeed(0, 'y');
                         } else {
-                            printf("a");
+//                            printf("a"); FIXME: :-(
                             body->setAcceleration(0, 'z');
                             body->setAcceleration(0, 'x');
                         }

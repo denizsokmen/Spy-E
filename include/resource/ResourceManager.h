@@ -6,6 +6,7 @@
 #define SPYE_RESOURCEMANAGER_H
 #include <map>
 #include <memory>
+#include <string>
 
 class Texture;
 class Material;

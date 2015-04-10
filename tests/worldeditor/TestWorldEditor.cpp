@@ -3,16 +3,16 @@
 //
 
 #include <logic/Game.h>
+#include <graphics/ui/Label.h>
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
-#include "sound/Sounds.h"
 #include "graphics/Shader.h"
 #include "world/Camera.h"
+#include "graphics/ui/GUI.h"
 
 float horizontalAngle = 3.14f;
 float verticalAngle = 0.0f;
@@ -86,18 +86,19 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
 
-    game->sounds->open("asd", "assets/sounds/0x1b.wav");
-    game->sounds->play("asd");
 
-/*    font = new FontSDL(game->drawer);
-      font->loadFont("fonts/Arial.ttf", 16);  */
 
+    Label* fpsLabel = new Label(L"FPS: 0");
+    fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
+    fpsLabel->setTag("fpsLabel");
+    game->gui->addSubview(fpsLabel);
 
 }
 
 void WorldEditorSystem::update(float dt) {
 
-    //std::wstring s = std::wstring(L"FPS-") + std::to_wstring(fps->get());
+    ((Label*) (game->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", game->fps);
+
 
     double mouseX = game->input->getMouse()->mouseX;
     double mouseY = game->input->getMouse()->mouseY;
