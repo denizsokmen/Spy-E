@@ -241,7 +241,7 @@ target_link_libraries(testsound engine)
 add_executable(game
 	game/main.cpp
 game/SpyE.cpp game/SpyE.h game/InputState.cpp game/InputState.h
-game/MainMenu.cpp game/MainMenu.h)
+game/MainMenu.cpp game/MainMenu.h game/Player.cpp game/Player.h game/Enemy.cpp game/Enemy.h game/GameEntity.cpp game/GameEntity.h)
 
 target_link_libraries(game engine)
 

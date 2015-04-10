@@ -95,3 +95,11 @@ bool ShaderProgram::load(const char *vertexFilePath, const char *fragmentFilePat
 void ShaderProgram::compileShaders(char *vertexProgram, char *fragmentProgram) {
 
 }
+
+ShaderProgram::ShaderProgram() {
+
+}
+
+ShaderProgram::~ShaderProgram() {
+
+}

@@ -30,7 +30,7 @@ void MainMenu::draw2D() {
 	if (!active)
 		return;
 	if (drawer != NULL)
-	drawer->draw(gfxMainMenu, glm::vec2(game->width/2, game->height/2), glm::vec2(gfxMainMenu->texture->width, gfxMainMenu->texture->height));
+	drawer->draw(gfxMainMenu, glm::vec2(0,0), glm::vec2(gfxMainMenu->texture->width, gfxMainMenu->texture->height));
 }
 
 void MainMenu::update(float dt) {
