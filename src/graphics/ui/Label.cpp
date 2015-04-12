@@ -51,6 +51,7 @@ void Label::draw() {
         this->font = gui->font;
     }
 
+
     wchar_t *tempText = (wchar_t *) this->text.c_str();
 
 //    printf("Label in: x:%f y:%f text:%s\n", this->frame.x, this->frame.y, this->text.c_str());
@@ -80,7 +81,7 @@ void Label::draw() {
         }
         else {
             this->getSystem()->drawer->draw(this->font->glyphs[ch].surface,
-                                            glm::vec2(position.x, position.y) + this->font->glyphs[ch].offset,
+                                            glm::vec2(position.x, position.y),
                                             glm::vec2(this->font->glyphs[ch].surface->getTexture()->width,
                                                       this->font->glyphs[ch].surface->getTexture()->height));
             position.x += this->font->glyphs[ch].advance;
