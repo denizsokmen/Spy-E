@@ -20,6 +20,7 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alext.h>
+#include <AL/efx-presets.h>
 
 //#include <AL/efx.h>
 
@@ -29,9 +30,12 @@
 
 #define TEMP_FMT_AU AL_FORMAT_STEREO16
 
+#define MAX_EFFECTS_SLOT 4
+
 #define swap_uint32(x) (((x) >> 24) | (((x) & 0x00FF0000) >> 8) |  \
                        (((x) & 0x0000FF00) << 8) | ((x) << 24))    \
 
+static LPALGENAUXILIARYEFFECTSLOTS alGenAuxiliaryEffectSlots;
 
 void print_error(std::string error_description){
    printf("Error :  %s , process failed. \n ", error_description.data());
@@ -84,6 +88,14 @@ void Sounds::check_EFX(){
       printf("OpenAL EFX extension is found! \n ");
    }else{
       printf("OpenAL EFX extension is not found! \n Use openal-info command to check... \n ");
+   }
+}
+
+void Sounds::init_mixer(){
+   for(int i=0; i<MAX_EFFECTS_SLOT; i++){
+      alGenAuxiliaryEffectSlots(1,&EFX_mixer.Slots[i]);
+      if(alGetError() != AL_NO_ERROR)
+         print_error("Couldn't Generate Effect Slots!");
    }
 }
 

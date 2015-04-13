@@ -25,8 +25,15 @@ class Sounds : public System {
          ALuint source;
       };
 
+      struct mixer{
+         ALuint Slots[4]   = {0, 0, 0, 0};
+         ALuint Effects[2] = {0, 0};
+         ALuint Filters[1] = {0};  
+      };
+
       //sound *sounds;
       std::vector<sound> sounds;
+      mixer EFX_mixer;
 
       /* ALuint *sound_buffers;
          ALuint *sound_sources; */
@@ -37,6 +44,7 @@ class Sounds : public System {
       int loadWAV(const std::string name, const std::string file_name);
       int loadAU(const std::string name, const std::string file_name);
       int find_source_by_name(const std::string sound_name);
+      void init_mixer();
       void check_EFX();
 
 #pragma pack(push,1)
