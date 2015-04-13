@@ -21,6 +21,8 @@
 #include <AL/alc.h>
 #include <AL/alext.h>
 
+//#include <AL/efx.h>
+
 #include "sound/Sounds.h"
 
 #define NO_NAME "NONAME"
@@ -77,6 +79,14 @@ bool check_SUN_AU(char* AU_t){
    return ifSUNau;
 }
 
+void Sounds::check_EFX(){
+   if(alcIsExtensionPresent(current_device, "ALC_EXT_EFX") == AL_TRUE){
+      printf("OpenAL EFX extension is found! \n ");
+   }else{
+      printf("OpenAL EFX extension is not found! \n Use openal-info command to check... \n ");
+   }
+}
+
 int Sounds::find_source_by_name(const std::string sound_name){
    for(int c = 0; c<sounds.size(); c++){
       /* printf("c1: %s |",   sound_name);
@@ -104,7 +114,9 @@ Sounds::Sounds() {
    // Initiating OpenAL 
    current_device = alcOpenDevice(NULL);                                            
    current_context = alcCreateContext(current_device, NULL);                                   
-   alcMakeContextCurrent(current_context);               
+   alcMakeContextCurrent(current_context);   
+
+   check_EFX();            
 
 /*                  ALUT Version                  */     
 

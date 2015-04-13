@@ -37,6 +37,7 @@ class Sounds : public System {
       int loadWAV(const std::string name, const std::string file_name);
       int loadAU(const std::string name, const std::string file_name);
       int find_source_by_name(const std::string sound_name);
+      void check_EFX();
 
 #pragma pack(push,1)
 
