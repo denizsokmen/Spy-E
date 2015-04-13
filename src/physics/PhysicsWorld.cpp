@@ -34,9 +34,11 @@ void PhysicsWorld::update(float dt) {
 
             for (Body *controlBody : bodies) {
                 if (body != controlBody) {
+
+
+
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
-
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.001f, 'y');
                             if(bounce)
@@ -44,7 +46,6 @@ void PhysicsWorld::update(float dt) {
                             else
                                 body->setSpeed(0, 'y');
                         } else {
-//                            printf("a"); FIXME: :-(
                             body->setAcceleration(0, 'z');
                             body->setAcceleration(0, 'x');
                         }
@@ -56,7 +57,6 @@ void PhysicsWorld::update(float dt) {
 }
 
 void PhysicsWorld::applyAirFriction(Body *body) {
-    //doesn't work
     body->addAcceleration(-(body->getSpeed().x)/2, 'x');
     body->addAcceleration(-(body->getSpeed().z)/2, 'z');
 }
@@ -83,12 +83,11 @@ bool PhysicsWorld::isCollided(Body *b1, Body *b2){
     BoundingBox *box1 = b1->getBoundingBox();
     BoundingBox *box2 = b2->getBoundingBox();
 
-    return ( box1->getMaxVertex().x > box2->getMinVertex().x &&
-             box1->getMinVertex().x < box2->getMaxVertex().x &&
-             box1->getMaxVertex().y > box2->getMinVertex().y &&
-             box1->getMinVertex().y < box2->getMaxVertex().y &&
-             box1->getMaxVertex().z > box2->getMinVertex().z &&
-             box1->getMinVertex().z < box2->getMaxVertex().z   );
-
+    return ( box1->getMaxVertex().x + b1->getLocation().x > box2->getMinVertex().x + b2->getLocation().x &&
+            box1->getMinVertex().x + b1->getLocation().x < box2->getMaxVertex().x + b2->getLocation().x &&
+            box1->getMaxVertex().y + b1->getLocation().y > box2->getMinVertex().y + b2->getLocation().y &&
+            box1->getMinVertex().y + b1->getLocation().y < box2->getMaxVertex().y + b2->getLocation().y &&
+            box1->getMaxVertex().z + b1->getLocation().z > box2->getMinVertex().z + b2->getLocation().z &&
+            box1->getMinVertex().z + b1->getLocation().z < box2->getMaxVertex().z + b2->getLocation().z  );
 }
 

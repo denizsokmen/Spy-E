@@ -7,19 +7,11 @@ Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
     this -> speed = zeroVector;
     this -> acceleration = zeroVector;
     this -> vertices = v;
-
-    for(int i = 0; i < vertices.size(); i++){
-        vertices[i].x += (*location).x;
-        vertices[i].y += (*location).y;
-        vertices[i].z += (*location).z;
-    }
-
     boundingBox = new BoundingBox(vertices);
 }
 
 void Body::setLocation(glm::vec3 loc) {
     *location = loc;
-    boundingBox->update(loc);
 }
 
 void Body::setSpeed(glm::vec3 s) {
@@ -125,4 +117,21 @@ void Body::addAcceleration(float acceleration, char direction) {
             printf("No such direction!");
             break;
     }
+}
+
+Entity *Body::getEntity() {
+    return this->entity;
+}
+
+BoundingBox *Body::getBoundingBoxFromLocation() {
+
+    std::vector<glm::vec3> tempVertices1 = this->vertices;
+
+    for(int i = 0; i < tempVertices1.size(); i++){
+        tempVertices1[i].x += this->getLocation().x;
+        tempVertices1[i].y += this->getLocation().y;
+        tempVertices1[i].z += this->getLocation().z;
+    }
+
+    return new BoundingBox(tempVertices1);
 }

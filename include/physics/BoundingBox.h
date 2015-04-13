@@ -26,7 +26,6 @@ public:
 
     void update(glm::vec3 position);
 
-
 private:
     void createFromVertices();
 

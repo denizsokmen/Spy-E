@@ -57,7 +57,12 @@ void TestPhysics::update(float dt) {
     handleMouseInputs(window);
     handleKeyboardInputs(dt);
     setCameraProperties();
-    printf("Bool: %i \n", (physics->castRay(b2->getLocation(), glm::vec3(-1.0f, 0.0f, 0.0f), b3->getBoundingBox()->minVertex, b3->getBoundingBox()->minVertex, entity3->transformation, dist)));
+
+
+
+    //casting a ray from 0 0 0 in the direction of -1 0 0 to a box in position -5 0 0 with a correct bounding box with no success
+    printf("Bool: %d \n", (physics->castRay(glm::vec3(0,0,0), glm::vec3(-1.0f, 0.0f, 0.0f), b3, dist)));
+    //distance isn't showing the right value too
     printf("Dist: %f \n", dist);
 }
 
@@ -66,24 +71,23 @@ void TestPhysics::setCameraProperties() {
 }
 
 void TestPhysics::handleKeyboardInputs(float dt) {
-
     if (game->input->isPressed("W")){
-        b1->setSpeed(10.0, 'z');
+        b1->setAcceleration(10.0, 'z');
     }
     else if (game->input->isPressed("S"))
-        b1->setSpeed(-10.0, 'z');
+        b1->setAcceleration(-10.0, 'z');
     else
-        b1->setSpeed(0.0, 'z');
+        b1->setAcceleration(0.0, 'z');
 
     if (game->input->isPressed("A"))
-        b1->setSpeed(-10.0, 'x');
+        b1->setAcceleration(-10.0, 'x');
     else if (game->input->isPressed("D"))
-        b1->setSpeed(10.0, 'x');
+        b1->setAcceleration(10.0, 'x');
     else
-        b1->setSpeed(0.0, 'x');
+        b1->setAcceleration(0.0, 'x');
 
     if (game->input->isPressed("Space"))
-        b1->setSpeed(10.0, 'y');
+        b1->setAcceleration(10.0, 'y');
 
     if (game->input->wasReleased("Escape")) game->quit = true;
     if (game->input->isPressed("Up"))   game->scene->camera->move(0.0f, 0.0f, speed *dt);
@@ -105,7 +109,7 @@ void TestPhysics::handleMouseInputs(SDL_Window *window) {
 }
 
 void TestPhysics::applyGravity() {
-    b1->setAcceleration(gravity, 'y');
+    //b1->setAcceleration(gravity, 'y');
 }
 
 
@@ -142,7 +146,7 @@ void TestPhysics::initializeEntities(Game *game) {
 
     //blue
     entity3 = game->scene->getWorld()->createRenderable("box");
-    entity3->position = glm::vec3(-5, 0, 0);
+    entity3->position = glm::vec3(-5.0f, 0, 0);
     entity3->color = glm::vec3(1.0,1.0,0.5);
 
     floor = game->scene->getWorld()->createRenderable("floor");

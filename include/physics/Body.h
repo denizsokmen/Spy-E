@@ -30,10 +30,12 @@ public:
     void setAcceleration(glm::vec3 acceleration);
     void setAcceleration(float acceleration, char direction);
     void addAcceleration(float acceleration, char direction);
+    Entity* getEntity();
     glm::vec3 getAcceleration();
     glm::vec3 getSpeed();
     glm::vec3 getLocation();
     std::vector<glm::vec3> getVertices();
     BoundingBox* getBoundingBox();
+    BoundingBox* getBoundingBoxFromLocation();
 };
 #endif

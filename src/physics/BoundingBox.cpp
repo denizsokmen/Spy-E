@@ -40,8 +40,8 @@ void BoundingBox::createFromVertices(){
 }
 
 void BoundingBox::update(glm::vec3 position) {
-    minVertex = glm::vec3(position.x - width/2, position.y - height/2, position.z - depth/2);
-    maxVertex = glm::vec3(position.x + width/2, position.y + height/2, position.z + depth/2);
+  //  minVertex = glm::vec3(position.x - width/2, position.y - height/2, position.z - depth/2);
+    //maxVertex = glm::vec3(position.x + width/2, position.y + height/2, position.z + depth/2);
 
 }
 
