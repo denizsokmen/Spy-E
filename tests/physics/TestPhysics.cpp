@@ -58,8 +58,10 @@ void TestPhysics::update(float dt) {
     handleKeyboardInputs(dt);
     setCameraProperties();
 
+
+
     //casting a ray from 0 0 0 in the direction of -1 0 0 to a box in position -5 0 0 with a correct bounding box with no success
-    printf("Bool: %i \n", (physics->castRay(glm::vec3(0,0,0), glm::vec3(-1.0f, 0.0f, 0.0f), b3, dist)));
+    printf("Bool: %d \n", (physics->castRay(glm::vec3(0,0,0), glm::vec3(-1.0f, 0.0f, 0.0f), b3, dist)));
     //distance isn't showing the right value too
     printf("Dist: %f \n", dist);
 }

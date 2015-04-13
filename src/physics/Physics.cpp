@@ -21,10 +21,9 @@ PhysicsWorld *Physics::getWorld() {
 
 
 bool Physics::castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, Body* body, float& intersectionDistance) {
-	glm::vec3 aabbMin = body->getBoundingBoxFromLocation()->minVertex;
-	glm::vec3 aabbMax = body->getBoundingBoxFromLocation()->maxVertex;
-	printf("BB: %f %f %f - %f %f %f\n", aabbMin.x, aabbMin.y, aabbMin.z, aabbMax.x, aabbMax.y, aabbMax.z);
-	this->castRay(rayOrigin, rayDirection, aabbMin, aabbMax, body->getEntity()->getTransformation(), intersectionDistance);
+	glm::vec3 aabbMin = body->getBoundingBox()->minVertex;
+	glm::vec3 aabbMax = body->getBoundingBox()->maxVertex;
+	return this->castRay(rayOrigin, rayDirection, aabbMin, aabbMax, body->getEntity()->getTransformation(), intersectionDistance);
 }
 
 // Intersection method from Real-Time Rendering and Essential Mathematics for Games
@@ -83,7 +82,6 @@ bool Physics::castRay(glm::vec3 rayOrigin,        // Ray origin, in world space
 		}
 	}
 
-
 	// Test intersection with the 2 planes perpendicular to the OBB's Y axis
 	// Exactly the same thing than above.
 	{
@@ -140,7 +138,6 @@ bool Physics::castRay(glm::vec3 rayOrigin,        // Ray origin, in world space
 				return false;
 		}
 	}
-
 	intersection_distance = tMin;
 	return true;
 

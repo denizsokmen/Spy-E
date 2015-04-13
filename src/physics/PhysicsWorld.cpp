@@ -34,9 +34,11 @@ void PhysicsWorld::update(float dt) {
 
             for (Body *controlBody : bodies) {
                 if (body != controlBody) {
+
+
+
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
-                        printf("a");
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.001f, 'y');
                             if(bounce)
@@ -78,30 +80,14 @@ glm::vec3 PhysicsWorld::getUpdatedSpeed(float dt, glm::vec3 &acceleration, glm::
 
 bool PhysicsWorld::isCollided(Body *b1, Body *b2){
 
-    std::vector<glm::vec3> tempVertices1 = b1->getVertices();
-    std::vector<glm::vec3> tempVertices2 = b2->getVertices();
+    BoundingBox *box1 = b1->getBoundingBox();
+    BoundingBox *box2 = b2->getBoundingBox();
 
-    for(int i = 0; i < tempVertices1.size(); i++){
-        tempVertices1[i].x += b1->getLocation().x;
-        tempVertices1[i].y += b1->getLocation().y;
-        tempVertices1[i].z += b1->getLocation().z;
-    }
-
-    for(int i = 0; i < tempVertices2.size(); i++){
-        tempVertices2[i].x += b2->getLocation().x;
-        tempVertices2[i].y += b2->getLocation().y;
-        tempVertices2[i].z += b2->getLocation().z;
-    }
-
-    BoundingBox *tempBox1 = new BoundingBox(tempVertices1);
-    BoundingBox *tempBox2 = new BoundingBox(tempVertices2);
-
-    return ( tempBox1->getMaxVertex().x > tempBox2->getMinVertex().x &&
-            tempBox1->getMinVertex().x < tempBox2->getMaxVertex().x &&
-            tempBox1->getMaxVertex().y > tempBox2->getMinVertex().y &&
-            tempBox1->getMinVertex().y < tempBox2->getMaxVertex().y &&
-            tempBox1->getMaxVertex().z > tempBox2->getMinVertex().z &&
-            tempBox1->getMinVertex().z < tempBox2->getMaxVertex().z   );
-
+    return ( box1->getMaxVertex().x + b1->getLocation().x > box2->getMinVertex().x + b2->getLocation().x &&
+            box1->getMinVertex().x + b1->getLocation().x < box2->getMaxVertex().x + b2->getLocation().x &&
+            box1->getMaxVertex().y + b1->getLocation().y > box2->getMinVertex().y + b2->getLocation().y &&
+            box1->getMinVertex().y + b1->getLocation().y < box2->getMaxVertex().y + b2->getLocation().y &&
+            box1->getMaxVertex().z + b1->getLocation().z > box2->getMinVertex().z + b2->getLocation().z &&
+            box1->getMinVertex().z + b1->getLocation().z < box2->getMaxVertex().z + b2->getLocation().z  );
 }
 
