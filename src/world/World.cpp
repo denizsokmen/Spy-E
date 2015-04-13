@@ -2,7 +2,7 @@
 #include "graphics/Renderable.h"
 #include "world/World.h"
 #include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "Constants.h"
 
 int World::getEntityCount() {

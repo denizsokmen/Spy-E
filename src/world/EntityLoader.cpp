@@ -10,7 +10,7 @@
 #include "graphics/Mesh.h"
 #include "world/World.h"
 #include "world/EntityLoader.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "utils/rapidxml_utils.hpp"
 #include "Constants.h"

@@ -2,7 +2,7 @@
 #include "logic/Game.h"
 #include "world/Scene.h"
 #include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "graphics/ui/Image.h"
 

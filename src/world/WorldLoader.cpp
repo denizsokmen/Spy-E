@@ -7,7 +7,7 @@
 #include "world/EntityLoader.h"
 #include <glm/glm.hpp>
 #include <graphics/Mesh.h>
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include <iostream>
 #include <sstream>

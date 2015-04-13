@@ -7,7 +7,7 @@
 #include <graphics/Material.h>
 #include <graphics/Mesh.h>
 #include <graphics/Shader.h>
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 
 /* TODO: FILE DOESN'T EXIST HANDLING*/
 

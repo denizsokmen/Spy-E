@@ -3,7 +3,7 @@
 #include "graphics/VertexBuffer.h"
 #include "graphics/Renderer.h"
 #include "graphics/Renderable.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "world/Camera.h"
 
 

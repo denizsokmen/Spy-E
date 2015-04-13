@@ -5,7 +5,7 @@
 #include <sstream>
 #include <fstream>
 
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/VertexBuffer.h"
 
 //Courtesy of https://github.com/syoyo/tinyobjloader/blob/master/tiny_obj_loader.cc

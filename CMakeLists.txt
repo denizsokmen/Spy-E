@@ -68,7 +68,7 @@ add_definitions(
 
 add_library(engine STATIC
 	src/graphics/Shader.cpp
-	src/graphics/ObjLoader.cpp
+	src/resource/ObjLoader.cpp
 	src/graphics/Renderable.cpp
 	src/graphics/VertexBuffer.cpp
 	src/graphics/SubMesh.cpp
@@ -105,7 +105,7 @@ add_library(engine STATIC
 
 	include/graphics/Renderable.h
 	include/graphics/Shader.h
-	include/graphics/ObjLoader.h
+	include/resource/ObjLoader.h
 	include/graphics/Mesh.h
 	include/graphics/VertexBuffer.h
 	include/graphics/SubMesh.h
