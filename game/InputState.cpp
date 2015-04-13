@@ -64,23 +64,51 @@ void InputState::update(float dt) {
 
 
         if (game->input->wasReleased("Escape")) {
+
             Menu* menu = (Menu*) game->gui->viewWithTag("menu");
+
             menu->hidden = false;
             mainmenu->active=true;
-            spye->active=false;
+
             currentState = STATE_MAINMENU;
+
+
+
         }
 
     }
     else if(currentState == STATE_MAINMENU) {
         Menu* menu = (Menu*) game->gui->viewWithTag("menu");
+
+        if (game->input->wasReleased("Escape")) {
+
+            if (spye->active) {
+                menu->hidden = true;
+                mainmenu->active=false;
+                currentState = STATE_GAME;
+            }
+
+
+        }
+
         if (game->input->isPressed("Enter")) {
 
             if (menu->getSelectedItem()->getTag() == "start") {
-                menu->hidden = true;
-                currentState = STATE_GAME;
-                mainmenu->active=false;
-                spye->activate();
+                if (!spye->active) {
+                    menu->hidden = true;
+                    currentState = STATE_GAME;
+                    mainmenu->active=false;
+                    spye->activate();
+                    Button* startButton = menu->getItem(0);
+                    startButton->setText(L"Resume", ControlState::Selected);
+                    startButton->setText(L"> Resume", ControlState::Normal);
+                }
+                else {
+                    menu->hidden = true;
+                    mainmenu->active=false;
+                    currentState = STATE_GAME;
+                }
+
             }
             else {
                 menu->getSelectedItem()->runTarget();

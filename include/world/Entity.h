@@ -19,12 +19,13 @@ public:
     glm::quat orientation;
     glm::mat4 transformation;
     glm::vec3 color;
+    glm::vec3 scale;
 
     Entity();
     virtual ~Entity() {};
     glm::mat4& getTransformation() {
 
-        transformation = glm::translate(glm::mat4(1.0f), position) * glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::translate(glm::mat4(1.0f), pivot);
+        transformation = glm::translate(glm::mat4(1.0f), position) * glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::scale(glm::mat4(1.0), scale) * glm::translate(glm::mat4(1.0f), pivot);
        /* transformation[3][0] = position[0];
         transformation[3][1] = position[1];
         transformation[3][2] = position[2];*/
