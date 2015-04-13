@@ -7,6 +7,7 @@
 
 class Body;
 class Entity;
+class BoundingBox;
 
 class PhysicsWorld{
 

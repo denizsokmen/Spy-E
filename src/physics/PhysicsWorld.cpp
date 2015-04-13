@@ -36,7 +36,7 @@ void PhysicsWorld::update(float dt) {
                 if (body != controlBody) {
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
-
+                        printf("a");
                         if (body->getLocation().y <= 2.5f) {
                             body->setLocation(2.001f, 'y');
                             if(bounce)
@@ -44,7 +44,6 @@ void PhysicsWorld::update(float dt) {
                             else
                                 body->setSpeed(0, 'y');
                         } else {
-//                            printf("a"); FIXME: :-(
                             body->setAcceleration(0, 'z');
                             body->setAcceleration(0, 'x');
                         }
@@ -56,7 +55,6 @@ void PhysicsWorld::update(float dt) {
 }
 
 void PhysicsWorld::applyAirFriction(Body *body) {
-    //doesn't work
     body->addAcceleration(-(body->getSpeed().x)/2, 'x');
     body->addAcceleration(-(body->getSpeed().z)/2, 'z');
 }
@@ -80,15 +78,30 @@ glm::vec3 PhysicsWorld::getUpdatedSpeed(float dt, glm::vec3 &acceleration, glm::
 
 bool PhysicsWorld::isCollided(Body *b1, Body *b2){
 
-    BoundingBox *box1 = b1->getBoundingBox();
-    BoundingBox *box2 = b2->getBoundingBox();
+    std::vector<glm::vec3> tempVertices1 = b1->getVertices();
+    std::vector<glm::vec3> tempVertices2 = b2->getVertices();
 
-    return ( box1->getMaxVertex().x > box2->getMinVertex().x &&
-             box1->getMinVertex().x < box2->getMaxVertex().x &&
-             box1->getMaxVertex().y > box2->getMinVertex().y &&
-             box1->getMinVertex().y < box2->getMaxVertex().y &&
-             box1->getMaxVertex().z > box2->getMinVertex().z &&
-             box1->getMinVertex().z < box2->getMaxVertex().z   );
+    for(int i = 0; i < tempVertices1.size(); i++){
+        tempVertices1[i].x += b1->getLocation().x;
+        tempVertices1[i].y += b1->getLocation().y;
+        tempVertices1[i].z += b1->getLocation().z;
+    }
+
+    for(int i = 0; i < tempVertices2.size(); i++){
+        tempVertices2[i].x += b2->getLocation().x;
+        tempVertices2[i].y += b2->getLocation().y;
+        tempVertices2[i].z += b2->getLocation().z;
+    }
+
+    BoundingBox *tempBox1 = new BoundingBox(tempVertices1);
+    BoundingBox *tempBox2 = new BoundingBox(tempVertices2);
+
+    return ( tempBox1->getMaxVertex().x > tempBox2->getMinVertex().x &&
+            tempBox1->getMinVertex().x < tempBox2->getMaxVertex().x &&
+            tempBox1->getMaxVertex().y > tempBox2->getMinVertex().y &&
+            tempBox1->getMinVertex().y < tempBox2->getMaxVertex().y &&
+            tempBox1->getMaxVertex().z > tempBox2->getMinVertex().z &&
+            tempBox1->getMinVertex().z < tempBox2->getMaxVertex().z   );
 
 }
 
