@@ -144,9 +144,6 @@ add_library(engine STATIC
 	include/utils/rapidxml_utils.hpp
 	include/world/WorldLoader.h
 
-	src/sound/Sounds.cpp
-	include/sound/Sounds.h
-
 	src/graphics/Texture.cpp
 
 	src/graphics/Material.cpp
