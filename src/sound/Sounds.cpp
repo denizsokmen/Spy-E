@@ -30,7 +30,12 @@
 #define swap_uint32(x) (((x) >> 24) | (((x) & 0x00FF0000) >> 8) |  \
                        (((x) & 0x0000FF00) << 8) | ((x) << 24))    \
 
-ALenum get_format(short bit_for_sample, short channels){
+
+void print_error(std::string error_description){
+   printf("Error :  %s , process failed. \n ", error_description.data());
+}
+
+ALenum get_format_WAVE(short bit_for_sample, short channels){
    ALenum format=0;
 
    if(bit_for_sample == 8) 
@@ -79,7 +84,7 @@ int Sounds::find_source_by_name(const std::string sound_name){
       if(!(sounds[c].name != sound_name)){
          return (sounds[c].source);
       }else{
-         // Need to add error function here!
+         print_error("Couldn't Find Sound");
       }
    }
 }
@@ -141,7 +146,7 @@ int Sounds::loadWAV(const std::string name, const std::string file_name){
       RIFF_Wave_file* sound_file = (RIFF_Wave_file*) malloc(sizeof(RIFF_Wave_file));
       fread(sound_file ,sizeof(RIFF_Wave_file), 1, file_ptr);
 
-      ALenum format = get_format(sound_file->bits_per_sample, 
+      ALenum format = get_format_WAVE(sound_file->bits_per_sample, 
                                  sound_file->channels);
 
    /* File chunk check */
@@ -172,7 +177,7 @@ int Sounds::loadWAV(const std::string name, const std::string file_name){
      
       // If there is a problem with generating Source
       if(alGetError() != AL_NO_ERROR){ 
-         printf("Couldn't Generate Source! (alGenSource/s()) \n");
+         print_error("Couldn't Generate Source! (alGenSource/s())");
       } 
         
       alBufferData(c_sound.buffer, 
@@ -186,7 +191,7 @@ int Sounds::loadWAV(const std::string name, const std::string file_name){
 
       // If there is a problem with loading buffer                 
       if(alGetError() != AL_NO_ERROR){ 
-         printf("Couldn't Load Buffer! (alBufferData()) \n");
+         print_error("Couldn't Load Buffer! (alBufferData())");
       } 
       
       // Linking Source
@@ -197,7 +202,7 @@ int Sounds::loadWAV(const std::string name, const std::string file_name){
       sounds.push_back(c_sound);
 
       return c_sound.source;
-   }else{printf("Couldn't Find File! (fopen()) \n");}
+   }else{print_error("Couldn't Find File! (fopen())");}
    // a function is needed for giving errors.
    // ? what to return here
 
@@ -221,8 +226,8 @@ int Sounds::loadAU(const std::string name, const std::string file_name){
       sound_file->sample_rate = swap_uint32(sound_file->sample_rate);
       sound_file->channels    = swap_uint32(sound_file->channels);
 
-   /* ALenum format = get_format(sound_file->bits_per_sample, 
-                                 sound_file->channels); */
+   /* ALenum format = get_format_WAVE(sound_file->bits_per_sample, 
+                                      sound_file->channels); */
 
       check_SUN_AU(sound_file->AU_t);
    /*   
@@ -243,7 +248,7 @@ int Sounds::loadAU(const std::string name, const std::string file_name){
       alGenSources(1, &c_sound.source);
      
       if(alGetError() != AL_NO_ERROR){ 
-         printf("Couldn't Generate Source! (alGenSource/s()) \n");
+         print_error("Couldn't Generate Source! (alGenSource/s())");
       } 
         
       alBufferData(c_sound.buffer, 
@@ -256,7 +261,7 @@ int Sounds::loadAU(const std::string name, const std::string file_name){
       free(data);
 
       if(alGetError() != AL_NO_ERROR){ 
-         printf("Couldn't Load Buffer! (alBufferData()) \n");
+         print_error("Couldn't Load Buffer! (alBufferData())");
       } 
       
       alSourcei(c_sound.source, AL_BUFFER, 
@@ -266,7 +271,7 @@ int Sounds::loadAU(const std::string name, const std::string file_name){
       sounds.push_back(c_sound);
 
       return c_sound.source;
-   }else{printf("Couldn't Find File! (fopen()) \n");}
+   }else{print_error("Couldn't Find File! (fopen())");}
    // a function is needed for giving errors.
    // ? what to return here
 
@@ -310,7 +315,7 @@ void Sounds::set_listener_position(ALfloat x, ALfloat y, ALfloat z){
 }
 void Sounds::set_listener_orientation(ALfloat x, ALfloat y, ALfloat z,
                               ALfloat x2, ALfloat y2, ALfloat z2){
-    // position and up(focues)
+    // position and up(focus)
     ALfloat listener_orientation[] = {x,  y,  z, x2, y2, z2};
     alListenerfv(AL_ORIENTATION, listener_orientation);
 }
