@@ -28,7 +28,7 @@ private:
     Label *fpsLabel;
 
 public:
-    PhysicsWorld *physicsWorld;
+    Physics *physics;
     Body *box;
     VertexBuffer *vbo;
 

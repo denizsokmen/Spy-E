@@ -1,11 +1,11 @@
 #include "physics/PhysicsWorld.h"
 
-PhysicsWorld::PhysicsWorld(){
+PhysicsWorld::PhysicsWorld(Physics* physics){
+    this->physics = physics;
     bounce = false;
 }
 
 PhysicsWorld::~PhysicsWorld() {
-
 }
 
 Body* PhysicsWorld::createBody(Entity* bodyEntity, std::vector<glm::vec3> vertices){
@@ -34,9 +34,6 @@ void PhysicsWorld::update(float dt) {
 
             for (Body *controlBody : bodies) {
                 if (body != controlBody) {
-
-
-
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
                         if (body->getLocation().y <= 2.5f) {
@@ -91,3 +88,6 @@ bool PhysicsWorld::isCollided(Body *b1, Body *b2){
             box1->getMinVertex().z + b1->getLocation().z < box2->getMaxVertex().z + b2->getLocation().z  );
 }
 
+std::vector<Body *> PhysicsWorld::getBodies() {
+    return this->bodies;
+}

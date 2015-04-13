@@ -96,7 +96,16 @@ void TestGameSystem::update(float dt) {
         box->setAcceleration(0, 'z');
     }
 
+    glm::vec3 adir = entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f);
 
+    if(game->input->justPressed("Enter")) {
+        float dist;
+        for(auto body : physics->getWorld()->getBodies()) {
+            if (physics->castRay(box->getLocation(), adir, body, dist) && body != box) {
+                body->getEntity()->color = glm::vec3(0.03, 0.07, 0.02);
+            }
+        }
+    }
 
     if(game->input->isPressed("Space"))
         box->setSpeed(10.0f, 'y');
@@ -133,6 +142,8 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
     game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
     game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
     game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
+    game->input->mapButton("LControl", new KeyboardButtonHandler(SDL_SCANCODE_LCTRL, game->input));
+    game->input->mapButton("Enter", new KeyboardButtonHandler(SDL_SCANCODE_RETURN, game->input));
 }
 
 void TestGameSystem::draw() {

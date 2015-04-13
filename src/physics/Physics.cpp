@@ -1,7 +1,7 @@
 #include "physics/Physics.h"
 
 Physics::Physics(){
-    physicsWorld = new PhysicsWorld();
+    physicsWorld = new PhysicsWorld(this);
 }
 
 Physics::~Physics(){

@@ -40,7 +40,7 @@ TestGUI::TestGUI(Game *game) {
     entity->color = glm::vec3(0, 0, 1.0f);
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
-    physicsWorld = new PhysicsWorld();
+    physics = new Physics();
     assignKeyboardInputs(game);
     assignMouseInputs(game);
 
@@ -55,10 +55,10 @@ TestGUI::TestGUI(Game *game) {
 
     for (int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable *entityTemp = loader.world->getRenderables()[i];
-        physicsWorld->createBody(entityTemp, entityTemp->getVertexBuffer()->vertexList);
+        physics->getWorld()->createBody(entityTemp, entityTemp->getVertexBuffer()->vertexList);
     }
 
-    box = physicsWorld->createBody(entity, entity->getVertexBuffer()->vertexList);
+    box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
     box->setAcceleration(-30.0f, 'y');
 
     Image *image = new Image("./assets/texture/menu/logo.png");
@@ -118,14 +118,10 @@ void TestGUI::update(float dt) {
         box->setSpeed(10.0f, 'y');
 
     if (game->input->justPressed("B"))
-        physicsWorld->bounce = !physicsWorld->bounce;
+        physics->getWorld()->bounce = !physics->getWorld()->bounce;
 
     if (game->input->wasReleased("Escape") || game->input->quit)
         game->quit = true;
-
-
-    physicsWorld->update(dt);
-
 }
 
 void TestGUI::assignMouseInputs(Game *game) {/*  Use keycodes given below for mouse input:

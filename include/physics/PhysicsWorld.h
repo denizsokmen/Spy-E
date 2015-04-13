@@ -8,13 +8,15 @@
 class Body;
 class Entity;
 class BoundingBox;
+class Physics;
 
 class PhysicsWorld{
 
     std::vector<Body*> bodies;
+    Physics *physics;
 
 public:
-    PhysicsWorld();
+    PhysicsWorld(Physics*);
     ~PhysicsWorld();
 
     bool bounce;
@@ -22,6 +24,7 @@ public:
     Body* createBody(Entity* bodyEntity, std::vector<glm::vec3> vertices);
     void update(float dt);
     bool isCollided(Body *b1, Body *b2);
+    std::vector<Body*> getBodies();
 
     glm::vec3 getUpdatedSpeed(float dt, glm::vec3 &acceleration, glm::vec3 &speed);
 
