@@ -5,7 +5,7 @@
 #include "graphics/ui/View.h"
 
 View::View() {
-
+    hidden = false;
 }
 
 void View::addSubview(View* view) {
@@ -42,8 +42,10 @@ std::string View::getTag(){
 }
 
 void View::draw() {
-    for (auto subView : subViews) {
-        subView->draw();
+    if (!hidden) {
+        for (auto subView : subViews) {
+            subView->draw();
+        }
     }
 }
 
@@ -64,7 +66,9 @@ void View::setFrame(Rect frame) {
 
 
 View::~View() {
+
     for (auto subView : subViews) {
         delete subView;
     }
+
 }

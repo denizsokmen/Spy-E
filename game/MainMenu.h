@@ -3,14 +3,13 @@
 #include <logic/System.h>
 
 class Game;
-class Drawable;
 class Drawer;
 
 class MainMenu : public System {
 	Game* game;
 
 public:
-	MainMenu(Game* game, Drawer* drawer);
+	MainMenu(Game* game);
 	~MainMenu();
 	void init();
 	void update(float dt);
@@ -18,7 +17,7 @@ public:
 	void draw2D();
 	bool active;
 
-	Drawable *gfxMainMenu;
+
 	Drawer *drawer;
 };
 

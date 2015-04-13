@@ -14,6 +14,7 @@ enum GameState {
     STATE_GAME
 };
 
+class GUI;
 class Game;
 class SpyE;
 class MainMenu;

@@ -2,7 +2,7 @@
 #include "logic/Game.h"
 #include "world/Scene.h"
 #include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "input/KeyboardButtonHandler.h"
 #include "input/MouseButtonHandler.h"
@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     SpyE *spye = new SpyE(game);
-    MainMenu *mainmenu = new MainMenu(game, game->drawer);
+    MainMenu *mainmenu = new MainMenu(game);
     InputState* inputState = new InputState(game, spye, mainmenu);
 
     game->getController()->addState("Mainmenu");

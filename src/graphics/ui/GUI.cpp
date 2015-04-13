@@ -7,6 +7,7 @@ GUI::GUI(Drawer *drawer) {
     this->mainView->setSystem(this);
     this->drawer = drawer;
     this->font = new Font("fonts/Arial.ttf", 16);
+
 }
 
 

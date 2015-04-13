@@ -13,10 +13,8 @@ class View;
 
 class GUI : public System {
 
-private:
-    View *mainView;
-
 public:
+    View *mainView;
     Font *font;
     Drawer *drawer;
 

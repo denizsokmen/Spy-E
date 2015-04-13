@@ -12,6 +12,11 @@
 #include <glm/gtc/quaternion.hpp>
 #include "MainMenu.h"
 #include <graphics/Renderable.h>
+#include <graphics/ui/Menu.h>
+#include <graphics/ui/Button.h>
+
+#include "graphics/ui/GUI.h"
+#include "sound/Sounds.h"
 
 void InputState::init() {
     game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
@@ -37,9 +42,6 @@ void InputState::init() {
 void InputState::update(float dt) {
 
 
-    if (game->input->wasReleased("Escape") || game->input->quit)
-        game->quit = true;
-
     if (currentState == STATE_GAME) {
         Entity* entity = spye->entity;
         if (game->input->isPressed("Left")) {
@@ -50,8 +52,6 @@ void InputState::update(float dt) {
             entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
         }
 
-
-
         if (game->input->isPressed("Up")) {
             glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
             entity->position += forward * 10.0f * dt;
@@ -61,13 +61,42 @@ void InputState::update(float dt) {
             glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
             entity->position += back * 10.0f * dt;
         }
+
+
+        if (game->input->wasReleased("Escape")) {
+            Menu* menu = (Menu*) game->gui->viewWithTag("menu");
+            menu->hidden = false;
+            mainmenu->active=true;
+            spye->active=false;
+            currentState = STATE_MAINMENU;
+        }
+
     }
     else if(currentState == STATE_MAINMENU) {
+        Menu* menu = (Menu*) game->gui->viewWithTag("menu");
         if (game->input->isPressed("Enter")) {
-            currentState = STATE_GAME;
-            mainmenu->active=false;
-            spye->activate();
+
+            if (menu->getSelectedItem()->getTag() == "start") {
+                menu->hidden = true;
+                currentState = STATE_GAME;
+                mainmenu->active=false;
+                spye->activate();
+            }
+            else {
+                menu->getSelectedItem()->runTarget();
+            }
+
         }
+        if (game->input->wasReleased("Up")) {
+            menu->moveCursorUp();
+            game->sounds->play("select");
+        }
+
+        if (game->input->wasReleased("Down")) {
+            menu->moveCursorDown();
+            game->sounds->play("select");
+        }
+
     }
 
 

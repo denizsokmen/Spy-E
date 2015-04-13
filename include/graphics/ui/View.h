@@ -24,7 +24,9 @@ private:
     std::map<std::string, View*> viewMap;
     std::string tag;
 
+
 public:
+    bool hidden;
     View();
     ~View();
     std::vector<View *> subViews;
@@ -39,6 +41,7 @@ public:
     virtual void setTag(std::string tag);
     virtual std::string getTag();
     virtual View *viewWithTag(std::string tag);
+
 };
 
 
