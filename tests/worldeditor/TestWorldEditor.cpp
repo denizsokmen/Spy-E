@@ -4,6 +4,7 @@
 
 #include <logic/Game.h>
 #include <graphics/ui/Label.h>
+#include <utils/FileOperations.h>
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/Renderable.h"
@@ -92,6 +93,16 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     fpsLabel->setTag("fpsLabel");
     game->gui->addSubview(fpsLabel);
+
+    FileOperations* operations = new FileOperations();
+
+    std::vector<std::string> directories = operations->getAllDirectories("./assets/entities/");
+
+    for (auto d : directories) {
+        printf("[Entities] %s \n", d.c_str());
+    }
+
+    delete operations;
 
 }
 
