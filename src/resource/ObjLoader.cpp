@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <resource/tiny_obj_loader.h>
+#include <graphics/Material.h>
 
 #include "resource/ObjLoader.h"
 #include "graphics/VertexBuffer.h"
@@ -86,30 +87,45 @@ VertexBuffer* ObjLoader::loadOBJ(const char * path) {
     }
 
 
+   /* Material* material = new Material();
+    material->diffuse = glm::vec3(materials[0].diffuse[0], materials[0].diffuse[1], materials[0].diffuse[2]);
+    material->ambient = glm::vec3(materials[0].ambient[0], materials[0].ambient[1], materials[0].ambient[2]);
+    material->specular = glm::vec3(materials[0].specular[0], materials[0].specular[1], materials[0].specular[2]);
+    material->shininess = materials[0].shininess;
+    material->dissolve = materials[0].dissolve;
 
-//    for (size_t i = 0; i < materials.size(); i++) {
-//        printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
-//        printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
-//        printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
-//        printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
-//        printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0], materials[i].transmittance[1], materials[i].transmittance[2]);
-//        printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0], materials[i].emission[1], materials[i].emission[2]);
-//        printf("  material.Ns = %f\n", materials[i].shininess);
-//        printf("  material.Ni = %f\n", materials[i].ior);
-//        printf("  material.dissolve = %f\n", materials[i].dissolve);
-//        printf("  material.illum = %d\n", materials[i].illum);
-//        printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
-//        printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
-//        printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
-//        printf("  material.map_Ns = %s\n", materials[i].normal_texname.c_str());
-//        std::map::const_iterator it(materials[i].unknown_parameter.begin());
-//        std::map::const_iterator itEnd(materials[i].unknown_parameter.end());
-//        for (; it != itEnd; it++) {
-//            printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
-//        }
-//        printf("\n");
-//    }
-//
+*/
+    for (size_t i = 0; i < materials.size(); i++) {
+
+        Material* material = new Material();
+        material->diffuse = glm::vec3(materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
+        material->ambient = glm::vec3(materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
+        material->specular = glm::vec3(materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
+        material->shininess = materials[i].shininess;
+        material->dissolve = materials[i].dissolve;
+
+        printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
+        printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
+        printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
+        printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
+        printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0], materials[i].transmittance[1], materials[i].transmittance[2]);
+        printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0], materials[i].emission[1], materials[i].emission[2]);
+        printf("  material.Ns = %f\n", materials[i].shininess);
+        printf("  material.Ni = %f\n", materials[i].ior);
+        printf("  material.dissolve = %f\n", materials[i].dissolve);
+        printf("  material.illum = %d\n", materials[i].illum);
+        printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
+        printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
+        printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
+        printf("  material.map_Ns = %s\n", materials[i].normal_texname.c_str());
+        //std::map::const_iterator it(materials[i].unknown_parameter.begin());
+        //std::map::const_iterator itEnd(materials[i].unknown_parameter.end());
+        //for (; it != itEnd; it++) {
+        //    printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
+        //}
+        printf("\n");
+    }
+
 
     vertexBuffer->upload();
     return vertexBuffer;
