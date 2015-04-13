@@ -100,6 +100,7 @@ add_library(engine STATIC
 	src/input/KeyboardButtonHandler.cpp
 	src/input/MouseButtonHandler.cpp
 	src/input/Mouse.cpp
+
 	src/sound/Sounds.cpp
 	include/sound/Sounds.h
 
@@ -143,9 +144,6 @@ add_library(engine STATIC
 	include/utils/rapidxml_print.hpp
 	include/utils/rapidxml_utils.hpp
 	include/world/WorldLoader.h
-
-	src/sound/Sounds.cpp
-	include/sound/Sounds.h
 
 	src/graphics/Texture.cpp
 

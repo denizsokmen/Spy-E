@@ -20,11 +20,14 @@ sound_manager.play("sound");
 
 TODO:
 
-- May decode ogg to raw sound data
+- May decode ogg to raw sound data(VORBIS includes needed)
 - Big endian order must be covered for WAV/raw sound files.
 - More error checks
 - Standalone sound class
-- Direct data erasure
+- Deleting sound data directly
+- AU support need to be reimplemented(Data in incorrect order)
+- Recognize AU audio format as OpenAL declaration
+- Use of OpenAL effects(EFX extension)
 
 Done
 
