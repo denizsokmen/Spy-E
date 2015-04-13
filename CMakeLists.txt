@@ -178,7 +178,13 @@ add_library(engine STATIC
     src/graphics/Skybox.cpp
     include/graphics/Skybox.h
     src/graphics/ui/Menu.cpp
-    include/graphics/ui/Menu.h include/resource/ResourceManager.h src/resource/ResourceManager.cpp)
+    include/graphics/ui/Menu.h
+    include/resource/ResourceManager.h
+    src/resource/ResourceManager.cpp
+    include/resource/tiny_obj_loader.h
+    src/resource/tiny_obj_loader.cpp
+
+    )
 
 
 target_link_libraries(engine
