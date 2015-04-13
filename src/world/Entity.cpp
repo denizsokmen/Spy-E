@@ -6,7 +6,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 Entity::Entity() {
-
+    scale = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 glm::quat Entity::getOrientation() const {
