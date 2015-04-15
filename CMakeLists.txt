@@ -223,7 +223,7 @@ target_link_libraries(testGUI engine)
 add_executable(easteregg
 	tests/easteregg/EasterEgg.cpp
 	tests/easteregg/EasterEgg.h
-)
+include/utils/FileOperations.h)
 
 target_link_libraries(easteregg engine)
 
