@@ -11,8 +11,7 @@ View::View() {
 void View::addSubview(View* view) {
     this->subViews.push_back(view);
     this->setSystem(this->system);
-    printf("[GUI] Added a subview count: %i\n", this->subViews.size());
-
+    printf("[GUI] Added a subview count: %lu\n", this->subViews.size());
     std::string viewTag = view->getTag();
     if (!viewTag.empty()) {
         this->viewMap[viewTag] = view;
@@ -71,4 +70,11 @@ View::~View() {
         delete subView;
     }
 
+}
+
+bool View::isClicked(int mouseX, int mouseY) {
+    return this->frame.x < mouseX &&
+    this->frame.y < mouseY &&
+    this->frame.x + this->frame.w > mouseX &&
+    this->frame.y + this->frame.h > mouseY;
 }

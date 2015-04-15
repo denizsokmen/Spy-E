@@ -59,10 +59,6 @@ void TestGameSystem::update(float dt) {
 
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
 
-
-
-
-
     glm::vec3 dir = entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 dirup = entity->orientation * glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -109,6 +105,8 @@ void TestGameSystem::update(float dt) {
 
     if(game->input->isPressed("Space"))
         box->setSpeed(10.0f, 'y');
+    else if(game->input->isPressed("Shift"))
+        box->setSpeed(-10.0f, 'y');
 
     if(game->input->justPressed("B"))
         physics->getWorld()->bounce = !physics->getWorld()->bounce;
@@ -144,6 +142,7 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
     game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
     game->input->mapButton("LControl", new KeyboardButtonHandler(SDL_SCANCODE_LCTRL, game->input));
     game->input->mapButton("Enter", new KeyboardButtonHandler(SDL_SCANCODE_RETURN, game->input));
+    game->input->mapButton("Shift", new KeyboardButtonHandler(SDL_SCANCODE_LSHIFT, game->input));
 }
 
 void TestGameSystem::draw() {

@@ -36,15 +36,20 @@ void PhysicsWorld::update(float dt) {
                 if (body != controlBody) {
                     if (isCollided(body, controlBody)) {
                         body->setLocation(location);
-                        if (body->getLocation().y <= 2.5f) {
-                            body->setLocation(2.001f, 'y');
+                        if (body->getLocation().y < 2.1f) {
+                            body->setLocation(2.5f, 'y');
+                            body->setAcceleration(0, 'y');
+                            body->setSpeed(0, 'y');
                             if(bounce)
                                 body->setSpeed(-(body->getSpeed().y), 'y');
                             else
                                 body->setSpeed(0, 'y');
+
                         } else {
-                            body->setAcceleration(0, 'z');
-                            body->setAcceleration(0, 'x');
+                            printf("b");
+                            body->setSpeed(0, 'x');
+                            body->setSpeed(0, 'z');
+
                         }
                     }
                 }

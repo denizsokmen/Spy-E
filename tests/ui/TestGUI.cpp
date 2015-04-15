@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 TestGUI::TestGUI(Game *game) {
     this->game = game;
     entity = game->scene->getWorld()->createRenderable("rabbit");
-    entity->position = glm::vec3(0, 10.0f, 0);
+    entity->position = glm::vec3(5.0f, 0.0f, 0);
     entity->scale = glm::vec3(5.0f, 5.0f, 5.0f);
     entity->color = glm::vec3(0, 0, 1.0f);
 
@@ -46,11 +46,9 @@ TestGUI::TestGUI(Game *game) {
     assignKeyboardInputs(game);
     assignMouseInputs(game);
 
-
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
     vbo = VertexBuffer::createQuad();
-
 
     WorldLoader loader(game->scene->getWorld());
     loader.load("./worlds/LevelOne-1.0.xml");
@@ -64,6 +62,7 @@ TestGUI::TestGUI(Game *game) {
     box->setAcceleration(-30.0f, 'y');
 
     Image *image = new Image("./assets/texture/menu/logo.png");
+    image->setTag("image1");
     image->setFrame(Rect(game->width - 140, game->height - 25, 140, 25));
     game->gui->addSubview(image);
 
@@ -72,8 +71,8 @@ TestGUI::TestGUI(Game *game) {
     game->gui->addSubview(fpsLabel);
 
 
-    game->sounds->open("asd", "assets/sounds/0x1b.wav");
-    game->sounds->play("asd");
+   // game->sounds->open("asd", "assets/sounds/0x1b.wav");
+    //game->sounds->play("asd");
 
 
 }
@@ -83,17 +82,18 @@ void TestGUI::update(float dt) {
     fpsLabel->setText(L"FPS: %f", game->fps);
 
 
+    if(game->input->justPressed("Left Click") &&
+       game->gui->viewWithTag("image1")->isClicked(game->input->getMouse()->mouseX, game->input->getMouse()->mouseY))
+        printf("%s Clicked", game->gui->viewWithTag("image1")->getTag().c_str());
+
+    //printf("%i", game->gui->viewWithTag("image1")->hidden);
+
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,
                                               entity->getPosition().z + -10.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
-
-    if (game->input->isPressed("Left Click")) {
-        entity->pivot = glm::vec3(1.0f, 0.0f, 1.0f);
-
-    }
 
     if (game->input->isPressed("Left")) {
         entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -148,6 +148,12 @@ void TestGUI::assignKeyboardInputs(Game *game) {/*Use scan codes for mapping key
     game->input->mapButton("Up", new KeyboardButtonHandler(SDL_SCANCODE_UP, game->input));
     game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
     game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
+    game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
+    game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
+    game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
+    game->input->mapButton("D", new KeyboardButtonHandler(SDL_SCANCODE_D, game->input));
+    game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
+    game->input->mapButton("Right Click", new MouseButtonHandler(SDL_BUTTON_RIGHT, game->input));
 }
 
 void TestGUI::draw() {

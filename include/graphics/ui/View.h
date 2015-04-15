@@ -3,16 +3,13 @@
 #define SPYE_VIEW_H
 
 #include "graphics/ui/Primitives.h"
+#include "graphics/ui/GUI.h"
 #include <glm/glm.hpp>
 #include <vector>
 #include <map>
 #include <string>
 
-
-class GUI;
-
 class Image;
-
 
 class View {
 
@@ -24,7 +21,6 @@ private:
     std::map<std::string, View*> viewMap;
     std::string tag;
 
-
 public:
     bool hidden;
     View();
@@ -34,6 +30,7 @@ public:
     Image *backgroundImage;
     GUI *getSystem();
 
+    virtual bool isClicked(int mouseX, int mouseY);
     virtual void addSubview(View *view);
     virtual void setSystem(GUI *system);
     virtual void setFrame(Rect frame);

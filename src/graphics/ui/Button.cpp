@@ -70,7 +70,6 @@ Button::~Button() {
         Style *style = iterator->second;
         delete style;
     }
-
 }
 
 ControlState Button::getState() {
