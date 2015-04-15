@@ -7,6 +7,8 @@
 #include <iostream>
 #include <resource/tiny_obj_loader.h>
 #include <graphics/Material.h>
+#include <graphics/Mesh.h>
+#include <graphics/SubMesh.h>
 
 #include "resource/ObjLoader.h"
 #include "graphics/VertexBuffer.h"
@@ -41,14 +43,21 @@ VertexBuffer* ObjLoader::loadOBJ(const char * path) {
     }
 
 
+    Mesh* mesh = new Mesh();
+
+
     std::cout << "[OBJLoader] # of shapes    : " << shapes.size() << std::endl;
     std::cout << "[OBJLoader] # of materials : " << materials.size() << std::endl;
 
 
+
+
     VertexBuffer* vertexBuffer = new VertexBuffer();
-
-
     for (size_t i = 0; i < shapes.size(); i++) {
+      //  VertexBuffer* vertexBuffer = new VertexBuffer();
+        SubMesh *submesh = new SubMesh();
+        mesh->subMeshes.push_back(submesh);
+
         printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
         printf("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
         printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
@@ -84,6 +93,10 @@ VertexBuffer* ObjLoader::loadOBJ(const char * path) {
 
 
         }
+        //vertexBuffer->upload();
+        submesh->vertexBuffer = vertexBuffer;
+
+
     }
 
 

@@ -7,7 +7,7 @@
 
 #include <GL/glew.h>
 #include <vector>
-
+#include <utils/MemoryPool.h>
 
 class ShaderProgram;
 class Scene;
@@ -24,16 +24,18 @@ class Renderer {
 
     GLuint vaoid;
 
-    private:
+private:
         void loadGeneralShader();
 
-    public:
-        ShaderProgram* generalShader;
-        Renderer();
-        ~Renderer();
-        void render(Camera* camera, std::vector<Renderable*> renderList);
+public:
+    ShaderProgram* generalShader;
+    Renderer();
+    ~Renderer();
+    void render(Camera* camera);
+    void updateRenderList(World* world, Camera* camera, float dt);
 
-
+    std::vector<Renderable*> renderList;
+   // MemoryPool<Renderable*> renderList;
 };
 
 #endif

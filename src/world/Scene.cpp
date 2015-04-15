@@ -7,9 +7,6 @@
 
 #include <iostream>
 
-void Scene::draw() {
-    renderer->render(camera, renderList);
-}
 
 Scene::~Scene() {
 
@@ -25,10 +22,24 @@ Scene::Scene() {
 }
 
 void Scene::update(float dt) {
-    renderList.clear();
+   /* renderList.clear();
 
     for (Renderable* renderable: world->getRenderables()) {
         renderList.push_back(renderable);
 
-    }
+    }*/
+}
+
+void Scene::updateRenderList(float dt) {
+    renderer->updateRenderList(world, camera, dt);
+    /*renderList.clear();
+
+    for (Renderable* renderable: world->getRenderables()) {
+        renderList.push_back(renderable);
+
+    }*/
+}
+
+void Scene::draw() {
+    renderer->render(camera);
 }

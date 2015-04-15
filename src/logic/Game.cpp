@@ -110,9 +110,11 @@ void Game::update() {
         }
         timer->endLoop();
 
+        if (isUpdated)
+            scene->updateRenderList(frameTime);
+
 		frameTime = ((float)(SDL_GetTicks() - tempTime)) / 1000.0f;
 		tempTime = SDL_GetTicks();
-
 		if (isUpdated) {
 			controller->draw();
 			controller->draw2D();

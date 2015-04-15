@@ -25,7 +25,7 @@ void Renderer::loadGeneralShader() {
 	
 }
 
-void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
+void Renderer::render(Camera* camera) {
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -59,4 +59,13 @@ void Renderer::render(Camera* camera, std::vector<Renderable*> renderList) {
 
 Renderer::~Renderer() {
 
+}
+
+
+void Renderer::updateRenderList(World *world, Camera *camera, float dt) {
+    renderList.clear();
+
+    for (Renderable* renderable: world->getRenderables()) {
+        renderList.push_back(renderable);
+    }
 }

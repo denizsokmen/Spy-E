@@ -5,6 +5,7 @@
 #include "VertexBuffer.h"
 
 class VertexBuffer;
+class SubMesh;
 
 class Mesh {
 
@@ -14,6 +15,7 @@ private:
 
 
 public:
+
 	VertexBuffer *getVertexBuffer() const {
 		return vertexBuffer;
 	}
@@ -24,6 +26,7 @@ public:
 public:
 	Mesh();
 	~Mesh();
+	std::vector<SubMesh*> subMeshes;
 };
 
 

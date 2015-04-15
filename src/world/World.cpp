@@ -23,7 +23,7 @@ Renderable* World::createRenderable(const char* name) {
     return entity;
 }
 
-std::vector<Entity*> World::getEntities() {
+std::vector<Entity*>& World::getEntities() {
     return entities;
 }
 Entity* World::getEntity(int identifier) {
@@ -46,7 +46,7 @@ void World::addEntities(std::vector<Entity *> *entities) {
     }
 }
 
-std::vector<Renderable *> World::getRenderables() {
+std::vector<Renderable *>& World::getRenderables() {
     return renderables;
 }
 

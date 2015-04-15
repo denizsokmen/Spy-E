@@ -5,7 +5,7 @@
 #include <logic/Game.h>
 #include "TestSound.h"
 #include "graphics/Mesh.h"
-#include "graphics/ObjLoader.h"
+#include "resource/ObjLoader.h"
 #include "graphics/Renderable.h"
 #include "world/Scene.h"
 #include "input/KeyboardButtonHandler.h"

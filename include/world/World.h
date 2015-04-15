@@ -28,8 +28,8 @@ class World {
 
 	Entity *createEntity();
 
-		std::vector<Entity*> getEntities();
-		std::vector<Renderable*> getRenderables();
+		std::vector<Entity*>& getEntities();
+		std::vector<Renderable*>& getRenderables();
 		void addEntity(Entity *entity);
 		void addEntities(std::vector<Entity *> *entities);
 

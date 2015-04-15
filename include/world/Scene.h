@@ -3,6 +3,7 @@
 
 #include "logic/System.h"
 #include "world/World.h"
+#include "utils/MemoryPool.h"
 #include <vector>
 
 class World;
@@ -23,8 +24,10 @@ public:
 	~Scene();
 	void draw();
 	void update(float dt);
+	void updateRenderList(float dt);
 
 	std::vector<Renderable*> renderList;
+	MemoryPool<Renderable*> renderPool;
 
 	void init() {}
 
