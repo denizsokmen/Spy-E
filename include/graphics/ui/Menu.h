@@ -31,7 +31,6 @@ public:
 
     void runSelected();
     void addItem(Button *item);
-    void setVerticalSpace(unsigned int space);
     void setCursor(unsigned int index);
     void reverseState(Button *item);
     void clear();
@@ -42,6 +41,8 @@ public:
     void reverseState(unsigned int index);
 
     Button *getSelectedItem();
+
+
 };
 
 

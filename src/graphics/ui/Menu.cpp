@@ -15,7 +15,6 @@ Menu::Menu() : View() {
 }
 
 
-
 void Menu::addItem(Button *item) {
 
     if (this->items.size() == 0)
@@ -25,12 +24,11 @@ void Menu::addItem(Button *item) {
     this->items.push_back(item);
 }
 
-
-Button *Menu::getItem(unsigned int index) {
+Button* Menu::getItem(unsigned int index) {
     return this->items.at(index);
 }
 
-Button *Menu::getSelectedItem() {
+Button* Menu::getSelectedItem() {
     return this->items.at(this->cursor);
 }
 
@@ -87,9 +85,9 @@ void Menu::placeButtons() {
         for (auto item: items) {
             //FIXME: Height must be calculated from label's font
             //Label *label = item->getLabel();
-            int height = 16;
+
             Rect frame = Rect(this->frame.x,
-                              this->frame.y + (height+verticalSpace) * index++,
+                              this->frame.y + (this->frame.h / items.size()) * index++,
                               this->frame.w,
                               this->frame.h / items.size());
             item->setFrame(frame);
@@ -101,9 +99,6 @@ void Menu::placeButtons() {
 }
 
 
-void Menu::setVerticalSpace(unsigned int space) {
-    this->verticalSpace = space;
-}
 
 void Menu::draw() {
     View::draw();

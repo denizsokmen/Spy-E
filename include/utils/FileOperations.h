@@ -12,9 +12,7 @@
 class FileOperations {
 
 public:
-
-
-    std::vector<std::string> getAllDirectories(std::string path){
+    static std::vector<std::string> getAllDirectories(std::string path){
         DIR *dir;
         struct dirent *ent;
         std::vector<std::string> directories;

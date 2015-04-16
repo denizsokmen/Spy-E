@@ -40,7 +40,7 @@ void InputState::init() {
 }
 
 void InputState::update(float dt) {
-
+    
 
     if (currentState == STATE_GAME) {
         Entity* entity = spye->entity;

@@ -8,9 +8,7 @@
 #include <map>
 
 class Texture;
-
 class Image;
-
 class Label;
 
 enum ControlState {
@@ -28,13 +26,9 @@ public:
         color = Color();
         texture = NULL;
     }
-
 };
 
-
 class Button : public View {
-
-
 private:
     Image *backgroundImage;
     Label *titleLabel;
@@ -45,24 +39,25 @@ private:
 
 public:
     Button();
-    Button(std::wstring text, Texture* image, std::function<void()> target);
+    ~Button();
 
     void setText(std::wstring text, ControlState state);
+    void setText(std::string text, ControlState state);
+    void setText(std::string text);
+    void setText(std::wstring text);
+
+    void setFrame(Rect frame);
     void setState(ControlState state);
+    void setImage(Texture *image, ControlState state);
+    void setTarget(std::function<void()> target);
     void runTarget();
 
     ControlState getState();
-    void setImage(Texture *image, ControlState state);
-    void setTarget(std::function<void()> target);
-
-    ~Button();
-
-    void setFrame(Rect frame);
     Label *getLabel();
 
+    // View's virtual functions
     void draw();
-
-    bool isClicked(std::string buttonKey);
+    bool isMouseInside();
 };
 
 

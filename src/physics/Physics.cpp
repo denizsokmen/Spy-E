@@ -1,4 +1,5 @@
 #include "physics/Physics.h"
+#include <limits>
 
 Physics::Physics(){
     physicsWorld = new PhysicsWorld(this);
@@ -17,8 +18,24 @@ PhysicsWorld *Physics::getWorld() {
 }
 
 
-// Intersection method from Real-Time Rendering and Essential Mathematics for Games
+Body* Physics::getNearestBody(glm::vec3 rayOrigin, glm::vec3 rayDirection){
+	printf("rayOrigin: (%f, %f, %f)\n", rayOrigin.x, rayOrigin.y, rayOrigin.z);
+	printf("rayDirection: (%f, %f, %f)\n", rayDirection.x, rayDirection.y, rayDirection.z);
+	float minDistance = std::numeric_limits<float>::max();
+	Body* nearestBody = NULL;
+	std::vector<Body*> bodies = this->getWorld()->getBodies();
+	for (auto body : bodies) {
+		float distance = 0;
+		bool isIntersected = this->castRay(rayOrigin, rayDirection,body, distance);
 
+		if (isIntersected) {
+			printf("Distance of body: %f \n", distance);
+			if (distance < minDistance)
+				nearestBody = body;
+		}
+	}
+	return nearestBody;
+}
 
 bool Physics::castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, Body* body, float& intersectionDistance) {
 	glm::vec3 aabbMin = body->getBoundingBox()->minVertex;
@@ -143,3 +160,6 @@ bool Physics::castRay(glm::vec3 rayOrigin,        // Ray origin, in world space
 
 }
 
+glm::vec3 Physics::lerp(glm::vec3 A, glm::vec3 B, float t) {
+	return A*t + B*(1.f-t);
+}

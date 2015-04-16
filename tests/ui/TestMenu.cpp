@@ -83,7 +83,7 @@ TestMenu::TestMenu(Game *game) {
 
     menu = new Menu();
     menu->setTag("menu");
-    menu->setFrame(Rect(40,game->height/2, 160, 160));
+
 
     Button* startButton = new Button();
     startButton->setTag("startButton");
@@ -113,7 +113,7 @@ TestMenu::TestMenu(Game *game) {
     menu->addItem(optionsButton);
     menu->addItem(extraButton);
     menu->addItem(exitButton);
-    menu->setVerticalSpace(16);
+    menu->setFrame(Rect(40,game->height/2, 160, 5*22));
     game->gui->addSubview(menu);
 
 

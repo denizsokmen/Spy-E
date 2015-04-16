@@ -28,13 +28,15 @@ void MainMenu::init() {
 
 	Menu* menu = new Menu();
 	menu->setTag("menu");
-	menu->setFrame(Rect(40,game->height/2, 300, 300));
+
 
 
 	Button* startButton = new Button();
 	startButton->setText(L"Start", Normal);
 	startButton->setText(L"> Start", Selected);
 	startButton->setTag("start");
+
+
 
 	Button* optionsButton = new Button();
 	optionsButton->setText(L"Options", Normal);
@@ -57,7 +59,7 @@ void MainMenu::init() {
 	menu->addItem(optionsButton);
 	menu->addItem(extraButton);
 	menu->addItem(exitButton);
-	menu->setVerticalSpace(16);
+	menu->setFrame(Rect(40,game->height/2, 70, 22*5));
 	game->gui->addSubview(menu);
 
 	game->sounds->open("select", "assets/sounds/select.wav");

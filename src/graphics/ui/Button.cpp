@@ -10,12 +10,12 @@ Button::Button() : View() {
     this->state = ControlState::Normal;
     this->styleMap[ControlState::Normal] = new Style();
     this->styleMap[ControlState::Selected] = new Style();
-    this->backgroundImage = new Image();
+    this->backgroundImage = new Image("./assets/texture/debug/rectangle.png");
     this->titleLabel = new Label();
     this->addSubview(backgroundImage);
     this->addSubview(titleLabel);
-    this->setTarget([](){
-        printf ("[GUI][Button] Target of this button is empty!.\n");
+    this->setTarget([this](){
+        printf ("[GUI][Button] Target of '%s' button is empty!.\n", this->getTag().c_str());
     });
 }
 
@@ -80,9 +80,29 @@ Label *Button::getLabel() {
     return this->titleLabel;
 }
 
-bool Button::isClicked(std::string buttonKey) {
-    bool clicked = View::isClicked(buttonKey);
-    if(clicked)
-        this->runTarget();
-    return clicked;
+
+void Button::setText(std::string text, ControlState state) {
+    std::wstring wstring;
+    wstring.assign(text.begin(), text.end());
+    this->setText(wstring, state);
 }
+
+void Button::setText(std::string text) {
+    std::wstring wstring;
+    wstring.assign(text.begin(), text.end());
+    this->setText(wstring);
+}
+
+void Button::setText(std::wstring text) {
+    this->setText(text, Normal);
+    this->setText(text, Selected);
+}
+
+bool Button::isMouseInside() {
+    bool isInside = View::isMouseInside();
+    if(isInside)
+        this->runTarget();
+    return isInside;
+
+}
+

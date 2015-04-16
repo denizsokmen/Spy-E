@@ -63,27 +63,36 @@ void View::setFrame(Rect frame) {
     this->frame = frame;
 }
 
-View::~View() {
 
+void View::setFrame(float x, float y, float w, float h) {
+    this->setFrame(Rect(x,y,w,h));
+}
+
+
+bool View::isMouseInside() {
+    float mouseX = this->getSystem()->getInput()->getMouse()->mouseX;
+    float mouseY = this->getSystem()->getInput()->getMouse()->mouseY;
+    bool inside = this->frame.x < mouseX &&
+                   this->frame.y < mouseY &&
+                   this->frame.x + this->frame.w > mouseX &&
+                   this->frame.y + this->frame.h > mouseY;
+    return inside;
+}
+
+void View::handleEvents() {
+    if(this->isMouseInside()) {
+        for (auto subView : subViews)
+            subView->handleEvents();
+    }
+}
+
+
+View::~View() {
     for (auto subView : subViews) {
         delete subView;
     }
 }
 
-bool View::isClicked(std::string buttonKey) {
-    float mouseX = this->getSystem()->getInput()->getMouse()->mouseX;
-    float mouseY = this->getSystem()->getInput()->getMouse()->mouseY;
-    bool clicked = this->frame.x < mouseX &&
-                   this->frame.y < mouseY &&
-                   this->frame.x + this->frame.w > mouseX &&
-                   this->frame.y + this->frame.h > mouseY;
-    return clicked;
-}
-
-void View::handleEvents(){
-    if(this->isClicked("Left Click")) {
-//        printf("tag: %s \n", this->tag.c_str());
-        for (auto subView : subViews)
-            subView->handleEvents();
-    }
+Rect View::getFrame() {
+    return this->frame;
 }

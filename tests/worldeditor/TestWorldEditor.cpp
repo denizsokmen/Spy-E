@@ -5,6 +5,9 @@
 #include <logic/Game.h>
 #include <graphics/ui/Label.h>
 #include <utils/FileOperations.h>
+#include <graphics/ui/Menu.h>
+#include <graphics/ui/Button.h>
+#include <physics/Body.h>
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/Renderable.h"
@@ -28,10 +31,10 @@ int main(int argc, char* argv[])
 {
     game = new Game();
     if (game->init(640, 480, "Spy-E", false)) {
-        //TestGameSystem *test = new TestGameSystem(game);
-        WorldEditorSystem *test = new WorldEditorSystem(game);
-        // TestPhysics *test = new TestPhysics(game);
-        game->getController()->addCoreSystem(test);
+
+        WorldEditorSystem *worldEditorSystem = new WorldEditorSystem(game);
+
+        game->getController()->addCoreSystem(worldEditorSystem);
         game->update();
     }
 
@@ -43,30 +46,37 @@ int main(int argc, char* argv[])
 }
 
 
+
+
+
 WorldEditorSystem::WorldEditorSystem(Game *game) {
     this->game = game;
 
 
     Renderable* entity = game->scene->getWorld()->createRenderable("box");
+    game->physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
     entity->position = glm::vec3(0,0,0);
     entity->color = glm::vec3(1.0,1.0,1.0);
 
 
 
     Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
+    game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
     entity2->position = glm::vec3(2.0,0,0);
     entity2->color = glm::vec3(0.5,1.0,1.0);
 
 
 
     Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
+    game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
     entity3->position = glm::vec3(-2.0,0.0,0);
     entity3->color = glm::vec3(0.5,0.5,1.0);
 
 
     Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
+    game->physics->getWorld()->createBody(floorEntity, floorEntity->getVertexBuffer()->vertexList);
     floorEntity->position = glm::vec3(0,-2.0f,0);
-    floorEntity->color = glm::vec3(1.0,1.0,1.0);
+    floorEntity->color = glm::vec3(1.0,0.5,1.0);
 
 
 
@@ -74,6 +84,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
     game->input->mapButton("S", new KeyboardButtonHandler(SDL_SCANCODE_S, game->input));
     game->input->mapButton("D", new KeyboardButtonHandler(SDL_SCANCODE_D, game->input));
+    game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
     game->input->mapButton("Escape", new KeyboardButtonHandler(SDL_SCANCODE_ESCAPE, game->input));
     game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
     game->input->mapButton("Right Click", new MouseButtonHandler(SDL_BUTTON_RIGHT, game->input));
@@ -86,75 +97,106 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
-
-
-
     Label* fpsLabel = new Label(L"FPS: 0");
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     fpsLabel->setTag("fpsLabel");
     game->gui->addSubview(fpsLabel);
 
-    FileOperations* operations = new FileOperations();
+    Label* entitiesLabel = new Label(L"Entities:");
 
-    std::vector<std::string> directories = operations->getAllDirectories("./assets/entities/");
+
+    Menu* menu = new Menu();
+
+
+    entitiesLabel->setFrame(((5.0*game->width)/6.0)-20, 10, 100, 100);
+    std::vector<std::string> directories = FileOperations::getAllDirectories("./assets/entities/");
 
     for (auto d : directories) {
+        Button* button = new Button();
+        button->setText(d);
+        button->setTag(d);
         printf("[Entities] %s \n", d.c_str());
+        menu->addItem(button);
     }
 
-    delete operations;
+    Rect menuFrame = Rect((5.0*game->width)/6.0, 30, game->width/8.0, 20*directories.size());
+    menu->setFrame(menuFrame);
 
+    game->gui->addSubview(menu);
+    game->gui->addSubview(entitiesLabel);
+    game->input->showCursor(true);
 }
 
 void WorldEditorSystem::update(float dt) {
 
     ((Label*) (game->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", game->fps);
+    float mouseX = game->input->getMouse()->mouseX;
+    float mouseY = game->input->getMouse()->mouseY;
+
+    if(game->input->justPressed("Left Click")){
+        game->gui->mainView->handleEvents();
 
 
-    double mouseX = game->input->getMouse()->mouseX;
-    double mouseY = game->input->getMouse()->mouseY;
-
-    horizontalAngle = mouseSpeed * float(game->width/2 - mouseX);
-    verticalAngle = mouseSpeed * float(game->height/2 - mouseY);
-
-    SDL_Window* window = game->input->mainWindow;
-
-    if(game->input->focus) //TODO: all game should be inside this loop
-        game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
+        glm::vec4 viewPort = glm::vec4(0,0,float(game->width), float(game->height));
 
 
-	game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
 
-    if (game->input->justPressed("Left Click"))
-        printf("left clicked\n");
+        glm::vec3 rayStart = glm::unProject(glm::vec3(mouseX, float(game->height)-mouseY, 0),
+                                       game->scene->camera->view,
+                                       game->scene->camera->projection,
+                                        viewPort);
 
-    if (game->input->justPressed("Right Click"))
-        printf("right clicked\n");
+        glm::vec3 rayEnd = glm::unProject(glm::vec3(mouseX, float(game->height)-mouseY, 1.0),
+                                        game->scene->camera->view,
+                                        game->scene->camera->projection,
+                                        viewPort);
 
 
-    if (game->input->isPressed("W")) {
-		game->scene->camera->move(0.0f, 0.0f, speed*dt);
 
+
+        glm::vec3 rayOrigin = game->scene->camera->position;
+        glm::vec3 rayDirection = rayEnd-rayStart;
+        Body* body = this->game->physics->getNearestBody(rayOrigin, rayDirection);
+        printf("camera position: (%f, %f, %f)\n", game->scene->camera->position.x,
+               game->scene->camera->position.y, game->scene->camera->position.z);
+        if (body) {
+            printf("Change color\n");
+            body->getEntity()->color = glm::vec3(body->getEntity()->color.x+0.1,
+                                                 body->getEntity()->color.y+0.1,
+                                                 body->getEntity()->color.z+0.1);
+        }
     }
-    if (game->input->isPressed("A")) {
-		game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
 
 
-    }
-	if (game->input->isPressed("S")) {
-		game->scene->camera->move(0.0f, 0.0f, -speed*dt);
+    if (game->input->isPressed("Space")){
 
 
-    }
-	if (game->input->isPressed("D")) {
-		game->scene->camera->move(speed*dt, 0.0f, 0.0f);
+        horizontalAngle = mouseSpeed * float(game->width/2 - mouseX);
+        verticalAngle = mouseSpeed * float(game->height/2 - mouseY);
+        SDL_Window* window = game->input->mainWindow;
 
+        if(game->input->focus) //TODO: all game should be inside this loop
+            game->input->getMouse()->setPosition(game->width/2, game->height/2, window);
+
+        game->scene->camera->fpsRotation(horizontalAngle*25.0f, verticalAngle*25.0f);
+
+        if (game->input->justPressed("Left Click"))
+            printf("left clicked\n");
+        if (game->input->justPressed("Right Click"))
+            printf("right clicked\n");
+        if (game->input->isPressed("W"))
+            game->scene->camera->move(0.0f, 0.0f, speed*dt);
+        if (game->input->isPressed("A"))
+            game->scene->camera->move(-speed*dt, 0.0f, 0.0f);
+        if (game->input->isPressed("S"))
+            game->scene->camera->move(0.0f, 0.0f, -speed*dt);
+        if (game->input->isPressed("D"))
+            game->scene->camera->move(speed*dt, 0.0f, 0.0f);
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit) {
         game->quit = true;
     }
-
 
 }
 

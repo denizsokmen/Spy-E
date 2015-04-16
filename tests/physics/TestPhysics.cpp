@@ -61,7 +61,7 @@ void TestPhysics::update(float dt) {
 
 
     //casting a ray from 0 0 0 in the direction of -1 0 0 to a box in position -5 0 0 with a correct bounding box with no success
-    printf("Bool: %d \n", (physics->castRay(glm::vec3(0,0,0), glm::vec3(-1.0f, 0.0f, 0.0f), b3, dist)));
+    printf("Bool: %d \n", (this->game->physics->castRay(glm::vec3(0,0,0), glm::vec3(-1.0f, 0.0f, 0.0f), b3, dist)));
     //distance isn't showing the right value too
     printf("Dist: %f \n", dist);
 }
@@ -114,12 +114,11 @@ void TestPhysics::applyGravity() {
 
 
 void TestPhysics::createBodies() {
-    this->physics = game->physics;
 
-    b1 = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
-    b2 = physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
-    b3 = physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
-    floorBody = physics->getWorld()->createBody(floor, floor->getVertexBuffer()->vertexList);
+    b1 = game->physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
+    b2 = game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
+    b3 = game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
+    floorBody = game->physics->getWorld()->createBody(floor, floor->getVertexBuffer()->vertexList);
 }
 
 void TestPhysics::initializeCamera(Game *game) {

@@ -24,7 +24,6 @@ public:
 
     ~GUI();
     void addSubview(View* view);
-    void addSubview(View* view, std::string tag);
     View* viewWithTag(std::string tag);
     void init();
     void update(float dt);

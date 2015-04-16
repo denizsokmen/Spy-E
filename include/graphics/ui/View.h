@@ -31,10 +31,12 @@ public:
     Image *backgroundImage;
     GUI *getSystem();
 
-    virtual bool isClicked(std::string buttonKey);
+    virtual bool isMouseInside();
     virtual void addSubview(View *view);
     virtual void setSystem(GUI *system);
     virtual void setFrame(Rect frame);
+    virtual void setFrame(float x, float y, float w, float h);
+    virtual Rect getFrame();
     virtual void draw();
     virtual void setTag(std::string tag);
     virtual std::string getTag();

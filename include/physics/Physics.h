@@ -24,6 +24,9 @@ public:
                  float &intersection_distance);
 
     bool castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, Body *body, float& intersectionDistance);
+
+    static glm::vec3 lerp(glm::vec3 A, glm::vec3 B, float t);
+    Body *getNearestBody(glm::vec3 rayOrigin, glm::vec3 rayDirection);
 };
 
 #endif

@@ -25,7 +25,6 @@ const glm::vec3 zeroVector = glm::vec3(0.0f, 0.0f, 0.0f);
 class ShaderProgram;
 class VertexBuffer;
 class Game;
-class Physics;
 class Body;
 class Skybox;
 
@@ -47,7 +46,7 @@ public:
     float mouseSpeed = 0.005f;
     float speed = 10.0f;
 
-    Physics* physics;
+
     Body *b1;
     Body *b2;
     Body *b3;
