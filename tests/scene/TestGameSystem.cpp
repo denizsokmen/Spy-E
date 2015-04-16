@@ -95,12 +95,21 @@ void TestGameSystem::update(float dt) {
     glm::vec3 adir = entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f);
 
     if(game->input->justPressed("Enter")) {
-        float dist;
-        for(auto body : physics->getWorld()->getBodies()) {
-            if (physics->castRay(box->getLocation(), adir, body, dist) && body != box) {
-                body->getEntity()->color = glm::vec3(0.03, 0.07, 0.02);
-            }
+
+
+        glm::vec3 loc = box->getLocation() + adir;
+        Body* body = this->game->physics->getNearestBody(loc, adir);
+        printf("camera position: (%f, %f, %f)\n", game->scene->camera->position.x,
+               game->scene->camera->position.y, game->scene->camera->position.z);
+        printf("camera direction: (%f, %f, %f)\n", game->scene->camera->viewDirection.x,
+               game->scene->camera->viewDirection.y, game->scene->camera->viewDirection.z);
+        if (body) {
+            printf("Change color\n");
+            body->getEntity()->color = glm::vec3(body->getEntity()->color.x+0.1,
+                                                 body->getEntity()->color.y+0.1,
+                                                 body->getEntity()->color.z+0.1);
         }
+
     }
 
     if(game->input->isPressed("Space"))

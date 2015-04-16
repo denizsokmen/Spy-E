@@ -14,10 +14,10 @@ class Game;
 class SoundManager;
 //class FontSDL;
 
-
 class WorldEditorSystem: public System {
 
     Game *game;
+    GLuint vertexbuffer;
 
 public:
     WorldEditorSystem(Game *game);

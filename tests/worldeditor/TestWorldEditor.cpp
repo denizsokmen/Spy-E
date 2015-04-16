@@ -24,7 +24,6 @@ float mouseSpeed = 0.005f;
 float speed = 10.0f;
 
 
-
 Game* game;
 
 int main(int argc, char* argv[])
@@ -52,11 +51,20 @@ int main(int argc, char* argv[])
 WorldEditorSystem::WorldEditorSystem(Game *game) {
     this->game = game;
 
+//    Renderable* entity = new Renderable();
+//    VertexBuffer* vertexBuffer = VertexBuffer::createQuad();
+//    Mesh* mesh = new Mesh();
+//    mesh->setVertexBuffer(vertexBuffer);
+//    entity->mesh = mesh;
+//    game->scene->getWorld()->getRenderables().push_back(entity);
 
-    Renderable* entity = game->scene->getWorld()->createRenderable("box");
-    game->physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
-    entity->position = glm::vec3(0,0,0);
-    entity->color = glm::vec3(1.0,1.0,1.0);
+//
+
+
+    Renderable* entity4 = game->scene->getWorld()->createRenderable("box");
+    game->physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
+    entity4->position = glm::vec3(0,0,0);
+    entity4->color = glm::vec3(1.0,1.0,1.0);
 
 
 
@@ -73,10 +81,6 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     entity3->color = glm::vec3(0.5,0.5,1.0);
 
 
-    Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
-    game->physics->getWorld()->createBody(floorEntity, floorEntity->getVertexBuffer()->vertexList);
-    floorEntity->position = glm::vec3(0,-2.0f,0);
-    floorEntity->color = glm::vec3(1.0,0.5,1.0);
 
 
 
@@ -125,6 +129,8 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->gui->addSubview(menu);
     game->gui->addSubview(entitiesLabel);
     game->input->showCursor(true);
+
+
 }
 
 void WorldEditorSystem::update(float dt) {
@@ -132,40 +138,6 @@ void WorldEditorSystem::update(float dt) {
     ((Label*) (game->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", game->fps);
     float mouseX = game->input->getMouse()->mouseX;
     float mouseY = game->input->getMouse()->mouseY;
-
-    if(game->input->justPressed("Left Click")){
-        game->gui->mainView->handleEvents();
-
-
-        glm::vec4 viewPort = glm::vec4(0,0,float(game->width), float(game->height));
-
-
-
-        glm::vec3 rayStart = glm::unProject(glm::vec3(mouseX, float(game->height)-mouseY, 0),
-                                       game->scene->camera->view,
-                                       game->scene->camera->projection,
-                                        viewPort);
-
-        glm::vec3 rayEnd = glm::unProject(glm::vec3(mouseX, float(game->height)-mouseY, 1.0),
-                                        game->scene->camera->view,
-                                        game->scene->camera->projection,
-                                        viewPort);
-
-
-
-
-        glm::vec3 rayOrigin = game->scene->camera->position;
-        glm::vec3 rayDirection = rayEnd-rayStart;
-        Body* body = this->game->physics->getNearestBody(rayOrigin, rayDirection);
-        printf("camera position: (%f, %f, %f)\n", game->scene->camera->position.x,
-               game->scene->camera->position.y, game->scene->camera->position.z);
-        if (body) {
-            printf("Change color\n");
-            body->getEntity()->color = glm::vec3(body->getEntity()->color.x+0.1,
-                                                 body->getEntity()->color.y+0.1,
-                                                 body->getEntity()->color.z+0.1);
-        }
-    }
 
 
     if (game->input->isPressed("Space")){
@@ -197,6 +169,50 @@ void WorldEditorSystem::update(float dt) {
     if (game->input->wasReleased("Escape") || game->input->quit) {
         game->quit = true;
     }
+
+    if(game->input->justPressed("Left Click")){
+        game->gui->mainView->handleEvents();
+
+
+        // FIXME: dsokmen, (sadpanda)
+        // Partialy based on:
+        // - https://github.com/Shervanator/Engine/blob/f442dae0a23ef802ac6ac164b288c4471e30ccf8/src/Ray.cpp#L19
+
+        printf("Mouse: x:%f y:%f \n", mouseX, mouseY);
+
+        glm::vec4 viewPort = glm::vec4(0.0f,0.0f,float(game->width), float(game->height));
+
+
+        glm::vec3 rayStart = glm::unProject(glm::vec3(mouseX,float(game->height) - mouseY, 0.0f),
+                                            glm::mat4(1)*game->scene->camera->view, //glm::mat4(1) considered as Model
+                                            glm::mat4(1),
+                                            viewPort);
+
+        glm::vec3 rayEnd = glm::unProject(glm::vec3(mouseX,float(game->height)- mouseY, 1.0f),
+        glm::mat4(1)*game->scene->camera->view,
+                                          glm::mat4(1),
+                                          viewPort);
+
+
+
+
+        glm::vec3 rayOrigin = rayStart;
+        printf("ray start: (%f, %f, %f)\n",rayStart.x, rayStart.y, rayStart.z);
+        glm::vec3 rayDirection = glm::normalize(rayEnd-rayStart);
+        Body* body = this->game->physics->getNearestBody(rayOrigin, rayDirection);
+        printf("camera position: (%f, %f, %f)\n", game->scene->camera->position.x,
+               game->scene->camera->position.y, game->scene->camera->position.z);
+        printf("camera direction: (%f, %f, %f)\n", game->scene->camera->viewDirection.x,
+               game->scene->camera->viewDirection.y, game->scene->camera->viewDirection.z);
+        if (body) {
+            printf("Change color\n");
+            body->getEntity()->color = glm::vec3(body->getEntity()->color.x+0.1,
+                                                 body->getEntity()->color.y+0.1,
+                                                 body->getEntity()->color.z+0.1);
+        }
+    }
+
+
 
 }
 
