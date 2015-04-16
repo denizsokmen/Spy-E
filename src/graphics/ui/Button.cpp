@@ -79,3 +79,10 @@ ControlState Button::getState() {
 Label *Button::getLabel() {
     return this->titleLabel;
 }
+
+bool Button::isClicked(std::string buttonKey) {
+    bool clicked = View::isClicked(buttonKey);
+    if(clicked)
+        this->runTarget();
+    return clicked;
+}

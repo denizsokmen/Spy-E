@@ -4,6 +4,7 @@
 
 #include "graphics/ui/Primitives.h"
 #include "graphics/ui/GUI.h"
+#include "input/Mouse.h"
 #include <glm/glm.hpp>
 #include <vector>
 #include <map>
@@ -30,7 +31,7 @@ public:
     Image *backgroundImage;
     GUI *getSystem();
 
-    virtual bool isClicked(int mouseX, int mouseY);
+    virtual bool isClicked(std::string buttonKey);
     virtual void addSubview(View *view);
     virtual void setSystem(GUI *system);
     virtual void setFrame(Rect frame);
@@ -39,6 +40,7 @@ public:
     virtual std::string getTag();
     virtual View *viewWithTag(std::string tag);
 
+    void handleEvents();
 };
 
 

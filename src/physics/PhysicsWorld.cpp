@@ -46,7 +46,6 @@ void PhysicsWorld::update(float dt) {
                                 body->setSpeed(0, 'y');
 
                         } else {
-                            printf("b");
                             body->setSpeed(0, 'x');
                             body->setSpeed(0, 'z');
 

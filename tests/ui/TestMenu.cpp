@@ -72,19 +72,21 @@ TestMenu::TestMenu(Game *game) {
 
 
     Image *image = new Image("./assets/texture/menu/logo.png");
+    image->setTag("logoImage");
     image->setFrame(Rect(game->width/2-105, 37.5, 210, 37.5));
     game->gui->addSubview(image);
 
     fpsLabel = new Label(L"FPS: 0");
+    fpsLabel->setTag("fpsLabel");
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     game->gui->addSubview(fpsLabel);
 
-
-
     menu = new Menu();
-    menu->setFrame(Rect(40,game->height/2, 300, 300));
+    menu->setTag("menu");
+    menu->setFrame(Rect(40,game->height/2, 160, 160));
 
     Button* startButton = new Button();
+    startButton->setTag("startButton");
     startButton->setText(L"Start", Normal);
     startButton->setText(L"_Start_", Selected);
     startButton->setTarget(
@@ -93,13 +95,17 @@ TestMenu::TestMenu(Game *game) {
             }
     );
     Button* optionsButton = new Button();
+    optionsButton->setTag("optionsButton");
     optionsButton->setText(L"Options", Normal);
     optionsButton->setText(L"_Options_", Selected);
+
     Button* extraButton = new Button();
+    extraButton->setTag("extraButton");
     extraButton->setText(L"Extras", Normal);
     extraButton->setText(L"_Extras_", Selected);
 
     Button* exitButton= new Button();
+    exitButton->setTag("exitButton");
     exitButton->setText(L"Exit", Normal);
     exitButton->setText(L"Are you done ?", Selected);
 
@@ -114,7 +120,7 @@ TestMenu::TestMenu(Game *game) {
     game->sounds->open("select", "assets/sounds/select.wav");
     game->sounds->open("start", "assets/sounds/start.wav");
 
-
+    game->input->showCursor(true);
 
 }
 
@@ -131,8 +137,6 @@ void TestMenu::update(float dt) {
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
     entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
-
-
 
     if (game->input->wasReleased("Up")) {
         menu->moveCursorUp();
@@ -176,6 +180,7 @@ void TestMenu::assignKeyboardInputs(Game *game) {/*Use scan codes for mapping ke
     game->input->mapButton("Enter", new KeyboardButtonHandler(SDL_SCANCODE_RETURN, game->input));
     game->input->mapButton("Space", new KeyboardButtonHandler(SDL_SCANCODE_SPACE, game->input));
     game->input->mapButton("B", new KeyboardButtonHandler(SDL_SCANCODE_B, game->input));
+    game->input->mapButton("Left Click", new MouseButtonHandler(SDL_BUTTON_LEFT, game->input));
 }
 
 void TestMenu::draw() {

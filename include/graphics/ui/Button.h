@@ -61,6 +61,8 @@ public:
     Label *getLabel();
 
     void draw();
+
+    bool isClicked(std::string buttonKey);
 };
 
 

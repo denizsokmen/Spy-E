@@ -9,7 +9,7 @@ Input::Input(SDL_Window *mainWindow) {
 	this->quit = false;
 	this->focus = true;
 	this->windowID = SDL_GetWindowID(mainWindow);
-//	SDL_ShowCursor(SDL_DISABLE);
+	SDL_ShowCursor(SDL_DISABLE);
 	initDeviceList();
 }
 
@@ -103,4 +103,6 @@ Input::~Input() {
 }
 
 
-
+void Input::showCursor(bool b) {
+	SDL_ShowCursor(b ? SDL_ENABLE : SDL_DISABLE);
+}

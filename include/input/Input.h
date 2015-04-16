@@ -30,6 +30,9 @@ public:
 
 	bool quit;
 	bool focus;
+	bool cursor;
+
+	void showCursor(bool);
 
 	bool justPressed(std::string);
 	bool isPressed(std::string);

@@ -63,13 +63,14 @@ TestGUI::TestGUI(Game *game) {
 
     Image *image = new Image("./assets/texture/menu/logo.png");
     image->setTag("image1");
-    image->setFrame(Rect(game->width - 140, game->height - 25, 140, 25));
+    image->setFrame(Rect(game->width - 140, game->height - 25, 140, 140));
     game->gui->addSubview(image);
 
     fpsLabel = new Label(L"FPS: 0");
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     game->gui->addSubview(fpsLabel);
 
+    game->input->showCursor(true);
 
    // game->sounds->open("asd", "assets/sounds/0x1b.wav");
     //game->sounds->play("asd");
@@ -80,13 +81,6 @@ TestGUI::TestGUI(Game *game) {
 void TestGUI::update(float dt) {
 
     fpsLabel->setText(L"FPS: %f", game->fps);
-
-
-    if(game->input->justPressed("Left Click") &&
-       game->gui->viewWithTag("image1")->isClicked(game->input->getMouse()->mouseX, game->input->getMouse()->mouseY))
-        printf("%s Clicked", game->gui->viewWithTag("image1")->getTag().c_str());
-
-    //printf("%i", game->gui->viewWithTag("image1")->hidden);
 
     entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,

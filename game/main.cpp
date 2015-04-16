@@ -31,8 +31,6 @@ int main(int argc, char* argv[])
 
     game->getController()->setState("Mainmenu");
     if (game->init(800, 600, "Spy-E", false)) {
-
-
         game->update();
     }
 

@@ -71,7 +71,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     this->scene = new Scene();
     this->input = new Input(this->mainWindow);
     this->drawer = new Drawer(this);
-    this->gui = new GUI(this->drawer);
+    this->gui = new GUI(this->drawer, this->input);
     this->physics = new Physics();
     this->sounds = new Sounds();
 

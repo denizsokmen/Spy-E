@@ -63,18 +63,27 @@ void View::setFrame(Rect frame) {
     this->frame = frame;
 }
 
-
 View::~View() {
 
     for (auto subView : subViews) {
         delete subView;
     }
-
 }
 
-bool View::isClicked(int mouseX, int mouseY) {
-    return this->frame.x < mouseX &&
-    this->frame.y < mouseY &&
-    this->frame.x + this->frame.w > mouseX &&
-    this->frame.y + this->frame.h > mouseY;
+bool View::isClicked(std::string buttonKey) {
+    float mouseX = this->getSystem()->getInput()->getMouse()->mouseX;
+    float mouseY = this->getSystem()->getInput()->getMouse()->mouseY;
+    bool clicked = this->frame.x < mouseX &&
+                   this->frame.y < mouseY &&
+                   this->frame.x + this->frame.w > mouseX &&
+                   this->frame.y + this->frame.h > mouseY;
+    return clicked;
+}
+
+void View::handleEvents(){
+    if(this->isClicked("Left Click")) {
+//        printf("tag: %s \n", this->tag.c_str());
+        for (auto subView : subViews)
+            subView->handleEvents();
+    }
 }

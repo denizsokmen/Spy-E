@@ -14,6 +14,8 @@ Menu::Menu() : View() {
 
 }
 
+
+
 void Menu::addItem(Button *item) {
 
     if (this->items.size() == 0)
@@ -89,7 +91,7 @@ void Menu::placeButtons() {
             Rect frame = Rect(this->frame.x,
                               this->frame.y + (height+verticalSpace) * index++,
                               this->frame.w,
-                              this->frame.y);
+                              this->frame.h / items.size());
             item->setFrame(frame);
             this->addSubview(item);
         }
