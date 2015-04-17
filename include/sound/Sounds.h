@@ -26,9 +26,9 @@ class Sounds : public System {
       };
 
       struct mixer{
-         ALuint Slots[4]   = {0, 0, 0, 0};
-         ALuint Effects[2] = {0, 0};
-         ALuint Filters[1] = {0};  
+         ALuint Slots[4];
+         ALuint Effects[2];
+         ALuint Filters[1];  
       };
 
       //sound *sounds;

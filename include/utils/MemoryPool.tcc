@@ -23,12 +23,18 @@
 #ifndef MEMORY_BLOCK_TCC
 #define MEMORY_BLOCK_TCC
 
-
+#if defined(__clang__) && __has_feature(cxx_noexcept) || \
+    defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
+	defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+#define NOEXCEPT noexcept
+#else
+#define NOEXCEPT
+#endif
 
 template <typename T, size_t BlockSize>
 inline typename MemoryPool<T, BlockSize>::size_type
 MemoryPool<T, BlockSize>::padPointer(data_pointer_ p, size_type align)
-const noexcept
+const NOEXCEPT
 {
     uintptr_t result = reinterpret_cast<uintptr_t>(p);
     return ((align - result) % align);
@@ -38,7 +44,7 @@ const noexcept
 
 template <typename T, size_t BlockSize>
 MemoryPool<T, BlockSize>::MemoryPool()
-noexcept
+NOEXCEPT
 {
     currentBlock_ = nullptr;
     currentSlot_ = nullptr;
@@ -50,7 +56,7 @@ noexcept
 
 template <typename T, size_t BlockSize>
 MemoryPool<T, BlockSize>::MemoryPool(const MemoryPool& memoryPool)
-noexcept :
+NOEXCEPT :
         MemoryPool()
 {}
 
@@ -58,7 +64,7 @@ noexcept :
 
 template <typename T, size_t BlockSize>
 MemoryPool<T, BlockSize>::MemoryPool(MemoryPool&& memoryPool)
-noexcept
+NOEXCEPT
 {
     currentBlock_ = memoryPool.currentBlock_;
     memoryPool.currentBlock_ = nullptr;
@@ -71,7 +77,7 @@ noexcept
 template <typename T, size_t BlockSize>
 template<class U>
 MemoryPool<T, BlockSize>::MemoryPool(const MemoryPool<U>& memoryPool)
-noexcept :
+NOEXCEPT :
         MemoryPool()
 {}
 
@@ -80,7 +86,7 @@ noexcept :
 template <typename T, size_t BlockSize>
 MemoryPool<T, BlockSize>&
 MemoryPool<T, BlockSize>::operator=(MemoryPool&& memoryPool)
-noexcept
+NOEXCEPT
 {
     if (this != &memoryPool)
     {
@@ -96,7 +102,7 @@ noexcept
 
 template <typename T, size_t BlockSize>
 MemoryPool<T, BlockSize>::~MemoryPool()
-noexcept
+NOEXCEPT
 {
     slot_pointer_ curr = currentBlock_;
     while (curr != nullptr) {
@@ -111,7 +117,7 @@ noexcept
 template <typename T, size_t BlockSize>
 inline typename MemoryPool<T, BlockSize>::pointer
 MemoryPool<T, BlockSize>::address(reference x)
-const noexcept
+const NOEXCEPT
 {
     return &x;
 }
@@ -121,7 +127,7 @@ const noexcept
 template <typename T, size_t BlockSize>
 inline typename MemoryPool<T, BlockSize>::const_pointer
 MemoryPool<T, BlockSize>::address(const_reference x)
-const noexcept
+const NOEXCEPT
 {
     return &x;
 }
@@ -180,7 +186,7 @@ MemoryPool<T, BlockSize>::deallocate(pointer p, size_type n)
 template <typename T, size_t BlockSize>
 inline typename MemoryPool<T, BlockSize>::size_type
 MemoryPool<T, BlockSize>::max_size()
-const noexcept
+const NOEXCEPT
 {
     size_type maxBlocks = -1 / BlockSize;
     return (BlockSize - sizeof(data_pointer_)) / sizeof(slot_type_) * maxBlocks;

@@ -26,6 +26,15 @@
 #include <climits>
 #include <cstddef>
 
+
+#if defined(__clang__) && __has_feature(cxx_noexcept) || \
+	defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
+	defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+#define NOEXCEPT noexcept
+#else
+#define NOEXCEPT
+#endif
+
 template <typename T, size_t BlockSize = 4096>
 class MemoryPool
 {
@@ -47,24 +56,24 @@ public:
     };
 
     /* Member functions */
-    MemoryPool() noexcept;
-    MemoryPool(const MemoryPool& memoryPool) noexcept;
-    MemoryPool(MemoryPool&& memoryPool) noexcept;
-    template <class U> MemoryPool(const MemoryPool<U>& memoryPool) noexcept;
+    MemoryPool() NOEXCEPT;
+    MemoryPool(const MemoryPool& memoryPool) NOEXCEPT;
+    MemoryPool(MemoryPool&& memoryPool) NOEXCEPT;
+    template <class U> MemoryPool(const MemoryPool<U>& memoryPool) NOEXCEPT;
 
-    ~MemoryPool() noexcept;
+    ~MemoryPool() NOEXCEPT;
 
     MemoryPool& operator=(const MemoryPool& memoryPool) = delete;
-    MemoryPool& operator=(MemoryPool&& memoryPool) noexcept;
+    MemoryPool& operator=(MemoryPool&& memoryPool) NOEXCEPT;
 
-    pointer address(reference x) const noexcept;
-    const_pointer address(const_reference x) const noexcept;
+    pointer address(reference x) const NOEXCEPT;
+    const_pointer address(const_reference x) const NOEXCEPT;
 
     // Can only allocate one object at a time. n and hint are ignored
     pointer allocate(size_type n = 1, const_pointer hint = 0);
     void deallocate(pointer p, size_type n = 1);
 
-    size_type max_size() const noexcept;
+    size_type max_size() const NOEXCEPT;
 
     template <class U, class... Args> void construct(U* p, Args&&... args);
     template <class U> void destroy(U* p);
@@ -87,7 +96,7 @@ private:
     slot_pointer_ lastSlot_;
     slot_pointer_ freeSlots_;
 
-    size_type padPointer(data_pointer_ p, size_type align) const noexcept;
+    size_type padPointer(data_pointer_ p, size_type align) const NOEXCEPT;
     void allocateBlock();
 
     static_assert(BlockSize >= 2 * sizeof(slot_type_), "BlockSize too small.");
