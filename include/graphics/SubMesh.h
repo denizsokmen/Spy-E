@@ -3,11 +3,18 @@
 
 class Material;
 class VertexBuffer;
+class Mesh;
 
 class SubMesh {
 
 public:
+    Mesh* mesh;
     VertexBuffer* vertexBuffer;
+    VertexBuffer *getVertexBuffer();
+    void setVertexBuffer(VertexBuffer *vertexBuffer);
+    Material *getMaterial();
+    void setMaterial(Material *material);
+
     Material* material;
 
     SubMesh();

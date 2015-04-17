@@ -19,19 +19,22 @@ std::shared_ptr<Texture> ResourceManager::createTexture(std::string& name) {
 }
 
 std::shared_ptr<Material> ResourceManager::createMaterial(std::string& name) {
-
-    return std::make_shared<Material>();
+    auto it = materials.find(name);
+    if (it == materials.end()) {
+        std::shared_ptr<Material> ptr = std::make_shared<Material>();
+        materials[name] = ptr;
+        return ptr;
+    }
+    else {
+        return it->second;
+    }
 }
 
 std::shared_ptr<Mesh> ResourceManager::createMesh(std::string& name) {
 
     auto it = meshes.find(name);
     if (it == meshes.end()) {
-        std::shared_ptr<Mesh> ptr = std::make_shared<Mesh>();
-
-        /* TODO: Support more extensions */
-        VertexBuffer *buffer = objLoader->loadOBJ(name.c_str());
-        ptr->setVertexBuffer(buffer);
+        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(objLoader->loadOBJ(name.c_str()));
 
         meshes[name] = ptr;
         return ptr;

@@ -4,8 +4,10 @@
 
 #include "VertexBuffer.h"
 
+
 class VertexBuffer;
 class SubMesh;
+class Material;
 
 class Mesh {
 
@@ -15,10 +17,9 @@ private:
 
 
 public:
+	Material* material;
 
-	VertexBuffer *getVertexBuffer() const {
-		return vertexBuffer;
-	}
+	VertexBuffer *getVertexBuffer();
 
 	void setVertexBuffer(VertexBuffer *vertexBuffer) {
 		this->vertexBuffer = vertexBuffer;

@@ -12,10 +12,10 @@ int World::getEntityCount() {
 Renderable* World::createRenderable(const char* name) {
     std::string entityName(name);
     Renderable* entity = new Renderable();
-    Mesh* mesh = new Mesh();
     std::string modelPath = ENTITIES_DIR+entityName+PATH_SEPARATOR+entityName+OBJ_EXTENSION;
-    VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
-    mesh->setVertexBuffer(buffer);
+    Mesh* mesh = objLoader->loadOBJ(modelPath.c_str());
+    //VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
+    //mesh->setVertexBuffer(buffer);
     entity->mesh = mesh;
 
 

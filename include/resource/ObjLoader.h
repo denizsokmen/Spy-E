@@ -6,12 +6,13 @@
 
 
 class VertexBuffer;
+class Mesh;
 
 class ObjLoader {
 
 
 public:
-        VertexBuffer* loadOBJ(const char * path);
+        Mesh* loadOBJ(const char * path);
         ObjLoader();
 };
 

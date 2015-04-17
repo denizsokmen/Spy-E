@@ -59,6 +59,8 @@ void Drawer::drawAll() {
 	glDisable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
     drawList.clear();
+
+    cam->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
 }
 
 void Drawer::update(float dt) {

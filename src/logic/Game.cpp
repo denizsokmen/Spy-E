@@ -67,6 +67,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 		printf("IMG_Init: Failed to init required jpg and png support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
 	}
+    glViewport(0,0,width, height);
 
     this->scene = new Scene();
     this->input = new Input(this->mainWindow);

@@ -183,23 +183,24 @@ void WorldEditorSystem::update(float dt) {
         glm::vec4 viewPort = glm::vec4(0.0f,0.0f,float(game->width), float(game->height));
 
 
-        glm::vec3 rayStart = glm::unProject(glm::vec3(mouseX,float(game->height) - mouseY, 0.0f),
-                                            glm::mat4(1)*game->scene->camera->view, //glm::mat4(1) considered as Model
-                                            glm::mat4(1),
+        glm::vec3 rayStart = glm::unProject(glm::vec3(game->width / 2, game->height / 2, 0.0f),
+                                            glm::translate(game->scene->camera->view, game->scene->camera->position),
+                                            game->scene->camera->projection,
                                             viewPort);
 
         glm::vec3 rayEnd = glm::unProject(glm::vec3(mouseX,float(game->height)- mouseY, 1.0f),
-        glm::mat4(1)*game->scene->camera->view,
-                                          glm::mat4(1),
+        glm::translate(game->scene->camera->view, game->scene->camera->position),
+                                          game->scene->camera->projection,
                                           viewPort);
 
 
 
 
         glm::vec3 rayOrigin = rayStart;
-        printf("ray start: (%f, %f, %f)\n",rayStart.x, rayStart.y, rayStart.z);
+        printf("ray start: (%f, %f, %f) ray end: (%f, %f, %f)\n",rayStart.x, rayStart.y, rayStart.z, rayEnd.x, rayEnd.y, rayEnd.z);
         glm::vec3 rayDirection = glm::normalize(rayEnd-rayStart);
-        Body* body = this->game->physics->getNearestBody(rayOrigin, rayDirection);
+
+        Body* body = this->game->physics->getNearestBody(game->scene->camera->position, rayDirection);
         printf("camera position: (%f, %f, %f)\n", game->scene->camera->position.x,
                game->scene->camera->position.y, game->scene->camera->position.z);
         printf("camera direction: (%f, %f, %f)\n", game->scene->camera->viewDirection.x,

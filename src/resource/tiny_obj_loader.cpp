@@ -612,6 +612,8 @@ namespace tinyobj {
             filepath = matId;
         }
 
+        printf("%s fskfkksf\n", filepath.c_str());
+
         std::ifstream matIStream(filepath.c_str());
         return LoadMtl(matMap, materials, matIStream);
     }
