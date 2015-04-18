@@ -72,11 +72,11 @@ void TestGameSystem::update(float dt) {
     }
 
     if (game->input->isPressed("Left")) {
-        entity->orientation = glm::rotate(entity->orientation, 120.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+        entity->orientation = glm::rotate(entity->orientation, glm::radians(120.0f * dt), glm::vec3(0.0f, 1.0f, 0.0f));
     }
 
     if (game->input->isPressed("Right")) {
-        entity->orientation = glm::rotate(entity->orientation, 120.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
+        entity->orientation = glm::rotate(entity->orientation, glm::radians(120.0f * dt), glm::vec3(0.0f, -1.0f, 0.0f));
     }
     
     if (game->input->isPressed("Up")) {

@@ -11,6 +11,8 @@ using namespace std;
 
 #include <GL/glew.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include "graphics/Shader.h"
 
 
@@ -102,4 +104,29 @@ ShaderProgram::ShaderProgram() {
 
 ShaderProgram::~ShaderProgram() {
 
+}
+
+void ShaderProgram::setUniform(GLint location, glm::mat4 const &value) const {
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void ShaderProgram::setUniform(GLint location, glm::mat3 const &value) const {
+	glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void ShaderProgram::setUniform(GLint location, const glm::vec3 &value) const {
+	glUniform3fv(location, 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::setUniform(GLint location, const glm::vec4 &value) const {
+	glUniform4fv(location, 1, glm::value_ptr(value));
+
+}
+
+void ShaderProgram::setUniform(GLint location, const float &value) const {
+	glUniform1f(location, value);
+}
+
+void ShaderProgram::setUniform(GLint location, const GLint &value) const {
+	glUniform1i(location, value);
 }

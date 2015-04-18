@@ -27,11 +27,11 @@ void Camera::fpsRotation(float head, float pitch) {
 	}
 	glm::quat newRot;
 	if (head != 0.0f) {
-		newRot = glm::angleAxis(-head, glm::vec3(0.0f, 1.0f, 0.0f));
+		newRot = glm::angleAxis(glm::radians(-head), glm::vec3(0.0f, 1.0f, 0.0f));
 		orientation = orientation * newRot;
 	}
 	if (pitch != 0.0f) {
-		newRot = glm::angleAxis(-pitch, glm::vec3(1.0f, 0.0f, 0.0f));
+		newRot = glm::angleAxis(glm::radians(-pitch), glm::vec3(1.0f, 0.0f, 0.0f));
 		orientation = newRot * orientation;
 	}
 	orientation = glm::normalize(orientation);

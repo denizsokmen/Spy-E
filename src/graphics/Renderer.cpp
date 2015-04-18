@@ -51,14 +51,33 @@ void Renderer::render(Camera* camera) {
 
         for (auto submesh : renderable->mesh->subMeshes) {
             Material* mat = submesh->getMaterial();
+            ShaderProgram* program = mat->program;
+
+
+
             glUseProgram(mat->program->id);
 
+            program->setUniform("MVP", MVP);
+            program->setUniform("NormalMatrix", normalMatrix);
+            program->setUniform("ModelMatrix", renderable->getTransformation());
+            program->setUniform("ModelViewMatrix", modelViewMatrix);
+            program->setUniform("ViewMatrix", camera->view);
 
-            glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+
+            program->setUniform("ambient", mat->ambient);
+            program->setUniform("specular", mat->specular);
+            program->setUniform("diffuse", mat->diffuse);
+            program->setUniform("shininess", mat->shininess);
+            program->setUniform("dissolve", mat->dissolve);
+
+
+
+
+            /*glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "MVP"), 1, GL_FALSE, &MVP[0][0]);
             glUniformMatrix3fv(glGetUniformLocation(generalShader->id, "NormalMatrix"), 1, GL_FALSE, &normalMatrix[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelMatrix"), 1, GL_FALSE, &renderable->getTransformation()[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelViewMatrix"), 1, GL_FALSE, &modelViewMatrix[0][0]);
-            glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ViewMatrix"), 1, GL_FALSE, &camera->view[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ViewMatrix"), 1, GL_FALSE, &camera->view[0][0]);*/
             glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->color[0]);
 
             submesh->getVertexBuffer()->bind();
