@@ -29,7 +29,7 @@ void VertexBuffer::addUV(glm::vec2 uv) {
     vertex[vboUV].push_back(uv.y);
 }
 
-void VertexBuffer::addColor(glm::vec4 color) {
+void VertexBuffer::addColor(glm::vec4& color) {
     vertex[vboColor].push_back(color.r);
     vertex[vboColor].push_back(color.g);
     vertex[vboColor].push_back(color.b);

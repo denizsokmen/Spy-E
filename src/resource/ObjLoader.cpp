@@ -13,6 +13,7 @@
 #include "resource/ObjLoader.h"
 #include "graphics/VertexBuffer.h"
 #include "resource/tiny_obj_loader.h"
+#include "resource/ResourceManager.h"
 #include <graphics/Shader.h>
 
 
@@ -53,14 +54,15 @@ Mesh* ObjLoader::loadOBJ(const char * path) {
     std::vector<Material*> materiallist;
 
     for (size_t i = 0; i < materials.size(); i++) {
-        Material* material = new Material();
+		Material* material = new Material(); // ResourceManager::instance()->createMaterial(path).get(); // new Material();
         material->diffuse = glm::vec3(materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
         material->ambient = glm::vec3(materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
         material->specular = glm::vec3(materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
         material->shininess = materials[i].shininess;
         material->dissolve = materials[i].dissolve;
-        material->program = new ShaderProgram();
-        material->program->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+		material->program = ResourceManager::instance()->createShader("./shaders/generic").get();
+       // material->program = new ShaderProgram();
+       // material->program->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
         materiallist.push_back(material);
 
 
@@ -85,9 +87,10 @@ Mesh* ObjLoader::loadOBJ(const char * path) {
 
 
     Mesh* mesh = new Mesh();
-    Material* material = new Material();
+	Material* material = ResourceManager::instance()->createMaterial(path).get(); 
+	/* new Material();
     material->program = new ShaderProgram();
-    material->program->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+    material->program->load("./shaders/vertex.glsl", "./shaders/fragment.glsl");*/
 
 
     mesh->material = material;

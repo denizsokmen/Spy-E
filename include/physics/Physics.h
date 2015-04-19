@@ -20,7 +20,7 @@ public:
     void update(float dt);
     PhysicsWorld* getWorld();
 
-    bool castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, glm::vec3 aabbMin, glm::vec3 aabbMax, glm::mat4 modelMatrix,
+    bool castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, glm::vec3 aabbMin, glm::vec3 aabbMax, glm::mat4& modelMatrix,
                  float &intersection_distance);
 
     bool castRay(glm::vec3 rayOrigin, glm::vec3 rayDirection, Body *body, float& intersectionDistance);
