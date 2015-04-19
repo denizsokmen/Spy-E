@@ -2,6 +2,7 @@
 #include <graphics/Texture.h>
 #include "graphics/ui/Font.h"
 #include <SDL_ttf.h>
+#include <stdio.h>
 
 
 Font::Font(const char* fontName, int size){

@@ -27,9 +27,7 @@
 #include <cstddef>
 
 
-#if defined(__clang__) && __has_feature(cxx_noexcept) || \
-	defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
-	defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
+#ifndef WIN32
 #define NOEXCEPT noexcept
 #else
 #define NOEXCEPT
