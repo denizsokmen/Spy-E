@@ -14,6 +14,15 @@ void Camera::lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 up) {
 
 }
 
+glm::vec3 Camera::unProject(glm::vec3 windowCoordinate, glm::vec2 windowSize) {
+	glm::vec4 viewPort = glm::vec4(0.0f,0.0f,windowSize.x, windowSize.y);
+	return glm::unProject(windowCoordinate,
+										glm::translate(this->view, this->position),
+										this->projection,
+										viewPort);
+
+}
+
 void Camera::fpsRotation(float head, float pitch) {
 	orientation = glm::quat_cast(view);
 	safePitch += pitch;

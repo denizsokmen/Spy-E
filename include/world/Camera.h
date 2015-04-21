@@ -38,6 +38,7 @@ public:
 	void updateView();
 
 
+    glm::vec3 unProject(glm::vec3 windowCoordinate, glm::vec2 windowSize);
 };
 
 #endif

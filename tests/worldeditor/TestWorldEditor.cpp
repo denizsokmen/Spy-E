@@ -180,23 +180,18 @@ void WorldEditorSystem::update(float dt) {
 
         printf("Mouse: x:%f y:%f \n", mouseX, mouseY);
 
-        glm::vec4 viewPort = glm::vec4(0.0f,0.0f,float(game->width), float(game->height));
+        glm::vec2 windowSize = glm::vec2(game->width,game->height);
 
+        glm::vec3 rayStart = game->scene->camera->unProject(glm::vec3(game->width / 2,
+                                                                      abs(game->height / 2),
+                                                                      0.0f),
+                                                            windowSize);
 
-        glm::vec3 rayStart = glm::unProject(glm::vec3(game->width / 2, game->height / 2, 0.0f),
-                                            glm::translate(game->scene->camera->view, game->scene->camera->position),
-                                            game->scene->camera->projection,
-                                            viewPort);
+        glm::vec3 rayEnd =  game->scene->camera->unProject(glm::vec3(mouseX,
+                                                                     float(game->height)-mouseY,
+                                                                     1.0f),
+                                                           windowSize);
 
-        glm::vec3 rayEnd = glm::unProject(glm::vec3(mouseX,float(game->height)- mouseY, 1.0f),
-        glm::translate(game->scene->camera->view, game->scene->camera->position),
-                                          game->scene->camera->projection,
-                                          viewPort);
-
-
-
-
-        glm::vec3 rayOrigin = rayStart;
         printf("ray start: (%f, %f, %f) ray end: (%f, %f, %f)\n",rayStart.x, rayStart.y, rayStart.z, rayEnd.x, rayEnd.y, rayEnd.z);
         glm::vec3 rayDirection = glm::normalize(rayEnd-rayStart);
 
