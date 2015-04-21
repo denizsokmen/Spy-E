@@ -30,8 +30,8 @@ void SpyE::init() {
 void SpyE::activate() {
     active=true;
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0, 2.0f, 0);
-    entity->color = glm::vec3(0, 0, 1.0f);
+    entity->setPosition(glm::vec3(0, 2.0f, 0));
+    entity->setColor(glm::vec3(0, 0, 1.0f));
     generalShader = new ShaderProgram();
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
     vbo = VertexBuffer::createQuad();
@@ -44,7 +44,6 @@ void SpyE::update(float dt) {
     if (!active)
         return;
 
-    entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y+10.0f, entity->getPosition().z + 20.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();

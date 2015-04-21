@@ -135,22 +135,22 @@ void TestPhysics::initializeShader() {
 void TestPhysics::initializeEntities(Game *game) {
     //pink
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(10,0,10);
-    entity->color = glm::vec3(1.0,1.0,1.0);
+    entity->setPosition(glm::vec3(10,0,10));
+    entity->setColor(glm::vec3(1.0,1.0,1.0));
 
     //white
     entity2 = game->scene->getWorld()->createRenderable("box");
-    entity2->position = glm::vec3(10, 0, 0);
-    entity2->color = glm::vec3(0.5,1.0,1.0);
+	entity2->setPosition(glm::vec3(10, 0, 0));
+	entity2->setColor(glm::vec3(0.5, 1.0, 1.0));
 
     //blue
     entity3 = game->scene->getWorld()->createRenderable("box");
-    entity3->position = glm::vec3(-5.0f, 0, 0);
-    entity3->color = glm::vec3(1.0,1.0,0.5);
+	entity3->setPosition(glm::vec3(-5.0f, 0, 0));
+	entity3->setColor(glm::vec3(1.0, 1.0, 0.5));
 
     floor = game->scene->getWorld()->createRenderable("floor");
-    floor->position = glm::vec3(0,-5,0);
-    floor->color = glm::vec3(1.0, 1.0, 1.0);
+	floor->setPosition(glm::vec3(0, -5, 0));
+	floor->setColor(glm::vec3(1.0, 1.0, 1.0));
 }
 
 void TestPhysics::assignInputs(Game *game) {

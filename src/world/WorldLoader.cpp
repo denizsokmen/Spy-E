@@ -95,8 +95,8 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
 
     if (entity != NULL) {
         printf("[WordLoader] Loading %s.\n", nameNode->value());
-        entity->position = this->parsePosition(entityNode);
-        entity->color = this->parseColor(entityNode);
+		entity->setPosition(this->parsePosition(entityNode));
+		entity->setColor(this->parseColor(entityNode));
 
     }
     else {

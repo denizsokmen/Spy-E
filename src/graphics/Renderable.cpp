@@ -2,12 +2,7 @@
 #include "graphics/Mesh.h"
 
 Renderable::Renderable() {
-    position.x=0.0f;
-    position.y=0.0f;
-    position.z=0.0f;
-
-
-
+	setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 VertexBuffer* Renderable::getVertexBuffer() {

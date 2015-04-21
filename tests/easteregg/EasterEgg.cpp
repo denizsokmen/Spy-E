@@ -36,11 +36,11 @@ int main(int argc, char *argv[]) {
 EasterEgg::EasterEgg(Game * game) {
     this->game = game;
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0, 10.0f, 0);
-    entity->color = glm::vec3(0, 0, 1.0f);
+    entity->setPosition(glm::vec3(0, 10.0f, 0));
+    entity->setColor(glm::vec3(0, 0, 1.0f));
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
-    physicsWorld = new PhysicsWorld();
+    physicsWorld = game->physics->getWorld();
     assignKeyboardInputs(game);
     assignMouseInputs(game);
 
@@ -82,32 +82,25 @@ EasterEgg::EasterEgg(Game * game) {
 void EasterEgg::update(float dt) {
 
 
-    entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,
                                               entity->getPosition().z + -10.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
-    //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
-
-    if (game->input->isPressed("Left Click")) {
-        entity->pivot = glm::vec3(1.0f, 0.0f, 1.0f);
-
-    }
-
+   
     if (game->input->isPressed("Left")) {
-        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+        entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
     }
 
-    if (game->input->isPressed("Right")) {
-        entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
+	if (game->input->isPressed("Right")) {
+		entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f)));
     }
 
     if (game->input->isPressed("Up")) {
-        glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
+        glm::vec3 forward = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f));
         box->setAcceleration(forward.x * 10.0f, 'x');
         box->setAcceleration(forward.z * 10.0f, 'z');
     } else if (game->input->isPressed("Down")) {
-        glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
+        glm::vec3 back = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f));
         box->setAcceleration(back.x * 10.0f, 'x');
         box->setAcceleration(back.z * 10.0f, 'z');
     } else if (!game->input->isPressed("Down") && !game->input->isPressed("Up")) {

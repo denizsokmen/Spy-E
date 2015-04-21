@@ -63,22 +63,22 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 
     Renderable* entity4 = game->scene->getWorld()->createRenderable("box");
     game->physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
-    entity4->position = glm::vec3(0,0,0);
-    entity4->color = glm::vec3(1.0,1.0,1.0);
+    entity4->setPosition(glm::vec3(0,0,0));
+	entity4->setColor(glm::vec3(1.0, 1.0, 1.0));
 
 
 
     Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
     game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
-    entity2->position = glm::vec3(2.0,0,0);
-    entity2->color = glm::vec3(0.5,1.0,1.0);
+    entity2->setPosition(glm::vec3(2.0,0,0));
+    entity2->setColor(glm::vec3(0.5,1.0,1.0));
 
 
 
     Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
     game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
-    entity3->position = glm::vec3(-2.0,0.0,0);
-    entity3->color = glm::vec3(0.5,0.5,1.0);
+	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
+	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
 
 
 
@@ -202,9 +202,10 @@ void WorldEditorSystem::update(float dt) {
                game->scene->camera->viewDirection.y, game->scene->camera->viewDirection.z);
         if (body) {
             printf("Change color\n");
-            body->getEntity()->color = glm::vec3(body->getEntity()->color.x+0.1,
-                                                 body->getEntity()->color.y+0.1,
-                                                 body->getEntity()->color.z+0.1);
+			glm::vec3 col = body->getEntity()->getColor();
+            body->getEntity()->setColor(glm::vec3(col.x+0.1,
+				col.y + 0.1,
+				col.z + 0.1));
         }
     }
 

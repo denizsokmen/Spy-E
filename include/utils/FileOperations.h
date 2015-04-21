@@ -13,7 +13,7 @@ class FileOperations {
 
 public:
     static std::vector<std::string> getAllDirectories(std::string path){
-        DIR *dir;
+        struct DIR *dir;
         struct dirent *ent;
         std::vector<std::string> directories;
 

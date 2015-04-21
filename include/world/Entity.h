@@ -9,39 +9,41 @@
 #include <string>
 
 class Entity {
+private:
 
+	glm::vec3 position;
+	glm::vec3 pivot;
+	glm::quat orientation;
+	glm::mat4 transformation;
+	glm::vec3 color;
+	glm::vec3 scale;
 protected:
 
 public:
     std::string name;
-    glm::vec3 position;
-    glm::vec3 pivot;
-    glm::quat orientation;
-    glm::mat4 transformation;
-    glm::vec3 color;
-    glm::vec3 scale;
+    
 
     Entity();
     virtual ~Entity() {};
-    glm::mat4& getTransformation() {
-
-        transformation = glm::translate(glm::mat4(1.0f), position) * glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::scale(glm::mat4(1.0), scale) * glm::translate(glm::mat4(1.0f), pivot);
-       /* transformation[3][0] = position[0];
-        transformation[3][1] = position[1];
-        transformation[3][2] = position[2];*/
-        return transformation;
-
-    }
-    void setTransformation(glm::mat4& trans) {
-        orientation = glm::normalize(glm::toQuat(trans));
-        position = glm::vec3(trans[3]);
-    }
+	glm::mat4 getTransformation() const;
+	void setTransformation(glm::mat4& trans);
 
     glm::quat getOrientation() const;
     void setOrientation(glm::quat &orientation);
 
     glm::vec3 getPosition() const;
     void setPosition(glm::vec3 &position);
+
+	glm::vec3 getColor() const;
+	void setColor(glm::vec3 &color);
+
+	glm::vec3 getScale() const;
+	void setScale(glm::vec3 &scale);
+
+	void updateTransformation();
+
+
+
 };
 
 #endif

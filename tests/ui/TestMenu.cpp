@@ -45,8 +45,8 @@ int main(int argc, char *argv[]) {
 TestMenu::TestMenu(Game *game) {
     this->game = game;
     entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0, 10.0f, 0);
-    entity->color = glm::vec3(0, 0, 1.0f);
+	entity->setPosition(glm::vec3(0, 10.0f, 0));
+    entity->setColor(glm::vec3(0, 0, 1.0f));
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
 
@@ -128,15 +128,13 @@ void TestMenu::update(float dt) {
 
     fpsLabel->setText(L"FPS: %f", game->fps);
 
-
-    entity->pivot = glm::vec3(0.0f, 0.0f, 0.0f);
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y + 10.0f,
                                               entity->getPosition().z + -10.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
-    entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+    entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
 
     if (game->input->wasReleased("Up")) {
         menu->moveCursorUp();
