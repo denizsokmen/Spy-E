@@ -10,7 +10,7 @@ class SubMesh;
 class Material;
 
 class Mesh {
-
+friend class SubMesh;
 
 private:
 	VertexBuffer* vertexBuffer;

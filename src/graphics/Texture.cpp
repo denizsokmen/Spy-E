@@ -12,6 +12,9 @@ void Texture::createFromSDL(SDL_Surface *surface) {
         return;
     }
 
+    SDL_Surface *image = SDL_CreateRGBSurface(NULL, surface->w, surface->h, 32, 0, 0, 0, 0);
+    SDL_BlitSurface(surface, NULL, image, NULL);
+
 
     id = 0;
 	width = surface->w;
@@ -21,16 +24,30 @@ void Texture::createFromSDL(SDL_Surface *surface) {
     glBindTexture(GL_TEXTURE_2D, id);
     GLenum mode = GL_RGB;
 
-    if(surface->format->BytesPerPixel == 4) {
-        mode = GL_RGBA;
+
+    int numcols= surface->format->BytesPerPixel;
+    if (numcols == 4)
+    {
+        if (surface->format->Rmask == 0x000000ff)
+            mode = GL_RGBA;
+        else
+            mode = GL_BGRA;
+    } else if (numcols == 3)     // no alpha channel
+    {
+        if (surface->format->Rmask == 0x000000ff)
+            mode = GL_RGB;
+        else
+            mode = GL_BGR;
+    } else {
+        printf("warning: the image is not truecolor..  this will probably break\n");
     }
 
-    glTexImage2D(GL_TEXTURE_2D, 0, mode, surface->w, surface->h, 0, mode, GL_UNSIGNED_BYTE, surface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, image->pixels);
 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   // glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

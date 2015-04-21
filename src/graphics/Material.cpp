@@ -6,8 +6,14 @@
 #include "graphics/Shader.h"
 #include "graphics/Texture.h"
 #include <GL/glew.h>
+#include <resource/ResourceManager.h>
+
 void Material::beginRendering() {
-    
+	GLuint bind = 0;
+    for(auto tex: textures) {
+		tex->bind(bind);
+		bind++;
+	}
 }
 
 void Material::endRendering() {
@@ -22,6 +28,9 @@ Material::Material() {
 
 	shininess = 128.0f;
 	dissolve = 1.0f;
+
+	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitydiffuse.png").get());
+	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitynormal.png").get());
 }
 
 Material::~Material() {

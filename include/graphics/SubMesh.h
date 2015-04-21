@@ -8,6 +8,10 @@ class Mesh;
 class SubMesh {
 
 public:
+
+    int triangleCount;
+    int indexOffset;
+
     Mesh* mesh;
     VertexBuffer* vertexBuffer;
     VertexBuffer *getVertexBuffer();

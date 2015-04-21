@@ -21,6 +21,7 @@ std::shared_ptr<Texture> ResourceManager::createTexture(std::string name) {
 		std::shared_ptr<Texture> ptr = std::make_shared<Texture>();
 		SDL_Surface *surface = IMG_Load(name.c_str());
 		if (surface == NULL)  {
+            printf("Failed to load tex : %s\n", name.c_str());
 			ptr = NULL;
 			return NULL;
 		}

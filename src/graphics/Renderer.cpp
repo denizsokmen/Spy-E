@@ -55,6 +55,7 @@ void Renderer::render(Camera* camera) {
 
 
             glUseProgram(mat->program->id);
+            mat->beginRendering();
 
             program->setUniform("MVP", MVP);
             program->setUniform("NormalMatrix", normalMatrix);
@@ -68,6 +69,11 @@ void Renderer::render(Camera* camera) {
             program->setUniform("diffuse", mat->diffuse);
             program->setUniform("shininess", mat->shininess);
             program->setUniform("dissolve", mat->dissolve);
+
+
+
+            program->setUniform("diffuseTex", 0);
+            program->setUniform("normalTex", 1);
 
 
 

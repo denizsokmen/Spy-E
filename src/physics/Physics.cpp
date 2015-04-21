@@ -51,7 +51,7 @@ bool Physics::castRay(glm::vec3 rayOrigin,        // Ray origin, in world space
 		// aabb is Axis-aligned minimum bounding box
 			 glm::vec3 aabbMax,          // Maximum X,Y,Z coords. Often aabb_min*-1 if your mesh is centered, but it's not always the case.
 
-			 glm::mat4& modelMatrix,       // Transformation applied to the mesh (which will thus be also applied to its bounding box)
+			 glm::mat4 modelMatrix,       // Transformation applied to the mesh (which will thus be also applied to its bounding box)
 
 			 float& intersection_distance) {
 

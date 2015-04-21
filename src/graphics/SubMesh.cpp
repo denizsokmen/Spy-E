@@ -11,7 +11,9 @@ SubMesh::~SubMesh() {
 }
 
 VertexBuffer *SubMesh::getVertexBuffer() {
-    return vertexBuffer;
+    if (vertexBuffer != NULL)
+        return vertexBuffer;
+    return mesh->vertexBuffer;
 }
 
 void SubMesh::setVertexBuffer(VertexBuffer *vertexBuffer) {

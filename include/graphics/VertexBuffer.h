@@ -42,6 +42,8 @@ public:
 
 	static VertexBuffer* createQuad();
     static VertexBuffer* createCube();
+
+    void drawIndexed(int count, int offset);
 };
 
 #endif

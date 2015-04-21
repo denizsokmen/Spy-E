@@ -120,6 +120,11 @@ void VertexBuffer::draw() {
         glDrawArrays(GL_TRIANGLES, 0, vertex[vboPosition].size() / 4);
 }
 
+void VertexBuffer::drawIndexed(int count, int offset) {
+    if (indices.size() > 0)
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*) offset);
+}
+
 void VertexBuffer::unbind() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
