@@ -3,7 +3,7 @@
 Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
 
     this -> entity = bodyEntity;
-    this -> location = &bodyEntity->position;
+    //this -> location = &bodyEntity->position;
     this -> speed = zeroVector;
     this -> acceleration = zeroVector;
     this -> vertices = v;
@@ -11,7 +11,9 @@ Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
 }
 
 void Body::setLocation(glm::vec3 loc) {
-    *location = loc;
+	if (entity != NULL)
+		entity->setPosition(loc);
+    //*location = loc;
 }
 
 void Body::setSpeed(glm::vec3 s) {
@@ -29,8 +31,10 @@ glm::vec3 Body::getSpeed() {
 }
 
 glm::vec3 Body::getLocation(){
+	if (entity != NULL)
+		return entity->getPosition();
 
-    return *location;
+	return glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
 BoundingBox* Body::getBoundingBox(){
@@ -82,20 +86,23 @@ void Body::setSpeed(float speed, char direction){
 }
 
 void Body::setLocation(float location, char direction) {
-    switch (direction) {
-        case 'x':
-            (*this->location).x = location;
-            break;
-        case 'y':
-            (*this->location).y = location;
-            break;
-        case 'z':
-            (*this->location).z = location;
-            break;
-        default:
-            printf("No such direction!");
-            break;
-    }
+	if (entity != NULL) {
+		glm::vec3 pos = entity->getPosition();
+		switch (direction) {
+		case 'x':
+			entity->setPosition(glm::vec3(location, pos.y, pos.z));
+			break;
+		case 'y':
+			entity->setPosition(glm::vec3(pos.x, location, pos.z));
+			break;
+		case 'z':
+			entity->setPosition(glm::vec3(pos.x, pos.y, location));
+			break;
+		default:
+			printf("No such direction!");
+			break;
+		}
+	}
 }
 
 Body::~Body(){
@@ -128,9 +135,12 @@ BoundingBox *Body::getBoundingBoxFromLocation() {
     std::vector<glm::vec3> tempVertices1 = this->vertices;
 
     for(int i = 0; i < tempVertices1.size(); i++){
-        tempVertices1[i].x += this->getLocation().x;
-        tempVertices1[i].y += this->getLocation().y;
-        tempVertices1[i].z += this->getLocation().z;
+		if (entity != NULL) {
+			glm::vec3 pos = entity->getPosition();
+			tempVertices1[i].x += pos.x;
+			tempVertices1[i].y += pos.y;
+			tempVertices1[i].z += pos.z;
+		}
     }
 
     return new BoundingBox(tempVertices1);

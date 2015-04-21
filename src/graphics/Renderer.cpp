@@ -34,9 +34,7 @@ void Renderer::render(Camera* camera) {
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
-    glUseProgram(generalShader->id);
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
     glm::mat4 MVP;
@@ -44,9 +42,10 @@ void Renderer::render(Camera* camera) {
     glm::mat3 normalMatrix;
 
     for (auto& renderable: renderList) {
+		glm::mat4 model = renderable->getTransformation();
 
-        MVP = camera->projection * (camera->view * renderable->getTransformation());
-        modelViewMatrix = camera->view * renderable->getTransformation();
+        MVP = camera->projection * (camera->view * model);
+		modelViewMatrix = camera->view * model;
         normalMatrix = glm::inverse(glm::transpose(glm::mat3(modelViewMatrix)));
 
         for (auto submesh : renderable->mesh->subMeshes) {
@@ -78,7 +77,7 @@ void Renderer::render(Camera* camera) {
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelMatrix"), 1, GL_FALSE, &renderable->getTransformation()[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelViewMatrix"), 1, GL_FALSE, &modelViewMatrix[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ViewMatrix"), 1, GL_FALSE, &camera->view[0][0]);*/
-            glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->color[0]);
+            glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->getColor()[0]);
 
             submesh->getVertexBuffer()->bind();
             submesh->getVertexBuffer()->draw();

@@ -45,21 +45,23 @@ void InputState::update(float dt) {
     if (currentState == STATE_GAME) {
         Entity* entity = spye->entity;
         if (game->input->isPressed("Left")) {
-            entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f));
+            entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
         }
 
         if (game->input->isPressed("Right")) {
-            entity->orientation = glm::rotate(entity->orientation, 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f));
+			entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f)));
         }
 
         if (game->input->isPressed("Up")) {
-            glm::vec3 forward = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, -1.0f));
-            entity->position += forward * 10.0f * dt;
+			glm::vec3 forward = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f));
+			glm::vec3 pos = entity->getPosition() + (forward * 10.0f * dt);
+			entity->setPosition(pos);
         }
 
         if (game->input->isPressed("Down")) {
-            glm::vec3 back = glm::normalize(entity->orientation * glm::vec3(0.0f, 0.0f, 1.0f));
-            entity->position += back * 10.0f * dt;
+			glm::vec3 back = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f));
+			glm::vec3 pos = entity->getPosition() + (back * 10.0f * dt);
+			entity->setPosition(pos);
         }
 
 

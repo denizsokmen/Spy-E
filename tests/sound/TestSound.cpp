@@ -40,24 +40,24 @@ SoundSystem::SoundSystem(Game *game){
     this->game = game;
 
     Renderable* entity = game->scene->getWorld()->createRenderable("box");
-    entity->position = glm::vec3(0,0,0);
-    entity->color = glm::vec3(1.0,1.0,1.0);
+    entity->setPosition(glm::vec3(0,0,0));
+    entity->setColor(glm::vec3(1.0,1.0,1.0));
 
     Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
-    entity2->position = glm::vec3(2.0,0,0);
-    entity2->color = glm::vec3(0.5,1.0,1.0);
+	entity2->setPosition(glm::vec3(2.0, 0, 0));
+	entity2->setColor(glm::vec3(0.5, 1.0, 1.0));
 
     Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
-    entity3->position = glm::vec3(-2.0,0.0,0);
-    entity3->color = glm::vec3(0.5,0.5,1.0);
+	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
+	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
 
     soundcube = game->scene->getWorld()->createRenderable("cube");
-    soundcube->position = glm::vec3(0.0,10.0,0);
-    soundcube->color = glm::vec3(0.2,0.2,0.2);
+	soundcube->setPosition(glm::vec3(0.0, 10.0, 0));
+	soundcube->setColor(glm::vec3(0.2, 0.2, 0.2));
 
     Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
-    floorEntity->position = glm::vec3(0,-2.0f,0);
-    floorEntity->color = glm::vec3(1.0,1.0,1.0);
+	floorEntity->setPosition(glm::vec3(0, -2.0f, 0));
+	floorEntity->setColor(glm::vec3(1.0, 1.0, 1.0));
 
     game->input->mapButton("W", new KeyboardButtonHandler(SDL_SCANCODE_W, game->input));
     game->input->mapButton("A", new KeyboardButtonHandler(SDL_SCANCODE_A, game->input));
@@ -125,29 +125,38 @@ void SoundSystem::update(float dt){
     }
 
     if (game->input->isPressed("Up")) {
-        soundcube->position.y += 5.0f * dt;
+		glm::vec3 pos = soundcube->getPosition();
+        pos.y += 5.0f * dt;
+		soundcube->setPosition(pos);
 
     }
     if (game->input->isPressed("Left")) {
-        soundcube->position.x -= 5.0f * dt;
+		glm::vec3 pos = soundcube->getPosition();
+		pos.x -= 5.0f * dt;
+		soundcube->setPosition(pos);
     }
 
     if (game->input->isPressed("Right")) {
-        soundcube->position.x += 5.0f * dt;
+		glm::vec3 pos = soundcube->getPosition();
+		pos.x += 5.0f * dt;
+		soundcube->setPosition(pos);
     }
 
     if (game->input->isPressed("Down")) {
-        soundcube->position.y -= 5.0f * dt;
+		glm::vec3 pos = soundcube->getPosition();
+		pos.y -= 5.0f * dt;
+		soundcube->setPosition(pos);
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit){
         game->quit = true;
     }
 
+	glm::vec3 pos = soundcube->getPosition();
     game->sounds->set_source_position(sound_1,
-                                    soundcube->position.x,
-                                    soundcube->position.y,
-                                    soundcube->position.z);
+                                    pos.x,
+                                    pos.y,
+                                    pos.z);
 
     game->sounds->set_listener_position(game->scene->camera->position.x,
                                         game->scene->camera->position.y,
