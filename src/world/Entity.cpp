@@ -18,7 +18,7 @@ glm::mat4 Entity::getTransformation() const {
 	return transformation;
 }
 
-void Entity::setTransformation(glm::mat4& trans) {
+void Entity::setTransformation(glm::mat4 trans) {
 	orientation = glm::normalize(glm::toQuat(trans));
 	position = glm::vec3(trans[3]);
 }
@@ -27,7 +27,7 @@ glm::quat Entity::getOrientation() const {
     return orientation;
 }
 
-void Entity::setOrientation(glm::quat &orientation) {
+void Entity::setOrientation(glm::quat orientation) {
 	if (this->orientation != orientation)
 		updateTransformation();
 
@@ -38,7 +38,7 @@ glm::vec3 Entity::getPosition() const {
     return position;
 }
 
-void Entity::setPosition(glm::vec3 &position) {
+void Entity::setPosition(glm::vec3 position) {
 	if (this->position != position)
 		updateTransformation();
     this->position = position;
@@ -48,7 +48,7 @@ glm::vec3 Entity::getColor() const {
 	return color;
 }
 
-void Entity::setColor(glm::vec3 &color) {
+void Entity::setColor(glm::vec3 color) {
 	if (this->color != color)
 		updateTransformation();
 	this->color = color;
@@ -58,7 +58,7 @@ glm::vec3 Entity::getScale() const {
 	return scale;
 }
 
-void Entity::setScale(glm::vec3 &scale) {
+void Entity::setScale(glm::vec3 scale) {
 	if (this->scale != scale)
 		updateTransformation();
 
