@@ -19,7 +19,7 @@ uniform vec3 diffuse;
 uniform float shininess;
 uniform float dissolve;
 
-out vec3 color;
+out vec4 color;
 
 void main() {
 
@@ -40,5 +40,7 @@ void main() {
     vec3 spec = specular * power;
     vec3 col = ambient + diff + spec;
         
-    color = attenuation * col * texture(diffuseTex, UV.st).rgb;
+    color = vec4(attenuation * col * texture(diffuseTex, UV.st).rgb, 1.0);
+
+    color.a = dissolve;
 }

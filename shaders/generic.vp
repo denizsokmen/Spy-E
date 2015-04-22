@@ -28,9 +28,10 @@ void main() {
 
     light_eyespace = ViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
 
-    halfDir = normalize(light_eyespace - position_eyespace).xyz;
 
-    lightDir = (light_eyespace - position_eyespace).xyz;
+    lightDir = normalize((light_eyespace - position_eyespace).xyz);
+
+    halfDir = normalize(lightDir - normalize(position_eyespace.xyz)).xyz;
 
     vec3 n = normalize(NormalMatrix * normal);
     vec3 t = normalize(NormalMatrix * tangent);

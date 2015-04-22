@@ -34,6 +34,9 @@ void Renderer::render(Camera* camera) {
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.2f, 0.0f);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
 
 

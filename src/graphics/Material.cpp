@@ -30,7 +30,7 @@ Material::Material() {
 	dissolve = 1.0f;
 
 	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitydiffuse.png").get());
-	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitynormal.png").get());
+	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/box-wood-normal.jpg").get());
 }
 
 Material::~Material() {
