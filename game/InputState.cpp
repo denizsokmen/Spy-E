@@ -55,13 +55,13 @@ void InputState::update(float dt) {
         if (game->input->isPressed("Up")) {
 			glm::vec3 forward = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f));
 			glm::vec3 pos = entity->getPosition() + (forward * 10.0f * dt);
-			entity->setPosition(pos);
+			entity->setPosition(std::move(pos));
         }
 
         if (game->input->isPressed("Down")) {
 			glm::vec3 back = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f));
 			glm::vec3 pos = entity->getPosition() + (back * 10.0f * dt);
-			entity->setPosition(pos);
+			entity->setPosition(std::move(pos));
         }
 
 

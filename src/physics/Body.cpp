@@ -12,7 +12,7 @@ Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
 
 void Body::setLocation(glm::vec3 loc) {
 	if (entity != NULL)
-		entity->setPosition(loc);
+		entity->setPosition(std::move(loc));
     //*location = loc;
 }
 

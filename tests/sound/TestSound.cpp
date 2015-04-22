@@ -127,25 +127,25 @@ void SoundSystem::update(float dt){
     if (game->input->isPressed("Up")) {
 		glm::vec3 pos = soundcube->getPosition();
         pos.y += 5.0f * dt;
-		soundcube->setPosition(pos);
+		soundcube->setPosition(std::move(pos));
 
     }
     if (game->input->isPressed("Left")) {
 		glm::vec3 pos = soundcube->getPosition();
 		pos.x -= 5.0f * dt;
-		soundcube->setPosition(pos);
+		soundcube->setPosition(std::move(pos));
     }
 
     if (game->input->isPressed("Right")) {
 		glm::vec3 pos = soundcube->getPosition();
 		pos.x += 5.0f * dt;
-		soundcube->setPosition(pos);
+		soundcube->setPosition(std::move(pos));
     }
 
     if (game->input->isPressed("Down")) {
 		glm::vec3 pos = soundcube->getPosition();
 		pos.y -= 5.0f * dt;
-		soundcube->setPosition(pos);
+		soundcube->setPosition(std::move(pos));
     }
 
     if (game->input->wasReleased("Escape") || game->input->quit){

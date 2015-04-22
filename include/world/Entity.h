@@ -26,19 +26,19 @@ public:
     Entity();
     virtual ~Entity() {};
 	glm::mat4 getTransformation() const;
-	void setTransformation(glm::mat4 trans);
+	void setTransformation(glm::mat4&& trans);
 
     glm::quat getOrientation() const;
-    void setOrientation(glm::quat orientation);
+    void setOrientation(glm::quat&& orientation);
 
     glm::vec3 getPosition() const;
-    void setPosition(glm::vec3 position);
+    void setPosition(glm::vec3&& position);
 
 	glm::vec3 getColor() const;
-	void setColor(glm::vec3 color);
+	void setColor(glm::vec3&& color);
 
 	glm::vec3 getScale() const;
-	void setScale(glm::vec3 scale);
+	void setScale(glm::vec3&& scale);
 
 	void updateTransformation();
 
