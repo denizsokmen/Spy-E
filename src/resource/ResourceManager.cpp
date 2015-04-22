@@ -8,6 +8,7 @@
 #include <graphics/Mesh.h>
 #include <graphics/Shader.h>
 #include "resource/ObjLoader.h"
+#include "resource/ObjLoader2.h"
 #include <SDL_image.h>
 
 /* TODO: FILE DOESN'T EXIST HANDLING*/
@@ -52,9 +53,10 @@ std::shared_ptr<Mesh> ResourceManager::createMesh(std::string name) {
 
     auto it = meshes.find(name);
     if (it == meshes.end()) {
-        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(objLoader->loadOBJ(name.c_str()));
+        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(objLoader2->import(name.c_str()));
 
         meshes[name] = ptr;
+        objLoader2->destroy();
         return ptr;
     }
     else {
@@ -82,7 +84,7 @@ std::shared_ptr<ShaderProgram> ResourceManager::createShader(std::string name) {
 }
 
 ResourceManager::ResourceManager() {
-
+    objLoader2 = new ModelOBJ();
 }
 
 ResourceManager::~ResourceManager() {

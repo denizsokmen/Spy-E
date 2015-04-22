@@ -11,6 +11,7 @@ enum VBO {
     vboUV,
     vboColor,
     vboTangent,
+    vboBitangent,
     MAX_VBO
 };
 
@@ -32,6 +33,7 @@ public:
     void addColor(glm::vec4& color);
     void addNormal(glm::vec3 normal);
     void addTangent(glm::vec3 tangent);
+    void addBitangent(glm::vec3 bitangent);
     void addIndex(unsigned int index);
 
     void upload();

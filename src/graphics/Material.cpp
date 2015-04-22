@@ -36,3 +36,12 @@ Material::Material() {
 Material::~Material() {
 
 }
+
+void Material::setTexture(TextureTypes type, Texture *texture) {
+	if (texture == NULL)
+		return;
+
+	if (type < TEXTURE_LAST)
+		textures[type] = texture;
+
+}

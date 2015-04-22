@@ -37,6 +37,8 @@ public:
     void beginRendering();
     void endRendering();
 
+    void setTexture(TextureTypes type, Texture* texture);
+
 
 
 

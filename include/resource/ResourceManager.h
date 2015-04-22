@@ -13,7 +13,7 @@ class Material;
 class Mesh;
 class ShaderProgram;
 class ObjLoader;
-
+class ModelOBJ;
 
 class ResourceManager {
 
@@ -42,6 +42,7 @@ public:
 
 
     ObjLoader* objLoader;
+    ModelOBJ* objLoader2;
 };
 
 

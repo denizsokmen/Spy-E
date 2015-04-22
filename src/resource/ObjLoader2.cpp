@@ -44,11 +44,15 @@
 #include <cstring>
 #include <limits>
 #include <string>
+#include <graphics/Mesh.h>
+#include <graphics/SubMesh.h>
+#include <resource/ResourceManager.h>
 
 #include "resource/ObjLoader2.h"
+#include "graphics/Material.h"
 namespace
 {
-    bool MeshCompFunc(const ModelOBJ::Mesh &lhs, const ModelOBJ::Mesh &rhs)
+    bool MeshCompFunc(const ModelOBJ::MeshObj &lhs, const ModelOBJ::MeshObj &rhs)
     {
         return lhs.pMaterial->alpha > rhs.pMaterial->alpha;
     }
@@ -163,12 +167,13 @@ void ModelOBJ::destroy()
     m_vertexCache.clear();
 }
 
-bool ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
+Mesh* ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
 {
+    vertexBuffer = new VertexBuffer();
     FILE *pFile = fopen(pszFilename, "r");
 
     if (!pFile)
-        return false;
+        return NULL;
 
     // Extract the directory the OBJ file is in from the file name.
     // This directory path will be used to load the OBJ's associated MTL file.
@@ -216,20 +221,49 @@ bool ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
 
     // Build tangents is required.
 
-    for (int i = 0; i < m_numberOfMaterials; ++i)
+    /*for (int i = 0; i < m_numberOfMaterials; ++i)
     {
         if (!m_materials[i].bumpMapFilename.empty())
         {
             generateTangents();
             break;
         }
+    }*/
+
+    generateTangents();
+    vertexBuffer->upload();
+
+    Mesh* retmesh = new Mesh();
+    retmesh->setVertexBuffer(vertexBuffer);
+
+    for (int i = 0; i < getNumberOfMeshes(); ++i) {
+        MeshObj const *pMesh = &getMesh(i);
+        MaterialObj const *pMaterial = pMesh->pMaterial;
+
+        Material* material = new Material();
+        material->diffuse = glm::vec3(pMaterial[0].diffuse[0], pMaterial[0].diffuse[1], pMaterial[0].diffuse[2]);
+        material->ambient = glm::vec3(pMaterial[0].ambient[0], pMaterial[0].ambient[1], pMaterial[0].ambient[2]);
+        material->specular = glm::vec3(pMaterial[0].specular[0], pMaterial[0].specular[1], pMaterial[0].specular[2]);
+        material->shininess = pMaterial[0].shininess;
+        material->dissolve = pMaterial[0].alpha;
+        material->program = ResourceManager::instance()->createShader("./shaders/generic").get();
+        material->setTexture(TEXTURE_DIFFUSE, ResourceManager::instance()->createTexture(m_directoryPath + pMaterial->colorMapFilename).get());
+        material->setTexture(TEXTURE_NORMAL, ResourceManager::instance()->createTexture(m_directoryPath + pMaterial->bumpMapFilename).get());
+
+        printf("Material: %s\n", m_directoryPath.c_str());
+
+        SubMesh *subMesh = new SubMesh();
+        subMesh->mesh = retmesh;
+        subMesh->indexOffset = pMesh->startIndex;
+        subMesh->triangleCount = pMesh->triangleCount;
+        subMesh->material = material;
+        retmesh->subMeshes.push_back(subMesh);
     }
 
-    vertexBuffer.upload();
 
 
 
-    return true;
+    return retmesh;
 }
 
 void ModelOBJ::normalize(float scaleTo, bool center)
@@ -325,19 +359,19 @@ void ModelOBJ::addTrianglePos(int index, int material, int v0, int v1, int v2)
     vertex.position[1] = m_vertexCoords[v0 * 3 + 1];
     vertex.position[2] = m_vertexCoords[v0 * 3 + 2];
     m_indexBuffer[index * 3] = addVertex(v0, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3]);
 
     vertex.position[0] = m_vertexCoords[v1 * 3];
     vertex.position[1] = m_vertexCoords[v1 * 3 + 1];
     vertex.position[2] = m_vertexCoords[v1 * 3 + 2];
     m_indexBuffer[index * 3 + 1] = addVertex(v1, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 1]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 1]);
 
     vertex.position[0] = m_vertexCoords[v2 * 3];
     vertex.position[1] = m_vertexCoords[v2 * 3 + 1];
     vertex.position[2] = m_vertexCoords[v2 * 3 + 2];
     m_indexBuffer[index * 3 + 2] = addVertex(v2, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 2]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 2]);
 }
 
 void ModelOBJ::addTrianglePosNormal(int index, int material, int v0, int v1,
@@ -360,7 +394,7 @@ void ModelOBJ::addTrianglePosNormal(int index, int material, int v0, int v1,
     vertex.normal[1] = m_normals[vn0 * 3 + 1];
     vertex.normal[2] = m_normals[vn0 * 3 + 2];
     m_indexBuffer[index * 3] = addVertex(v0, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3]);
 
     vertex.position[0] = m_vertexCoords[v1 * 3];
     vertex.position[1] = m_vertexCoords[v1 * 3 + 1];
@@ -369,7 +403,7 @@ void ModelOBJ::addTrianglePosNormal(int index, int material, int v0, int v1,
     vertex.normal[1] = m_normals[vn1 * 3 + 1];
     vertex.normal[2] = m_normals[vn1 * 3 + 2];
     m_indexBuffer[index * 3 + 1] = addVertex(v1, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 1]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 1]);
 
     vertex.position[0] = m_vertexCoords[v2 * 3];
     vertex.position[1] = m_vertexCoords[v2 * 3 + 1];
@@ -378,7 +412,7 @@ void ModelOBJ::addTrianglePosNormal(int index, int material, int v0, int v1,
     vertex.normal[1] = m_normals[vn2 * 3 + 1];
     vertex.normal[2] = m_normals[vn2 * 3 + 2];
     m_indexBuffer[index * 3 + 2] = addVertex(v2, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 2]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 2]);
 }
 
 void ModelOBJ::addTrianglePosTexCoord(int index, int material, int v0, int v1,
@@ -400,7 +434,7 @@ void ModelOBJ::addTrianglePosTexCoord(int index, int material, int v0, int v1,
     vertex.texCoord[0] = m_textureCoords[vt0 * 2];
     vertex.texCoord[1] = m_textureCoords[vt0 * 2 + 1];
     m_indexBuffer[index * 3] = addVertex(v0, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3]);
 
     vertex.position[0] = m_vertexCoords[v1 * 3];
     vertex.position[1] = m_vertexCoords[v1 * 3 + 1];
@@ -408,7 +442,7 @@ void ModelOBJ::addTrianglePosTexCoord(int index, int material, int v0, int v1,
     vertex.texCoord[0] = m_textureCoords[vt1 * 2];
     vertex.texCoord[1] = m_textureCoords[vt1 * 2 + 1];
     m_indexBuffer[index * 3 + 1] = addVertex(v1, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 1]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 1]);
 
     vertex.position[0] = m_vertexCoords[v2 * 3];
     vertex.position[1] = m_vertexCoords[v2 * 3 + 1];
@@ -416,7 +450,7 @@ void ModelOBJ::addTrianglePosTexCoord(int index, int material, int v0, int v1,
     vertex.texCoord[0] = m_textureCoords[vt2 * 2];
     vertex.texCoord[1] = m_textureCoords[vt2 * 2 + 1];
     m_indexBuffer[index * 3 + 2] = addVertex(v2, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 2]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 2]);
 }
 
 void ModelOBJ::addTrianglePosTexCoordNormal(int index, int material, int v0,
@@ -443,7 +477,7 @@ void ModelOBJ::addTrianglePosTexCoordNormal(int index, int material, int v0,
     vertex.normal[1] = m_normals[vn0 * 3 + 1];
     vertex.normal[2] = m_normals[vn0 * 3 + 2];
     m_indexBuffer[index * 3] = addVertex(v0, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3]);
 
     vertex.position[0] = m_vertexCoords[v1 * 3];
     vertex.position[1] = m_vertexCoords[v1 * 3 + 1];
@@ -454,7 +488,7 @@ void ModelOBJ::addTrianglePosTexCoordNormal(int index, int material, int v0,
     vertex.normal[1] = m_normals[vn1 * 3 + 1];
     vertex.normal[2] = m_normals[vn1 * 3 + 2];
     m_indexBuffer[index * 3 + 1] = addVertex(v1, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 1]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 1]);
 
     vertex.position[0] = m_vertexCoords[v2 * 3];
     vertex.position[1] = m_vertexCoords[v2 * 3 + 1];
@@ -465,7 +499,7 @@ void ModelOBJ::addTrianglePosTexCoordNormal(int index, int material, int v0,
     vertex.normal[1] = m_normals[vn2 * 3 + 1];
     vertex.normal[2] = m_normals[vn2 * 3 + 2];
     m_indexBuffer[index * 3 + 2] = addVertex(v2, &vertex);
-    vertexBuffer.addIndex(m_indexBuffer[index * 3 + 2]);
+    vertexBuffer->addIndex(m_indexBuffer[index * 3 + 2]);
 }
 
 int ModelOBJ::addVertex(int hash, const Vertex *pVertex)
@@ -479,9 +513,9 @@ int ModelOBJ::addVertex(int hash, const Vertex *pVertex)
 
         index = static_cast<int>(m_vertexBuffer.size());
         m_vertexBuffer.push_back(*pVertex);
-        vertexBuffer.addVertex(glm::vec3(pVertex->position[0],pVertex->position[1],pVertex->position[2]));
-        vertexBuffer.addNormal(glm::vec3(pVertex->normal[0],pVertex->normal[1],pVertex->normal[2]));
-        vertexBuffer.addUV(glm::vec2(pVertex->texCoord[0],pVertex->texCoord[1]));
+        vertexBuffer->addVertex(glm::vec3(pVertex->position[0],pVertex->position[1],pVertex->position[2]));
+        vertexBuffer->addNormal(glm::vec3(pVertex->normal[0],pVertex->normal[1],pVertex->normal[2]));
+        vertexBuffer->addUV(glm::vec2(pVertex->texCoord[0],pVertex->texCoord[1]));
         m_vertexCache.insert(std::make_pair(hash, std::vector<int>(1, index)));
     }
     else
@@ -509,9 +543,9 @@ int ModelOBJ::addVertex(int hash, const Vertex *pVertex)
             index = static_cast<int>(m_vertexBuffer.size());
             m_vertexBuffer.push_back(*pVertex);
 
-            vertexBuffer.addVertex(glm::vec3(pVertex->position[0],pVertex->position[1],pVertex->position[2]));
-            vertexBuffer.addNormal(glm::vec3(pVertex->normal[0],pVertex->normal[1],pVertex->normal[2]));
-            vertexBuffer.addUV(glm::vec2(pVertex->texCoord[0],pVertex->texCoord[1]));
+            vertexBuffer->addVertex(glm::vec3(pVertex->position[0],pVertex->position[1],pVertex->position[2]));
+            vertexBuffer->addNormal(glm::vec3(pVertex->normal[0],pVertex->normal[1],pVertex->normal[2]));
+            vertexBuffer->addUV(glm::vec2(pVertex->texCoord[0],pVertex->texCoord[1]));
             m_vertexCache[hash].push_back(index);
         }
     }
@@ -523,7 +557,7 @@ void ModelOBJ::buildMeshes()
 {
     // Group the model's triangles based on material type.
 
-    Mesh *pMesh = 0;
+    MeshObj *pMesh = 0;
     int materialId = -1;
     int numMeshes = 0;
 
@@ -775,7 +809,7 @@ void ModelOBJ::generateTangents()
         pVertex0->tangent[1] *= length;
         pVertex0->tangent[2] *= length;
 
-        vertexBuffer.addTangent(glm::vec3(pVertex0->tangent[0], pVertex0->tangent[1], pVertex0->tangent[2]));
+        vertexBuffer->addTangent(glm::vec3(pVertex0->tangent[0], pVertex0->tangent[1], pVertex0->tangent[2]));
 
         // Calculate the handedness of the local tangent space.
         // The bitangent vector is the cross product between the triangle face
@@ -814,6 +848,9 @@ void ModelOBJ::generateTangents()
         pVertex0->bitangent[0] = bitangent[0];
         pVertex0->bitangent[1] = bitangent[1];
         pVertex0->bitangent[2] = bitangent[2];
+
+
+        vertexBuffer->addBitangent(glm::vec3(pVertex0->bitangent[0], pVertex0->bitangent[1], pVertex0->bitangent[2]));
     }
 
     m_hasTangents = true;
@@ -931,7 +968,7 @@ void ModelOBJ::importGeometryFirstPass(FILE *pFile)
     // Define a default material if no materials were loaded.
     if (m_numberOfMaterials == 0)
     {
-        Material defaultMaterial =
+        MaterialObj defaultMaterial =
                 {
                         0.2f, 0.2f, 0.2f, 1.0f,
                         0.8f, 0.8f, 0.8f, 1.0f,
@@ -1152,7 +1189,7 @@ bool ModelOBJ::importMaterials(const char *pszFilename)
     if (!pFile)
         return false;
 
-    Material *pMaterial = 0;
+    MaterialObj *pMaterial = 0;
     int illum = 0;
     int numMaterials = 0;
     char buffer[256] = {0};

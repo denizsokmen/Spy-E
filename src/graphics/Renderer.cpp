@@ -86,7 +86,7 @@ void Renderer::render(Camera* camera) {
             glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->getColor()[0]);
 
             submesh->getVertexBuffer()->bind();
-            submesh->getVertexBuffer()->draw();
+            submesh->getVertexBuffer()->drawIndexed(submesh->triangleCount*3, submesh->indexOffset);
             submesh->getVertexBuffer()->unbind();
         }
     }

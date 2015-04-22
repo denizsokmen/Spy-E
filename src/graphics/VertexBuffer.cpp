@@ -42,12 +42,20 @@ void VertexBuffer::addTangent(glm::vec3 tangent) {
     vertex[vboTangent].push_back(tangent.z);
 }
 
+
+void VertexBuffer::addBitangent(glm::vec3 bitangent) {
+    vertex[vboBitangent].push_back(bitangent.x);
+    vertex[vboBitangent].push_back(bitangent.y);
+    vertex[vboBitangent].push_back(bitangent.z);
+}
+
+
 void VertexBuffer::addIndex(unsigned int index) {
     indices.push_back(index);
 }
 
 void VertexBuffer::upload() {
-    glGenBuffers(5, vbo);
+    glGenBuffers(6, vbo);
 
     printf("VBO %d - %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size(), indices.size());
     if (vertex[vboPosition].size() > 0) {
@@ -79,6 +87,11 @@ void VertexBuffer::upload() {
         glBufferData(GL_ARRAY_BUFFER, vertex[vboTangent].size() * sizeof(float), &vertex[vboTangent][0], GL_STATIC_DRAW);
     }
 
+    if (vertex[vboBitangent].size() > 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboBitangent]);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboBitangent].size() * sizeof(float), &vertex[vboBitangent][0], GL_STATIC_DRAW);
+    }
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glGenBuffers(1, &vboind);
@@ -99,11 +112,27 @@ void VertexBuffer::bind() {
     glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, vbo[vboNormal]);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+
     if (vertex[vboUV].size() > 0) {
         glEnableVertexAttribArray(2);
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboUV]);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
     }
+
+    if (vertex[vboTangent].size() > 0) {
+        glEnableVertexAttribArray(4);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboTangent]);
+        glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+    }
+
+    if (vertex[vboBitangent].size() > 0) {
+        glEnableVertexAttribArray(5);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboBitangent]);
+        glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+    }
+
+
+
 
     if (indices.size() > 0) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboind);
@@ -131,6 +160,8 @@ void VertexBuffer::unbind() {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glDisableVertexAttribArray(4);
+    glDisableVertexAttribArray(5);
 }
 
 VertexBuffer *VertexBuffer::createQuad() {

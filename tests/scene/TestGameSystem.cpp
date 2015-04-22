@@ -20,9 +20,10 @@ int main(int argc, char* argv[])
 
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
-    entity = game->scene->getWorld()->createRenderable("box");
+    entity = game->scene->getWorld()->createRenderable("rabbit");
     entity->setPosition(glm::vec3(0, 10.0f, 0));
     entity->setColor(glm::vec3(0, 0, 1.0f));
+    entity->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
 
     physics = game->physics;

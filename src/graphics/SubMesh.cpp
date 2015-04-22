@@ -4,6 +4,7 @@
 
 SubMesh::SubMesh() {
     material = NULL;
+    vertexBuffer = NULL;
 }
 
 SubMesh::~SubMesh() {

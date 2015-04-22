@@ -24,11 +24,12 @@
 //    used instead.
 // 4. This loader triangulates all polygonal faces during importing.
 //-----------------------------------------------------------------------------
+class Mesh;
 
 class ModelOBJ
 {
 public:
-    struct Material
+    struct MaterialObj
     {
         float ambient[4];
         float diffuse[4];
@@ -50,20 +51,20 @@ public:
         float bitangent[3];
     };
 
-    struct Mesh
+    struct MeshObj
     {
         int startIndex;
         int triangleCount;
-        const Material *pMaterial;
+        const MaterialObj *pMaterial;
     };
 
     ModelOBJ();
     ~ModelOBJ();
 
-    VertexBuffer vertexBuffer;
+    VertexBuffer* vertexBuffer;
 
     void destroy();
-    bool import(const char *pszFilename, bool rebuildNormals = false);
+    Mesh* import(const char *pszFilename, bool rebuildNormals = false);
     void normalize(float scaleTo = 1.0f, bool center = true);
     void reverseWinding();
 
@@ -78,8 +79,8 @@ public:
     const int *getIndexBuffer() const;
     int getIndexSize() const;
 
-    const Material &getMaterial(int i) const;
-    const Mesh &getMesh(int i) const;
+    const MaterialObj &getMaterial(int i) const;
+    const MeshObj &getMesh(int i) const;
 
     int getNumberOfIndices() const;
     int getNumberOfMaterials() const;
@@ -142,8 +143,8 @@ private:
 
     std::string m_directoryPath;
 
-    std::vector<Mesh> m_meshes;
-    std::vector<Material> m_materials;
+    std::vector<MeshObj> m_meshes;
+    std::vector<MaterialObj> m_materials;
     std::vector<Vertex> m_vertexBuffer;
     std::vector<int> m_indexBuffer;
     std::vector<int> m_attributeBuffer;
@@ -178,10 +179,10 @@ inline const int *ModelOBJ::getIndexBuffer() const
 inline int ModelOBJ::getIndexSize() const
 { return static_cast<int>(sizeof(int)); }
 
-inline const ModelOBJ::Material &ModelOBJ::getMaterial(int i) const
+inline const ModelOBJ::MaterialObj &ModelOBJ::getMaterial(int i) const
 { return m_materials[i]; }
 
-inline const ModelOBJ::Mesh &ModelOBJ::getMesh(int i) const
+inline const ModelOBJ::MeshObj &ModelOBJ::getMesh(int i) const
 { return m_meshes[i]; }
 
 inline int ModelOBJ::getNumberOfIndices() const
