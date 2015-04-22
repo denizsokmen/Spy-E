@@ -22,13 +22,15 @@ int main(int argc, char* argv[])
     MainMenu *mainmenu = new MainMenu(game);
     InputState* inputState = new InputState(game, spye, mainmenu);
 
-    game->getController()->addState("Mainmenu");
+	game->getController()->addState("Mainmenu");
+	game->getController()->addState("Default");
+
+
+	game->getController()->addCoreSystem(inputState);
     game->getController()->addSystem("Mainmenu", mainmenu);
+	game->getController()->addSystem("Default", spye);
 
-    game->getController()->addCoreSystem(spye);
-    game->getController()->addCoreSystem(inputState);
-
-
+   
     game->getController()->setState("Mainmenu");
     if (game->init(800, 600, "Spy-E", false)) {
         game->update();

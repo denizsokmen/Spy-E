@@ -59,7 +59,10 @@ void SystemController::draw2D() {
 void SystemController::setState(std::string name) {
     std::map<std::string, std::vector<System*>>::iterator state = gameStates.find(name);
     if (state != gameStates.end()) {
+		
         currentState = &state->second;
+
+		
     }
 }
 

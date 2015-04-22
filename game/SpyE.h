@@ -11,6 +11,7 @@ class Renderable;
 class Game;
 class ShaderProgram;
 class VertexBuffer;
+class Skybox;
 
 class SpyE : public System {
 
@@ -21,10 +22,11 @@ public:
     Game *game;
 
     void update(float dt);
-
     void init();
+	void draw();
 
     Renderable *entity;
+	Skybox *skybox;
 
     void activate();
 

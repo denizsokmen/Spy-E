@@ -9,6 +9,7 @@ public:
 	virtual void update(float dt) {}
 	virtual void draw() {}
 	virtual void draw2D() {}
+	virtual void setActive(bool isActive) {}
 };
 
 #endif

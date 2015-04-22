@@ -45,11 +45,11 @@ void InputState::update(float dt) {
     if (currentState == STATE_GAME) {
         Entity* entity = spye->entity;
         if (game->input->isPressed("Left")) {
-            entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
+            entity->setOrientation(glm::rotate(entity->getOrientation(), glm::radians(90.0f * dt), glm::vec3(0.0f, 1.0f, 0.0f)));
         }
 
         if (game->input->isPressed("Right")) {
-			entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, -1.0f, 0.0f)));
+			entity->setOrientation(glm::rotate(entity->getOrientation(), glm::radians(90.0f * dt), glm::vec3(0.0f, -1.0f, 0.0f)));
         }
 
         if (game->input->isPressed("Up")) {
@@ -99,6 +99,7 @@ void InputState::update(float dt) {
                 if (!spye->active) {
                     menu->hidden = true;
                     currentState = STATE_GAME;
+					game->getController()->setState("Default");
                     mainmenu->active=false;
                     spye->activate();
                     Button* startButton = menu->getItem(0);

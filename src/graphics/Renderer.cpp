@@ -86,7 +86,7 @@ void Renderer::render(Camera* camera) {
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelMatrix"), 1, GL_FALSE, &renderable->getTransformation()[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ModelViewMatrix"), 1, GL_FALSE, &modelViewMatrix[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(generalShader->id, "ViewMatrix"), 1, GL_FALSE, &camera->view[0][0]);*/
-            glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->getColor()[0]);
+            //glUniform3fv(glGetUniformLocation(generalShader->id, "Color"), 1, &renderable->getColor()[0]);
 
             submesh->getVertexBuffer()->bind();
             submesh->getVertexBuffer()->drawIndexed(submesh->triangleCount*3, submesh->indexOffset);
