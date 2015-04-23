@@ -237,8 +237,10 @@ Mesh* ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
     retmesh->setVertexBuffer(vertexBuffer);
 
     for (int i = 0; i < getNumberOfMeshes(); ++i) {
+
         MeshObj const *pMesh = &getMesh(i);
         MaterialObj const *pMaterial = pMesh->pMaterial;
+        printf("Mesh %i withName %s \n ",i, pMesh->pMaterial->name.c_str());
 
         Material* material = new Material();
         material->diffuse = glm::vec3(pMaterial[0].diffuse[0], pMaterial[0].diffuse[1], pMaterial[0].diffuse[2]);

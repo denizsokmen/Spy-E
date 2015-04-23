@@ -44,6 +44,7 @@ class World {
 	void setVersion(std::string version);
 
 
+	Renderable *createRenderableFromPath(char const *modelPath);
 };
 
 

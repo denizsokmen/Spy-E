@@ -23,6 +23,20 @@ Renderable* World::createRenderable(const char* name) {
     return entity;
 }
 
+
+
+Renderable* World::createRenderableFromPath(const char* modelPath) {
+    Renderable* entity = new Renderable();
+    Mesh* mesh = ResourceManager::instance()->createMesh(modelPath).get(); // objLoader->loadOBJ(modelPath.c_str());
+    //VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
+    //mesh->setVertexBuffer(buffer);
+    entity->mesh = mesh;
+
+    renderables.push_back(entity);
+    return entity;
+}
+
+
 std::vector<Entity*>& World::getEntities() {
     return entities;
 }

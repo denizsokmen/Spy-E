@@ -7,7 +7,7 @@ Game* game;
 int main(int argc, char* argv[])
 {
     game = new Game();
-    if (game->init(800, 600, "Spy-E", false)) {
+    if (game->init(800*1.5f, 600*1.5f, "Spy-E", false)) {
         TestGameSystem *test = new TestGameSystem(game);
         game->getController()->addCoreSystem(test);
         game->update();

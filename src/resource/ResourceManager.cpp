@@ -22,7 +22,7 @@ std::shared_ptr<Texture> ResourceManager::createTexture(std::string name) {
 		std::shared_ptr<Texture> ptr = std::make_shared<Texture>();
 		SDL_Surface *surface = IMG_Load(name.c_str());
 		if (surface == NULL)  {
-            printf("Failed to load tex : %s\n", name.c_str());
+            printf("Failed to load texture in path: : %s\n", name.c_str());
 			ptr = NULL;
 			return NULL;
 		}
@@ -50,7 +50,7 @@ std::shared_ptr<Material> ResourceManager::createMaterial(std::string name) {
 }
 
 std::shared_ptr<Mesh> ResourceManager::createMesh(std::string name) {
-
+    printf("[ResourceManager] createMesh: %s", name.c_str());
     auto it = meshes.find(name);
     if (it == meshes.end()) {
         std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(objLoader2->import(name.c_str()));
