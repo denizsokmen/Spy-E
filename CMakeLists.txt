@@ -184,7 +184,7 @@ add_library(engine STATIC
     include/resource/tiny_obj_loader.h
     src/resource/tiny_obj_loader.cpp
 
-    include/utils/MemoryPool.h include/utils/MemoryPool.tcc  src/resource/ObjLoader2.cpp include/resource/ObjLoader2.h)
+    include/utils/MemoryPool.h include/utils/MemoryPool.tcc  src/resource/ObjLoader2.cpp include/resource/ObjLoader2.h include/resource/MD5Loader.h src/resource/MD5Loader.cpp)
 
 
 target_link_libraries(engine

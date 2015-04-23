@@ -1,0 +1,69 @@
+#version 330 core
+
+layout(location = 0) in vec4 inVertex;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 uv;
+layout(location = 4) in vec3 tangent;
+layout(location = 5) in vec3 bitangent;
+
+layout(location = 6) in vec4 boneindex;
+layout(location = 7) in vec4 weight;
+
+uniform mat4 MVP;
+uniform mat3 NormalMatrix;
+uniform mat4 ModelMatrix;
+uniform mat4 ViewMatrix;
+uniform mat4 ModelViewMatrix;
+
+
+uniform mat4 Bones[64];
+
+
+out vec4 position_eyespace;
+out vec4 light_eyespace;
+out vec3 lightDir;
+out vec3 halfDir;
+out vec2 UV;
+
+
+void main() {
+
+    mat4 newv;
+    int ind;
+    ind=int(boneindex.x);
+    newv = (Bones[ind]) * weight.x;
+    ind=int(boneindex.y);
+    newv += (Bones[ind]) * weight.y;
+    ind=int(boneindex.z);
+    newv += (Bones[ind]) * weight.z;
+    ind=int(boneindex.w);
+    newv += (Bones[ind]) * weight.w;
+
+    vec4 vertexPosition_modelspace = newv * inVertex;
+    vec3 newNormal = (newv * vec4(normal, 0.0)).xyz;
+    vec3 newTangent = (newv * vec4(tangent, 0.0)).xyz;
+
+
+    gl_Position = MVP * vertexPosition_modelspace;
+    position_eyespace = ModelViewMatrix * vertexPosition_modelspace;
+
+    light_eyespace = ViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
+
+
+    lightDir = normalize((light_eyespace - position_eyespace).xyz);
+
+    halfDir = normalize(lightDir - normalize(position_eyespace.xyz)).xyz;
+
+    vec3 n = normalize(NormalMatrix * newNormal);
+    vec3 t = normalize(NormalMatrix * newTangent);
+    vec3 b = cross(n, t);
+
+    mat3 tbnMatrix = mat3(t.x, b.x, n.x,
+                          t.y, b.y, n.y,
+                          t.z, b.z, n.z);
+
+    lightDir = tbnMatrix * lightDir;
+    halfDir = tbnMatrix * halfDir;
+    UV = uv;
+
+}

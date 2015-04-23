@@ -2,7 +2,7 @@
 #include "graphics/VertexBuffer.h"
 
 
-VertexBuffer::VertexBuffer() {
+VertexBuffer::VertexBuffer() : mode(GL_TRIANGLES) {
 
 }
 
@@ -251,4 +251,12 @@ VertexBuffer *VertexBuffer::createCube() {
     vbo->upload();
 
     return vbo;
+}
+
+GLenum VertexBuffer::getMode() {
+    return mode;
+}
+
+void VertexBuffer::setMode(GLenum mod) {
+    mode = mod;
 }

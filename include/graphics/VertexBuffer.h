@@ -21,6 +21,7 @@ class VertexBuffer {
     GLuint vboind;
     std::vector<float> vertex[MAX_VBO];
     std::vector<unsigned int> indices;
+    GLenum mode;
 
 
 public:
@@ -35,6 +36,9 @@ public:
     void addTangent(glm::vec3 tangent);
     void addBitangent(glm::vec3 bitangent);
     void addIndex(unsigned int index);
+
+    GLenum getMode();
+    void setMode(GLenum mod);
 
     void upload();
 
