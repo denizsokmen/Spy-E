@@ -94,13 +94,13 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
     Entity *entity = entityLoader->load(typeNode->value(), world);
 
     if (entity != NULL) {
-        printf("[WordLoader] Loading %s.\n", nameNode->value());
+        printf("[WordLoader] Loading '%s'.\n", nameNode->value());
 		entity->setPosition(this->parsePosition(entityNode));
 		entity->setColor(this->parseColor(entityNode));
 
     }
     else {
-        printf("[WordLoader] Unable to load %s.\n", nameNode->value());
+        printf("[WordLoader] Unable to load '%s'.\n", nameNode->value());
     }
 
 }
@@ -117,14 +117,14 @@ glm::vec3 WorldLoader::parsePosition(rapidxml::xml_node<> *entityNode) {
     this->getComponent(positionNode, "Y", &y);
     this->getComponent(positionNode, "Z", &z);
 
-    return glm::vec3(x, y, z);
+    return glm::vec3(x*2.0f, y*2.0f, z*2.0f);
 }
 
 glm::vec3 WorldLoader::parseColor(rapidxml::xml_node<> *entityNode) {
     rapidxml::xml_node<> *colorNode = entityNode->first_node("Color");
     if (colorNode == NULL) {
-        printf("[WorldLoader] Optional: <Entity> does not have a <Color> node!\n");
-        return glm::vec3(0, 0, 0);
+        //printf("[WorldLoader] Optional: <Entity> does not have a <Color> node!\n");
+        return glm::vec3(1, 1, 1);
     }
     float r = 0, g = 0, b = 0;
 

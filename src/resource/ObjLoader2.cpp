@@ -249,10 +249,18 @@ Mesh* ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
         material->shininess = pMaterial[0].shininess;
         material->dissolve = pMaterial[0].alpha;
         material->program = ResourceManager::instance()->createShader("./shaders/generic").get();
+        printf("Loading texture_diffuse from: dir:'%s' fileName:'%s'\n", m_directoryPath.c_str(), pMaterial->colorMapFilename.c_str());
         material->setTexture(TEXTURE_DIFFUSE, ResourceManager::instance()->createTexture(m_directoryPath + pMaterial->colorMapFilename).get());
-        material->setTexture(TEXTURE_NORMAL, ResourceManager::instance()->createTexture(m_directoryPath + pMaterial->bumpMapFilename).get());
+
+        if (!pMaterial->bumpMapFilename.empty()) {
+            printf("Loading texture_normal from: dir:'%s' fileName:'%s'\n", m_directoryPath.c_str(), pMaterial->bumpMapFilename.c_str());
+            material->setTexture(TEXTURE_NORMAL, ResourceManager::instance()->createTexture(m_directoryPath + pMaterial->bumpMapFilename).get());
+        }
+
 
         printf("Material: %s\n", m_directoryPath.c_str());
+
+
 
         SubMesh *subMesh = new SubMesh();
         subMesh->mesh = retmesh;
@@ -260,6 +268,8 @@ Mesh* ModelOBJ::import(const char *pszFilename, bool rebuildNormals)
         subMesh->triangleCount = pMesh->triangleCount;
         subMesh->material = material;
         retmesh->subMeshes.push_back(subMesh);
+
+
     }
 
 

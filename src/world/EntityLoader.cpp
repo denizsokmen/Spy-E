@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <utils/FileOperations.h>
 
 //from Spy-E Engine
 #include "world/Entity.h"
@@ -17,15 +18,20 @@
 
 EntityLoader::EntityLoader(){
     objLoader = new ObjLoader();
+
 }
 
 
 Entity* EntityLoader::load(char const *name, World* world){
+    std::string entityName(name);
+    std::vector<std::string> directories = FileOperations::getAllDirectories("./assets/entities/");
 
-    return world->createRenderable(name);
+    if (std::find(directories.begin(), directories.end(), entityName) != directories.end()){
+        return world->createRenderable(name);
+    }
+    printf("[EntityLoader] Unknown entity named as %s\n", name);
 
-
-
+    return NULL;
 }
 
 

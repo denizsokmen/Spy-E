@@ -13,6 +13,7 @@ Renderable* World::createRenderable(const char* name) {
     std::string entityName(name);
     Renderable* entity = new Renderable();
     std::string modelPath = ENTITIES_DIR+entityName+PATH_SEPARATOR+entityName+OBJ_EXTENSION;
+
 	Mesh* mesh = ResourceManager::instance()->createMesh(modelPath.c_str()).get(); // objLoader->loadOBJ(modelPath.c_str());
     //VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
     //mesh->setVertexBuffer(buffer);

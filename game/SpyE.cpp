@@ -43,10 +43,9 @@ void SpyE::activate() {
 	entity->setPosition(glm::vec3(0, 2.0f, 0));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
 
-//
-	Renderable* map = game->scene->getWorld()->createRenderableFromPath("./entities/map/level1.obj");
-	map->setPosition(glm::vec3(0,0,0));
-
+	WorldLoader loader(game->scene->getWorld());
+	loader.load("./worlds/ExportedLevel.xml");
+//	loader.load("./worlds/LevelOne-1.0.xml");
 }
 
 void SpyE::update(float dt) {

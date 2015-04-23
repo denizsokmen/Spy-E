@@ -50,7 +50,7 @@ std::shared_ptr<Material> ResourceManager::createMaterial(std::string name) {
 }
 
 std::shared_ptr<Mesh> ResourceManager::createMesh(std::string name) {
-    printf("[ResourceManager] createMesh: %s", name.c_str());
+
     auto it = meshes.find(name);
     if (it == meshes.end()) {
         std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(objLoader2->import(name.c_str()));

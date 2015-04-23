@@ -8,6 +8,7 @@
 #include <graphics/ui/Menu.h>
 #include <graphics/ui/Button.h>
 #include <physics/Body.h>
+#include <world/WorldLoader.h>
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/Renderable.h"
@@ -61,24 +62,24 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 //
 
 
-    Renderable* entity4 = game->scene->getWorld()->createRenderable("box");
-    game->physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
-    entity4->setPosition(glm::vec3(0,0,0));
-	entity4->setColor(glm::vec3(1.0, 1.0, 1.0));
-
-
-
-    Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
-    game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
-    entity2->setPosition(glm::vec3(2.0,0,0));
-    entity2->setColor(glm::vec3(0.5,1.0,1.0));
-
-
-
-    Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
-    game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
-	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
-	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
+//    Renderable* entity4 = game->scene->getWorld()->createRenderable("box");
+//    game->physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
+//    entity4->setPosition(glm::vec3(0,0,0));
+//	entity4->setColor(glm::vec3(1.0, 1.0, 1.0));
+//
+//
+//
+//    Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
+//    game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
+//    entity2->setPosition(glm::vec3(2.0,0,0));
+//    entity2->setColor(glm::vec3(0.5,1.0,1.0));
+//
+//
+//
+//    Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
+//    game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
+//	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
+//	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
 
 
 
@@ -130,6 +131,8 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->gui->addSubview(entitiesLabel);
     game->input->showCursor(true);
 
+    WorldLoader loader(game->scene->getWorld());
+    loader.load("./worlds/ExportedLevel.xml");
 
 }
 
