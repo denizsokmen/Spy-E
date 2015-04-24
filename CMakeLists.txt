@@ -184,7 +184,15 @@ add_library(engine STATIC
     include/resource/tiny_obj_loader.h
     src/resource/tiny_obj_loader.cpp
 
-    include/utils/MemoryPool.h include/utils/MemoryPool.tcc  src/resource/ObjLoader2.cpp include/resource/ObjLoader2.h include/resource/MD5Loader.h src/resource/MD5Loader.cpp src/graphics/Skeleton.cpp src/graphics/Bone.cpp include/graphics/Skeleton.h include/graphics/Bone.h)
+    include/utils/MemoryPool.h
+     include/utils/MemoryPool.tcc
+     src/resource/ObjLoader2.cpp
+     include/resource/ObjLoader2.h
+     include/resource/MD5Loader.h
+     src/resource/MD5Loader.cpp
+     src/graphics/Skeleton.cpp
+     src/graphics/Bone.cpp
+     include/graphics/Skeleton.h include/graphics/Bone.h src/resource/MD5AnimLoader.cpp include/resource/MD5AnimLoader.h include/graphics/AnimationState.h include/graphics/Animation.h)
 
 
 target_link_libraries(engine
