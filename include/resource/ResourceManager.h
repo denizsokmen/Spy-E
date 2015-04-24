@@ -7,6 +7,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include "MD5Loader.h"
 
 class Texture;
 class Material;
@@ -43,6 +44,9 @@ public:
 
     ObjLoader* objLoader;
     ModelOBJ* objLoader2;
+    MD5Loader* md5Loader;
+
+    std::shared_ptr<Mesh> createSkeletalMesh(std::string name);
 };
 
 

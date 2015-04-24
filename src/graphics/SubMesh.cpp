@@ -5,6 +5,7 @@
 SubMesh::SubMesh() {
     material = NULL;
     vertexBuffer = NULL;
+    triangleCount = 0;
 }
 
 SubMesh::~SubMesh() {

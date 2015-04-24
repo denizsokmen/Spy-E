@@ -15,6 +15,7 @@
 #include <world/Camera.h>
 #include <graphics/ui/Menu.h>
 #include <graphics/Skybox.h>
+#include <resource/ResourceManager.h>
 
 SpyE::SpyE(Game *game) {
     this->game = game;
@@ -42,6 +43,8 @@ void SpyE::activate() {
 	entity = game->scene->getWorld()->createRenderable("box");
 	entity->setPosition(glm::vec3(0, 2.0f, 0));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
+	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
 
 	WorldLoader loader(game->scene->getWorld());
 	loader.load("./worlds/ExportedLevel.xml");

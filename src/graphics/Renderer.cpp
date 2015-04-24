@@ -78,6 +78,10 @@ void Renderer::render(Camera* camera) {
             program->setUniform("diffuseTex", 0);
             program->setUniform("normalTex", 1);
 
+            if(renderable->mesh->getSkeleton()) {
+                program->setUniform("Bones", renderable->mesh->boneMatrix);
+            }
+
 
 
 

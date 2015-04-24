@@ -12,6 +12,8 @@ enum VBO {
     vboColor,
     vboTangent,
     vboBitangent,
+    vboBoneIndex,
+    vboWeight,
     MAX_VBO
 };
 
@@ -50,6 +52,10 @@ public:
     static VertexBuffer* createCube();
 
     void drawIndexed(int count, int offset);
+
+    void addBoneIndex(glm::vec4 ind);
+
+    void addWeight(glm::vec4 ind);
 };
 
 #endif

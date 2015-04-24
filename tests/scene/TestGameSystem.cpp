@@ -1,5 +1,6 @@
 #include "TestGameSystem.h"
 #include <world/WorldLoader.h>
+#include <resource/ResourceManager.h>
 
 
 Game* game;
@@ -21,10 +22,12 @@ int main(int argc, char* argv[])
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
     entity = game->scene->getWorld()->createRenderable("rabbit");
-    entity->setPosition(glm::vec3(0, 10.0f, 0));
+    entity->setPosition(glm::vec3(10.0f, 5.0f, 20.0f));
     entity->setColor(glm::vec3(0, 0, 1.0f));
-    entity->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+    entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
+    entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
+    //entity->setOrientation(glm::rotate(entity->getOrientation(), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f)));
 
     physics = game->physics;
     assignKeyboardInputs(game);

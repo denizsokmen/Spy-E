@@ -17,6 +17,7 @@
 ResourceManager* ResourceManager::manager = NULL;
 
 std::shared_ptr<Texture> ResourceManager::createTexture(std::string name) {
+    printf("Loading texture: %s\n", name.c_str());
 	auto it = textures.find(name);
 	if (it == textures.end()) {
 		std::shared_ptr<Texture> ptr = std::make_shared<Texture>();
@@ -65,6 +66,21 @@ std::shared_ptr<Mesh> ResourceManager::createMesh(std::string name) {
 
 }
 
+std::shared_ptr<Mesh> ResourceManager::createSkeletalMesh(std::string name) {
+
+    auto it = meshes.find(name);
+    if (it == meshes.end()) {
+        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(md5Loader->load(name.c_str()));
+
+        meshes[name] = ptr;
+        return ptr;
+    }
+    else {
+        return it->second;
+    }
+
+}
+
 
 /* Exception for shaders, shaders programs consist of a vertex and a fragment program
  * you shouldn't specify an extension while invoking this function. It will look for
@@ -85,6 +101,7 @@ std::shared_ptr<ShaderProgram> ResourceManager::createShader(std::string name) {
 
 ResourceManager::ResourceManager() {
     objLoader2 = new ModelOBJ();
+    md5Loader = new MD5Loader();
 }
 
 ResourceManager::~ResourceManager() {

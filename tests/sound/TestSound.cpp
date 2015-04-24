@@ -3,6 +3,7 @@
 //
 
 #include <logic/Game.h>
+#include <resource/ResourceManager.h>
 #include "TestSound.h"
 #include "graphics/Mesh.h"
 #include "resource/ObjLoader.h"
@@ -49,10 +50,11 @@ SoundSystem::SoundSystem(Game *game){
 
     Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
 	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
+
 	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
 
     soundcube = game->scene->getWorld()->createRenderable("cube");
-	soundcube->setPosition(glm::vec3(0.0, 10.0, 0));
+	soundcube->setPosition(glm::vec3(0.0, 0.0, 0));
 	soundcube->setColor(glm::vec3(0.2, 0.2, 0.2));
 
     Renderable* floorEntity = game->scene->getWorld()->createRenderable("floor");
