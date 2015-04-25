@@ -25,6 +25,9 @@ public:
 
     Entity();
     virtual ~Entity() {};
+
+	virtual void update(float dt) {}
+
 	glm::mat4 getTransformation() const;
 	void setTransformation(glm::mat4&& trans);
 

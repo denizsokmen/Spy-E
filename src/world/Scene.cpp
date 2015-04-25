@@ -22,6 +22,7 @@ Scene::Scene() {
 }
 
 void Scene::update(float dt) {
+	world->update(dt);
    /* renderList.clear();
 
     for (Renderable* renderable: world->getRenderables()) {

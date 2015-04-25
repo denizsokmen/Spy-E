@@ -33,7 +33,7 @@ void main() {
 
     float nDotL = max(0.0, dot(n, l));
     float nDotH = max(0.0, dot(n, h));
-    float power = (nDotL == 0.0) ? 0.0 : pow(nDotH, shininess);
+    float power = (nDotL == 0.0) ? 0.0 : pow(nDotH, shininess*128.0);
 
 
     vec3 diff = diffuse * nDotL;

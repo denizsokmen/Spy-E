@@ -8,6 +8,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
+#include <graphics/Skeleton.h>
 
 class Mesh;
 
@@ -19,6 +20,7 @@ public:
     struct Vertex {
         glm::vec3 pos;
         glm::vec3 normal;
+        glm::vec3 tangent;
         glm::vec2 uv;
         glm::vec4 boneIndex;
         glm::vec4 bias;
@@ -47,13 +49,22 @@ public:
     std::vector<WeightInfo> weightInfos;
 
 
+    void generateTangents();
 };
 
 class MD5Loader {
 
 public:
+    MD5Loader();
+    ~MD5Loader();
 
     Mesh* load(std::string name);
+
+    void transformNormals(SkeletalMesh &mesh);
+
+    void transformMesh(SkeletalMesh &mesh, Skeleton* skeleton);
+
+    void calcQuatW(glm::quat &quat);
 
 };
 

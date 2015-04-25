@@ -1,5 +1,6 @@
 #include "TestGameSystem.h"
 #include <world/WorldLoader.h>
+#include <resource/ResourceManager.h>
 
 
 Game* game;
@@ -20,11 +21,8 @@ int main(int argc, char* argv[])
 
 TestGameSystem::TestGameSystem(Game *game) {
 	this->game = game;
-    entity = game->scene->getWorld()->createRenderable("rabbit");
-    entity->setPosition(glm::vec3(0, 10.0f, 0));
-    entity->setColor(glm::vec3(0, 0, 1.0f));
-    entity->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
     //glm::mat4 trans = glm::scale(entity->getTransformation(), glm::vec3(2.0f, 2.0f, 2.0f));
+    //entity->setOrientation(glm::rotate(entity->getOrientation(), glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f)));
 
     physics = game->physics;
     assignKeyboardInputs(game);
@@ -46,8 +44,17 @@ TestGameSystem::TestGameSystem(Game *game) {
         physics->getWorld()->createBody(entityTemp, entityTemp->getVertexBuffer()->vertexList);
     }
 
-    box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
-    box->setAcceleration(-30.0f, 'y');
+
+	entity = game->scene->getWorld()->createRenderable("rabbit");
+	entity->setPosition(glm::vec3(10.0f, 5.0f, 20.0f));
+	entity->setColor(glm::vec3(0, 0, 1.0f));
+	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
+	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	entity->addAnimation("lurking", "./assets/entities/hellknight/idle.md5mesh");
+	entity->setAnimation("lurking");
+
+	box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
+	//box->setAcceleration(-30.0f, 'y');
 
 
 }
@@ -62,7 +69,7 @@ void TestGameSystem::update(float dt) {
     glm::vec3 dir = entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 dirup = entity->getOrientation() * glm::vec3(0.0f, 1.0f, 0.0f);
 
-    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 5.0f) + (dir * 10.0f)), 0.01f);
+    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 5.0f) + (dir * 20.0f)), 0.01f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
 

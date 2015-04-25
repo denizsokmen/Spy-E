@@ -49,13 +49,28 @@ void VertexBuffer::addBitangent(glm::vec3 bitangent) {
     vertex[vboBitangent].push_back(bitangent.z);
 }
 
+void VertexBuffer::addBoneIndex(glm::vec4& ind) {
+    vertex[vboBoneIndex].push_back(ind.x);
+    vertex[vboBoneIndex].push_back(ind.y);
+    vertex[vboBoneIndex].push_back(ind.z);
+    vertex[vboBoneIndex].push_back(ind.w);
+}
+
+void VertexBuffer::addWeight(glm::vec4& ind) {
+    vertex[vboWeight].push_back(ind.x);
+    vertex[vboWeight].push_back(ind.y);
+    vertex[vboWeight].push_back(ind.z);
+    vertex[vboWeight].push_back(ind.w);
+}
+
+
 
 void VertexBuffer::addIndex(unsigned int index) {
     indices.push_back(index);
 }
 
 void VertexBuffer::upload() {
-    glGenBuffers(6, vbo);
+    glGenBuffers(8, vbo);
 
     printf("VBO %d - %d - %d\n", vertex[vboPosition].size(), vertex[vboNormal].size(), indices.size());
     if (vertex[vboPosition].size() > 0) {
@@ -90,6 +105,16 @@ void VertexBuffer::upload() {
     if (vertex[vboBitangent].size() > 0) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo[vboBitangent]);
         glBufferData(GL_ARRAY_BUFFER, vertex[vboBitangent].size() * sizeof(float), &vertex[vboBitangent][0], GL_STATIC_DRAW);
+    }
+
+    if (vertex[vboBoneIndex].size() > 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboBoneIndex]);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboBoneIndex].size() * sizeof(float), &vertex[vboBoneIndex][0], GL_STATIC_DRAW);
+    }
+
+    if (vertex[vboWeight].size() > 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboWeight]);
+        glBufferData(GL_ARRAY_BUFFER, vertex[vboWeight].size() * sizeof(float), &vertex[vboWeight][0], GL_STATIC_DRAW);
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -131,6 +156,17 @@ void VertexBuffer::bind() {
         glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
     }
 
+    if (vertex[vboBoneIndex].size() > 0) {
+        glEnableVertexAttribArray(6);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboBoneIndex]);
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+    }
+
+    if (vertex[vboWeight].size() > 0) {
+        glEnableVertexAttribArray(7);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo[vboWeight]);
+        glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+    }
 
 
 
@@ -151,7 +187,7 @@ void VertexBuffer::draw() {
 
 void VertexBuffer::drawIndexed(int count, int offset) {
     if (indices.size() > 0)
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*) offset);
+        glDrawElements(GL_TRIANGLES, (count > 0) ? count : indices.size(), GL_UNSIGNED_INT, (void*) offset);
 }
 
 void VertexBuffer::unbind() {
@@ -162,6 +198,8 @@ void VertexBuffer::unbind() {
     glDisableVertexAttribArray(2);
     glDisableVertexAttribArray(4);
     glDisableVertexAttribArray(5);
+    glDisableVertexAttribArray(6);
+    glDisableVertexAttribArray(7);
 }
 
 VertexBuffer *VertexBuffer::createQuad() {

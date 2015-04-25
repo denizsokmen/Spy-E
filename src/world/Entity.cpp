@@ -28,10 +28,11 @@ glm::quat Entity::getOrientation() const {
 }
 
 void Entity::setOrientation(glm::quat&& orientation) {
-	if (this->orientation != orientation)
+	if (this->orientation != orientation) {
+		this->orientation = orientation;
 		updateTransformation();
+	}
 
-    this->orientation = orientation;
 }
 
 glm::vec3 Entity::getPosition() const {
@@ -39,9 +40,12 @@ glm::vec3 Entity::getPosition() const {
 }
 
 void Entity::setPosition(glm::vec3&& position) {
-	if (this->position != position)
+	if (this->position != position) {
+
+		this->position = position;
+
 		updateTransformation();
-    this->position = position;
+	}
 }
 
 glm::vec3 Entity::getColor() const {
@@ -59,10 +63,12 @@ glm::vec3 Entity::getScale() const {
 }
 
 void Entity::setScale(glm::vec3&& scale) {
-	if (this->scale != scale)
-		updateTransformation();
+	if (this->scale != scale) {
 
-	this->scale = scale;
+		this->scale = scale;
+		updateTransformation();
+	}
+
 }
 
 void Entity::updateTransformation() {

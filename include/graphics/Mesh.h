@@ -3,6 +3,7 @@
 
 
 #include "VertexBuffer.h"
+#include "Skeleton.h"
 
 
 class VertexBuffer;
@@ -28,6 +29,12 @@ public:
 	Mesh();
 	~Mesh();
 	std::vector<SubMesh*> subMeshes;
+
+	void setSkeleton(Skeleton * skeleton);
+
+	Skeleton *getSkeleton();
+	Skeleton *skeleton;
+	std::vector<glm::mat4> boneMatrix;
 };
 
 

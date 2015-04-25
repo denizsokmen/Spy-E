@@ -110,6 +110,8 @@ void ShaderProgram::setUniform(GLint location, glm::mat4 const &value) const {
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 }
 
+
+
 void ShaderProgram::setUniform(GLint location, glm::mat3 const &value) const {
 	glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
 }
@@ -129,4 +131,8 @@ void ShaderProgram::setUniform(GLint location, const float &value) const {
 
 void ShaderProgram::setUniform(GLint location, const GLint &value) const {
 	glUniform1i(location, value);
+}
+
+void ShaderProgram::setUniform(GLint location, const std::vector<glm::mat4> &value) const {
+	glUniformMatrix4fv(location, value.size(), GL_FALSE, glm::value_ptr(value[0]));
 }
