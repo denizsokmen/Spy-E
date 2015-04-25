@@ -7,7 +7,7 @@ Renderable::Renderable() {
 	setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	mesh = NULL;
 	animation = NULL;
-	boneMatrix.resize(64, glm::mat4(1.0f));
+	boneMatrix.resize(150, glm::mat4(1.0f));
 }
 
 void Renderable::update(float dt) {

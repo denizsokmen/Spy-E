@@ -1,5 +1,5 @@
 MD5Version 10
-commandline "anim models/monsters/hellknight/cycles/idle2.mb -dest models/md5/monsters/hellknight/idle2.md5anim -game Doom -prefix HK2_ -keep lknee1 rknee1 SPINNER rmissile lmissile target forehead1 -parent rmissile rhand -parent lmissile lhand -parent waist SPINNER -parent SPINNER body2 -parent drool jaw -parent backtongue jaw -parent upsaliva head -parent losaliva jaw -prefix HK_ -align All"
+commandline ""
 
 numFrames 120
 numJoints 110

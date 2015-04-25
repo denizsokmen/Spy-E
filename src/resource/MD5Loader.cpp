@@ -36,7 +36,7 @@ void MD5Loader::transformMesh(SkeletalMesh& mesh, Skeleton* skeleton) {
         vert.boneIndex = glm::vec4(0);
         vert.bias = glm::vec4(0);
 
-        for (int j = 0; j < winfo.weightCount; j++) {
+        for (int j = 0; j < std::min(4, winfo.weightCount); j++) {
             SkeletalMesh::Weight &weight = mesh.weights[winfo.weightOffset + j];
             Bone &bone = skeleton->bones[weight.boneIndex];
 
@@ -249,6 +249,7 @@ Mesh *MD5Loader::load(std::string name) {
         }
         else if (sscanf(data," numJoints %d", &numJoints) == 1)
         {
+            printf("numJoints %d\n", numJoints);
             if (numJoints > 0)
             {
                 boneMatrix.resize(numJoints);
@@ -258,6 +259,7 @@ Mesh *MD5Loader::load(std::string name) {
         }
         else if (sscanf(data," numMeshes %d", &numMeshes) == 1)
         {
+            printf("nummeshes %d\n", numMeshes);
             if (numMeshes > 0)
             {
                 meshes.reserve(numMeshes);
@@ -273,14 +275,14 @@ Mesh *MD5Loader::load(std::string name) {
                 glm::vec3 pos;
                 glm::quat rot;
                 fgets(data,sizeof(data),f);
-                if (sscanf (data,"%s %d ( %f %f %f ) ( %f %f %f )",junk,&bone.parentID,
-                            &pos.x, &pos.y, &pos.z, &rot.x, &rot.y, &rot.z) == 8)
-                {
+                sscanf (data," \"%[^\"]\" %d ( %f %f %f ) ( %f %f %f ) ",junk,&bone.parentID,
+                            &pos.x, &pos.y, &pos.z, &rot.x, &rot.y, &rot.z);
+
                     calcQuatW(rot);
                     bone.setTransformation(pos,rot);
                     bindSkeleton->bones.push_back(bone);
 
-                }
+
             }
             bindSkeleton->buildPoses();
             mesh->setSkeleton(bindSkeleton);
@@ -361,7 +363,7 @@ Mesh *MD5Loader::load(std::string name) {
                         ms.weights.reserve(numWeights);
                     }
                 }
-                else if (sscanf (data," vert %d ( %f %f ) %d %d", &vert_index, &fdata[0], &fdata[1],
+                else if (sscanf (data," vert %d ( %f %f ) %d %d ", &vert_index, &fdata[0], &fdata[1],
                                  &idata[0], &idata[1]) == 5)
                 {
                     SkeletalMesh::Vertex vert;
@@ -376,7 +378,7 @@ Mesh *MD5Loader::load(std::string name) {
                     ms.weightInfos.push_back(winfo);
 
                 }
-                else if (sscanf (data," tri %d %d %d %d",&tri_index,&idata[0],&idata[1],&idata[2]) == 4)
+                else if (sscanf (data," tri %d %d %d %d ",&tri_index,&idata[0],&idata[1],&idata[2]) == 4)
                 {
                     SkeletalMesh::Triangle tri;
                     tri.index[0]=idata[0];
@@ -384,7 +386,7 @@ Mesh *MD5Loader::load(std::string name) {
                     tri.index[2]=idata[2];
                     ms.indices.push_back(tri);
                 }
-                else if (sscanf (data," weight %d %d %f ( %f %f %f )",
+                else if (sscanf (data," weight %d %d %f ( %f %f %f ) ",
                                  &weight_index, &idata[0], &fdata[0], &fdata[1],
                                  &fdata[2], &fdata[3]) == 6)
                 {

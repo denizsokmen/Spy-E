@@ -124,6 +124,7 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
 
         if (sscanf(data," numFrames %d", &numFrames) == 1)
         {
+            printf("numframes: %d\n", numFrames);
             anim->numFrames = numFrames;
             if (numFrames > 0)
             {
@@ -134,6 +135,7 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
         }
         else if(sscanf(data," numJoints %d", &numJoints) == 1)
         {
+            printf("numjoints: %d\n", numJoints);
             anim->numJoints = numJoints;
             boneInfos.reserve(numJoints);
             baseSkeleton.bones.reserve(numJoints);
@@ -145,10 +147,14 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
         {
             anim->frameRate = frameRate;
 
+            printf("framerate: %d\n", frameRate);
+
         }
         else if (sscanf(data," numAnimatedComponents %d", &animatedParts) == 1)
         {
             anim->animatedParts = animatedParts;
+
+            printf("animatedparts: %d\n", animatedParts);
         }
         else if (strncmp(data,"hierarchy {", 11) == 0)
         {
@@ -156,8 +162,10 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
             {
                 fgets(data, sizeof(data),f);
                 BoneInfo info;
-                sscanf(data, " %s %d %d %d", junk,&info.parent, &info.flags,
+                sscanf(data, " \"%[^\"]\" %d %d %d", junk,&info.parent, &info.flags,
                        &info.index);
+
+                printf("junk %s %d %d %d\n", junk, info.parent, info.flags, info.index);
                 boneInfos.push_back(info);
             }
 

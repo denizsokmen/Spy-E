@@ -9,7 +9,7 @@
 Animation::Animation() {
 	currentState = NULL;
 	animTime = 0.0f;
-	boneMatrix.resize(64, glm::mat4(1.0f));
+	boneMatrix.resize(150, glm::mat4(1.0f));
 }
 
 Animation::~Animation() {

@@ -16,7 +16,7 @@ uniform mat4 ViewMatrix;
 uniform mat4 ModelViewMatrix;
 
 
-uniform mat4 Bones[64];
+uniform mat4 Bones[150];
 
 
 out vec4 position_eyespace;
@@ -37,7 +37,7 @@ void main() {
     ind=int(boneindex.z);
     newv += (Bones[ind]) * weight.z;
     ind=int(boneindex.w);
-    newv += (Bones[ind]) * weight.w;
+    newv += (Bones[ind]) * (1.0 - weight.x - weight.y - weight.z);
 
     vec4 vertexPosition_modelspace = newv * inVertex;
     vec3 newNormal = (newv * vec4(normal, 0.0)).xyz;
