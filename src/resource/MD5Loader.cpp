@@ -13,6 +13,7 @@
 #include <resource/ResourceManager.h>
 #include <graphics/Material.h>
 #include <graphics/Mesh.h>
+#include <algorithm>
 
 void MD5Loader::calcQuatW(glm::quat& quat) {
     //In MD5 models, you need to calculate w of
