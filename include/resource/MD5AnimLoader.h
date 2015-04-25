@@ -7,13 +7,14 @@
 #include <graphics/Skeleton.h>
 #include <string>
 #include <glm/glm.hpp>
+#include <graphics/AnimationState.h>
 
 class MD5Anim {
 public:
 
     MD5Anim();
     ~MD5Anim();
-    void loadAnim(std::string fname);
+    AnimationState* loadAnim(std::string fname);
     void update(float deltaTime);
     void render();
 

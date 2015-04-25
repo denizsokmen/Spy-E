@@ -11,6 +11,10 @@
 //running walking bilmemneying
 class AnimationState {
 
+public:
+
+    AnimationState();
+    ~AnimationState();
 
     //2spooky4me
     Skeleton baseSkeleton;
@@ -27,5 +31,8 @@ class AnimationState {
     float animTime;
     float animDuration;
     float frameDuration;
+
+    void interpolateSkeletons(Skeleton &finalskel, Skeleton &sk0, Skeleton &sk1, float intrp);
+    void update(float deltaTime);
 };
 #endif //SPYE_ANIMATIONSTATE_H

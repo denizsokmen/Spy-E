@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <graphics/AnimationState.h>
+
 MD5Anim::MD5Anim() {
 
 }
@@ -108,19 +110,21 @@ void MD5Anim::update(float deltaTime) {
 }
 
 
-void MD5Anim::loadAnim(std::string fname) {
+AnimationState* MD5Anim::loadAnim(std::string fname) {
 
     FILE *f;
     char data[512];
     f=fopen(fname.c_str(),"rb");
     int frameind;
     char junk[100];
+    AnimationState *anim = new AnimationState();
     while(!feof(f))
     {
         fgets(data,sizeof(data),f);
 
         if (sscanf(data," numFrames %d", &numFrames) == 1)
         {
+            anim->numFrames = numFrames;
             if (numFrames > 0)
             {
                 frameSkeleton.reserve(numFrames);
@@ -130,6 +134,7 @@ void MD5Anim::loadAnim(std::string fname) {
         }
         else if(sscanf(data," numJoints %d", &numJoints) == 1)
         {
+            anim->numJoints = numJoints;
             boneInfos.reserve(numJoints);
             baseSkeleton.bones.reserve(numJoints);
             boneMatrix.resize(numJoints);
@@ -138,11 +143,12 @@ void MD5Anim::loadAnim(std::string fname) {
 
         else if (sscanf(data," frameRate %d", &frameRate) == 1)
         {
+            anim->frameRate = frameRate;
 
         }
         else if (sscanf(data," numAnimatedComponents %d", &animatedParts) == 1)
         {
-
+            anim->animatedParts = animatedParts;
         }
         else if (strncmp(data,"hierarchy {", 11) == 0)
         {
@@ -194,9 +200,16 @@ void MD5Anim::loadAnim(std::string fname) {
         }
     }
     fclose(f);
+
+    anim->baseSkeleton = baseSkeleton;
+    for(auto it: frameSkeleton) {
+        anim->frameSkeleton.push_back(it);
+    }
     fprintf(stdout, "Anim successful \n");
-    frameDuration=1.0f / (float)frameRate;
-    animDuration=frameDuration * (float)numFrames;
-    animTime=0.0f;
+    anim->frameDuration=1.0f / (float)frameRate;
+    anim->animDuration=frameDuration * (float)numFrames;
+    anim->animTime=0.0f;
+
+    return anim;
 
 }
