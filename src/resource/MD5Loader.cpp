@@ -335,6 +335,7 @@ Mesh *MD5Loader::load(std::string name) {
                     /*Bitmap *bmp=new TGATexture();
                     bmp->load(fname);
                     ms.tex.createFromBitmap(bmp);
+					
                     delete bmp;*/
 
                 }

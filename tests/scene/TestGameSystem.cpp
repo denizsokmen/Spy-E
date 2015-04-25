@@ -48,10 +48,10 @@ TestGameSystem::TestGameSystem(Game *game) {
 	entity = game->scene->getWorld()->createRenderable("rabbit");
 	entity->setPosition(glm::vec3(10.0f, 5.0f, 20.0f));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
-	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
+	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
 	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
-	entity->addAnimation("lurking", "./assets/entities/human/human.md5anim");
-	entity->setAnimation("lurking");
+	//entity->addAnimation("lurking", "./assets/entities/human/human.md5anim");
+	//entity->setAnimation("lurking");
 
 	box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
 	box->setAcceleration(-30.0f, 'y');
