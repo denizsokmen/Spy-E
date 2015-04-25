@@ -7,7 +7,7 @@
     <SkyBox>N/A</SkyBox>
 
     <Entities>
-    	
+
         <Entity name="box0">
             <Type>box</Type>
             <Position>

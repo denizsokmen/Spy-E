@@ -132,7 +132,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->input->showCursor(true);
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/ExportedLevel.xml");
+    loader.load("./worlds/Level2/");
 
 }
 

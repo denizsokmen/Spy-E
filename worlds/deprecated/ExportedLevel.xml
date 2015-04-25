@@ -1,18 +1,13 @@
+
 <World>
-    <Name>LevelOne</Name>
-
-
-    <Version>1.0</Version>
-    <SkyBox>N/A</SkyBox>
-
     <Entities>
 
         <Entity name="Cube.208">
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -21,8 +16,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -31,8 +26,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-6.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -41,8 +36,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-4.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -51,8 +46,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>0.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -61,8 +56,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>-4.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -71,8 +66,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -81,8 +76,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -91,8 +86,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -101,8 +96,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -111,8 +106,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>-3.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -121,8 +116,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -131,8 +126,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -141,8 +136,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-5.0</X>
-                <Y>0.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -151,8 +146,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>0.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -171,8 +166,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -181,8 +176,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -191,8 +186,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -201,8 +196,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -211,8 +206,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -221,8 +216,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -231,8 +226,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -241,8 +236,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -251,8 +246,8 @@
             <Type>cube</Type>
             <Position>
                 <X>6.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -261,8 +256,8 @@
             <Type>cube</Type>
             <Position>
                 <X>7.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -271,8 +266,8 @@
             <Type>cube</Type>
             <Position>
                 <X>7.0</X>
-                <Y>3.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -281,8 +276,8 @@
             <Type>cube</Type>
             <Position>
                 <X>7.0</X>
-                <Y>2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -301,8 +296,8 @@
             <Type>cube</Type>
             <Position>
                 <X>7.0</X>
-                <Y>0.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -311,8 +306,8 @@
             <Type>cube</Type>
             <Position>
                 <X>7.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -321,8 +316,8 @@
             <Type>cube</Type>
             <Position>
                 <X>6.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -331,8 +326,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -341,8 +336,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -351,8 +346,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-3.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -361,8 +356,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -371,8 +366,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-5.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -381,8 +376,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>-6.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -391,8 +386,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-8.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -401,8 +396,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-9.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-9.0</Z>
             </Position>
         </Entity>
 
@@ -411,8 +406,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-10.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-10.0</Z>
             </Position>
         </Entity>
 
@@ -421,8 +416,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-10.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-10.0</Z>
             </Position>
         </Entity>
 
@@ -431,8 +426,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-10.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-10.0</Z>
             </Position>
         </Entity>
 
@@ -441,8 +436,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-10.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-10.0</Z>
             </Position>
         </Entity>
 
@@ -451,8 +446,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-10.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-10.0</Z>
             </Position>
         </Entity>
 
@@ -461,8 +456,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-9.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-9.0</Z>
             </Position>
         </Entity>
 
@@ -471,8 +466,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-9.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-9.0</Z>
             </Position>
         </Entity>
 
@@ -481,8 +476,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-9.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-9.0</Z>
             </Position>
         </Entity>
 
@@ -491,8 +486,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-9.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-9.0</Z>
             </Position>
         </Entity>
 
@@ -501,8 +496,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-8.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -511,8 +506,8 @@
             <Type>start</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-8.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -521,8 +516,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -531,8 +526,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -541,8 +536,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -551,8 +546,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -561,8 +556,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -571,8 +566,8 @@
             <Type>end</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -581,8 +576,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>3.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -591,8 +586,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>3.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -601,8 +596,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-4.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -611,8 +606,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>4.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -621,8 +616,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -631,8 +626,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -641,8 +636,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -651,8 +646,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>4.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -661,8 +656,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>4.0</Z>
             </Position>
         </Entity>
 
@@ -681,8 +676,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>1.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -691,8 +686,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>0.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -701,8 +696,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>0.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>0.0</Z>
             </Position>
         </Entity>
 
@@ -711,8 +706,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -721,8 +716,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-1.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -741,8 +736,8 @@
             <Type>cube</Type>
             <Position>
                 <X>6.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -751,8 +746,8 @@
             <Type>cube</Type>
             <Position>
                 <X>6.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -761,8 +756,8 @@
             <Type>cube</Type>
             <Position>
                 <X>6.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -771,8 +766,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -781,8 +776,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -791,8 +786,8 @@
             <Type>cube</Type>
             <Position>
                 <X>5.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -811,8 +806,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -821,8 +816,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-6.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -831,8 +826,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -841,8 +836,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-6.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -851,8 +846,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -861,8 +856,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-8.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -871,8 +866,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-8.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -881,8 +876,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-8.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-8.0</Z>
             </Position>
         </Entity>
 
@@ -891,8 +886,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -901,8 +896,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -911,8 +906,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -931,8 +926,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -941,8 +936,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-3.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -951,8 +946,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -961,8 +956,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-4.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -971,8 +966,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-2.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -981,8 +976,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-2.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -991,8 +986,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-1.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1001,8 +996,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-2.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1011,8 +1006,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1021,8 +1016,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-1.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1031,8 +1026,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -1041,8 +1036,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -1051,8 +1046,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-7.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -1061,8 +1056,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-7.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -1071,8 +1066,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-7.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-7.0</Z>
             </Position>
         </Entity>
 
@@ -1081,8 +1076,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1091,8 +1086,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1101,8 +1096,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-6.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1111,8 +1106,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-6.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1121,8 +1116,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1131,8 +1126,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-5.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1141,8 +1136,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-6.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1151,8 +1146,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1161,8 +1156,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1171,8 +1166,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-6.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1181,8 +1176,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-6.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1191,8 +1186,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-6.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-6.0</Z>
             </Position>
         </Entity>
 
@@ -1201,8 +1196,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1211,8 +1206,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1221,8 +1216,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-5.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-5.0</Z>
             </Position>
         </Entity>
 
@@ -1231,8 +1226,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1241,8 +1236,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1251,8 +1246,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1261,8 +1256,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1271,8 +1266,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1281,8 +1276,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1301,8 +1296,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1311,8 +1306,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1321,8 +1316,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1331,8 +1326,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1341,8 +1336,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1351,8 +1346,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1371,8 +1366,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1381,8 +1376,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1391,8 +1386,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1401,8 +1396,8 @@
             <Type>cube</Type>
             <Position>
                 <X>4.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1411,8 +1406,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-3.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1421,8 +1416,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1431,8 +1426,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1441,8 +1436,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1451,8 +1446,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1461,8 +1456,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-4.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-4.0</Z>
             </Position>
         </Entity>
 
@@ -1471,8 +1466,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1481,8 +1476,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1491,8 +1486,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1501,8 +1496,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1511,8 +1506,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-3.0</Z>
             </Position>
         </Entity>
 
@@ -1521,8 +1516,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-2.0</Y>
-                <Z>1.0</Z>
+                <Y>1.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1531,8 +1526,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-2.0</Y>
-                <Z>2.0</Z>
+                <Y>2.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1541,8 +1536,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1551,8 +1546,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1561,8 +1556,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1571,8 +1566,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1581,8 +1576,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-2.0</Z>
             </Position>
         </Entity>
 
@@ -1591,8 +1586,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1601,8 +1596,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1611,8 +1606,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1621,8 +1616,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1631,8 +1626,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1641,8 +1636,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>-1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
             </Position>
         </Entity>
 
@@ -1651,8 +1646,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1661,8 +1656,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1671,8 +1666,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-2.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1701,8 +1696,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1711,8 +1706,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1721,8 +1716,8 @@
             <Type>cube</Type>
             <Position>
                 <X>-1.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1741,8 +1736,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1751,8 +1746,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1761,8 +1756,8 @@
             <Type>cube</Type>
             <Position>
                 <X>3.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1771,8 +1766,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1781,8 +1776,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1791,8 +1786,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1821,8 +1816,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1831,8 +1826,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1841,8 +1836,8 @@
             <Type>cube</Type>
             <Position>
                 <X>2.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1851,8 +1846,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1861,8 +1856,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>3.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>3.0</Z>
             </Position>
         </Entity>
 
@@ -1871,8 +1866,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1881,8 +1876,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>2.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
             </Position>
         </Entity>
 
@@ -1891,8 +1886,8 @@
             <Type>cube</Type>
             <Position>
                 <X>0.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 
@@ -1901,8 +1896,8 @@
             <Type>cube</Type>
             <Position>
                 <X>1.0</X>
-                <Y>1.0</Y>
-                <Z>0.0</Z>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
             </Position>
         </Entity>
 

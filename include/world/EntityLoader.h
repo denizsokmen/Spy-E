@@ -21,7 +21,7 @@ private:
 
 public:
     EntityLoader();
-    Entity* load(char const *name, World* world);
+    Entity* load(char const *folderPath, World* world);
     ~EntityLoader();
 
 

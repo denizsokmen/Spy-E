@@ -7,17 +7,22 @@
 
 #include <glm/glm.hpp>
 #include "utils/XMLLoader.h"
+#include <string>
+
+#define SPYE_WORLD_FILE_EXTENSION ".xml"
+#define ENTITIES_FOLDER_NAME "entities"
 
 class World;
 class ObjLoader;
 class EntityLoader;
-
 
 class WorldLoader : public XMLLoader {
 
 private:
     EntityLoader* entityLoader;
     rapidxml::xml_node<> *worldNode;
+    std::string folderPath;
+    std::string entitiesFolderPath;
 
     void parseWorldNode();
     void parseNameNode();

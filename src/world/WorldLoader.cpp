@@ -14,6 +14,8 @@
 #include <fstream>
 #include <utils/rapidxml_utils.hpp>
 #include <vector>
+#include <utils/FileOperations.h>
+#include "Constants.h"
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
@@ -21,12 +23,41 @@ WorldLoader::WorldLoader(World* world) {
     this->worldNode = NULL;
 }
 
+
+/* WorldLoader::load function gets path of the World folder:
+ * For instance:
+ * ~/Spy-E/Level1/ includes inside
+ * ~/Spy-E/Level1/Level1.xml
+ * ~/Spy-E/Level1/entities/
+ * ~/Spy-E/Level1/entities/cube/
+ * ~/Spy-E/Level1/entities/cube/cube.obj
+ * ~/Spy-E/Level1/entities/cube/cube.mtl
+ * ...
+ * So:
+ *  if path == "~/Spy-E/Level1/" then:
+ *      documentPath = "~/Spy-E/Level1/Level1.xml"
+ *      folderPath = "~/Spy-E/Level1/"
+ */
 void WorldLoader::load(char const *path) {
 
-    printf("---------- WorldLoader -------------\n");
-    printf("[WorldLoader] Loading file: %s \n", path);
 
-    rapidxml::xml_document<> *document = this->getDocument(path);
+    printf("---------- WorldLoader -------------\n");
+    printf("[WorldLoader] Loading world from folder: %s \n", path);
+    this->folderPath = path;
+
+
+    std::string folderPathWithoutSeperator(path);
+    folderPathWithoutSeperator.pop_back();
+
+
+    int beginIdx = folderPathWithoutSeperator.rfind(PATH_SEPARATOR);
+    std::string worldName = folderPathWithoutSeperator.substr(beginIdx + 1);
+    printf("world name: %s\n", worldName.c_str());
+    std::string documentPath = folderPath + worldName +  SPYE_WORLD_FILE_EXTENSION;
+
+    this->entitiesFolderPath = this->folderPath  + ENTITIES_FOLDER_NAME + PATH_SEPARATOR;
+
+    rapidxml::xml_document<> *document = this->getDocument(documentPath.c_str());
     if (document != NULL) {
         worldNode = document->first_node("World");
         this->parseWorldNode();
@@ -91,7 +122,20 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
         return;
     }
 
-    Entity *entity = entityLoader->load(typeNode->value(), world);
+    std::string entityFolder = this->entitiesFolderPath + typeNode->value() + PATH_SEPARATOR;
+    std::string entityName = typeNode->value();
+    std::string entityPath = entityFolder + entityName + OBJ_EXTENSION;
+
+    std::vector<std::string> directories = FileOperations::getAllDirectories(this->entitiesFolderPath);
+
+    Entity *entity = NULL;
+    if (std::find(directories.begin(), directories.end(), entityName) != directories.end()){
+        entity = entityLoader->load(entityPath.c_str(), world);
+    }
+    else {
+        printf("[WorldLoader] Unknown entity named as %s (not found in entitiesFolder) \n", entityName.c_str());
+    }
+
 
     if (entity != NULL) {
         printf("[WordLoader] Loading '%s'.\n", nameNode->value());
@@ -117,7 +161,7 @@ glm::vec3 WorldLoader::parsePosition(rapidxml::xml_node<> *entityNode) {
     this->getComponent(positionNode, "Y", &y);
     this->getComponent(positionNode, "Z", &z);
 
-    return glm::vec3(x*2.0f, y*2.0f, z*2.0f);
+    return glm::vec3(x, y, z);
 }
 
 glm::vec3 WorldLoader::parseColor(rapidxml::xml_node<> *entityNode) {

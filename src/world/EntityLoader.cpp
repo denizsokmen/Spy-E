@@ -23,15 +23,7 @@ EntityLoader::EntityLoader(){
 
 
 Entity* EntityLoader::load(char const *name, World* world){
-    std::string entityName(name);
-    std::vector<std::string> directories = FileOperations::getAllDirectories("./assets/entities/");
-
-    if (std::find(directories.begin(), directories.end(), entityName) != directories.end()){
-        return world->createRenderable(name);
-    }
-    printf("[EntityLoader] Unknown entity named as %s\n", name);
-
-    return NULL;
+    return world->createRenderableFromPath(name);
 }
 
 

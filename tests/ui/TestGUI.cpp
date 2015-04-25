@@ -51,7 +51,7 @@ TestGUI::TestGUI(Game *game) {
     vbo = VertexBuffer::createQuad();
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/LevelOne-1.0.xml");
+    loader.load("./worlds/Level2/");
 
     for (int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable *entityTemp = loader.world->getRenderables()[i];

@@ -44,7 +44,7 @@ void SpyE::activate() {
 	entity->setColor(glm::vec3(0, 0, 1.0f));
 
 	WorldLoader loader(game->scene->getWorld());
-	loader.load("./worlds/ExportedLevel.xml");
+	loader.load("./worlds/Level2/");
 //	loader.load("./worlds/LevelOne-1.0.xml");
 }
 

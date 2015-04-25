@@ -27,11 +27,15 @@ Renderable* World::createRenderable(const char* name) {
 
 
 Renderable* World::createRenderableFromPath(const char* modelPath) {
+    printf("Model path: %s\n", modelPath);
     Renderable* entity = new Renderable();
-    Mesh* mesh = ResourceManager::instance()->createMesh(modelPath).get(); // objLoader->loadOBJ(modelPath.c_str());
+    std::string modelPathString(modelPath);
+
+    Mesh* mesh = ResourceManager::instance()->createMesh(modelPathString.c_str()).get(); // objLoader->loadOBJ(modelPath.c_str());
     //VertexBuffer *buffer = objLoader->loadOBJ(modelPath.c_str());
     //mesh->setVertexBuffer(buffer);
     entity->mesh = mesh;
+
 
     renderables.push_back(entity);
     return entity;

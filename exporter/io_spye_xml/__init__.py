@@ -1,4 +1,19 @@
-
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software Foundation,
+#  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+import shutil
 
 
 bl_info = {
@@ -15,7 +30,7 @@ bl_info = {
 
 
 import bpy
-
+import os
 
 
 ENTITIY_SCHEMA = """
@@ -37,7 +52,10 @@ WORLD_SCHEMA = """
 </World>
 """
 
-
+if "bpy" in locals():
+    import importlib
+    if "export_obj" in locals():
+        importlib.reload(export_obj)
 
 
 
@@ -78,6 +96,7 @@ class ExportSpyWorld(Operator, ExportHelper):
             )
 
     def execute(self, context):
+        from . import export_obj
 
         # return write_some_data(context, self.filepath, self.use_setting)
         if self.filepath == "":
@@ -87,28 +106,57 @@ class ExportSpyWorld(Operator, ExportHelper):
         allMeshObjs = [obj for obj in bpy.context.scene.objects if obj.type == 'MESH'];
 
         entities = []
-        with open(self.filepath, 'w', encoding='utf-8') as f:
-            for obj in allMeshObjs:
-                print(obj.name + " is at location" + str(obj.location))
-                name = str(obj.name).lower()
-                location = obj.location
 
-                 # Special case for Cube.0001's
-                if '.' in name:
-                    name = name.split(".")[0] # becomes cube
-                x = str(location.x)
-                y = str(location.y)
-                z = str(location.z)
-                entity = ENTITIY_SCHEMA.format(str(obj.name),name,x,y,z)
-                entities.append(entity)
+        filepath, filename = os.path.split(self.filepath)
+        (shortname, extension) = os.path.splitext(filename)
 
-            entitiesText = "\n".join(entities)
-            world = WORLD_SCHEMA.format(entitiesText)
+        directoryPath = os.path.join(filepath, shortname)
+        entitiesDirectoryPath = os.path.join(directoryPath, "entities")
+
+        if not os.path.exists(directoryPath):  # FIXME: may have race condition
+            os.makedirs(directoryPath)
+            os.makedirs(entitiesDirectoryPath)
+        else:
+            shutil.rmtree(directoryPath)
+            os.makedirs(directoryPath)
+            os.makedirs(entitiesDirectoryPath)
+
+
+        spyWorldPath = os.path.join(directoryPath, filename)
+
+
+        entity_set = set()
+
+        for obj in allMeshObjs:
+            print(obj.name + " is at location" + str(obj.location))
+            name = str(obj.name).lower()
+            location = obj.location
+
+             # Special case for Cube.0001's
+            if '.' in name:
+                name = name.split(".")[0] # becomes cube
+            x = str(location.x)
+            y = str(-location.y)
+            z = str(location.z)
+            entity = ENTITIY_SCHEMA.format(str(obj.name),name,x,z,y) # Spy-E's Up is +Y, Blender's is +Z
+            entities.append(entity)
+            if name not in entity_set:
+                entity_set.add(name)
+                entity_own_folder = os.path.join(entitiesDirectoryPath, name)
+                os.makedirs(entity_own_folder)
+                entity_full_path = os.path.join(entity_own_folder, name) + ".obj"
+                export_obj.write_file(entity_full_path, [obj], context.scene, EXPORT_NORMALS=True, EXPORT_TRI=True,EXPORT_APPLY_MODIFIERS=True, EXPORT_EDGES=True, EXPORT_BLEN_OBS=True)
+
+        entitiesText = "\n".join(entities)
+        world = WORLD_SCHEMA.format(entitiesText)
+
+        with open(spyWorldPath, 'w', encoding='utf-8') as f:
+
             f.write(world)
-        
+
 
         return {'FINISHED'}
-        
+
 
 
 # Only needed if you want to add into a dynamic menu
