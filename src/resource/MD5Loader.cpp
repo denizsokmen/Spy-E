@@ -227,6 +227,7 @@ Mesh *MD5Loader::load(std::string name) {
     int ver,curMesh=0;
 
     Mesh *mesh = new Mesh();
+    const char *exts[5]= {".jpg", ".png", ".tga", ".bmp", ""};
 
 
 
@@ -333,7 +334,32 @@ Mesh *MD5Loader::load(std::string name) {
                     }
                     fname[go]='\0';
 
-                    material->setTexture(TEXTURE_DIFFUSE, ResourceManager::instance()->createTexture(directoryPath + std::string(fname)).get());
+                    std::string fNameStr = fname;
+                    std::string::size_type fOffset = fNameStr.find_last_of('\\');
+
+                    if (fOffset != std::string::npos)
+                    {
+                        fNameStr = fNameStr.substr(++fOffset);
+                    }
+                    else
+                    {
+                        fOffset = fNameStr.find_last_of('/');
+
+                        if (fOffset != std::string::npos)
+                            fNameStr = fNameStr.substr(++fOffset);
+                    }
+
+                    printf("FILE: %s\n", fNameStr.c_str());
+
+                    for(int i = 0; i < 5; i++) {
+
+                        if (ResourceManager::instance()->createTexture(directoryPath + fNameStr + std::string(exts[i])) != NULL) {
+
+                            material->setTexture(TEXTURE_DIFFUSE, ResourceManager::instance()->createTexture(directoryPath + fNameStr + std::string(exts[i])).get());
+                            break;
+                        }
+                    }
+
                     /*Bitmap *bmp=new TGATexture();
                     bmp->load(fname);
                     ms.tex.createFromBitmap(bmp);
