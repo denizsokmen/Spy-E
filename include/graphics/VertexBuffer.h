@@ -53,9 +53,9 @@ public:
 
     void drawIndexed(int count, int offset);
 
-    void addBoneIndex(glm::vec4 ind);
+    void addBoneIndex(glm::vec4& ind);
 
-    void addWeight(glm::vec4 ind);
+    void addWeight(glm::vec4& ind);
 };
 
 #endif

@@ -81,6 +81,21 @@ std::shared_ptr<Mesh> ResourceManager::createSkeletalMesh(std::string name) {
 
 }
 
+std::shared_ptr<AnimationState> ResourceManager::createAnimation(std::string name) {
+
+	auto it = animations.find(name);
+	if (it == animations.end()) {
+		std::shared_ptr<AnimationState> ptr = std::shared_ptr<AnimationState>(md5AnimLoader->loadAnim(name.c_str()));
+
+		animations[name] = ptr;
+		return ptr;
+	}
+	else {
+		return it->second;
+	}
+
+}
+
 
 /* Exception for shaders, shaders programs consist of a vertex and a fragment program
  * you shouldn't specify an extension while invoking this function. It will look for
@@ -102,6 +117,7 @@ std::shared_ptr<ShaderProgram> ResourceManager::createShader(std::string name) {
 ResourceManager::ResourceManager() {
     objLoader2 = new ModelOBJ();
     md5Loader = new MD5Loader();
+	md5AnimLoader = new MD5Anim();
 }
 
 ResourceManager::~ResourceManager() {

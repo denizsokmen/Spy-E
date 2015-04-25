@@ -73,6 +73,11 @@ World::~World() {
     delete objLoader;
 }
 
+void World::update(float dt) {
+	for (auto renderable : renderables)
+		renderable->update(dt);
+}
+
 std::string World::getName() {
     return name;
 }

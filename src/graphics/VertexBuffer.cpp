@@ -49,14 +49,14 @@ void VertexBuffer::addBitangent(glm::vec3 bitangent) {
     vertex[vboBitangent].push_back(bitangent.z);
 }
 
-void VertexBuffer::addBoneIndex(glm::vec4 ind) {
+void VertexBuffer::addBoneIndex(glm::vec4& ind) {
     vertex[vboBoneIndex].push_back(ind.x);
     vertex[vboBoneIndex].push_back(ind.y);
     vertex[vboBoneIndex].push_back(ind.z);
     vertex[vboBoneIndex].push_back(ind.w);
 }
 
-void VertexBuffer::addWeight(glm::vec4 ind) {
+void VertexBuffer::addWeight(glm::vec4& ind) {
     vertex[vboWeight].push_back(ind.x);
     vertex[vboWeight].push_back(ind.y);
     vertex[vboWeight].push_back(ind.z);

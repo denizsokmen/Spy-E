@@ -207,7 +207,7 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
     }
     fprintf(stdout, "Anim successful \n");
     anim->frameDuration=1.0f / (float)frameRate;
-    anim->animDuration=frameDuration * (float)numFrames;
+	anim->animDuration = anim->frameDuration * (float)numFrames;
     anim->animTime=0.0f;
 
     return anim;

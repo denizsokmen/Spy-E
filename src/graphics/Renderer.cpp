@@ -27,6 +27,8 @@ void Renderer::loadGeneralShader() {
 	
 }
 
+
+
 void Renderer::render(Camera* camera) {
 
     glEnable(GL_DEPTH_TEST);
@@ -79,7 +81,7 @@ void Renderer::render(Camera* camera) {
             program->setUniform("normalTex", 1);
 
             if(renderable->mesh->getSkeleton()) {
-                program->setUniform("Bones", renderable->mesh->boneMatrix);
+                program->setUniform("Bones", renderable->boneMatrix);
             }
 
 

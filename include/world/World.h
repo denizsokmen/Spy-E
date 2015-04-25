@@ -19,8 +19,10 @@ class World {
 	std::string version;
 
 	public:
+
 		World();
 		~World();
+		void update(float dt);
 
 		int getEntityCount();
 
