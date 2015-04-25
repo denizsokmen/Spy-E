@@ -8,6 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <graphics/AnimationState.h>
+#include <string.h>
 
 MD5Anim::MD5Anim() {
 

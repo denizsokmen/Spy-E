@@ -11,11 +11,13 @@
 #include "graphics/Renderable.h"
 #include <iostream>
 #include <sstream>
+#include <string>
 #include <fstream>
 #include <utils/rapidxml_utils.hpp>
 #include <vector>
 #include <utils/FileOperations.h>
 #include "Constants.h"
+#include <algorithm>
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
