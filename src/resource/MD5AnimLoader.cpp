@@ -44,15 +44,19 @@ void MD5Anim::buildFrames(FrameData& data) {
         if (info.flags & 1)
             newBone.localPos.x = data.data[info.index + j++];
         if (info.flags & 2)
-            newBone.localPos.y = data.data[info.index + j++];
+			newBone.localPos.y = data.data[info.index + j++];
         if (info.flags & 4)
-            newBone.localPos.z = data.data[info.index + j++];
+			newBone.localPos.z = data.data[info.index + j++];
         if (info.flags & 8)
             newBone.localRotation.x = data.data[info.index + j++];
         if (info.flags & 16)
             newBone.localRotation.y = data.data[info.index + j++];
         if (info.flags & 32)
             newBone.localRotation.z = data.data[info.index + j++];
+
+		newBone.localPos.x *= scaleamount.x;
+		newBone.localPos.y *= scaleamount.y;
+		newBone.localPos.z *= scaleamount.z;
 
 
         calcQuatW(newBone.localRotation);
@@ -111,8 +115,9 @@ void MD5Anim::update(float deltaTime) {
 }
 
 
-AnimationState* MD5Anim::loadAnim(std::string fname) {
-
+AnimationState* MD5Anim::loadAnim(std::string fname, glm::vec3&& scale, glm::quat&& rotate) {
+	rotationamount = rotate;
+	scaleamount = scale;
     FILE *f;
     char data[512];
     f=fopen(fname.c_str(),"rb");
@@ -191,6 +196,9 @@ AnimationState* MD5Anim::loadAnim(std::string fname) {
                 if (sscanf(data," ( %f %f %f ) ( %f %f %f )", &bon.localPos.x, &bon.localPos.y, &bon.localPos.z, &bon.localRotation.x, &bon.localRotation.y, &bon.localRotation.z) == 6)
                 {
                     calcQuatW(bon.localRotation);
+					//bon.localPos.x *= scale.x;
+					//bon.localPos.y *= scale.y;
+					//bon.localPos.z *= scale.z;
                     baseSkeleton.bones.push_back(bon);
                 }
             }

@@ -57,8 +57,9 @@ class MD5Loader {
 public:
     MD5Loader();
     ~MD5Loader();
+	glm::quat rotationamount;
 
-    Mesh* load(std::string name);
+	Mesh* load(std::string name, glm::vec3&& scale, glm::quat&& rotate);
 
     void transformNormals(SkeletalMesh &mesh);
 

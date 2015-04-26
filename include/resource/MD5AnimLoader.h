@@ -14,7 +14,9 @@ public:
 
     MD5Anim();
     ~MD5Anim();
-    AnimationState* loadAnim(std::string fname);
+	AnimationState* loadAnim(std::string fname, glm::vec3&& scale, glm::quat&& rotate);
+	glm::quat rotationamount;
+	glm::vec3 scaleamount;
     void update(float deltaTime);
     void render();
 

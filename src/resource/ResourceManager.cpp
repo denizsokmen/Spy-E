@@ -70,7 +70,9 @@ std::shared_ptr<Mesh> ResourceManager::createSkeletalMesh(std::string name) {
 
     auto it = meshes.find(name);
     if (it == meshes.end()) {
-        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(md5Loader->load(name.c_str()));
+		glm::quat ro1 = glm::angleAxis(glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+		//glm::quat ro2 = glm::angleAxis(glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        std::shared_ptr<Mesh> ptr = std::shared_ptr<Mesh>(md5Loader->load(name.c_str(), glm::vec3(0.08f, 0.08f, 0.08f), std::move(ro1) ));
 
         meshes[name] = ptr;
         return ptr;
@@ -85,7 +87,7 @@ std::shared_ptr<AnimationState> ResourceManager::createAnimation(std::string nam
 
 	auto it = animations.find(name);
 	if (it == animations.end()) {
-		std::shared_ptr<AnimationState> ptr = std::shared_ptr<AnimationState>(md5AnimLoader->loadAnim(name.c_str()));
+		std::shared_ptr<AnimationState> ptr = std::shared_ptr<AnimationState>(md5AnimLoader->loadAnim(name.c_str(), glm::vec3(0.08f, 0.08f, 0.08f), glm::angleAxis(glm::radians(90.0f), glm::vec3(-1.0f, 0.0f, 0.0f))));
 
 		animations[name] = ptr;
 		return ptr;

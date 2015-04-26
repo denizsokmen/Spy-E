@@ -49,7 +49,7 @@ TestGameSystem::TestGameSystem(Game *game) {
 	entity->setPosition(glm::vec3(10.0f, 5.0f, 20.0f));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
 	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
-	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	//entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	entity->addAnimation("lurking", "./assets/entities/hellknight/idle.md5mesh");
 	entity->setAnimation("lurking");
 
@@ -69,7 +69,7 @@ void TestGameSystem::update(float dt) {
     glm::vec3 dir = entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 dirup = entity->getOrientation() * glm::vec3(0.0f, 1.0f, 0.0f);
 
-    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 5.0f) + (dir * 20.0f)), 0.01f);
+    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 15.0f) + (dir * 20.0f)), 0.01f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
 
