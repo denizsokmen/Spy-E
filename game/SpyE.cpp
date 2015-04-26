@@ -36,10 +36,7 @@ void SpyE::activate() {
 
 
 
-	skybox = new Skybox("./assets/texture/skybox/desert_right.jpg", "./assets/texture/skybox/desert_left.jpg",
-		"./assets/texture/skybox/desert_top.jpg", "./assets/texture/skybox/desert_top.jpg",
-		"./assets/texture/skybox/desert_front.jpg", "./assets/texture/skybox/desert_back.jpg");
-
+	
 	entity = game->scene->getWorld()->createRenderable("box");
 	entity->setPosition(glm::vec3(0, 2.0f, 0));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
@@ -48,6 +45,11 @@ void SpyE::activate() {
 
 	WorldLoader loader(game->scene->getWorld());
 	loader.load("./worlds/Level2/");
+
+	skybox = new Skybox("./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
+		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
+		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg");
+
 //	loader.load("./worlds/LevelOne-1.0.xml");
 }
 

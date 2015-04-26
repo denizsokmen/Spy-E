@@ -24,9 +24,9 @@ Skybox::Skybox(std::string posx, std::string negx, std::string posy, std::string
 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_REPEAT);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
     shaderProgram = new ShaderProgram();
@@ -38,12 +38,15 @@ Skybox::Skybox(std::string posx, std::string negx, std::string posy, std::string
 void Skybox::load(std::string filename, GLuint type) {
     GLenum mode = GL_RGB;
     SDL_Surface* surface = IMG_Load(filename.c_str());
+	SDL_Surface *image = SDL_CreateRGBSurface(NULL, surface->w, surface->h, 32, 0, 0, 0, 0);
+	SDL_BlitSurface(surface, NULL, image, NULL);
+
     if (surface != NULL) {
         if (surface->format->BytesPerPixel == 4) {
             mode = GL_RGBA;
         }
 
-        glTexImage2D(type, 0, mode, surface->w, surface->h, 0, mode, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(type, 0, GL_RGBA, surface->w, surface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, image->pixels);
     }
     else {
         printf("Error loading: %s\n", filename.c_str());
@@ -61,7 +64,7 @@ void Skybox::draw(Camera *camera) {
     glDepthFunc(GL_LEQUAL);
 
     glUseProgram(shaderProgram->id);
-    glm::mat4 MVP = camera->projection * (camera->view * glm::scale(glm::mat4(1.0f),glm::vec3(100,100,100)));
+    glm::mat4 MVP = camera->projection * (camera->view * glm::scale(glm::mat4(1.0f),glm::vec3(500,500,500)));
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
 
