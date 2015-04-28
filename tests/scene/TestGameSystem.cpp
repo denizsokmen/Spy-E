@@ -37,7 +37,7 @@ TestGameSystem::TestGameSystem(Game *game) {
 
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/Level2/");
+    loader.load("./worlds/level1/");
 
     for(int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable* entityTemp = loader.world->getRenderables()[i];

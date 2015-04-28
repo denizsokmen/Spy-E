@@ -103,7 +103,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->input->showCursor(true);
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/level1/");
+    loader.load("./worlds/level2/");
 
 }
 

@@ -170,7 +170,9 @@ class ExportSpyWorld(bpy.types.Operator, ExportHelper, IOOBJOrientationHelper):
             location = obj.location
             location = global_matrix * location
             #  # Special case for Cube.0001's
+            original = True
             if '.' in name:
+                original = False
                 name = name.split(".")[0] # becomes cube
                 
             x = str(location.x)
@@ -183,7 +185,7 @@ class ExportSpyWorld(bpy.types.Operator, ExportHelper, IOOBJOrientationHelper):
                                            obj.scale.x, obj.scale.y, obj.scale.z # scale
                                            )
             entities.append(entity)
-            if name not in entity_set:
+            if name not in entity_set and original:
                 entity_set.add(name)
                 entity_own_folder = os.path.join(entitiesDirectoryPath, name)
                 os.makedirs(entity_own_folder)
