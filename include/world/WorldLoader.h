@@ -14,12 +14,10 @@
 
 class World;
 class ObjLoader;
-class EntityLoader;
 
 class WorldLoader : public XMLLoader {
 
 private:
-    EntityLoader* entityLoader;
     rapidxml::xml_node<> *worldNode;
     std::string folderPath;
     std::string entitiesFolderPath;
@@ -28,12 +26,13 @@ private:
     void parseNameNode();
     void parseVersionNode();
     void parseEntities();
-    void parseEntity(rapidxml::xml_node<> *entityNode);
-    glm::vec3 parsePosition(rapidxml::xml_node<> *entityNode);
-    glm::vec3 parseColor(rapidxml::xml_node<> *entityNode);
+    void parseEntity(rapidxml::xml_node<>* entityNode);
+    glm::vec3 parsePosition(rapidxml::xml_node<>* entityNode);
+    glm::vec3 parseColor(rapidxml::xml_node<>* entityNode);
+    glm::vec3 parseScale(rapidxml::xml_node<>* entityNode);
 
-    void getComponent(rapidxml::xml_node<> *positionNode,
-                      const char *name, float *value);
+    void getComponent(rapidxml::xml_node<>* positionNode,
+                      const char* name, float* value);
 
 public:
     World* world;
@@ -41,6 +40,7 @@ public:
     void load(char const *name);
 
     ~WorldLoader();
+
 
 };
 

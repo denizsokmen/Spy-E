@@ -40,22 +40,26 @@ void SpyE::activate() {
 	entity = game->scene->getWorld()->createRenderable("box");
 	entity->setPosition(glm::vec3(0, 2.0f, 0));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
-	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
-	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
+//	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+//	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
 
 	WorldLoader loader(game->scene->getWorld());
-	loader.load("./worlds/Level2/");
+	loader.load("./worlds/level1/");
 
 	skybox = new Skybox("./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
 		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
 		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg");
 
-//	loader.load("./worlds/LevelOne-1.0.xml");
+
 }
 
 void SpyE::update(float dt) {
     if (!active)
         return;
+
+	Entity* weapon = this->game->scene->getWorld()->getEntity("weapon002");
+	weapon->setOrientation(glm::rotate(weapon->getOrientation(), 0.5f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
+
 
     game->scene->camera->position = glm::vec3(entity->getPosition().x, entity->getPosition().y+10.0f, entity->getPosition().z + 20.0f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));

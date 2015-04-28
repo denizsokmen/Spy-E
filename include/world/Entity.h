@@ -45,6 +45,8 @@ public:
 
 	void updateTransformation();
 
+	void setName(std::string name);
+
 
 
 };

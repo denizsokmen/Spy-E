@@ -114,7 +114,7 @@ def write_mtl(scene, filepath, path_mode, copy_set, mtl_dict):
                 # write relative image path
                 filepath = bpy_extras.io_utils.path_reference(filepath, source_dir, dest_dir,
                                                               path_mode, "", copy_set, face_img.library)
-                shutil.copy2(filepath,dest_dir)
+                shutil.copy2(filepath, dest_dir)
                 fw('map_Kd %s\n' % os.path.basename(filepath))  # Diffuse mapping image
                 del filepath
             else:
@@ -128,8 +128,9 @@ def write_mtl(scene, filepath, path_mode, copy_set, mtl_dict):
                 if mtex and mtex.texture and mtex.texture.type == 'IMAGE':
                     image = mtex.texture.image
                     if image:
-                        shutil.copy2(image,dest_dir)
-                        image = os.path.basename(image)
+                        #image = os.path.basename(image)
+                        # shutil.copy2(image,dest_dir)
+                        #
                         # texface overrides others
                         if (mtex.use_map_color_diffuse and (face_img is None) and
                             (mtex.use_map_warp is False) and (mtex.texture_coords != 'REFLECTION')):
@@ -242,13 +243,17 @@ def write_nurb(fw, ob, ob_mat):
 
     return tot_verts
 
-
+# EXPORT_NORMALS=True,
+# EXPORT_TRI=True,
+# EXPORT_APPLY_MODIFIERS=True,
+# EXPORT_EDGES=True,
+# EXPORT_BLEN_OBS=True
 def write_file(filepath, objects, scene,
-               EXPORT_TRI=False,
-               EXPORT_EDGES=False,
+               EXPORT_TRI=True,
+               EXPORT_EDGES=True,
                EXPORT_SMOOTH_GROUPS=False,
                EXPORT_SMOOTH_GROUPS_BITFLAGS=False,
-               EXPORT_NORMALS=False,
+               EXPORT_NORMALS=True,
                EXPORT_UV=True,
                EXPORT_MTL=True,
                EXPORT_APPLY_MODIFIERS=True,
@@ -368,7 +373,8 @@ def write_file(filepath, objects, scene,
             if me is None:
                 continue
 
-            me.transform(EXPORT_GLOBAL_MATRIX * ob_mat)
+
+            #me.transform(EXPORT_GLOBAL_MATRIX * ob_mat)
 
             if EXPORT_TRI:
                 # _must_ do this first since it re-allocs arrays
@@ -512,7 +518,7 @@ def write_file(filepath, objects, scene,
                         if no_val is None:
                             no_val = normals_to_idx[no_key] = no_unique_count
                             x,y,z = no_key
-                            fw('vn %.6f %.6f %.6f\n' % (-x, -y, -z))
+                            fw('vn %.6f %.6f %.6f\n' % (-x,-y, -z))
                             no_unique_count += 1
                         loops_to_normals[l_idx] = no_val
                 del normals_to_idx, no_get, no_key, no_val
@@ -672,7 +678,7 @@ def write_file(filepath, objects, scene,
     print("OBJ Export time: %.2f" % (time.time() - time1))
 
 
-def _write(context, filepath,
+def _write(context, objs, filepath,
            EXPORT_TRI,  # ok
            EXPORT_EDGES,
            EXPORT_SMOOTH_GROUPS,
@@ -716,10 +722,13 @@ def _write(context, filepath,
             context_name[2] = '_%.6d' % frame
 
         scene.frame_set(frame, 0.0)
-        if EXPORT_SEL_ONLY:
-            objects = context.selected_objects
-        else:
-            objects = scene.objects
+
+        objects = objs
+
+        # if EXPORT_SEL_ONLY:
+        #     objects = context.selected_objects
+        # else:
+        #     objects = scene.objects
 
         full_path = ''.join(context_name)
 
@@ -758,10 +767,10 @@ Currently the exporter lacks these features:
 """
 
 
-def save(operator, context, filepath="",
+def save(operator, context, objs, filepath,
          use_triangles=False,
          use_edges=True,
-         use_normals=False,
+         use_normals=True,
          use_smooth_groups=False,
          use_smooth_groups_bitflags=False,
          use_uvs=True,
@@ -779,7 +788,7 @@ def save(operator, context, filepath="",
          path_mode='AUTO'
          ):
 
-    _write(context, filepath,
+    _write(context, objs, filepath,
            EXPORT_TRI=use_triangles,
            EXPORT_EDGES=use_edges,
            EXPORT_SMOOTH_GROUPS=use_smooth_groups,

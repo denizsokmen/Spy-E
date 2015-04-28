@@ -134,7 +134,7 @@ void TestMenu::update(float dt) {
     game->scene->camera->focus = entity->getPosition();
     //entity->position += glm::vec3(0.000f, 0.00f, -3.0f*dt);
 
-    entity->setOrientation(glm::rotate(entity->getOrientation(), 90.0f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
+    entity->setOrientation(glm::rotate(entity->getOrientation(), 0.1f * dt, glm::vec3(0.0f, 1.0f, 0.0f)));
 
     if (game->input->wasReleased("Up")) {
         menu->moveCursorUp();

@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <string>
 
 Entity::Entity() {
     scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -73,4 +74,8 @@ void Entity::setScale(glm::vec3&& scale) {
 
 void Entity::updateTransformation() {
 	transformation = glm::translate(glm::mat4(1.0f), position) *glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::scale(glm::mat4(1.0), scale) * glm::translate(glm::mat4(1.0f), pivot);
+}
+
+void Entity::setName(std::string name) {
+	this->name = name;
 }

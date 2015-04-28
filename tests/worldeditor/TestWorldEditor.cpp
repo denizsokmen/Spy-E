@@ -52,35 +52,6 @@ int main(int argc, char* argv[])
 WorldEditorSystem::WorldEditorSystem(Game *game) {
     this->game = game;
 
-//    Renderable* entity = new Renderable();
-//    VertexBuffer* vertexBuffer = VertexBuffer::createQuad();
-//    Mesh* mesh = new Mesh();
-//    mesh->setVertexBuffer(vertexBuffer);
-//    entity->mesh = mesh;
-//    game->scene->getWorld()->getRenderables().push_back(entity);
-
-//
-
-
-//    Renderable* entity4 = game->scene->getWorld()->createRenderable("box");
-//    game->physics->getWorld()->createBody(entity4, entity4->getVertexBuffer()->vertexList);
-//    entity4->setPosition(glm::vec3(0,0,0));
-//	entity4->setColor(glm::vec3(1.0, 1.0, 1.0));
-//
-//
-//
-//    Renderable* entity2 = game->scene->getWorld()->createRenderable("cube");
-//    game->physics->getWorld()->createBody(entity2, entity2->getVertexBuffer()->vertexList);
-//    entity2->setPosition(glm::vec3(2.0,0,0));
-//    entity2->setColor(glm::vec3(0.5,1.0,1.0));
-//
-//
-//
-//    Renderable* entity3 = game->scene->getWorld()->createRenderable("cube");
-//    game->physics->getWorld()->createBody(entity3, entity3->getVertexBuffer()->vertexList);
-//	entity3->setPosition(glm::vec3(-2.0, 0.0, 0));
-//	entity3->setColor(glm::vec3(0.5, 0.5, 1.0));
-
 
 
 
@@ -132,7 +103,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->input->showCursor(true);
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/Level2/");
+    loader.load("./worlds/level1/");
 
 }
 

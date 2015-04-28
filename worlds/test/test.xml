@@ -1,0 +1,95 @@
+
+<World>
+    <Entities>
+        
+        <Entity name="Cube.008">
+            <Type>cube.008</Type>
+            <Position>
+                <X>6.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.007">
+            <Type>cube.007</Type>
+            <Position>
+                <X>3.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.006">
+            <Type>cube.006</Type>
+            <Position>
+                <X>-9.0</X>
+                <Y>0.0</Y>
+                <Z>6.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.005">
+            <Type>cube.005</Type>
+            <Position>
+                <X>-6.0</X>
+                <Y>0.0</Y>
+                <Z>4.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.004">
+            <Type>cube.004</Type>
+            <Position>
+                <X>-3.0</X>
+                <Y>0.0</Y>
+                <Z>2.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.003">
+            <Type>cube.003</Type>
+            <Position>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.002">
+            <Type>cube.002</Type>
+            <Position>
+                <X>0.08061805367469788</X>
+                <Y>7.219546794891357</Y>
+                <Z>-0.035039450973272324</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube.001">
+            <Type>cube.001</Type>
+            <Position>
+                <X>0.0821685865521431</X>
+                <Y>2.9062108993530273</Y>
+                <Z>-0.0016947330441325903</Z>
+            </Position>
+        </Entity>
+
+
+        <Entity name="Cube">
+            <Type>cube</Type>
+            <Position>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+            </Position>
+        </Entity>
+
+    </Entities>
+</World>

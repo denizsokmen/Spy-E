@@ -4,7 +4,6 @@
 #include "world/World.h"
 #include "world/Entity.h"
 #include "world/WorldLoader.h"
-#include "world/EntityLoader.h"
 #include <glm/glm.hpp>
 #include <graphics/Mesh.h>
 #include "resource/ObjLoader.h"
@@ -21,7 +20,6 @@
 
 WorldLoader::WorldLoader(World* world) {
     this->world = world;
-    this->entityLoader = new EntityLoader();
     this->worldNode = NULL;
 }
 
@@ -34,6 +32,7 @@ WorldLoader::WorldLoader(World* world) {
  * ~/Spy-E/Level1/entities/cube/
  * ~/Spy-E/Level1/entities/cube/cube.obj
  * ~/Spy-E/Level1/entities/cube/cube.mtl
+ * ~/Spy-E/Level1/entities/cube/wood.png
  * ...
  * So:
  *  if path == "~/Spy-E/Level1/" then:
@@ -124,18 +123,20 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
         return;
     }
 
+    std::string entityName = nameNode->value();
     std::string entityFolder = this->entitiesFolderPath + typeNode->value() + PATH_SEPARATOR;
-    std::string entityName = typeNode->value();
-    std::string entityPath = entityFolder + entityName + OBJ_EXTENSION;
+    std::string entityTypeName = typeNode->value();
+    std::string entityPath = entityFolder + entityTypeName + OBJ_EXTENSION;
 
     std::vector<std::string> directories = FileOperations::getAllDirectories(this->entitiesFolderPath);
 
     Entity *entity = NULL;
-    if (std::find(directories.begin(), directories.end(), entityName) != directories.end()){
-        entity = entityLoader->load(entityPath.c_str(), world);
+    if (std::find(directories.begin(), directories.end(), entityTypeName) != directories.end()){
+        entity = world->createRenderableFromPath(entityPath.c_str());
+        world->mapEntity(entityName, entity);
     }
     else {
-        printf("[WorldLoader] Unknown entity named as %s (not found in entitiesFolder) \n", entityName.c_str());
+        printf("[WorldLoader] Unknown entity named as %s (not found in entitiesFolder) \n", entityTypeName.c_str());
     }
 
 
@@ -143,6 +144,8 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
         printf("[WordLoader] Loading '%s'.\n", nameNode->value());
 		entity->setPosition(this->parsePosition(entityNode));
 		entity->setColor(this->parseColor(entityNode));
+        entity->setScale(this->parseScale(entityNode));
+//        entity->setRotation();
 
     }
     else {
@@ -151,11 +154,26 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
 
 }
 
-glm::vec3 WorldLoader::parsePosition(rapidxml::xml_node<> *entityNode) {
+glm::vec3 WorldLoader::parseScale(rapidxml::xml_node<>* entityNode) {
+    rapidxml::xml_node<> *scaleNode = entityNode->first_node("Scale");
+    if (scaleNode == NULL) {
+        printf("[WorldLoader] Warning: <Entity> does not have a <Scale> node!\n");
+        return glm::vec3(3.89f, 3.89f, 3.89f);
+    }
+    float x = 0, y = 0, z = 0;
+
+    this->getComponent(scaleNode, "X", &x);
+    this->getComponent(scaleNode, "Y", &y);
+    this->getComponent(scaleNode, "Z", &z);
+
+    return glm::vec3(x, y, z);
+}
+
+glm::vec3 WorldLoader::parsePosition(rapidxml::xml_node<>* entityNode) {
     rapidxml::xml_node<> *positionNode = entityNode->first_node("Position");
     if (positionNode == NULL) {
         printf("[WorldLoader] Warning: <Entity> does not have a <Position> node!\n");
-        return glm::vec3(0, 0, 0);
+        return glm::vec3(0.0f, 0.0f, 0.0f);
     }
     float x = 0, y = 0, z = 0;
 
@@ -170,7 +188,7 @@ glm::vec3 WorldLoader::parseColor(rapidxml::xml_node<> *entityNode) {
     rapidxml::xml_node<> *colorNode = entityNode->first_node("Color");
     if (colorNode == NULL) {
         //printf("[WorldLoader] Optional: <Entity> does not have a <Color> node!\n");
-        return glm::vec3(1, 1, 1);
+        return glm::vec3(1.0f, 1.0f, 1.0f);
     }
     float r = 0, g = 0, b = 0;
 
@@ -201,8 +219,6 @@ WorldLoader::~WorldLoader(){
     printf("[WorldLoader] Deallocating...\n");
     delete this->document;
     delete this->file;
-    delete this->entityLoader;
-
     printf("------------------------------------\n");
 }
 

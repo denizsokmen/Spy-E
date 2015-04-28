@@ -5,6 +5,7 @@
 #include "resource/ObjLoader.h"
 #include "Constants.h"
 #include "resource/ResourceManager.h"
+
 int World::getEntityCount() {
     return entities.size();
 }
@@ -42,11 +43,17 @@ Renderable* World::createRenderableFromPath(const char* modelPath) {
 }
 
 
+
+void World::mapEntity(std::string name, Entity *entity){
+    this->entityMap[name] = entity;
+}
+
+
 std::vector<Entity*>& World::getEntities() {
     return entities;
 }
-Entity* World::getEntity(int identifier) {
-    return entities[identifier];
+Entity* World::getEntity(std::string name) {
+    return this->entityMap[name];
 }
 
 void World::addEntity(Entity *entity) {
@@ -97,3 +104,4 @@ std::string World::getVersion() {
 void World::setVersion(std::string version) {
     this->version = version;
 }
+
