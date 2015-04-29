@@ -5,10 +5,7 @@
 #include "resource/ObjLoader.h"
 #include "Constants.h"
 #include "resource/ResourceManager.h"
-
-int World::getEntityCount() {
-    return entities.size();
-}
+#include "world/Light.h"
 
 Renderable* World::createRenderable(const char* name) {
     std::string entityName(name);
@@ -49,9 +46,6 @@ void World::mapEntity(std::string name, Entity *entity){
 }
 
 
-std::vector<Entity*>& World::getEntities() {
-    return entities;
-}
 Entity* World::getEntity(std::string name) {
     return this->entityMap[name];
 }
@@ -66,11 +60,6 @@ Entity* World::createEntity() {
     return entity;
 }
 
-void World::addEntities(std::vector<Entity *> *entities) {
-    for(auto &entity: *entities) {
-        this->addEntity(entity);
-    }
-}
 
 std::vector<Renderable *>& World::getRenderables() {
     return renderables;
@@ -105,3 +94,10 @@ void World::setVersion(std::string version) {
     this->version = version;
 }
 
+void World::addLight(Light *light) {
+    lights.push_back(light);
+}
+
+std::vector<Light *> &World::getLights() {
+    return lights;
+}

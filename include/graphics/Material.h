@@ -10,6 +10,7 @@ class Texture;
 enum TextureTypes {
 	TEXTURE_DIFFUSE=0,
 	TEXTURE_NORMAL,
+    TEXTURE_SPECULAR,
 	TEXTURE_LAST
 
 };

@@ -15,6 +15,7 @@ in vec3 viewDir;
 
 uniform sampler2D diffuseTex;
 uniform sampler2D normalTex;
+uniform sampler2D specularTex;
 uniform vec3 ambient;
 uniform vec3 specular;
 uniform vec3 diffuse;
@@ -40,15 +41,15 @@ out vec4 color;
 vec3 ApplyLight(Light light, vec3 surfaceColor, vec3 normal, vec3 surfacePos, vec3 surfaceToCamera) {
     vec3 surfaceToLight;
 	vec4 lightPos = ViewMatrix * light.position;
-	vec3 coneDir = TBN * (ViewMatrix * vec4(normalize(light.coneDirection), 0.0)).xyz;
+	vec3 coneDir = normalize(TBN * (ViewMatrix * vec4(normalize(light.coneDirection), 0.0)).xyz);
     float attenuation = 1.0;
     if(light.position.w == 0.0) {
         //directional light
-        surfaceToLight = TBN * (ViewMatrix * vec4(normalize(-light.position.xyz), 0.0)).xyz;
+        surfaceToLight = normalize(TBN * (ViewMatrix * vec4(normalize(-light.position.xyz), 0.0)).xyz);
         attenuation = 1.0; //no attenuation for directional lights
     } else {
         //point light
-        surfaceToLight = TBN * normalize(lightPos.xyz - surfacePos);
+        surfaceToLight = normalize(TBN * normalize(lightPos.xyz - surfacePos));
         float distanceToLight = length(lightPos.xyz - surfacePos);
         attenuation = 1.0 / (1.0 + light.attenuation * pow(distanceToLight, 2));
 
@@ -70,7 +71,7 @@ vec3 ApplyLight(Light light, vec3 surfaceColor, vec3 normal, vec3 surfacePos, ve
     float specularCoefficient = 0.0;
     if(diffuseCoefficient > 0.0)
         specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
-    vec3 finalSpecular = specularCoefficient * specular * light.intensities;
+    vec3 finalSpecular = specularCoefficient * texture(specularTex, UV.st).rgb * light.intensities;
 
     //linear color (color before gamma correction)
     return finalAmbient + attenuation*(finalDiffuse + finalSpecular);

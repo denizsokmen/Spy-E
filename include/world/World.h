@@ -9,43 +9,46 @@
 class Entity;
 class Renderable;
 class ObjLoader;
+class Light;
 
 class World {
 
-	private:
-		std::vector<Entity *> entities;
-		std::vector<Renderable *> renderables;
-		std::map<std::string, Entity*> entityMap;
-		ObjLoader *objLoader;
+private:
+    std::vector<Entity *> entities;
+    std::vector<Renderable *> renderables;
+    std::vector<Light *> lights;
+    std::map<std::string, Entity*> entityMap;
+    ObjLoader *objLoader;
 
-	std::string name;
-	std::string version;
+    std::string name;
+    std::string version;
 
-	public:
+public:
 
-		World();
-		~World();
-		void update(float dt);
+    World();
+    ~World();
+    void update(float dt);
 
-		int getEntityCount();
 
-		Entity* getEntity(std::string name);
-		Entity *createEntity();
+    void addLight(Light *light);
 
-		std::vector<Entity*>& getEntities();
-		std::vector<Renderable*>& getRenderables();
 
-		void addEntity(Entity *entity);
-		void addEntities(std::vector<Entity *> *entities);
+    Entity* getEntity(std::string name);
+    Entity *createEntity();
 
-		Renderable *createRenderable(const char *name);
-		std::string getName();
-		void setName(std::string name);
-		std::string getVersion();
-		void setVersion(std::string version);
-		Renderable *createRenderableFromPath(char const *modelPath);
+    std::vector<Renderable*>& getRenderables();
+    std::vector<Light*>& getLights();
 
-		void mapEntity(std::string name, Entity *entity);
+    void addEntity(Entity *entity);
+
+    Renderable *createRenderable(const char *name);
+    std::string getName();
+    void setName(std::string name);
+    std::string getVersion();
+    void setVersion(std::string version);
+    Renderable *createRenderableFromPath(char const *modelPath);
+
+    void mapEntity(std::string name, Entity *entity);
 };
 
 

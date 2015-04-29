@@ -31,6 +31,7 @@ Material::Material() {
 
 	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitydiffuse.png").get());
 	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identitynormal.png").get());
+	textures.push_back(ResourceManager::instance()->createTexture("./assets/texture/identityspecular.jpg").get());
 }
 
 Material::~Material() {

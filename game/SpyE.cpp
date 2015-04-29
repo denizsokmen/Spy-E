@@ -16,6 +16,7 @@
 #include <graphics/ui/Menu.h>
 #include <graphics/Skybox.h>
 #include <resource/ResourceManager.h>
+#include <world/Light.h>
 
 SpyE::SpyE(Game *game) {
     this->game = game;
@@ -46,8 +47,42 @@ void SpyE::activate() {
     entity->addAnimation("lurking", "./assets/entities/hellknight/idle.md5mesh");
     entity->setAnimation("lurking");
 
+
+
+    /*Light *light2 = new Light();
+    light2->type = LIGHT_DIRECTIONAL;
+    light2->setPosition(glm::vec3(1, -1, 1));
+    light2->intensities = glm::vec3(0.2, 0.2, 0.0);
+    light2->coneAngle = 40.0f;
+    light2->coneDirection = glm::vec3(0, -0.5, -1);
+    light2->ambientCoefficient = 0.01f;
+    light2->attenuation = 0.01f;*/
+
+
 	WorldLoader loader(game->scene->getWorld());
 	loader.load("./worlds/level1/");
+
+
+    Light *light = new Light();
+    light->type = LIGHT_SPOT;
+    light->setPosition(glm::vec3(0, 15, 20));
+    light->intensities = glm::vec3(0.1, 0.1, 0.1);
+    light->coneAngle = 359.0f;
+    light->coneDirection = glm::vec3(0, -0.5, -1);
+    light->ambientCoefficient = 0.01f;
+    light->attenuation = 0.01f;
+
+    Light *light2 = new Light();
+    light2->type = LIGHT_SPOT;
+    light2->setPosition(glm::vec3(0, 15, -5));
+    light2->intensities = glm::vec3(0.1, 0.1, 0.0);
+    light2->coneAngle = 359.0f;
+    light2->coneDirection = glm::vec3(0, -0.5, -1);
+    light2->ambientCoefficient = 0.01f;
+    light2->attenuation = 0.01f;
+
+	game->scene->getWorld()->addLight(light);
+    game->scene->getWorld()->addLight(light2);
 
 	skybox = new Skybox("./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
 		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",

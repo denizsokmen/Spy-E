@@ -26,7 +26,7 @@ float speed = 10.0f;
 
 
 Game* game;
-
+int a;
 int main(int argc, char* argv[])
 {
     game = new Game();

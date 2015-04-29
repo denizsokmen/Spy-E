@@ -7,7 +7,10 @@
 #include "resource/ObjLoader.h"
 #include "world/Camera.h"
 #include <graphics/SubMesh.h>
+#include "world/Light.h"
 #include <graphics/Material.h>
+#include <sstream>
+
 
 Renderer::Renderer() {
 	glGenVertexArrays(1, &vaoid);
@@ -64,13 +67,22 @@ void Renderer::render(Camera* camera) {
 
 
 			program->setUniform("cameraPosition", camera->position);
-			program->setUniform("numLights", 1);
-			program->setUniform("allLights[0].position", glm::vec4(0, 15, 40, 1));
-			program->setUniform("allLights[0].intensities", glm::vec3(0.4, 0.3, 0.1));
-			program->setUniform("allLights[0].attenuation", 0.01f);
-			program->setUniform("allLights[0].coneAngle", 35.0f);
-			program->setUniform("allLights[0].coneDirection", glm::vec3(0, -0.5, -1));
-			program->setUniform("allLights[0].ambientCoefficient", 0.01f);
+
+            int i = 0;
+            program->setUniform("numLights", (int)lightList.size());
+            for(auto light: lightList) {
+                std::ostringstream ss;
+                ss << "allLights[" << i << "].";
+                std::string lightString = ss.str();
+                glm::vec3 pos = light->getPosition();
+                program->setUniform(lightString + std::string("position"), glm::vec4(pos.x, pos.y, pos.z, (light->type == LIGHT_DIRECTIONAL) ? 0.0f: 1.0f));
+                program->setUniform(lightString + std::string("intensities"), light->intensities);
+                program->setUniform(lightString + std::string("attenuation"), light->attenuation);
+                program->setUniform(lightString + std::string("coneAngle"), light->coneAngle);
+                program->setUniform(lightString + std::string("coneDirection"), light->coneDirection);
+                program->setUniform(lightString + std::string("ambientCoefficient"), light->ambientCoefficient);
+                ++i;
+            }
 
 
             program->setUniform("MVP", MVP);
@@ -90,6 +102,7 @@ void Renderer::render(Camera* camera) {
 
             program->setUniform("diffuseTex", 0);
             program->setUniform("normalTex", 1);
+            program->setUniform("specularTex", 2);
 
             if(renderable->mesh->getSkeleton()) {
                 program->setUniform("Bones", renderable->boneMatrix);
@@ -123,8 +136,13 @@ Renderer::~Renderer() {
 
 void Renderer::updateRenderList(World *world, Camera *camera, float dt) {
     renderList.clear();
+    lightList.clear();
 
     for (Renderable* renderable: world->getRenderables()) {
         renderList.push_back(renderable);
+    }
+
+    for (Light *light: world->getLights()) {
+        lightList.push_back(light);
     }
 }

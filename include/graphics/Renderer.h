@@ -14,6 +14,7 @@ class Scene;
 class ObjLoader;
 class VertexBuffer;
 class Camera;
+class Light;
 class Renderable;
 
 
@@ -35,6 +36,7 @@ public:
     void updateRenderList(World* world, Camera* camera, float dt);
 
     std::vector<Renderable*> renderList;
+    std::vector<Light*> lightList;
    // MemoryPool<Renderable*> renderList;
 };
 
