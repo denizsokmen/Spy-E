@@ -19,12 +19,9 @@ uniform mat4 ModelViewMatrix;
 uniform mat4 Bones[150];
 
 
-out vec4 position_eyespace;
-out vec4 light_eyespace;
-out vec3 lightDir;
-out vec3 halfDir;
 out vec2 UV;
-
+out mat3 TBN;
+out vec4 fragVert;
 
 void main() {
 
@@ -40,6 +37,7 @@ void main() {
     newv += (Bones[ind]) * (1.0 - weight.x - weight.y - weight.z);
 
     vec4 vertexPosition_modelspace = newv * inVertex;
+	fragVert = vertexPosition_modelspace|
     vec3 newNormal = (newv * vec4(normal, 0.0)).xyz;
     vec3 newTangent = (newv * vec4(tangent, 0.0)).xyz;
 
@@ -47,23 +45,15 @@ void main() {
     gl_Position = MVP * vertexPosition_modelspace;
     position_eyespace = ModelViewMatrix * vertexPosition_modelspace;
 
-    light_eyespace = ViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
 
 
-    lightDir = normalize((light_eyespace - position_eyespace).xyz);
+    vec3 n = normalize(NormalMatrix * normal);
+    vec3 t = normalize(NormalMatrix * tangent);
+	vec3 b = normalize(NormalMatrix * cross( normal, tangent )); 
 
-    halfDir = normalize(lightDir - normalize(position_eyespace.xyz)).xyz;
+    mat3 tbnMatrix = transpose(mat3(t,b,n));
 
-    vec3 n = normalize(NormalMatrix * newNormal);
-    vec3 t = normalize(NormalMatrix * newTangent);
-    vec3 b = cross(n, t);
-
-    mat3 tbnMatrix = mat3(t.x, b.x, n.x,
-                          t.y, b.y, n.y,
-                          t.z, b.z, n.z);
-
-    lightDir = tbnMatrix * lightDir;
-    halfDir = tbnMatrix * halfDir;
     UV = uv;
+	TBN = tbnMatrix;
 
 }

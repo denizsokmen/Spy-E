@@ -15,34 +15,24 @@ uniform mat4 ModelViewMatrix;
 
 
 
-out vec4 position_eyespace;
-out vec4 light_eyespace;
-out vec3 lightDir;
-out vec3 halfDir;
+
 out vec2 UV;
+out mat3 TBN;
+out vec4 fragVert;
 
 
 void main() {
     gl_Position = MVP * vertexPosition_modelspace;
-    position_eyespace = ModelViewMatrix * vertexPosition_modelspace;
+	fragVert = vertexPosition_modelspace;
 
-    light_eyespace = ViewMatrix * vec4(10.0, 10.0,10.0, 1.0);
-
-
-    lightDir = normalize((light_eyespace - position_eyespace).xyz);
-
-    halfDir = normalize(lightDir - normalize(position_eyespace.xyz)).xyz;
 
     vec3 n = normalize(NormalMatrix * normal);
     vec3 t = normalize(NormalMatrix * tangent);
-    vec3 b = cross(n, t);
+	vec3 b = normalize(NormalMatrix * cross( normal, tangent )); 
 
-    mat3 tbnMatrix = mat3(t.x, b.x, n.x,
-                          t.y, b.y, n.y,
-                          t.z, b.z, n.z);
+    mat3 tbnMatrix = transpose(mat3(t,b,n));
 
-    lightDir = tbnMatrix * lightDir;
-    halfDir = tbnMatrix * halfDir;
     UV = uv;
+	TBN = tbnMatrix;
 
 }
