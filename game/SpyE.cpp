@@ -40,8 +40,11 @@ void SpyE::activate() {
 	entity = game->scene->getWorld()->createRenderable("box");
 	entity->setPosition(glm::vec3(0, 2.0f, 0));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
-//	entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
-//	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/human/human.md5mesh").get();
+	//entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+    entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
+
+    entity->addAnimation("lurking", "./assets/entities/hellknight/idle.md5mesh");
+    entity->setAnimation("lurking");
 
 	WorldLoader loader(game->scene->getWorld());
 	loader.load("./worlds/level1/");

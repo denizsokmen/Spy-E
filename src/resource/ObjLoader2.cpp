@@ -1239,7 +1239,7 @@ bool ModelOBJ::importMaterials(const char *pszFilename)
 
                 // Wavefront .MTL file shininess is from [0,1000].
                 // Scale back to a generic [0,1] range.
-                pMaterial->shininess /= 1000.0f;
+                //pMaterial->shininess /= 1000.0f;
                 break;
 
             case 'K': // Ka, Kd, or Ks

@@ -44,7 +44,7 @@ vec3 ApplyLight(Light light, vec3 surfaceColor, vec3 normal, vec3 surfacePos, ve
     float attenuation = 1.0;
     if(light.position.w == 0.0) {
         //directional light
-        surfaceToLight = TBN * normalize(lightPos.xyz);
+        surfaceToLight = TBN * (ViewMatrix * vec4(normalize(-light.position.xyz), 0.0)).xyz;
         attenuation = 1.0; //no attenuation for directional lights
     } else {
         //point light
@@ -81,12 +81,12 @@ void main() {
 	vec3 normal = normalize(texture(normalTex, UV.st).rgb * 2.0 - 1.0);
     vec3 surfacePos = vec3(ModelViewMatrix * vec4(fragVert.xyz, 1));
     vec4 surfaceColor = texture(diffuseTex, UV.st);
-    //vec3 surfaceToCamera =  normalize(TBN * normalize(-surfacePos)); 
+    vec3 surfaceToCamera =  TBN * -surfacePos;
 	
 	
     vec3 linearColor = vec3(0);
 	for(int i = 0; i < numLights; ++i){
-        linearColor += ApplyLight(allLights[i], surfaceColor.rgb, normal, surfacePos, normalize(viewDir));
+        linearColor += ApplyLight(allLights[i], surfaceColor.rgb, normal, surfacePos, normalize(surfaceToCamera));
     }
 	
      
