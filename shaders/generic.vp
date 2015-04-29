@@ -19,6 +19,7 @@ uniform mat4 ModelViewMatrix;
 out vec2 UV;
 out mat3 TBN;
 out vec4 fragVert;
+out vec3 viewDir;
 
 
 void main() {
@@ -26,12 +27,17 @@ void main() {
 	fragVert = vertexPosition_modelspace;
 
 
+	
+	vec4 posEye = ModelViewMatrix * vertexPosition_modelspace;
+	
     vec3 n = normalize(NormalMatrix * normal);
     vec3 t = normalize(NormalMatrix * tangent);
 	vec3 b = normalize(NormalMatrix * cross( normal, tangent )); 
 
     mat3 tbnMatrix = transpose(mat3(t,b,n));
+	
 
+	viewDir = TBN * -posEye.xyz;
     UV = uv;
 	TBN = tbnMatrix;
 

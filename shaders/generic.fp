@@ -10,6 +10,7 @@ uniform mat4 ModelMatrix;
 in vec4 fragVert;
 in vec2 UV;
 in mat3 TBN;
+in vec3 viewDir;
 
 
 uniform sampler2D diffuseTex;
@@ -68,11 +69,11 @@ vec3 ApplyLight(Light light, vec3 surfaceColor, vec3 normal, vec3 surfacePos, ve
     //specular
     float specularCoefficient = 0.0;
     if(diffuseCoefficient > 0.0)
-        specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), 128.0 * shininess);
+        specularCoefficient = pow(max(0.0, dot(surfaceToCamera, reflect(-surfaceToLight, normal))), shininess);
     vec3 finalSpecular = specularCoefficient * specular * light.intensities;
 
     //linear color (color before gamma correction)
-    return attenuation*(finalDiffuse + finalSpecular);
+    return finalAmbient + attenuation*(finalDiffuse + finalSpecular);
 }
 
 void main() {
@@ -80,12 +81,12 @@ void main() {
 	vec3 normal = normalize(texture(normalTex, UV.st).rgb * 2.0 - 1.0);
     vec3 surfacePos = vec3(ModelViewMatrix * vec4(fragVert.xyz, 1));
     vec4 surfaceColor = texture(diffuseTex, UV.st);
-    vec3 surfaceToCamera =  normalize(TBN * normalize(-surfacePos)); 
+    //vec3 surfaceToCamera =  normalize(TBN * normalize(-surfacePos)); 
 	
 	
     vec3 linearColor = vec3(0);
 	for(int i = 0; i < numLights; ++i){
-        linearColor += ApplyLight(allLights[i], surfaceColor.rgb, normal, surfacePos, surfaceToCamera);
+        linearColor += ApplyLight(allLights[i], surfaceColor.rgb, normal, surfacePos, normalize(viewDir));
     }
 	
      

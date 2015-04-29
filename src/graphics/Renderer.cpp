@@ -65,11 +65,11 @@ void Renderer::render(Camera* camera) {
 
 			program->setUniform("cameraPosition", camera->position);
 			program->setUniform("numLights", 1);
-			program->setUniform("allLights[0].position", glm::vec4(0, 10, 20, 1));
+			program->setUniform("allLights[0].position", glm::vec4(0, 20, 20, 1));
 			program->setUniform("allLights[0].intensities", glm::vec3(1.0, 1.0, 1.0));
 			program->setUniform("allLights[0].attenuation", 0.1f);
 			program->setUniform("allLights[0].coneAngle", 80.0f);
-			program->setUniform("allLights[0].coneDirection", glm::vec3(0, -1, -1));
+			program->setUniform("allLights[0].coneDirection", glm::vec3(0, -1, -0.5));
 			program->setUniform("allLights[0].ambientCoefficient", 0.06f);
 
 
