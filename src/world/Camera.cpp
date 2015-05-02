@@ -9,6 +9,13 @@ Camera::~Camera() {
 
 }
 
+void Camera::perspective(float fov, float ratio, float near, float far) {
+	projection = glm::perspective(fov, ratio, near, far);
+}
+void Camera::ortho(float left, float right, float top, float bot) {
+	projection = glm::ortho(left, right, bot, top);
+}
+
 void Camera::lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 up) {
     view = glm::lookAt(eye, target, up);
 

@@ -1,7 +1,7 @@
 #include "TestGameSystem.h"
 #include <world/WorldLoader.h>
 #include <resource/ResourceManager.h>
-
+#include <world/Light.h>
 
 Game* game;
 
@@ -55,6 +55,17 @@ TestGameSystem::TestGameSystem(Game *game) {
 
 	box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
 	//box->setAcceleration(-30.0f, 'y');
+
+	Light *light = new Light();
+	light->type = LIGHT_DIRECTIONAL;
+	light->setPosition(glm::vec3(0, -1, 1));
+	light->intensities = glm::vec3(1.0, 1.0, 1.0);
+	light->coneAngle = 359.0f;
+	light->coneDirection = glm::vec3(0, -0.5, -1);
+	light->ambientCoefficient = 0.01f;
+	light->attenuation = 0.01f;
+
+	game->scene->getWorld()->addLight(light);
 
 
 }
