@@ -353,9 +353,9 @@ def write_file(filepath, objects, scene,
             # XXX debug print
             print(ob_main.name, 'has', len(obs), 'dupli children')
         else:
-            obs = [(ob_main, ob_main.matrix_world)]
+            obs = [(ob_main, ob_main.matrix_world, ob_main.matrix_local)]
 
-        for ob, ob_mat in obs:
+        for ob, ob_mat, ob_local in obs:
             uv_unique_count = no_unique_count = 0
 
             # Nurbs curve support
@@ -372,9 +372,9 @@ def write_file(filepath, objects, scene,
 
             if me is None:
                 continue
+            print(EXPORT_GLOBAL_MATRIX)
 
-
-            #me.transform(EXPORT_GLOBAL_MATRIX * ob_mat)
+            me.transform(EXPORT_GLOBAL_MATRIX)
 
             if EXPORT_TRI:
                 # _must_ do this first since it re-allocs arrays

@@ -30,6 +30,7 @@ private:
     glm::vec3 parsePosition(rapidxml::xml_node<>* entityNode);
     glm::vec3 parseColor(rapidxml::xml_node<>* entityNode);
     glm::vec3 parseScale(rapidxml::xml_node<>* entityNode);
+    glm::vec3 parseRotation(rapidxml::xml_node<> *entityNode);
 
     void getComponent(rapidxml::xml_node<>* positionNode,
                       const char* name, float* value);
@@ -40,6 +41,7 @@ public:
     void load(char const *name);
 
     ~WorldLoader();
+
 
 
 };

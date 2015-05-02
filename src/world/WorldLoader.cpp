@@ -144,8 +144,11 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
         printf("[WordLoader] Loading '%s'.\n", nameNode->value());
 		entity->setPosition(this->parsePosition(entityNode));
 		entity->setColor(this->parseColor(entityNode));
+//        glm::quat orientation = this->parseRotation(entityNode);
+//        printf("Orientation: x:%f, y:%f, z:%f w:%f\n", orientation.x, orientation.y, orientation.z, orientation.w);
+        entity->setRotation(this->parseRotation(entityNode));
         entity->setScale(this->parseScale(entityNode));
-//        entity->setRotation();
+
 
     }
     else {
@@ -154,11 +157,27 @@ void WorldLoader::parseEntity(rapidxml::xml_node<> *entityNode) {
 
 }
 
+glm::vec3 WorldLoader::parseRotation(rapidxml::xml_node<>* entityNode) {
+    rapidxml::xml_node<> *rotationNode = entityNode->first_node("Rotation");
+    if (rotationNode == NULL) {
+        printf("[WorldLoader] Warning: <Entity> does not have a <Rotation> node!\n");
+        return glm::vec3(0,0,0);
+    }
+    float x = 0, y = 0, z = 0;//, w = 0;
+
+//    this->getComponent(rotationNode, "W", &w);
+    this->getComponent(rotationNode, "X", &x);
+    this->getComponent(rotationNode, "Y", &y);
+    this->getComponent(rotationNode, "Z", &z);
+
+    return glm::vec3(x,y,z); //, w);
+}
+
 glm::vec3 WorldLoader::parseScale(rapidxml::xml_node<>* entityNode) {
     rapidxml::xml_node<> *scaleNode = entityNode->first_node("Scale");
     if (scaleNode == NULL) {
         printf("[WorldLoader] Warning: <Entity> does not have a <Scale> node!\n");
-        return glm::vec3(3.89f, 3.89f, 3.89f);
+        return glm::vec3(1.00f, 1.00f, 1.00f);
     }
     float x = 0, y = 0, z = 0;
 

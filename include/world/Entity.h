@@ -48,7 +48,7 @@ public:
 	void setName(std::string name);
 
 
-
+	void setRotation(glm::vec3 &&rotation);
 };
 
 #endif

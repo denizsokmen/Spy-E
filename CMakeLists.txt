@@ -80,7 +80,6 @@ add_library(engine STATIC
 	src/world/Entity.cpp
 	src/world/World.cpp
 	src/world/Scene.cpp
-	src/world/WorldExporter.cpp
 
 	src/physics/BoundingBox.cpp
 	src/physics/Physics.cpp
@@ -125,7 +124,7 @@ add_library(engine STATIC
 	include/world/Entity.h
 	include/world/Scene.h
 	include/world/Camera.h
-	include/world/WorldExporter.h
+
 
 	include/physics/BoundingBox.h
 	include/physics/Body.h

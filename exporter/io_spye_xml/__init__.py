@@ -33,20 +33,29 @@ import os
 
 
 ENTITIY_SCHEMA = """
-        <Entity name="{0}">
-            <Type>{1}</Type>
+        <Entity name="{name}">
+            <Type>{type}</Type>
             <Position>
-                <X>{2}</X>
-                <Y>{3}</Y>
-                <Z>{4}</Z>
+                <X>{positionX}</X>
+                <Y>{positionY}</Y>
+                <Z>{positionZ}</Z>
             </Position>
             <Scale>
-                <X>{5}</X>
-                <Y>{6}</Y>
-                <Z>{7}</Z>
+                <X>{scaleX}</X>
+                <Y>{scaleY}</Y>
+                <Z>{scaleZ}</Z>
             </Scale>
+            <Rotation>
+
+                <X>{rotationX}</X>
+                <Y>{rotationY}</Y>
+                <Z>{rotationZ}</Z>
+            </Rotation>
         </Entity>
 """
+
+# <W>{rotationW}</W>
+
 
 WORLD_SCHEMA = """
 <World>
@@ -79,7 +88,13 @@ from bpy_extras.io_utils import (ImportHelper,
                                  axis_conversion,
 )
 
+import mathutils
+import math
+
 IOOBJOrientationHelper = orientation_helper_factory("IOOBJOrientationHelper", axis_forward='-Z', axis_up='Y')
+
+ROTATE_X_PI2 = mathutils.Quaternion((1.0, 0.0, 0.0), math.radians(-90.0)).to_matrix().to_4x4()
+ROTATE_X_PI2quat = mathutils.Quaternion((1.0, 0.0, 0.0), math.radians(-90.0))
 
 
 class ExportSpyWorld(bpy.types.Operator, ExportHelper, IOOBJOrientationHelper):
@@ -129,11 +144,13 @@ class ExportSpyWorld(bpy.types.Operator, ExportHelper, IOOBJOrientationHelper):
                                             "check_existing",
                                             "filter_glob",
                                             ))
-
-        global_matrix = (Matrix.Scale(self.global_scale, 4) *
-                         axis_conversion(to_forward=self.axis_forward,
+        #(Matrix.Scale(self.global_scale, 4) *
+        global_matrix = (axis_conversion(to_forward=self.axis_forward,
                                          to_up=self.axis_up,
                                          ).to_4x4())
+#        global_matrix = mathutils.Matrix.Scale(1, 4, (0, -1, 0)) * ROTATE_X_PI2
+        global_matrix =  mathutils.Matrix.Identity(4) * mathutils.Matrix.Scale(1, 4, (0, -1, 0))
+
         keywords["global_matrix"] = global_matrix
         keywords.pop("filepath", None)
 
@@ -167,23 +184,55 @@ class ExportSpyWorld(bpy.types.Operator, ExportHelper, IOOBJOrientationHelper):
         for obj in allMeshObjs:
             print(obj.name + " is at location" + str(obj.location))
             name = str(obj.name).lower()
-            location = obj.location
-            location = global_matrix * location
+
+
+
+            matrix_world = ROTATE_X_PI2 * obj.matrix_world
+            location, quaternion, scale = matrix_world.decompose()
+
+            loctemp, quattemp, scaletemp = obj.matrix_local.decompose()
+            quattemp = ROTATE_X_PI2quat * quattemp
+            rotation = quattemp.to_euler("XYZ")
+
+            # Blender scale matrix yapicam, 0, -1 , 0 flip  mathutils.Matrix.Scale(1, 4, (0, -1, 0) ) for flipping
+            # ROTATE_X_P2 *
+
+            # location = obj.location
+            # location = global_matrix * location
+            #
+            #
+            # quat_a = mathutils.Quaternion(obj.rotation_quaternion)
+            # quat_a[1] = -obj.rotation_quaternion[1]
+            # quat_a[2] = obj.rotation_quaternion[2]
+            # quat_a[3] = -obj.rotation_quaternion[3]
+            # quat_a[0] = obj.rotation_quaternion[0]
+            #
+
+
+
             #  # Special case for Cube.0001's
             original = True
             if '.' in name:
                 original = False
                 name = name.split(".")[0] # becomes cube
                 
-            x = str(location.x)
-            # y = str(-location.y)
-            y = str(location.y)
-            z = str(location.z)
-            entity = ENTITIY_SCHEMA.format(str(obj.name),
-                                           name,
-                                           x, y, z,  # location
-                                           obj.scale.x, obj.scale.y, obj.scale.z # scale
-                                           )
+
+            entity_dict = {
+                "name": str(obj.name),
+                "type": str(name),
+                "positionX": str(location.x),
+                "positionY": str(location.y),
+                "positionZ": str(location.z),
+                "scaleX": str(scale.x),
+                "scaleY": str(scale.y),
+                "scaleZ": str(scale.z),
+                # "rotationW": str(quat_a[0]),
+                "rotationX": str(rotation[0]),
+                "rotationY": str(rotation[1]),
+                "rotationZ": str(rotation[2])
+            }
+            entity = ENTITIY_SCHEMA.format(**entity_dict)
+
             entities.append(entity)
             if name not in entity_set and original:
                 entity_set.add(name)

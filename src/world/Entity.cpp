@@ -2,12 +2,15 @@
 
 #include "world/Entity.h"
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <string>
 
 Entity::Entity() {
     scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	pivot = glm::vec3(0,0,0);
+	orientation = glm::quat(0,0,0,1);
 }
 
 glm::mat4 Entity::getTransformation() const {
@@ -22,6 +25,28 @@ glm::mat4 Entity::getTransformation() const {
 void Entity::setTransformation(glm::mat4&& trans) {
 	orientation = glm::normalize(glm::toQuat(trans));
 	position = glm::vec3(trans[3]);
+}
+
+void Entity::setRotation(glm::vec3&& rotation){
+	printf("Rotation: x:%f, y:%f, z:%f\n", rotation.x, rotation.y, rotation.z);
+//
+	float PI = glm::pi<float>();
+	this->setOrientation(glm::rotate(this->getOrientation(), PI, glm::vec3(0.0f, 0.0f, 1.0f)));
+//	this->setOrientation(glm::rotate(this->getOrientation(), PI/4.0f, glm::vec3(1.0f, 0.0f, 0.0f)));
+//	glm::quat rota = glm::angleAxis(-halfPI, glm::vec3(1.0f,0.0f,0.0f));
+
+	this->setOrientation(glm::rotate(this->getOrientation(), rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)));
+	this->setOrientation(glm::rotate(this->getOrientation(), rotation.y, glm::vec3(0.0f, 0.0f, 1.0f)));
+	this->setOrientation(glm::rotate(this->getOrientation(), rotation.z, glm::vec3(0.0f, -1.0f, 0.0f)));
+
+//	this->orientation = glm::normalize ( orientation);
+
+//	glm::quat rot1 = glm::angleAxis(rotation.x, glm::vec3(1.0f,0.0f,0.0f));
+//	glm::quat rot2 = glm::angleAxis(rotation.y, glm::vec3(0.0f,1.0f,0.0f));
+//	glm::quat rot3 = glm::angleAxis(rotation.z, glm::vec3(0.0f,0.0f,1.0f));
+
+	//this->setOrientation(rot1 * rot2 * rot3);
+
 }
 
 glm::quat Entity::getOrientation() const {
