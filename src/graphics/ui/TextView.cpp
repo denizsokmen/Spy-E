@@ -44,17 +44,16 @@ void TextView::splitText() {
     int lineLength = 0;
     numberOfLines = 0;
 
-    for (auto ch: this->text) {
-        textWidth += font->glyphs[ch].surface->texture->width;
-        printf("[GUI][TextView] textWidth is %f\n", textWidth);
-        lineLength++;
-        if (textWidth >= this->frame.w) {
-            std::wstring s = text.substr(startingPoint, lineLength);
-            printf("[GUI][TextView] splitted value: %s \n", s.c_str());
-            createNewLabel(s);
-            startingPoint = lineLength + 1;
-            lineLength = 0;
-            textWidth = 0;
-        }
+    float characterWidth = font->glyphs[12].surface->texture->width;
+    int characterCountForLine = this->frame.w / characterWidth;
+
+    int start = 0;
+    while(true) {
+        std::wstring s = text.substr(start, characterCountForLine);
+        createNewLabel(s);
+        start += characterCountForLine;
+
+        if(start >= this->text.size()) break;
     }
 }
+

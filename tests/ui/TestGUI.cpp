@@ -70,6 +70,11 @@ TestGUI::TestGUI(Game *game) {
     fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
     game->gui->addSubview(fpsLabel);
 
+    TextView *textView = new TextView();
+    textView->setFrame(Rect(10, 10, 400, 800));
+    textView->setText(L"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur hendrerit, massa et dignissim rutrum, ex nisi egestas est, eu vestibulum quam ante eu purus. Pellentesque tellus lectus, euismod id efficitur non, vehicula eget mi.");
+    game->gui->addSubview(textView);
+
     game->input->showCursor(true);
 
    // game->sounds->open("asd", "assets/sounds/0x1b.wav");
