@@ -284,11 +284,11 @@ Mesh *MD5Loader::load(std::string name, glm::vec3&& scale, glm::quat&& rotate) {
 
                     calcQuatW(rot);
 
-					//rot = rot * rotate;
+					rot = rotate*rot;
 					pos.x *= scale.x;
 					pos.y *= scale.y;
 					pos.z *= scale.z;
-					//pos = rotate*pos;
+					pos = rotate* pos;
                     bone.setTransformation(pos,rot);
                     bindSkeleton->bones.push_back(bone);
 
@@ -431,7 +431,7 @@ Mesh *MD5Loader::load(std::string name, glm::vec3&& scale, glm::quat&& rotate) {
                     wei.pos.x=fdata[1] * scale.x;
                     wei.pos.y=fdata[2] * scale.y;
                     wei.pos.z=fdata[3] * scale.z;
-					//wei.pos = rotate*wei.pos;
+					//wei.pos = wei.pos * rotate;
                     ms.weights.push_back(wei);
                 }
             }

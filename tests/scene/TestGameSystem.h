@@ -10,6 +10,7 @@ class Renderable;
 class ShaderProgram;
 class VertexBuffer;
 class Skybox;
+class Light;
 
 
 class FontSDL;
@@ -21,6 +22,7 @@ class TestGameSystem: public System {
 public:
     Physics* physics;
     Body* box;
+	Light *charlight;
 
     TestGameSystem(Game *game);
 

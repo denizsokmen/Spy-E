@@ -46,11 +46,12 @@ TestGameSystem::TestGameSystem(Game *game) {
 
 
 	entity = game->scene->getWorld()->createRenderable("rabbit");
-	entity->setPosition(glm::vec3(10.0f, 5.0f, 20.0f));
+	entity->setPosition(glm::vec3(0.0f, 5.0f, 20.0f));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
 	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
-	//entity->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
-	entity->addAnimation("lurking", "./assets/entities/hellknight/idle.md5mesh");
+	entity->setScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	entity->addAnimation("lurking", "./assets/entities/hellknight/walk7.md5anim");
+	entity->addAnimation("standing", "./assets/entities/hellknight/idle.md5mesh");
 	entity->setAnimation("lurking");
 
 	box = physics->getWorld()->createBody(entity, entity->getVertexBuffer()->vertexList);
@@ -65,7 +66,17 @@ TestGameSystem::TestGameSystem(Game *game) {
 	light->ambientCoefficient = 0.01f;
 	light->attenuation = 0.01f;
 
+	charlight = new Light();
+	charlight->type = LIGHT_SPOT;
+	charlight->setPosition(glm::vec3(0, -1, 1));
+	charlight->intensities = glm::vec3(1.0, 0.0, 0.0);
+	charlight->coneAngle = 30.0f;
+	charlight->coneDirection = glm::vec3(0, -0.5, -1);
+	charlight->ambientCoefficient = 0.01f;
+	charlight->attenuation = 0.01f;
+
 	game->scene->getWorld()->addLight(light);
+	game->scene->getWorld()->addLight(charlight);
 
 
 }
@@ -77,13 +88,15 @@ void TestGameSystem::update(float dt) {
 
 
 
-    glm::vec3 dir = entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 dir = glm::vec3(0.0f, 0.0f, 1.0f);
 	glm::vec3 dirup = entity->getOrientation() * glm::vec3(0.0f, 1.0f, 0.0f);
 
-    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 15.0f) + (dir * 20.0f)), 0.01f);
+    game->scene->camera->position = glm::mix(game->scene->camera->position, entity->getPosition() + ((dirup * 15.0f) + (dir * 5.0f)), 0.01f);
     game->scene->camera->lookAt(game->scene->camera->position, entity->getPosition(), glm::vec3(0.0f, 1.0f, 0.0f));
     game->scene->camera->focus = entity->getPosition();
 
+	charlight->coneDirection = entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f);
+	charlight->setPosition(entity->getPosition());
 
     if (game->input->isPressed("Left")) {
         entity->setOrientation(glm::rotate(entity->getOrientation(), glm::radians(120.0f * dt), glm::vec3(0.0f, 1.0f, 0.0f)));
@@ -95,15 +108,20 @@ void TestGameSystem::update(float dt) {
     
     if (game->input->isPressed("Up")) {
         glm::vec3 forward = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f));
-        box->setAcceleration(forward.x * 10.0f, 'x');
-        box->setAcceleration(forward.z * 10.0f, 'z');
+		box->setSpeed(forward * 8.0f);
+		entity->setAnimation("lurking");
+       // box->setAcceleration(forward.x * 10.0f, 'x');
+       // box->setAcceleration(forward.z * 10.0f, 'z');
     } else if (game->input->isPressed("Down")) {
-		glm::vec3 back = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f));
-        box->setAcceleration(back.x * 10.0f, 'x');
-        box->setAcceleration(back.z * 10.0f, 'z');
+		glm::vec3 back = glm::normalize(entity->getOrientation() * glm::vec3(0.0f, 0.0f, -1.0f)); 
+		box->setSpeed(back * 8.0f);
+        //box->setAcceleration(back.x * 10.0f, 'x');
+       // box->setAcceleration(back.z * 10.0f, 'z');
     } else if (!game->input->isPressed("Down") && !game->input->isPressed("Up")){
+		box->setSpeed(glm::vec3(0, 0, 0));
         box->setAcceleration(0, 'x');
-        box->setAcceleration(0, 'z');
+		box->setAcceleration(0, 'z');
+		entity->setAnimation("standing");
     }
 
 	glm::vec3 adir = entity->getOrientation() * glm::vec3(0.0f, 0.0f, 1.0f);

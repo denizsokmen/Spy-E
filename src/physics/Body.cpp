@@ -7,6 +7,11 @@ Body::Body(Entity* bodyEntity, std::vector<glm::vec3> v){
     this -> speed = zeroVector;
     this -> acceleration = zeroVector;
     this -> vertices = v;
+
+	for (auto& vec : vertices) {
+		vec *= bodyEntity->getScale();
+	}
+
     boundingBox = new BoundingBox(vertices);
 }
 

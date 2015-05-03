@@ -54,19 +54,31 @@ void MD5Anim::buildFrames(FrameData& data) {
         if (info.flags & 32)
             newBone.localRotation.z = data.data[info.index + j++];
 
-		newBone.localPos.x *= scaleamount.x;
-		newBone.localPos.y *= scaleamount.y;
-		newBone.localPos.z *= scaleamount.z;
+
+		
 
 
         calcQuatW(newBone.localRotation);
+
+		
+		newBone.setTransformation(newBone.localPos, newBone.localRotation);
 
         //Add bone to the skeleton.
         skeleton.bones.push_back(newBone);
     }
     //So far we have been calculating in joint-space
     //convert everything to the model space.
+	
     skeleton.buildTransforms();
+
+	for (auto& bone : skeleton.bones) {
+		bone.worldRotation = rotationamount * bone.worldRotation;
+		bone.worldPos.x *= scaleamount.x;
+		bone.worldPos.y *= scaleamount.y;
+		bone.worldPos.z *= scaleamount.z;
+		bone.worldPos = rotationamount* bone.worldPos;
+		//bone.setTransformation(bone.worldPos, bone.worldRotation);
+	}
 
     //Add the skeleton.
     frameSkeleton.push_back(skeleton);
@@ -196,9 +208,8 @@ AnimationState* MD5Anim::loadAnim(std::string fname, glm::vec3&& scale, glm::qua
                 if (sscanf(data," ( %f %f %f ) ( %f %f %f )", &bon.localPos.x, &bon.localPos.y, &bon.localPos.z, &bon.localRotation.x, &bon.localRotation.y, &bon.localRotation.z) == 6)
                 {
                     calcQuatW(bon.localRotation);
-					//bon.localPos.x *= scale.x;
-					//bon.localPos.y *= scale.y;
-					//bon.localPos.z *= scale.z;
+
+					bon.setTransformation(bon.localPos, bon.localRotation);
                     baseSkeleton.bones.push_back(bon);
                 }
             }
@@ -226,6 +237,11 @@ AnimationState* MD5Anim::loadAnim(std::string fname, glm::vec3&& scale, glm::qua
     anim->frameDuration=1.0f / (float)frameRate;
 	anim->animDuration = anim->frameDuration * (float)numFrames;
     anim->animTime=0.0f;
+
+	frameSkeleton.clear();
+	boneInfos.clear();
+	bounds.clear();
+	boneMatrix.clear();
 
     return anim;
 

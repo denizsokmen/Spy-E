@@ -19,9 +19,11 @@ Animation::~Animation() {
 void Animation::setState(std::string name) {
 	auto it = namedStates.find(name);
 	if (it != namedStates.end()) {
-		currentState = it->second;
-		currentSkeleton = currentState->baseSkeleton;
-
+		if (currentState != it->second) {
+			currentState = it->second;
+			currentSkeleton = currentState->baseSkeleton;
+			animTime = 0.0f;
+		}
 	}
 }
 

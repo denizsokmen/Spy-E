@@ -58,8 +58,8 @@ void PhysicsWorld::update(float dt) {
 }
 
 void PhysicsWorld::applyAirFriction(Body *body) {
-    body->addAcceleration(-(body->getSpeed().x)/2, 'x');
-    body->addAcceleration(-(body->getSpeed().z)/2, 'z');
+    //body->addAcceleration(-(body->getSpeed().x)/2, 'x');
+    //body->addAcceleration(-(body->getSpeed().z)/2, 'z');
 }
 
 glm::vec3 PhysicsWorld::getUpdatedLocation(float dt, glm::vec3 &acceleration, glm::vec3 &location,
