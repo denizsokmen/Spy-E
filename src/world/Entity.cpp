@@ -31,13 +31,13 @@ void Entity::setRotation(glm::vec3&& rotation){
 	printf("Rotation: x:%f, y:%f, z:%f\n", rotation.x, rotation.y, rotation.z);
 //
 	float PI = glm::pi<float>();
-	this->setOrientation(glm::rotate(this->getOrientation(), PI, glm::vec3(0.0f, 0.0f, 1.0f)));
+	//this->setOrientation(glm::rotate(this->getOrientation(), PI, glm::vec3(0.0f, 0.0f, 1.0f)));
 //	this->setOrientation(glm::rotate(this->getOrientation(), PI/4.0f, glm::vec3(1.0f, 0.0f, 0.0f)));
 //	glm::quat rota = glm::angleAxis(-halfPI, glm::vec3(1.0f,0.0f,0.0f));
 
 	this->setOrientation(glm::rotate(this->getOrientation(), rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)));
-	this->setOrientation(glm::rotate(this->getOrientation(), rotation.y, glm::vec3(0.0f, 0.0f, 1.0f)));
-	this->setOrientation(glm::rotate(this->getOrientation(), rotation.z, glm::vec3(0.0f, -1.0f, 0.0f)));
+	this->setOrientation(glm::rotate(this->getOrientation(), rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)));
+	this->setOrientation(glm::rotate(this->getOrientation(), rotation.z, glm::vec3(0.0f, 0.0f, 1.0f)));
 
 //	this->orientation = glm::normalize ( orientation);
 
