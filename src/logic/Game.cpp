@@ -41,6 +41,8 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, 4 ) ;
 
 
+
+
     mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height,
                                   ((fullScreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN) | SDL_WINDOW_OPENGL);
     mainGLContext = SDL_GL_CreateContext(mainWindow);
@@ -67,6 +69,13 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 		printf("IMG_Init: Failed to init required jpg and png support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
 	}
+    // get version info
+    const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
+    const GLubyte* version = glGetString (GL_VERSION); // version as a string
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
+
+
     glViewport(0,0,width, height);
 
     this->scene = new Scene();
