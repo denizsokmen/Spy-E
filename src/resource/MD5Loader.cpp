@@ -201,6 +201,8 @@ void SkeletalMesh::generateTangents()
 
 Mesh *MD5Loader::load(std::string name, glm::vec3&& scale, glm::quat&& rotate) {
 	rotationamount = rotate;
+
+	scale = glm::vec3(1.0f, 1.0f, 1.0f);
     FILE *f;
     char data[512];
 

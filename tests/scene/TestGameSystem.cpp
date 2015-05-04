@@ -49,7 +49,7 @@ TestGameSystem::TestGameSystem(Game *game) {
 	entity->setPosition(glm::vec3(0.0f, 5.0f, 20.0f));
 	entity->setColor(glm::vec3(0, 0, 1.0f));
 	entity->mesh = ResourceManager::instance()->createSkeletalMesh("./assets/entities/hellknight/hellknight.md5mesh").get();
-	entity->setScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	entity->setScale(glm::vec3(0.01f, 0.01f, 0.01f));
 	entity->addAnimation("lurking", "./assets/entities/hellknight/walk7.md5anim");
 	entity->addAnimation("standing", "./assets/entities/hellknight/idle.md5mesh");
 	entity->setAnimation("lurking");

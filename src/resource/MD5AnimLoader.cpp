@@ -129,7 +129,7 @@ void MD5Anim::update(float deltaTime) {
 
 AnimationState* MD5Anim::loadAnim(std::string fname, glm::vec3&& scale, glm::quat&& rotate) {
 	rotationamount = rotate;
-	scaleamount = scale;
+	scaleamount = glm::vec3(1.0f, 1.0f, 1.0f);;
     FILE *f;
     char data[512];
     f=fopen(fname.c_str(),"rb");
