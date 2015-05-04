@@ -65,24 +65,34 @@ void SpyE::activate() {
 
     Light *light = new Light();
     light->type = LIGHT_SPOT;
-    light->setPosition(glm::vec3(0, 15, 20));
-    light->intensities = glm::vec3(0.1, 0.1, 0.1);
-    light->coneAngle = 359.0f;
-    light->coneDirection = glm::vec3(0, -0.5, -1);
+    light->setPosition(glm::vec3(0, 5, -5));
+    light->intensities = glm::vec3(0.4, 0.0, 0.4);
+    light->coneAngle = 45.0f;
+    light->coneDirection = glm::vec3(1, -0.5, 0);
     light->ambientCoefficient = 0.01f;
     light->attenuation = 0.01f;
 
     Light *light2 = new Light();
     light2->type = LIGHT_SPOT;
     light2->setPosition(glm::vec3(0, 15, -5));
-    light2->intensities = glm::vec3(0.1, 0.1, 0.0);
-    light2->coneAngle = 359.0f;
-    light2->coneDirection = glm::vec3(0, -0.5, -1);
+    light2->intensities = glm::vec3(0.5, 0.5, 0.0);
+    light2->coneAngle = 30.0f;
+    light2->coneDirection = glm::vec3(0, -0.5, 1);
     light2->ambientCoefficient = 0.01f;
-    light2->attenuation = 0.01f;
+    light2->attenuation = 0.001f;
+
+    Light *light3 = new Light();
+    light3->type = LIGHT_SPOT;
+    light3->setPosition(glm::vec3(0, 15, -5));
+    light3->intensities = glm::vec3(0.0, 0.4, 0.0);
+    light3->coneAngle = 359.0f;
+    light3->coneDirection = glm::vec3(-1, -0.3, 1);
+    light3->ambientCoefficient = 0.01f;
+    light3->attenuation = 0.1f;
 
 	game->scene->getWorld()->addLight(light);
     game->scene->getWorld()->addLight(light2);
+    game->scene->getWorld()->addLight(light3);
 
 	skybox = new Skybox("./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",
 		"./assets/texture/skybox/vr.jpg", "./assets/texture/skybox/vr.jpg",

@@ -10,7 +10,7 @@
 Entity::Entity() {
     scale = glm::vec3(1.0f, 1.0f, 1.0f);
 	pivot = glm::vec3(0,0,0);
-	orientation = glm::quat(0,0,0,1);
+	//orientation = glm::quat(0,0,0,1);
 }
 
 glm::mat4 Entity::getTransformation() const {
