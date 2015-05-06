@@ -11,12 +11,16 @@ class Font;
 class Label : public View {
 
 private:
+
+
     std::wstring text;
     Font *font;
 
 public:
     Label();
+    Label(const wchar_t *text, ...);
     Label(std::wstring text);
+
     void setText(std::wstring text);
 
     void setFont(const char *name, int size);
@@ -28,6 +32,8 @@ public:
 
 
     void setText(wchar_t const *text, ...);
+    void setText(const wchar_t *text, va_list args);
+
 };
 
 

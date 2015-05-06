@@ -74,10 +74,6 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->scene->camera->position = glm::vec3(0.0f,0.0f,5.0f);
     game->scene->camera->focus = glm::vec3(0.0f,0.0f,0.0f);
 
-    Label* fpsLabel = new Label(L"FPS: 0");
-    fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
-    fpsLabel->setTag("fpsLabel");
-    game->gui->addSubview(fpsLabel);
 
     Label* entitiesLabel = new Label(L"Entities:");
 
@@ -133,7 +129,7 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
 
 void WorldEditorSystem::update(float dt) {
 
-    ((Label*) (game->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", game->fps);
+
     float mouseX = game->input->getMouse()->mouseX;
     float mouseY = game->input->getMouse()->mouseY;
 

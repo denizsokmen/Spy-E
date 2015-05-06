@@ -14,6 +14,8 @@
 #include "input/Input.h"
 #include "logic/Game.h"
 #include "graphics/ui/GUI.h"
+#include "graphics/ui/Label.h"
+#include "graphics/ui/Image.h"
 #include "sound/Sounds.h"
 #include "logic/SystemController.h"
 #define TICK_PER_SECOND 1000
@@ -69,11 +71,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
 		printf("IMG_Init: Failed to init required jpg and png support!\n");
 		printf("IMG_Init: %s\n", IMG_GetError());
 	}
-    // get version info
-    const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
-    const GLubyte* version = glGetString (GL_VERSION); // version as a string
-    printf("Renderer: %s\n", renderer);
-    printf("OpenGL version supported %s\n", version);
+
 
 
     glViewport(0,0,width, height);
@@ -88,6 +86,7 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     this->controller->addCoreSystem(input);
     this->controller->addCoreSystem(scene);
     this->controller->addCoreSystem(drawer);
+
     this->controller->addCoreSystem(gui);
     this->controller->addCoreSystem(physics);
     this->controller->addCoreSystem(sounds);
@@ -95,11 +94,41 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     this->controller->init();
 
     this->timer = new Timer(TICK_PER_SECOND);
-
-
+    this->initDebugOverlay();
 
 
     return true;
+}
+
+void Game::initDebugOverlay() const {
+    // get version info
+    const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
+    const GLubyte* version = glGetString (GL_VERSION); // version as a string
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
+
+    Label* rendererLabel = new Label();
+    rendererLabel->setText(L"Renderer: %s", renderer);
+    rendererLabel->setTag("rendererLabel");
+    rendererLabel->setFrame(20,20,100,100);
+    gui->addSubview(rendererLabel);
+
+
+    Label* driverLabel = new Label();
+    driverLabel->setText(L"Driver: %s", version);
+    driverLabel->setTag("driverLabel");
+    driverLabel->setFrame(20,40,100,100);
+    gui->addSubview(driverLabel);
+
+
+    Label* fpsLabel = new Label(L"FPS: 0");
+    fpsLabel->setFrame(20, height - 40, 300, 100);
+    fpsLabel->setTag("fpsLabel");
+    gui->addSubview(fpsLabel);
+
+    Image *image = new Image("./assets/texture/menu/logo.png");
+    image->setFrame(this->width-145, this->height-37.5, 115, 18.25);
+    this->gui->addSubview(image);
 }
 
 void Game::update() {
@@ -113,7 +142,9 @@ void Game::update() {
         deltaTime = currentTime - lastTime;
 
 
+
         while (timer->tick()) {
+            ((Label*) (this->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", this->fps);
             controller->update(timer->getTickSize());
             tickCount++;
             isUpdated = true;

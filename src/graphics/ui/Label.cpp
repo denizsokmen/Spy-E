@@ -16,6 +16,13 @@ Label::Label() : View() {
     this->font = NULL;
 }
 
+Label::Label(const wchar_t *text, ...) : View() {
+    va_list args;
+    va_start(args, text);
+    this->setText(text, args);
+    va_end(args);
+    this->font = NULL;
+}
 
 Label::Label(std::wstring text) : View() {
     this->setText(text);
@@ -26,13 +33,18 @@ void Label::setText(std::wstring text) {
     this->text = text;
 }
 
-void Label::setText(const wchar_t *text, ...) {
+
+void Label::setText(const wchar_t *text, va_list args) {
     wchar_t txt[256];
+    vswprintf(txt, 255, text, args);
+    this->text = txt;
+}
+
+void Label::setText(const wchar_t *text, ...) {
     va_list ap;
     va_start(ap, text);
-    vswprintf(txt, 255, text, ap);
+    this->setText(text, ap);
     va_end(ap);
-    this->text = txt;
 }
 
 void Label::setFont(const char *name, int size) {

@@ -55,6 +55,8 @@ public:
     GUI *gui;
     Drawer *drawer;
     Physics *physics;
+
+    void initDebugOverlay() const;
 };
 
 

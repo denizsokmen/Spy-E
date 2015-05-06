@@ -40,9 +40,7 @@ TestPhysics::TestPhysics(Game *game){
                         "./assets/texture/skybox/desert_top.jpg", "./assets/texture/skybox/desert_top.jpg",
                         "./assets/texture/skybox/desert_front.jpg","./assets/texture/skybox/desert_back.jpg");
 
-    fpsLabel = new Label(L"FPS: 0");
-    fpsLabel->setFrame(Rect(0, game->height - 20, 300, 100));
-    game->gui->addSubview(fpsLabel);
+
 
 }
 
@@ -51,7 +49,7 @@ void TestPhysics::update(float dt) {
     SDL_Window *window = game->input->mainWindow;
 
 
-    fpsLabel->setText(L"FPS: %f", game->fps);
+
 
     float dist;
     handleMouseInputs(window);

@@ -37,7 +37,7 @@ class TestPhysics: public System {
     Renderable* entity4;
     Renderable* floor;
     Game *game;
-    Label *fpsLabel;
+
 
 public:
 

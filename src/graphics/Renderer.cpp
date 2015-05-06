@@ -45,6 +45,9 @@ void Renderer::render(Camera* camera) {
     camera->perspective(70.0f, 4.0f/3.0f, 0.1f, 100.0f);
 
 
+    glBindVertexArray(vaoid);
+
+
     glm::mat4 MVP;
     glm::mat4 modelViewMatrix;
     glm::mat3 normalMatrix;
