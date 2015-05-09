@@ -11,7 +11,7 @@ class ShaderProgram;
 class VertexBuffer;
 class Skybox;
 class Light;
-
+class Billboard;
 
 class FontSDL;
 
@@ -41,6 +41,7 @@ public:
     void assignMouseInputs(Game *game);
 
     Skybox *skybox;
+    Billboard *billboard;
 };
 
 

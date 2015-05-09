@@ -2,6 +2,7 @@
 #include <world/WorldLoader.h>
 #include <resource/ResourceManager.h>
 #include <world/Light.h>
+#include <graphics/Billboard.h>
 
 Game* game;
 
@@ -34,7 +35,7 @@ TestGameSystem::TestGameSystem(Game *game) {
     generalShader->load("./shaders/quad_vertex.glsl", "./shaders/quad_fragment.glsl");
     vbo = VertexBuffer::createQuad();
 
-
+    billboard = new Billboard("./assets/texture/neon.png");
 
     WorldLoader loader(game->scene->getWorld());
     loader.load("./worlds/level1/");
@@ -188,7 +189,7 @@ void TestGameSystem::assignKeyboardInputs(Game *game) {/*Use scan codes for mapp
 }
 
 void TestGameSystem::draw() {
-
+    billboard->draw(game->scene->camera);
 }
 
 void TestGameSystem::draw2D() {

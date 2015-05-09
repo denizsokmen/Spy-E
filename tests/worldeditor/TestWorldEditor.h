@@ -12,6 +12,7 @@ class ShaderProgram;
 class VertexBuffer;
 class Game;
 class SoundManager;
+class Billboard;
 //class FontSDL;
 
 class WorldEditorSystem: public System {
@@ -33,6 +34,7 @@ public:
 
 
 //    FontSDL *font;
+    Billboard *billboard;
 };
 
 

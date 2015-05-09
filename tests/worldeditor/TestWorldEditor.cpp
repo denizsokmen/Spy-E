@@ -10,6 +10,7 @@
 #include <physics/Body.h>
 #include <world/WorldLoader.h>
 #include <world/Light.h>
+#include <graphics/Billboard.h>
 #include "TestWorldEditor.h"
 #include "graphics/Mesh.h"
 #include "graphics/Renderable.h"
@@ -98,10 +99,11 @@ WorldEditorSystem::WorldEditorSystem(Game *game) {
     game->gui->addSubview(menu);
     game->gui->addSubview(entitiesLabel);
     game->input->showCursor(true);
-
+//
     WorldLoader loader(game->scene->getWorld());
     loader.load("./worlds/level2/");
 
+    billboard = new Billboard("./assets/texture/neon.png");
 
     Light *light = new Light();
     light->type = LIGHT_SPOT;
@@ -208,7 +210,7 @@ void WorldEditorSystem::update(float dt) {
 }
 
 void WorldEditorSystem::draw() {
-
+    billboard->draw(game->scene->camera);
 }
 
 void WorldEditorSystem::draw2D() {

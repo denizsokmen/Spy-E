@@ -8,6 +8,7 @@
 #include <vector>
 #include <list>
 #define GLCheckError() (glGetError() == GL_NO_ERROR)
+#define INVALID_UNIFORM_LOCATION 0xffffffff
 
 class ShaderProgram {
 
@@ -45,6 +46,11 @@ public:
     typedef std::list<GLuint> ShaderObjectList;
     ShaderObjectList shaderObjList;
 
+    bool initialise();
+
+    void finish();
+
+    GLint getUniformLocation(const char *uniformName);
 };
 
 #endif

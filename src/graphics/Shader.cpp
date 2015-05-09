@@ -87,21 +87,26 @@ bool ShaderProgram::finalizeShaders() {
 }
 
 bool ShaderProgram::load(const char *vertexFilePath, const char *fragmentFilePath) {
+
+    this->initialise();
+    this->addShader(GL_VERTEX_SHADER, vertexFilePath);
+    this->addShader(GL_FRAGMENT_SHADER, fragmentFilePath);
+    this->finish();
+
+
+}
+bool ShaderProgram::initialise() {
     id = glCreateProgram();
     if (id == 0) {
         fprintf(stderr, "Error creating shader program\n");
         return false;
     }
-
-
-    this->addShader(GL_VERTEX_SHADER, vertexFilePath);
-    this->addShader(GL_FRAGMENT_SHADER, fragmentFilePath);
-    this->finalizeShaders();
-    glUseProgram(id);
-
-
 }
 
+void ShaderProgram::finish(){
+    this->finalizeShaders();
+    glUseProgram(id);
+}
 
 
 ShaderProgram::~ShaderProgram() {
@@ -115,10 +120,18 @@ ShaderProgram::~ShaderProgram() {
     }
 }
 
+GLint ShaderProgram::getUniformLocation(const char* uniformName){
+    GLint location = glGetUniformLocation(this->id, uniformName);
+
+    if (location == INVALID_UNIFORM_LOCATION) {
+        fprintf(stderr, "Warning! Unable to get the location of uniform '%s'\n", uniformName);
+    }
+    return location;
+}
+
 void ShaderProgram::setUniform(GLint location, glm::mat4 const &value) const {
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 }
-
 
 
 void ShaderProgram::setUniform(GLint location, glm::mat3 const &value) const {
