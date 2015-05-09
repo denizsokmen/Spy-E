@@ -84,17 +84,17 @@ bool Game::init(int width, int height, char const *title, bool fullScreen) {
     this->sounds = new Sounds();
 
     this->controller->addCoreSystem(input);
-    this->controller->addCoreSystem(scene);
-    this->controller->addCoreSystem(drawer);
 
     this->controller->addCoreSystem(gui);
     this->controller->addCoreSystem(physics);
     this->controller->addCoreSystem(sounds);
 
+    this->controller->addCoreSystem(scene);
+    this->controller->addCoreSystem(drawer);
     this->controller->init();
 
     this->timer = new Timer(TICK_PER_SECOND);
-    this->initDebugOverlay();
+//    this->initDebugOverlay();
 
 
     return true;
@@ -144,7 +144,7 @@ void Game::update() {
 
 
         while (timer->tick()) {
-            ((Label*) (this->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", this->fps);
+//            ((Label*) (this->gui->viewWithTag("fpsLabel")))->setText(L"FPS: %f", this->fps);
             controller->update(timer->getTickSize());
             tickCount++;
             isUpdated = true;

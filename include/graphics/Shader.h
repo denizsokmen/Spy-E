@@ -6,14 +6,19 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include <list>
+#define GLCheckError() (glGetError() == GL_NO_ERROR)
+
 class ShaderProgram {
 
-    void compileShaders(char* vertexProgram, char* fragmentProgram);
+
 public:
     ShaderProgram();
     ~ShaderProgram();
+    bool addShader(GLenum type, const char *filePath);
     bool load(const char* vertexFilePath, const char* fragmentFilePath);
 
+    bool finalizeShaders();
 
     void setUniform(GLint location, const std::vector<glm::mat4>& value) const;
     void setUniform(GLint location, const glm::mat4& value) const;
@@ -37,6 +42,9 @@ public:
 
 
     GLuint id;
+    typedef std::list<GLuint> ShaderObjectList;
+    ShaderObjectList shaderObjList;
+
 };
 
 #endif

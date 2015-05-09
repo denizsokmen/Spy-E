@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 #include <dirent.h>
+#include <iostream>
+#include <fstream>
 
 class FileOperations {
 
@@ -32,6 +34,28 @@ public:
 
 
         return directories;
+    }
+
+
+    static bool readFile(const char* filePath, std::string& out) {
+        std::ifstream f(filePath);
+        bool done = false;
+
+        if (f.is_open()) {
+            std::string line;
+            while (getline(f,line)){
+                out.append(line);
+                out.append("\n");
+
+            }
+            f.close();
+            done = true;
+        }
+        else {
+            printf("[FileOperations] Unable to open file in %s \n", filePath);
+        }
+
+        return done;
     }
 
 };

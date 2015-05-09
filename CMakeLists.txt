@@ -189,7 +189,7 @@ add_library(engine STATIC
      src/resource/MD5Loader.cpp
      src/graphics/Skeleton.cpp
      src/graphics/Bone.cpp
-     include/graphics/Skeleton.h include/graphics/Bone.h src/resource/MD5AnimLoader.cpp include/resource/MD5AnimLoader.h include/graphics/AnimationState.h include/graphics/Animation.h src/graphics/AnimationState.cpp src/graphics/Animation.cpp include/world/Light.h src/world/Light.cpp)
+     include/graphics/Skeleton.h include/graphics/Bone.h src/resource/MD5AnimLoader.cpp include/resource/MD5AnimLoader.h include/graphics/AnimationState.h include/graphics/Animation.h src/graphics/AnimationState.cpp src/graphics/Animation.cpp include/world/Light.h src/world/Light.cpp include/graphics/Billboard.h src/graphics/Billboard.cpp)
 
 
 target_link_libraries(engine
