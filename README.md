@@ -1,6 +1,6 @@
 ## Spy-E  
   
-Spy-E is a 3D stealth game project, which is based on **OpenAL 1.1**, **OpenGL 3.3™** and **C++**. 
+Spy-E started as a 3D stealth game project, due to time constraints, it's now S(pectacular)P(erfect)Y(ummy)- E(ngine), which is based on **OpenAL 1.1**, **OpenGL 3.3™** and **C++**. 
 
 ### Description
 
@@ -17,3 +17,12 @@ All of the open source external libraries are in externals folder and [GLEW](htt
 * GNU/Linux, 
 * Mac OS X 10.9+
 * A graphics driver and card that support **OpenGL 3.3™**.
+
+### Contributors
+
+* Arman Garip
+* Can Göçmen
+* Deniz Sökmen
+* Enes Şenel
+* Taha Doğan Güneş <tdgunes@gmail.com>
+
