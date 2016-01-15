@@ -24,7 +24,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-module
 
 
 include_directories(
-	glew-1.9.0/include/
+		glew-1.13.0/include/
 	
 )
 
@@ -45,7 +45,7 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 ### GLEW ###
 
 set(GLEW_SOURCE
-	glew-1.9.0/src/glew.c
+		glew-1.13.0/src/glew.c
 )
 
 set(GLEW_HEADERS
@@ -67,10 +67,10 @@ target_link_libraries(GLEW_190
 
 ### SDL ###
 set(DIRECTX OFF)
-add_subdirectory (SDL2-2.0.3)
+add_subdirectory(SDL2-2.0.4)
 
 set(LIBTYPE SHARED)
-add_subdirectory (openal-soft-1.16.0)
+add_subdirectory(openal-soft-1.17.1)
 
 
 find_package(SDL2_image REQUIRED)

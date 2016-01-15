@@ -1,4 +1,4 @@
-#include <external/SDL2-2.0.3/src/video/SDL_sysvideo.h>
+#include <external/SDL2-2.0.4/src/video/SDL_sysvideo.h>
 #include "graphics/ui/GUI.h"
 #include "graphics/ui/View.h"
 #include "graphics/ui/Font.h"

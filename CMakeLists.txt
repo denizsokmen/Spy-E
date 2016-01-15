@@ -17,6 +17,7 @@ endif()
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
 # Compile external dependencies 
 add_subdirectory (external)
@@ -40,9 +41,9 @@ endif(INCLUDE_DISTRIB)
 
 include_directories(
 	external/glm-0.9.4.0/
-	external/glew-1.9.0/include/
-	external/SDL2-2.0.3/include/
-	external/openal-soft-1.16.0/include/
+		external/glew-1.13.0/include/
+		external/SDL2-2.0.4/include/
+		external/openal-soft-1.17.1/include/
 	include/
 	${SDL2_INCLUDE_DIR}
 	${SDL2_IMAGE_INCLUDE_DIR}

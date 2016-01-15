@@ -17,6 +17,7 @@
 #include "graphics/ui/TextView.h"
 #include "graphics/ui/Primitives.h"
 #include "sound/Sounds.h"
+#include "world/Light.h"
 
 Game *game;
 
@@ -51,7 +52,7 @@ EasterEgg::EasterEgg(Game * game) {
 
 
     WorldLoader loader(game->scene->getWorld());
-    loader.load("./worlds/LevelOne-1.0.xml");
+    loader.load("./worlds/level1/");
 
     for (int i = 1; i < loader.world->getRenderables().size(); i++) {
         Renderable *entityTemp = loader.world->getRenderables()[i];
@@ -62,7 +63,15 @@ EasterEgg::EasterEgg(Game * game) {
     box->setAcceleration(-30.0f, 'y');
 
 
-
+    Light *light = new Light();
+    light->type = LIGHT_POINT;
+    light->setPosition(glm::vec3(0, -1, 1));
+    light->intensities = glm::vec3(1.0, 1.0, 1.0);
+    light->coneAngle = 359.0f;
+    light->coneDirection = glm::vec3(0, -0.5, -1);
+    light->ambientCoefficient = 0.01f;
+    light->attenuation = 0.01f;
+    game->scene->getWorld()->addLight(light);
 
     Image *image = new Image("./assets/texture/easteregg/menu.png");
     image->setFrame(Rect(0, game->height - 81, 681, 81));
