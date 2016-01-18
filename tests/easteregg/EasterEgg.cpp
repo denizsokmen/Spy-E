@@ -65,7 +65,7 @@ EasterEgg::EasterEgg(Game * game) {
 
     Light *light = new Light();
     light->type = LIGHT_POINT;
-    light->setPosition(glm::vec3(0, -1, 1));
+    light->setPosition(glm::vec3(1, 30.0f, 1));
     light->intensities = glm::vec3(1.0, 1.0, 1.0);
     light->coneAngle = 359.0f;
     light->coneDirection = glm::vec3(0, -0.5, -1);
@@ -79,8 +79,8 @@ EasterEgg::EasterEgg(Game * game) {
 
 
     TextView *textView = new TextView();
-    textView->setFrame(Rect(game->width / 2, game->height / 2, 200, 400));
-    textView->setText(L"YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW YOU ARE IN DOOM NOW");
+    textView->setFrame(Rect(0, game->height - 100, game->width, 400));
+    textView->setText(L"YOU ARE IN DOOM");
     game->gui->addSubview(textView);
 
     game->sounds->open("doom", "assets/sounds/doom.wav");

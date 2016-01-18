@@ -98,7 +98,11 @@ void Entity::setScale(glm::vec3&& scale) {
 }
 
 void Entity::updateTransformation() {
-	transformation = glm::translate(glm::mat4(1.0f), position) *glm::translate(glm::mat4(1.0f), pivot*-1.0f) * glm::toMat4(orientation) * glm::scale(glm::mat4(1.0), scale) * glm::translate(glm::mat4(1.0f), pivot);
+	transformation = glm::translate(glm::mat4(1.0f), position)
+					 * glm::translate(glm::mat4(1.0f), pivot * -1.0f)
+					 * glm::toMat4(orientation)
+					 * glm::scale(glm::mat4(1.0), scale)
+					 * glm::translate(glm::mat4(1.0f), pivot);
 }
 
 void Entity::setName(std::string name) {

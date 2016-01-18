@@ -2,8 +2,6 @@
 // Created by tdgunes on 3/23/15.
 //
 
-
-
 // from:
 // http://stackoverflow.com/questions/12971499/how-to-get-the-file-separator-symbol-in-standard-c-c-or
 #if defined(WIN32) || defined(_WIN32)
