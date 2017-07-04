@@ -16,7 +16,7 @@ if( CMAKE_BINARY_DIR MATCHES " " )
 endif()
 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lmingw32")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
 # Compile external dependencies 
@@ -29,9 +29,12 @@ include(MSVCMultipleProcessCompile) # /MP
 
 message("${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}  ${CMAKE_MODULE_PATH}")
 
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_ttf REQUIRED)
+INCLUDE(FindPkgConfig)
 
+pkg_check_modules(SDL2 REQUIRED sdl2)
+pkg_check_modules(SDL2_IMAGE REQUIRED SDL2_image)
+pkg_check_modules(SDL2_TTF REQUIRED SDL2_ttf)
+pkg_check_modules(OPENAL REQUIRED openal)
 
 if(INCLUDE_DISTRIB)
 	add_subdirectory(distrib)
@@ -41,9 +44,6 @@ endif(INCLUDE_DISTRIB)
 
 include_directories(
 	external/glm-0.9.4.0/
-		external/glew-1.13.0/include/
-		external/SDL2-2.0.4/include/
-		external/openal-soft-1.17.1/include/
 	include/
 	${SDL2_INCLUDE_DIR}
 	${SDL2_IMAGE_INCLUDE_DIR}
@@ -54,12 +54,10 @@ include_directories(
 set(ALL_LIBS
 	${OPENGL_LIBRARY}
 	GLEW_190
-	SDL2
-	SDL2main
+    ${SDL2_LIBRARIES}
 	${SDL2_IMAGE_LIBRARIES}
     ${SDL2_TTF_LIBRARIES}
-	openal
-	
+    OPENAL
 )
 
 add_definitions(

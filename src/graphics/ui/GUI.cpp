@@ -1,8 +1,6 @@
-#include <external/SDL2-2.0.4/src/video/SDL_sysvideo.h>
 #include "graphics/ui/GUI.h"
 #include "graphics/ui/View.h"
 #include "graphics/ui/Font.h"
-
 
 GUI::GUI(Drawer* drawer, Input* input) {
     this->mainView = new View();
@@ -11,7 +9,10 @@ GUI::GUI(Drawer* drawer, Input* input) {
     this->drawer = drawer;
     this->font = new Font("fonts/Arial.ttf", 16);
     this->input = input;
-    this->mainView->setFrame(Rect(0,0,this->input->mainWindow->w, this->input->mainWindow->h));
+    int w = 0;
+    int h = 0;
+    SDL_GetWindowSize(this->input->mainWindow, &w, &h);
+    this->mainView->setFrame(Rect(0,0, w, h));
 }
 
 void GUI::init() {
